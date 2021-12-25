@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ArtistController@index');
+Route::get('/artists/create', 'ArtistController@create');
+Route::post('/artists', 'ArtistController@store');
+Route::get('/artists/{artist}', 'ArtistController@show');  // 曲名一覧表示に変える
