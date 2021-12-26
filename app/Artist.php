@@ -15,7 +15,20 @@ class Artist extends Model
     
     public function getPaginateByLimit(int $limit_count = 5)
     {
-        // updated_atで降順に並べたあと、limitで件数制限をかける
-        return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
+        // 名前順に並べたあと、limitで件数制限をかける
+        return $this->orderBy('name')->paginate($limit_count);
+    }
+
+    // Songに対するリレーション
+    public function songs()
+    {
+        return $this->hasMany('App\Song');
+    }
+
+    // 対象アーティストの曲一覧取得
+    public function getSongsByTargetArtist(int $artist_id, int $limit_count = 20)
+    {
+        // アーティストIDを指定し、名前順に並べたあと、ペジネーションをかける
+        return $this::with('songs')->find($artist_id)->songs()->orderBy('name')->paginate($limit_count);
     }
 }
