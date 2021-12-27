@@ -16,9 +16,11 @@
             <h2>{{ $artist->name }}</h2>
         </div>
         <div class='songs'>
+            <h2>曲一覧</h2>
+            [<a href='/artists/{{ $artist->id }}/songs/create'>新規曲追加</a>]
             @foreach ($songs as $song)
                 <div class='song'>
-                    <h4>{{ $song->name }}</h4>
+                    <h4><a href='/artists/{{ $artist->id }}/songs/{{ $song->id }}'>{{ $song->name }}</a></h4>
                 </div>
             @endforeach
         </div>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Artist;
-use App\Song;
 use Illuminate\Http\Request;
 
 class ArtistController extends Controller
@@ -23,10 +22,5 @@ class ArtistController extends Controller
         $input = $request['artist'];
         $artist->fill($input)->save();
         return redirect('/');
-    }
-
-    public function show(Artist $artist)
-    {
-        return view('artists/show')->with(['artist' => $artist, 'songs' => $artist->getSongsByTargetArtist($artist->id)]);
     }
 }

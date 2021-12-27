@@ -9,6 +9,11 @@ class Song extends Model
 {
     use SoftDeletes;
 
+    protected $fillable = [
+        'name',
+        'artist_id',
+    ];
+
     // Artistに対するリレーション
     public function artist()
     {

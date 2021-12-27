@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', 'ArtistController@index');
-Route::get('/artists/create', 'ArtistController@create');
+Route::get('/', 'ArtistController@index');  // アーティスト一覧表示（トップ画面）
+Route::get('/artists/create', 'ArtistController@create');  // 新規アーティスト追加画面
 Route::post('/artists', 'ArtistController@store');
-Route::get('/artists/{artist}', 'ArtistController@show');  // 曲名一覧表示に変える
+
+Route::get('/artists/{artist}', 'SongController@index');  // 曲一覧表示
+Route::get('/artists/{artist}/songs/create', 'SongController@create');
+Route::post('/artists/{artist}/songs', 'SongController@store');
+// Route::get('/artists/{artist}/songs/{song}', SongController@show);
