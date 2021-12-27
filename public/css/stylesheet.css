@@ -1,0 +1,40 @@
+.siteTtl-outer {
+    display: table;
+    background-color: #a5c2ee;
+    color: #fff;
+    height: 80px;
+    width: 200px;
+}
+
+.siteTtl-logo {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 45px;
+    font-family: fantasy;
+}
+
+.search {
+    height: 80px;
+}
+
+.search-query {
+    float: left;
+    text-align: center;
+    font-size: 1rem;
+    height: 38px;
+    width: 221px;
+    margin: 0.25rem;
+}
+
+.search-btn {
+    border-radius: 0.25rem;
+    color: #fff;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    background-color: #007bff;
+    border-color: #007bff;
+    font-size: .875rem;
+    padding: 0.25rem 0.5rem;
+    margin: 0.6rem;
+}

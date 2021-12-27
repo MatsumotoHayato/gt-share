@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <meta charset='utf-8'>
+        <meta charset="utf-8">
         <title>新規曲追加画面</title>
-        <!-- Fonts -->
-        <link href='https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap' rel='stylesheet'>
+        <link rel="stylesheet" type="text/css" href="{{ secure_asset('css/stylesheet.css') }}">
     </head>
     <body>
-        <h1>GTshare</h1>
+        <div class="siteTtl-outer">
+            <div class="siteTtl-logo">GTshare</div>
+        </div>
         <h2>{{ $artist->name }}の新規曲追加</h2>
-        <form action='/artists/{{ $artist->id }}/songs' method='POST'>
+        <form action="/artists/{{ $artist->id }}/songs" method="POST">
             @csrf
-            <div class='song_name'>
+            <div class="song_name">
                 <h2>曲名</h2>
-                <input type='text' name='song[name]' placeholder='新規曲名'/>
+                <input type="text" name="song[name]" placeholder="新規曲名"/>
             </div>
-            <input type='submit' value='追加'/>
+            <input type="submit" value="追加"/>
         </form>
-        <div class='footer'>
-            <a href='/artists/{{ $artist->id }}'>{{ $artist->name }}の曲一覧へ</a>
-            <a href='/'>アーティスト一覧へ</a>
+        <div class="footer">
+            <p><a href="/artists/{{ $artist->id }}">{{ $artist->name }}の曲一覧へ</a></p>
+            <p><a href="/">アーティスト一覧へ</a></p>
         </div>
     </body>
 </html>
