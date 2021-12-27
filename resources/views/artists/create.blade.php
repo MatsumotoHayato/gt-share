@@ -17,8 +17,8 @@
             </div>
             <input type='submit' value='追加'/>
         </form>
-        <div class="footer">
-            <a href="/">アーティスト一覧へ</a>
+        <div class='footer'>
+            <a href='/'>アーティスト一覧へ</a>
         </div>
     </body>
 </html>

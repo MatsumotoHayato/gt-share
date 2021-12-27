@@ -16,7 +16,7 @@ class CreateSongsTable extends Migration
         Schema::create('songs', function (Blueprint $table) {
             $table->smallIncrements('id');
             $table->string('name');  // 曲名
-            $table->unsignedBigInteger('artist_id');  // 参照するartistsテーブルのid
+            $table->unsignedInteger('artist_id');  // 参照するartistsテーブルのid
             $table->timestamps();
             $table->softDeletes();
         });

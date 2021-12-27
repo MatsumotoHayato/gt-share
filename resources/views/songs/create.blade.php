@@ -17,9 +17,9 @@
             </div>
             <input type='submit' value='追加'/>
         </form>
-        <div class="footer">
-            <a href="/artists/{{ $artist->id }}">{{ $artist->name }}の曲一覧へ</a>
-            <a href="/">アーティスト一覧へ</a>
+        <div class='footer'>
+            <a href='/artists/{{ $artist->id }}'>{{ $artist->name }}の曲一覧へ</a>
+            <a href='/'>アーティスト一覧へ</a>
         </div>
     </body>
 </html>

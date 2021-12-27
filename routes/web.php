@@ -18,4 +18,7 @@ Route::post('/artists', 'ArtistController@store');
 Route::get('/artists/{artist}', 'SongController@index');  // 曲一覧表示
 Route::get('/artists/{artist}/songs/create', 'SongController@create');
 Route::post('/artists/{artist}/songs', 'SongController@store');
-// Route::get('/artists/{artist}/songs/{song}', SongController@show);
+
+Route::get('/artists/{artist}/songs/{song}', 'PostController@index');  // レビュー一覧表示
+Route::get('/artists/{artist}/songs/{song}/posts/create', 'PostController@create');
+Route::post('/artists/{artist}/songs/{song}/posts', 'PostController@store');

@@ -19,4 +19,10 @@ class Song extends Model
     {
         return $this->belongsTo('App\Artist');
     }
+
+    // Postに対するリレーション
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
 }
