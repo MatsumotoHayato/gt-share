@@ -12,7 +12,7 @@ class SongController extends Controller
     {
         return view('songs/index')->with([
             'artist'=> $artist, 
-            'songs' => $artist->getSongsByTargetArtist($artist->id)
+            'songs' => $artist->getSongsByTargetArtist()
         ]);
     }
 
@@ -21,7 +21,7 @@ class SongController extends Controller
         return view('songs/create')->with(['artist' => $artist]);
     }
 
-    public function store(Request $request, Song $song, Artist $artist)
+    public function store(Request $request, Artist $artist, Song $song)
     {
         $input = $request['song'];
         $input += ['artist_id' => $artist->id];  // 要素artist_idの追加

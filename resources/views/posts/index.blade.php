@@ -19,13 +19,20 @@
             [<a href="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/create">新規レビュー投稿</a>]
             @foreach ($posts as $post)
                 <div class="post">
-                    <h4>ユーザー: {{ $post->user_id }}</h4>
-                    <p class="experience">楽器経験: {{ $post->experience }}年</p>
+                    <h4>{{ $post->user->name }}: 
+                    @if ($post->experience < 1)
+                        楽器経験1年未満
+                    @else
+                        楽器経験{{ $post->experience }}年
+                    @endif
+                    </h4>
                     <p class="created_at">投稿日時: {{ $post->created_at }}</p>
+                    <h4>楽器: {{ $post->instrument->name }}</h4>
                     <h4>難易度: {{ $post->difficulty }}</h4>
+                    <p>URL: {{ $post->url }}</p>
                     <p class="body">感想: {{ $post->body }}</p>
                     <div class="voted_count">
-                        <small>役に立った 〇〇人</small>
+                        <button type="submit">役に立った 〇〇人</button>
                     </div>
                 </div>
             @endforeach

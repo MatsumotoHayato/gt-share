@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedSmallInteger('song_id');
             $table->unsignedSmallInteger('instrument_id');
-            $table->unsignedDecimal('experience', 3, 1); // 経験年数（0.5年、1年、）
+            $table->unsignedTinyInteger('experience'); // 経験年数（0,1,2...年）
             $table->unsignedTinyInteger('difficulty');  // 難易度(1~5)
             $table->text('body');  // レビュー内容
             $table->string('url')->nullable(); // URL
