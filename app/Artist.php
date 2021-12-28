@@ -14,7 +14,7 @@ class Artist extends Model
         'name',
     ];
     
-    public function getPaginateByLimit(int $limit_count = 5)
+    public function getArtistsPaginateByLimit(int $limit_count = 20)
     {
         // 名前順に並べたあと、limitで件数制限をかける
         return $this->orderBy('name')->paginate($limit_count);
