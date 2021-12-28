@@ -6,6 +6,8 @@
         <link rel="stylesheet" type="text/css" href="{{ secure_asset('css/stylesheet.css') }}">
     </head>
     <body>
+        @extends('layouts.app')
+        @section('content')
         <div class="siteTtl-outer">
             <div class="siteTtl-logo">GTshare</div>
         </div>
@@ -26,5 +28,6 @@
                 {{ $artists->links() }}
             </div>
         </div>
+        @endsection
     </body>
 </html>
