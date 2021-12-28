@@ -11,12 +11,18 @@
         <div class="siteTtl-outer">
             <div class="siteTtl-logo">GTshare</div>
         </div>
-        <h2>{{ $song->name }} / {{ $song->artist->name }} の新規レビュー投稿</h2>
-        <form action="/artists/{{ $song->artist->id }}/songs/{{ $song->id }}/posts" method="POST">
+        <h2>{{ $song->name }} / {{ $artist->name }} の新規レビュー投稿</h2>
+        <form action="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts" method="POST">
             @csrf
             <div>
-                <p>楽器</p>
-                <p>楽器経験<input type="text" name="post[experience]" value="{{ old("post.experience") }}"/>年</p>
+                楽器<select name="post[instrument_id]">
+                  <option value="未選択">選択してください</option>
+                    @foreach ($instruments as $instrument)
+                    <option value='{{ $instrument->id }}'>{{ $instrument->name }}</option>
+                    @endforeach
+                </select>
+                
+                <p>楽器経験<input type="text" name="post[experience]" value="{{ old("post.experience") }}"/>年 （1年未満の場合は0と記入してください）</p>
                 
                 <p>難易度<select name="post[difficulty]">
                   <option value="未選択">選択してください</option>
@@ -25,13 +31,13 @@
                     @endfor
                 </select></p>
                 感想<textarea type="text" name="post[body]" placeholder="演奏した感想を記入してください。" value="{{ old("post.body") }}"></textarea>
-                <p>URL<input type="url" name="post[url]" placeholder="演奏動画のURL" value="{{ old("post.url") }}"/></p>
+                <p>URL<input type="url" name="post[url]" placeholder="演奏動画のURLがあれば" value="{{ old("post.url") }}"/></p>
             </div>
-            <input type="submit" value="追加"/>
+            <input type="submit" value="投稿"/>
         </form>
         <div class="footer">
-            <p><a href="/artists/{{ $song->artist->id }}/songs/{{ $song->id }}">{{ $song->name }}のレビュー一覧へ</a></p>
-            <p><a href="/artists/{{ $song->artist->id }}">{{ $song->artist->name }}の曲一覧へ</a></p>
+            <p><a href="/artists/{{ $artist->id }}/songs/{{ $song->id }}">{{ $song->name }}のレビュー一覧へ</a></p>
+            <p><a href="/artists/{{ $artist->id }}">{{ $artist->name }}の曲一覧へ</a></p>
             <p><a href="/">アーティスト一覧へ</a></p>
         </div>
         @endsection

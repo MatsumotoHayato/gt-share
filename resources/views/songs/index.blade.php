@@ -25,7 +25,7 @@
             @foreach ($songs as $song)
                 <div class="song">
                     <h4><a href="/artists/{{ $artist->id }}/songs/{{ $song->id }}">{{ $song->name }}</a></h4>
-                    <small>レビュー件数</small>
+                    <small>レビュー{{ $song->getPostCountByTargetSong() }}件</small>
                 </div>
             @endforeach
         </div>

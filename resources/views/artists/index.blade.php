@@ -21,7 +21,7 @@
             @foreach ($artists as $artist)
                 <div class="artist">
                     <h3 class="artist-name"><a href="/artists/{{ $artist->id }}">{{ $artist->name }}</a></h3>
-                    <small class='posts-count'>レビュー件数</small>
+                    <small class='posts-count'>レビュー{{ $artist->getPostCountByTargetArtist() }}件</small>
                 </div>
             @endforeach
             <div class="paginate">
