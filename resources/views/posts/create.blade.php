@@ -22,8 +22,7 @@
                     <option value='{{ $i }}'>{{ $i }}</option>
                     @endfor
                 </select></p>
-                
-                <p>感想<input type="text" name="post[body]" placeholder="演奏した感想を記入してください。" value="{{ old("post.body") }}"/></p>
+                感想<textarea type="text" name="post[body]" placeholder="演奏した感想を記入してください。" value="{{ old("post.body") }}"></textarea>
                 <p>URL<input type="url" name="post[url]" placeholder="演奏動画のURL" value="{{ old("post.url") }}"/></p>
             </div>
             <input type="submit" value="追加"/>

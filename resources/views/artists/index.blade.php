@@ -18,8 +18,8 @@
             [<a href="/artists/create">新規アーティスト追加</a>]
             @foreach ($artists as $artist)
                 <div class="artist">
-                    <h3 class="artist_name"><a href="/artists/{{ $artist->id }}">{{ $artist->name }}</a></h3>
-                    <small>レビュー件数</small>
+                    <h3 class="artist-name"><a href="/artists/{{ $artist->id }}">{{ $artist->name }}</a></h3>
+                    <small class='posts-count'>レビュー件数</small>
                 </div>
             @endforeach
             <div class="paginate">

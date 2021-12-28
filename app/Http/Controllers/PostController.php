@@ -14,7 +14,7 @@ class PostController extends Controller
         return view('posts/index')->with([
             'artist' => $artist,
             'song' => $song,
-            'posts'=> $post->get(),
+            'posts'=> $song->getPostsByTargetSong($song->id),
         ]);
     }
 

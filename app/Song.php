@@ -25,4 +25,10 @@ class Song extends Model
     {
         return $this->hasMany('App\Post');
     }
+
+    public function getPostsByTargetSong(int $song_id, int $limit_count = 20)
+    {
+        // 曲IDを指定し、名前順に並べたあと、ペジネーションをかける
+        return $this::with('posts')->find($song_id)->posts()->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
 }

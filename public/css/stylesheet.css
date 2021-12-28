@@ -38,3 +38,11 @@
     padding: 0.25rem 0.5rem;
     margin: 0.6rem;
 }
+
+.artists, .songs, .posts {
+    width: 400px;
+}
+
+.artist, .song, .post {
+    border: 1px solid #e0e0e0;
+}
