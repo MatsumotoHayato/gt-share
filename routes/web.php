@@ -12,13 +12,18 @@
 */
 
 Route::get('/', 'ArtistController@index');  // アーティスト一覧表示（トップ画面）
-Route::get('/artists/create', 'ArtistController@create');  // 新規アーティスト追加画面
-Route::post('/artists', 'ArtistController@store');
+Route::get('/artists/create', 'ArtistController@create')->middleware('auth');  // 新規アーティスト追加画面
+Route::post('/artists', 'ArtistController@store')->middleware('auth');
 
 Route::get('/artists/{artist}', 'SongController@index');  // 曲一覧表示
-Route::get('/artists/{artist}/songs/create', 'SongController@create');
-Route::post('/artists/{artist}/songs', 'SongController@store');
+Route::get('/artists/{artist}/songs/create', 'SongController@create')->middleware('auth');
+Route::post('/artists/{artist}/songs', 'SongController@store')->middleware('auth');
 
 Route::get('/artists/{artist}/songs/{song}', 'PostController@index');  // レビュー一覧表示
-Route::get('/artists/{artist}/songs/{song}/posts/create', 'PostController@create');
-Route::post('/artists/{artist}/songs/{song}/posts', 'PostController@store');
+Route::get('/artists/{artist}/songs/{song}/posts/create', 'PostController@create')->middleware('auth');
+Route::post('/artists/{artist}/songs/{song}/posts', 'PostController@store')->middleware('auth');
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
