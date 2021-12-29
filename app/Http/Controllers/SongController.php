@@ -28,4 +28,12 @@ class SongController extends Controller
         $song->fill($input)->save();
         return redirect('/artists/'. $artist->id);
     }
+
+    public function search(Request $request, Song $song)
+    {
+        return view('songs/search')->with([
+            'songs' => $song->searchSongsByKeyword($request['keyword']),
+            'keyword' => $request['keyword'],
+        ]);
+    }
 }

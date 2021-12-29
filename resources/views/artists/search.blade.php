@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <title>Top Page</title>
+        <title>アーティスト名検索結果</title>
         <link rel="stylesheet" type="text/css" href="{{ secure_asset('css/stylesheet.css') }}">
     </head>
     <body>
@@ -19,7 +19,7 @@
             </form>
         </div>
         <div class="artists">
-            <h2>アーティスト一覧</h2>
+            <h2>アーティスト名"{{ $keyword }}"の検索結果</h2>
             [<a href="/artists/create">新規アーティスト追加</a>]
             @foreach ($artists as $artist)
                 <div class="artist">
@@ -30,6 +30,9 @@
             <div class="paginate">
                 {{ $artists->links() }}
             </div>
+        </div>
+        <div class="footer">
+            <p><a href="/">アーティスト一覧へ</a></p>
         </div>
         @endsection
     </body>

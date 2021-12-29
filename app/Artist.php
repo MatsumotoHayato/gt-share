@@ -39,4 +39,10 @@ class Artist extends Model
         // postsテーブルとsongsテーブルを内部結合、artist_idで絞り込み、レコード数をカウント
         return DB::table('posts')->join('songs', 'posts.song_id', '=', 'songs.id')->where('artist_id', $this->id)->count();
     }
+
+    // キーワードからアーティスト名検索
+    public function searchArtistsByKeyword($keyword, int $limit_count = 20)
+    {
+        return $this::where('name','like','%'.$keyword.'%')->orderBy('name')->paginate($limit_count);
+    }
 }
