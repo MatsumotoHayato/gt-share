@@ -28,11 +28,18 @@ class Song extends Model
     }
 
     // 対象曲のレビュー一覧を取得
-    public function getPostsByTargetSong(int $limit_count = 20)
+    public function getPostsByTargetSong(int $limit_count = 10)
     {
         // 曲IDを指定し、名前順に並べたあと、ペジネーションをかける
         return $this::with('posts')->find($this->id)->posts()->orderBy('updated_at', 'DESC')->paginate($limit_count);
         // return $this::with('posts')->where('song_id', $this->id)->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
+
+    // 対象曲のレビュー一覧を取得
+    public function getPostsByTargetSongAndInstrument(int $instrument_id = 1, int $limit_count = 10)
+    {
+        // 曲IDと楽器IDを指定し、投稿時間順に並べたあと、ペジネーションをかける
+        return $this::with('posts')->find($this->id)->posts()->where('instrument_id', $instrument_id)->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
 
     // 対象曲のレビュー件数取得

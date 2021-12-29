@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>{{ $song->name }}のレビュー一覧</title>
+        
         <link rel="stylesheet" type="text/css" href="{{ secure_asset('css/stylesheet.css') }}">
     </head>
     <body>
@@ -14,6 +15,17 @@
         <div class="name">
             <h2>{{ $song->name }} / {{ $artist->name }}</h2>
         </div>
+        <form action="/artists/{{ $artist->id }}/songs/{{ $song->id }}/selected" method="GET">
+            <div>
+                楽器<select name="instrument_id" onChange="submit(this.form)">
+                    
+                    <option value="未選択">選択してください</option>
+                        @foreach ($instruments as $instrument)
+                        <option value='{{ $instrument->id }}'>{{ $instrument->name }}</option>
+                        @endforeach
+                    </select>
+            </div>
+        </form>
         <div class="posts">
             <h2>レビュー一覧</h2>
             [<a href="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/create">新規レビュー投稿</a>]
