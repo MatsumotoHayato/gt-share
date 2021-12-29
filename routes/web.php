@@ -20,6 +20,7 @@ Route::get('/artists/{artist}/songs/create', 'SongController@create')->middlewar
 Route::post('/artists/{artist}/songs', 'SongController@store')->middleware('auth');
 
 Route::get('/artists/{artist}/songs/{song}', 'PostController@index');  // レビュー一覧表示
+Route::get('/artists/{artist}/songs/{song}/selected', 'PostController@index_selected_instrument');  // 楽器選択時のレビュー一覧表示
 Route::get('/artists/{artist}/songs/{song}/posts/create', 'PostController@create')->middleware('auth');
 Route::post('/artists/{artist}/songs/{song}/posts', 'PostController@store')->middleware('auth');
 

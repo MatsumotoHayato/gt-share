@@ -10,12 +10,23 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index(Artist $artist, Song $song)  // 引数の順番に注意（web.phpと揃える）
+    public function index(Artist $artist, Song $song, Instrument $instrument)  // 引数の順番に注意（web.phpと揃える）
     {
         return view('posts/index')->with([
             'artist' => $artist,
             'song' => $song,
-            'posts'=> $song->getPostsByTargetSong(),
+            'posts'=> $song->getPostsByTargetSongAndInstrument(),
+            'instruments' => $instrument->get(),
+        ]);
+    }
+
+    public function index_selected_instrument(Request $request, Artist $artist, Song $song, Instrument $instrument)
+    {
+        return view('posts/index')->with([
+            'artist' => $artist,
+            'song' => $song,
+            'posts'=> $song->getPostsByTargetSongAndInstrument($request['instrument_id']),  // 受け取った楽器IDで絞り込み
+            'instruments' => $instrument->get(),
         ]);
     }
 
