@@ -23,4 +23,12 @@ class ArtistController extends Controller
         $artist->fill($input)->save();
         return redirect('/');
     }
+
+    public function search(Request $request, Artist $artist)
+    {
+        return view('artists/search')->with([
+            'artists' => $artist->searchArtistsByKeyword($request['keyword']),
+            'keyword' => $request['keyword'],
+        ]);
+    }
 }

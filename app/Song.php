@@ -48,4 +48,10 @@ class Song extends Model
         // return $this::with('posts')->find($song_id)->posts()->count();
         return DB::table('posts')->where('song_id', $this->id)->count();
     }
+
+    // キーワードから曲名検索
+    public function searchSongsByKeyword($keyword, int $limit_count = 20)
+    {
+        return $this::where('name','like','%'.$keyword.'%')->orderBy('name')->paginate($limit_count);
+    }
 }
