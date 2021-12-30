@@ -26,6 +26,7 @@ Route::post('/artists/{artist}/songs/{song}/posts', 'PostController@store')->mid
 
 Route::get('/search/artists', 'ArtistController@search');  // アーティスト名検索結果画面
 Route::get('/search/songs', 'SongController@search');      // 曲名検索結果画面
+Route::get('/artists/{artist}/search/songs', 'SongController@search_by_artist');  // 特定アーティストの曲名検索結果画面
 
 Auth::routes();
 

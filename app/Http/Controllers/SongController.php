@@ -29,11 +29,22 @@ class SongController extends Controller
         return redirect('/artists/'. $artist->id);
     }
 
+    // 全曲からキーワード検索
     public function search(Request $request, Song $song)
     {
         return view('songs/search')->with([
             'songs' => $song->searchSongsByKeyword($request['keyword']),
             'keyword' => $request['keyword'],
+        ]);
+    }
+
+    // 特定アーティストの曲からキーワード検索
+    public function search_by_artist(Request $request, Artist $artist, Song $song)
+    {
+        return view('songs/search')->with([
+            'songs' => $song->searchSongsByKeyword($request['keyword'], $artist->id),
+            'keyword' => $request['keyword'],
+            'artist' => $artist,
         ]);
     }
 }
