@@ -13,7 +13,7 @@
         </div>
         <div class="search">
             <form method="GET">
-                <input class="search-query" name="keyword" type="text" placeholder="アーティスト名や曲名を検索"/>
+                <input class="search-keyword" name="keyword" type="text" placeholder="アーティスト名や曲名を検索"/>
                 <button class="search-btn" type="submit" formaction="/search/artists">アーティスト名検索</button>
                 <button class="search-btn" type="submit" formaction="/search/songs">曲名検索</button>
             </form>

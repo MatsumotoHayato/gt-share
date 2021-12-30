@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <title>{{ $song->name }}のレビュー一覧</title>
+        <title>{{ $song->name }} / {{ $artist->name }}のレビュー一覧</title>
         
         <link rel="stylesheet" type="text/css" href="{{ secure_asset('css/stylesheet.css') }}">
     </head>
@@ -15,15 +15,27 @@
         <div class="name">
             <h2>{{ $song->name }} / {{ $artist->name }}</h2>
         </div>
+        @php
+            if (empty($selected_instrument_id)) { $selected_instrument_id = $instruments->first()->id; }
+        @endphp
         <form action="/artists/{{ $artist->id }}/songs/{{ $song->id }}/selected" method="GET">
             <div>
                 楽器<select name="instrument_id" onChange="submit(this.form)">
-                    
-                    <option value="未選択">選択してください</option>
                         @foreach ($instruments as $instrument)
-                        <option value='{{ $instrument->id }}'>{{ $instrument->name }}</option>
+                            @if ($instrument->id == $selected_instrument_id)
+                                <option value='{{ $instrument->id }}' selected>{{ $instrument->name }}</option>
+                            @else
+                                <option value='{{ $instrument->id }}'>{{ $instrument->name }}</option>
+                            @endif
                         @endforeach
                     </select>
+            </div>
+            <div>
+                @if ($song->culcDifficultyByTargetInstrument($selected_instrument_id) != 0)
+                    <h2>難易度: {{ $song->culcDifficultyByTargetInstrument($selected_instrument_id)}}</h2>
+                @else
+                    <h2>難易度: なし</h2>
+                @endif
             </div>
         </form>
         <div class="posts">

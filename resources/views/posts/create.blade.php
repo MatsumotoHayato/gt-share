@@ -18,7 +18,7 @@
                 楽器<select name="post[instrument_id]">
                   <option value="未選択">選択してください</option>
                     @foreach ($instruments as $instrument)
-                    <option value='{{ $instrument->id }}'>{{ $instrument->name }}</option>
+                        <option value='{{ $instrument->id }}'>{{ $instrument->name }}</option>
                     @endforeach
                 </select>
                 
@@ -27,7 +27,7 @@
                 <p>難易度<select name="post[difficulty]">
                   <option value="未選択">選択してください</option>
                     @for ($i = 1; $i <= 5; $i++)
-                    <option value='{{ $i }}'>{{ $i }}</option>
+                        <option value='{{ $i }}'>{{ $i }}</option>
                     @endfor
                 </select></p>
                 感想<textarea type="text" name="post[body]" placeholder="演奏した感想を記入してください。" value="{{ old("post.body") }}"></textarea>
