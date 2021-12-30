@@ -23,9 +23,11 @@ class PostController extends Controller
     public function index_selected_instrument(Request $request, Artist $artist, Song $song, Instrument $instrument)
     {
         return view('posts/index')->with([
+            
             'artist' => $artist,
             'song' => $song,
             'posts'=> $song->getPostsByTargetSongAndInstrument($request['instrument_id']),  // 受け取った楽器IDで絞り込み
+            'selected_instrument_id' => $request['instrument_id'],
             'instruments' => $instrument->get(),
         ]);
     }

@@ -49,6 +49,13 @@ class Song extends Model
         return DB::table('posts')->where('song_id', $this->id)->count();
     }
 
+    // 楽器ごとの曲の難易度を計算
+    public function culcDifficultyByTargetInstrument(int $instrument_id = 1)
+    {
+        $difficulty = DB::table('posts')->where('song_id', $this->id)->where('instrument_id', $instrument_id)->avg('difficulty');
+        return round($difficulty, 2);  // 小数点第2位まで表示
+    }
+
     // キーワードから曲名検索、$artist_idが渡されればアーティストでも絞り込み
     public function searchSongsByKeyword($keyword, $artist_id = NULL, int $limit_count = 20)
     {
