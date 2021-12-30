@@ -11,19 +11,35 @@
         <div class="siteTtl-outer">
             <div class="siteTtl-logo">GTshare</div>
         </div>
-        <div class="search">
-            <form method="GET">
-                <input class="search-query" name="keyword" type="text" placeholder="アーティスト名や曲名を検索"/>
-                <button class="search-btn" type="submit" formaction="/search/artists">アーティスト名検索</button>
-                <button class="search-btn" type="submit" formaction="/search/songs">曲名検索</button>
-            </form>
-        </div>
-        <h1>曲名"{{ $keyword }}"の検索結果</h1>
+        @if (empty($artist))   <!--$artistが空なら全曲から検索-->
+            <div class="search">
+                <form method="GET">
+                    <input class="search-query" name="keyword" type="text" placeholder="アーティスト名や曲名を検索"/>
+                    <button class="search-btn" type="submit" formaction="/search/artists">アーティスト名検索</button>
+                    <button class="search-btn" type="submit" formaction="/search/songs">曲名検索</button>
+                </form>
+            </div>
+            <h1>曲名"{{ $keyword }}"の検索結果</h1>
+        @else
+            <div class="search">
+                <form method="GET">
+                    <input class="search-query" name="keyword" type="text" placeholder="{{ $artist->name}}の曲名を検索"/>
+                    <button class="search-btn" type="submit" formaction="/artists/{{ $artist->id }}/search/songs">曲名検索</button>
+                </form>
+            </div>
+            <h1>{{ $artist->name}}の曲名"{{ $keyword }}"の検索結果</h1>
+        @endif
         <div class="songs">
             <h2>曲一覧</h2>
+            @if (!empty($artist))
+                [<a href="/artists/{{ $artist->id }}/songs/create">新規曲追加</a>]
+            @endif
             @foreach ($songs as $song)
                 <div class="song">
                     <h4><a href="/artists/{{ $song->artist_id }}/songs/{{ $song->id }}">{{ $song->name }}</a></h4>
+                    @if (empty($artist))
+                        <small><a href="/artists/{{ $song->artist_id }}">- {{ $song->artist->name }}</a></small>
+                    @endif
                     <small>レビュー{{ $song->getPostCountByTargetSong() }}件</small>
                 </div>
             @endforeach

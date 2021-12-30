@@ -49,9 +49,13 @@ class Song extends Model
         return DB::table('posts')->where('song_id', $this->id)->count();
     }
 
-    // キーワードから曲名検索
-    public function searchSongsByKeyword($keyword, int $limit_count = 20)
+    // キーワードから曲名検索、$artist_idが渡されればアーティストでも絞り込み
+    public function searchSongsByKeyword($keyword, $artist_id = NULL, int $limit_count = 20)
     {
+        if (empty($artist_id)) {
         return $this::where('name','like','%'.$keyword.'%')->orderBy('name')->paginate($limit_count);
+        } else {
+        return $this::where('artist_id', $artist_id)->where('name','like','%'.$keyword.'%')->orderBy('name')->paginate($limit_count);
+        }
     }
 }
