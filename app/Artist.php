@@ -14,7 +14,7 @@ class Artist extends Model
         'name',
     ];
     
-    public function getArtistsPaginateByLimit(int $limit_count = 20)
+    public function getArtistsPaginateByLimit(int $limit_count = 40)
     {
         // 名前順に並べたあと、limitで件数制限をかける
         return $this->orderBy('name')->paginate($limit_count);
@@ -27,7 +27,7 @@ class Artist extends Model
     }
 
     // 対象アーティストの曲一覧取得
-    public function getSongsByTargetArtist(int $limit_count = 20)
+    public function getSongsByTargetArtist(int $limit_count = 40)
     {
         // アーティストIDを指定し、名前順に並べたあと、ペジネーションをかける
         return $this::with('songs')->find($this->id)->songs()->orderBy('name')->paginate($limit_count);
@@ -41,7 +41,7 @@ class Artist extends Model
     }
 
     // キーワードからアーティスト名検索
-    public function searchArtistsByKeyword($keyword, int $limit_count = 20)
+    public function searchArtistsByKeyword($keyword, int $limit_count = 40)
     {
         return $this::where('name','like','%'.$keyword.'%')->orderBy('name')->paginate($limit_count);
     }

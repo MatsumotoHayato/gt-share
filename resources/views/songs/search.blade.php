@@ -48,6 +48,9 @@
                 </div>
             @endforeach
         </div>
+        <div class="paginate">
+                {{ $songs->links() }}
+        </div>
         <div class="footer">
             <p><a href="/">アーティスト一覧へ</a></p>
         </div>
