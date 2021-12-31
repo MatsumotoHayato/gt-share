@@ -29,6 +29,9 @@
                     <small>レビュー{{ $song->getPostCountByTargetSong() }}件</small>
                 </div>
             @endforeach
+            <div class="paginate">
+                {{ $songs->links() }}
+            </div>
         </div>
         <div class="footer">
             <p><a href="/">アーティスト一覧へ</a></p>

@@ -61,6 +61,9 @@
                 </div>
             @endforeach
         </div>
+        <div class="paginate">
+                {{ $posts->links() }}
+        </div>
         <div class="footer">
             <p><a href="/artists/{{ $artist->id }}">{{ $artist->name }}の曲一覧へ</a></p>
             <p><a href="/">アーティスト一覧へ</a></p>

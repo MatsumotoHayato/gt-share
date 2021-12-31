@@ -57,7 +57,7 @@ class Song extends Model
     }
 
     // キーワードから曲名検索、$artist_idが渡されればアーティストでも絞り込み
-    public function searchSongsByKeyword($keyword, $artist_id = NULL, int $limit_count = 20)
+    public function searchSongsByKeyword($keyword, $artist_id = NULL, int $limit_count = 40)
     {
         if (empty($artist_id)) {
         return $this::where('name','like','%'.$keyword.'%')->orderBy('name')->paginate($limit_count);
