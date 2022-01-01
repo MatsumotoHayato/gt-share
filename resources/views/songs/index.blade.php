@@ -13,9 +13,9 @@
         </div>
         <div class="search">
             <form method="GET">
-                <input class="search-keyword" name="keyword" type="text" placeholder="{{ $artist->name}}の曲名を検索"/>
+                <input class="search-keyword" name="song_keyword" type="text" placeholder="{{ $artist->name}}の曲名を検索"/>
                 <button class="search-btn" type="submit" formaction="/artists/{{ $artist->id }}/search/songs">曲名検索</button>
-                <p class="name__error" style="color:red">{{ $errors->first("keyword") }}</p>
+                <p class="name__error" style="color:red">{{ $errors->first("song_keyword") }}</p>
             </form>
         </div>
         <div class="name">
@@ -25,12 +25,14 @@
             <h2>曲一覧</h2>
             [<a href="/artists/{{ $artist->id }}/songs/create">新規曲追加</a>]
             <div>
+                @if($songs->isNotEmpty())
                 <form action="/" method="GET">
                     <select onChange="submit(this.form)">
-                        <option>名前順</option>
-                        <option>レビュー数順</option>
+                        <option>投稿時間順</option>
+                        <option>役に立った順</option>
                     </select>
                 </form>
+                @endif
             </div>
             @foreach ($songs as $song)
                 <div class="song">

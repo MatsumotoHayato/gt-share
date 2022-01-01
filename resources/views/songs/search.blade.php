@@ -28,9 +28,9 @@
         @else
             <div class="search">
                 <form method="GET">
-                    <input class="search-keyword" name="keyword" type="text" placeholder="{{ $artist->name}}の曲名を検索"/>
+                    <input class="search-keyword" name="song_keyword" type="text" placeholder="{{ $artist->name}}の曲名を検索"/>
                     <button class="search-btn" type="submit" formaction="/artists/{{ $artist->id }}/search/songs">曲名検索</button>
-                    <p class="name__error" style="color:red">{{ $errors->first("keyword") }}</p>
+                    <p class="name__error" style="color:red">{{ $errors->first("song_keyword") }}</p>
                 </form>
             </div>
             <h1>{{ $artist->name}}の曲名"{{ $keyword }}"の検索結果</h1>

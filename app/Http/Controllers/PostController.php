@@ -7,7 +7,7 @@ use App\Song;
 use App\Instrument;
 use App\Post;
 use Illuminate\Http\Request;
-use App\Http\Requests\CustomRequest;
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -41,7 +41,7 @@ class PostController extends Controller
             ]);
     }
 
-    public function store(CustomRequest $request, Artist $artist, Song $song, Post $post)
+    public function store(PostRequest $request, Artist $artist, Song $song, Post $post)
     {
         $input = $request['post'];
         $input += [

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Artist;
 use Illuminate\Http\Request;
-use App\Http\Requests\CustomRequest;
+use App\Http\Requests\ArtistRequest;
 
 class ArtistController extends Controller
 {
@@ -18,7 +18,7 @@ class ArtistController extends Controller
         return view('artists/create');
     }
 
-    public function store(CustomRequest $request, Artist $artist)
+    public function store(ArtistRequest $request, Artist $artist)
     {
         $input = $request['artist'];
         $artist->fill($input)->save();
@@ -27,7 +27,7 @@ class ArtistController extends Controller
 
     public function search(Request $request, Artist $artist)
     {
-        // バリデーションチェック
+        // バリデーション
         $request = $request->validate([
             'keyword' => 'required|string|max:50'
         ]);

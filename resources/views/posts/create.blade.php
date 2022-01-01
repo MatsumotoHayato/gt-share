@@ -14,7 +14,6 @@
         <h2>{{ $song->name }} / {{ $artist->name }} の新規レビュー投稿</h2>
         <form action="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts" method="POST">
             @csrf
-            
             <div>
                 楽器<select name="post[instrument_id]">
                   <option value="未選択">選択してください</option>
@@ -46,7 +45,8 @@
                 感想<textarea type="text" name="post[body]" placeholder="演奏した感想を記入してください。（1000文字以下）">{{ old("post.body") }}</textarea>
                 <p style="color:red">{{ $errors->first("post.body") }}</p>
                 
-                <p>URL<input type="url" name="post[url]" placeholder="演奏動画のURLがあれば" value="{{ old("post.url") }}"/></p>
+                <p>URL（任意）<input type="text" name="post[url]" placeholder="演奏動画のURL" value="{{ old("post.url") }}"/></p>
+                <p style="color:red">{{ $errors->first("post.url") }}</p>
             </div>
             <input type="submit" value="投稿"/>
         </form>
