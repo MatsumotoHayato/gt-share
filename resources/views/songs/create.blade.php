@@ -16,7 +16,8 @@
             @csrf
             <div class="song_name">
                 <h2>曲名</h2>
-                <input type="text" name="song[name]" placeholder="新規曲名"/>
+                <input type="text" name="song[name]" placeholder="新規曲名" value="{{ old("song.name") }}"/>
+                <p class="name__error" style="color:red">{{ $errors->first("song.name") }}</p>
             </div>
             <input type="submit" value="追加"/>
         </form>

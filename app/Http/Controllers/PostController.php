@@ -7,6 +7,7 @@ use App\Song;
 use App\Instrument;
 use App\Post;
 use Illuminate\Http\Request;
+use App\Http\Requests\CustomRequest;
 
 class PostController extends Controller
 {
@@ -23,7 +24,6 @@ class PostController extends Controller
     public function index_selected_instrument(Request $request, Artist $artist, Song $song, Instrument $instrument)
     {
         return view('posts/index')->with([
-            
             'artist' => $artist,
             'song' => $song,
             'posts'=> $song->getPostsByTargetSongAndInstrument($request['instrument_id']),  // 受け取った楽器IDで絞り込み
@@ -41,7 +41,7 @@ class PostController extends Controller
             ]);
     }
 
-    public function store(Request $request, Artist $artist, Song $song, Post $post)
+    public function store(CustomRequest $request, Artist $artist, Song $song, Post $post)
     {
         $input = $request['post'];
         $input += [
