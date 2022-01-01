@@ -16,11 +16,21 @@
                 <input class="search-keyword" name="keyword" type="text" placeholder="アーティスト名や曲名を検索"/>
                 <button class="search-btn" type="submit" formaction="/search/artists">アーティスト名検索</button>
                 <button class="search-btn" type="submit" formaction="/search/songs">曲名検索</button>
+                <p class="name__error" style="color:red">{{ $errors->first("keyword") }}</p>
             </form>
         </div>
         <div class="artists">
             <h2>アーティスト一覧</h2>
             [<a href="/artists/create">新規アーティスト追加</a>]
+            <div>
+                <form action="/" method="GET">
+                    <select onChange="submit(this.form)">
+                        <option>名前順</option>
+                        <option>レビュー数順</option>
+                        <option>曲数順</option>
+                    </select>
+                </form>
+            </div>
             @foreach ($artists as $artist)
                 <div class="artist">
                     <h3 class="artist-name"><a href="/artists/{{ $artist->id }}">{{ $artist->name }}</a></h3>
