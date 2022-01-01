@@ -33,21 +33,23 @@
         </div>
         <div>
             @if ($song->culcDifficultyByTargetInstrument($selected_instrument_id) != 0)
-                <h2>難易度: {{ $song->culcDifficultyByTargetInstrument($selected_instrument_id)}}</h2>
+                <h4>難易度: {{ $song->culcDifficultyByTargetInstrument($selected_instrument_id)}}</h4>
             @else
-                <h2>難易度: なし</h2>
+                <h4>難易度: なし</h4>
             @endif
         </div>
         <div class="posts">
             <h2>レビュー一覧</h2>
             [<a href="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/create">新規レビュー投稿</a>]
             <div>
+                @if($posts->isNotEmpty())
                 <form action="/" method="GET">
                     <select onChange="submit(this.form)">
                         <option>投稿時間順</option>
                         <option>役に立った順</option>
                     </select>
                 </form>
+                @endif
             </div>
             @foreach ($posts as $post)
                 <div class="post">
@@ -58,7 +60,7 @@
                         楽器経験{{ $post->experience }}年
                     @endif
                     </h4>
-                    <p class="created_at">投稿日時: {{ $post->created_at }}</p>
+                    <p class="created_at">{{ $post->created_at }}</p>
                     <h4>楽器: {{ $post->instrument->name }}</h4>
                     <h4>難易度: {{ $post->difficulty }}</h4>
                     @isset ($post->url) <p>URL: {{ $post->url }}</p> @endisset

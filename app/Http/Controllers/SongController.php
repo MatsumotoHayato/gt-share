@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Artist;
 use App\Song;
 use Illuminate\Http\Request;
-use App\Http\Requests\CustomRequest;
+use App\Http\Requests\SongRequest;
 
 class SongController extends Controller
 {
@@ -22,7 +22,7 @@ class SongController extends Controller
         return view('songs/create')->with(['artist' => $artist]);
     }
 
-    public function store(CustomRequest $request, Artist $artist, Song $song)
+    public function store(SongRequest $request, Artist $artist, Song $song)
     {
         $input = $request['song'];
         $input += ['artist_id' => $artist->id];  // 要素artist_idの追加
@@ -33,7 +33,7 @@ class SongController extends Controller
     // 全曲からキーワード検索
     public function search(Request $request, Song $song)
     {
-        // バリデーションチェック
+        // バリデーション
         $request = $request->validate([
             'keyword' => 'required|string|max:100'
         ]);
@@ -46,13 +46,13 @@ class SongController extends Controller
     // 特定アーティストの曲からキーワード検索
     public function search_by_artist(Request $request, Artist $artist, Song $song)
     {
-        // バリデーションチェック
+        // バリデーション
         $request = $request->validate([
-            'keyword' => 'required|string|max:100'
+            'song_keyword' => 'required|string|max:100'  // バリデーションメッセージを'song_keyword'=>'曲名'としているため
         ]);
         return view('songs/search')->with([
-            'songs' => $song->searchSongsByKeyword($request['keyword'], $artist->id),
-            'keyword' => $request['keyword'],
+            'songs' => $song->searchSongsByKeyword($request['song_keyword'], $artist->id),
+            'keyword' => $request['song_keyword'],
             'artist' => $artist,
         ]);
     }
