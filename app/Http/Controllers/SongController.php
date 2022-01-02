@@ -66,7 +66,8 @@ class SongController extends Controller
             'instruments' => $instrument->get(),
         ]);
     }
-    // 初心者向けの曲ランキング
+    
+    // 楽器選択時の初心者向けの曲ランキング
     public function ranking_selected_instrument(Request $request, Song $song, Instrument $instrument)
     {
         return view('songs/ranking')->with([

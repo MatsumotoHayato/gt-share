@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
+use App\Post;
 
 class Song extends Model
 {
@@ -32,7 +33,6 @@ class Song extends Model
     {
         // 曲IDを指定し、名前順に並べたあと、ペジネーションをかける
         return $this::with('posts')->find($this->id)->posts()->orderBy('updated_at', 'DESC')->paginate($limit_count);
-        // return $this::with('posts')->where('song_id', $this->id)->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
 
     // 対象曲のレビュー一覧を取得
@@ -45,20 +45,23 @@ class Song extends Model
     // 対象曲のレビュー件数取得
     public function getPostCountByTargetSong()
     {
-        // return $this::with('posts')->find($song_id)->posts()->count();
-        return DB::table('posts')->where('song_id', $this->id)->count();
+        return Post::where('song_id', $this->id)->count();
     }
 
     // 楽器ごとの曲の難易度を計算
     public function culcDifficultyByTargetInstrument(int $instrument_id = 1)
     {
-        $difficulty = DB::table('posts')->where('song_id', $this->id)->where('instrument_id', $instrument_id)->avg('difficulty');
+        $difficulty = Post::where('song_id', $this->id)->where('instrument_id', $instrument_id)->avg('difficulty');
         return round($difficulty, 2);  // 小数点第2位まで表示
     }
     
+    // 難易度の低い順から曲を取得
     public function getSongsForBeginnersByInstrument(int $instrument_id = 1, int $limit_count = 20)
     {
-        return $this::select('songs.name')->join('posts', 'songs.id', '=', 'posts.song_id')->where('posts.instrument_id', $instrument_id)->groupBy('songs.id', 'songs.name')->orderByRaw('AVG(posts.difficulty)')->get();
+        // 曲IDでグループ化して平均難易度を計算し、難易度昇順に曲を並び替える
+        // 'songs.artist_id'をSelect句で選択しないとアーティスト名取得できない
+        return $this::Join('posts', 'songs.id', '=', 'posts.song_id')->where('posts.instrument_id', $instrument_id)->groupBy('songs.id', 'songs.name', 'songs.artist_id')
+        ->orderByRaw('avg(posts.difficulty)')->select('songs.id', 'songs.name', 'songs.artist_id')->paginate($limit_count);
     }
 
     // キーワードから曲名検索、$artist_idが渡されればアーティストでも絞り込み

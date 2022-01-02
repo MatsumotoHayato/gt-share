@@ -14,27 +14,26 @@
         </div>
         @php
             if (empty($selected_instrument_id)) { $selected_instrument_id = $instruments->first()->id; }
-            dd($songs);
         @endphp
-        <div>
-            <form action="/ranking/beginners/selected" method="GET">
-                楽器<select name="instrument_id" onChange="submit(this.form)">
-                        @foreach ($instruments as $instrument)
-                            @if ($instrument->id == $selected_instrument_id)
-                                <option value='{{ $instrument->id }}' selected>{{ $instrument->name }}</option>
-                            @else
-                                <option value='{{ $instrument->id }}'>{{ $instrument->name }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-            </form>
-        </div>
         <div class="songs">
-            <h2>曲一覧</h2>
-            @foreach ($songs as $song)
+            <h2>初心者向け曲ランキング</h2>
+            <div>
+                <form action="/ranking/beginners/selected" method="GET">
+                    楽器<select name="instrument_id" onChange="submit(this.form)">
+                            @foreach ($instruments as $instrument)
+                                @if ($instrument->id == $selected_instrument_id)
+                                    <option value='{{ $instrument->id }}' selected>{{ $instrument->name }}</option>
+                                @else
+                                    <option value='{{ $instrument->id }}'>{{ $instrument->name }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                </form>
+            </div>
+            @foreach ($songs as $index => $song)
                 <div class="song">
-                    <h4>{{ $song->name }}</h4>
-                    <h4><a href="/artists/{{ $song->artist->id }}/songs/{{ $song->id }}">{{ $song->name }}</a> / {{$song->artist->name}}</h4>
+                    <h4>{{ $index+1 }}. <a href="/artists/{{ $song->artist->id }}/songs/{{ $song->id }}">{{ $song->name }}</a> / 
+                    <a href="/artists/{{ $song->artist->id }}">{{$song->artist->name}}</a></h4>
                     <small>難易度 {{ $song->culcDifficultyByTargetInstrument($selected_instrument_id) }}</small>
                 </div>
             @endforeach
