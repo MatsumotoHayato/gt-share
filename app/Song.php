@@ -55,6 +55,11 @@ class Song extends Model
         $difficulty = DB::table('posts')->where('song_id', $this->id)->where('instrument_id', $instrument_id)->avg('difficulty');
         return round($difficulty, 2);  // 小数点第2位まで表示
     }
+    
+    public function getSongsForBeginnersByInstrument(int $instrument_id = 1, int $limit_count = 20)
+    {
+        return $this::select('songs.name')->join('posts', 'songs.id', '=', 'posts.song_id')->where('posts.instrument_id', $instrument_id)->groupBy('songs.id', 'songs.name')->orderByRaw('AVG(posts.difficulty)')->get();
+    }
 
     // キーワードから曲名検索、$artist_idが渡されればアーティストでも絞り込み
     public function searchSongsByKeyword($keyword, $artist_id = NULL, int $limit_count = 40)
