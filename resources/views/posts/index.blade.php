@@ -45,7 +45,7 @@
                 @if($posts->isNotEmpty())
                 <form action="/" method="GET">
                     <select onChange="submit(this.form)">
-                        <option>投稿時間順</option>
+                        <option>新しい順</option>
                         <option>役に立った順</option>
                     </select>
                 </form>

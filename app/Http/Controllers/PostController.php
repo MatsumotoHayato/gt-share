@@ -70,10 +70,18 @@ class PostController extends Controller
         return redirect('/artists/'. $artist->id. '/songs/'. $song->id);
     }
     
-    public function mypage(Post $post)
+    // 役に立ったマイリスト
+    public function mylist(Post $post)
     {
-        return view('posts/mypage')->with([
+        return view('posts/mylist')->with([
             'posts' => $post->getMyFavoritePosts()
         ]);
+    }
+    
+    // マイリストの役に立った取り消し機能
+    public function unfavorite_mylist(Post $post)
+    {
+        $post->users()->detach(Auth::id());
+        return redirect('/mylist');
     }
 }
