@@ -44,4 +44,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Post');
     }
+    
+    // 役に立った機能のためのPostに対するリレーション
+    public function favorites()
+    {
+        return $this->belongsToMany('App\Post')->withTimestamps();
+    }
 }

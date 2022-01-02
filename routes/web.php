@@ -28,6 +28,13 @@ Route::get('/search/artists', 'ArtistController@search');  // アーティスト
 Route::get('/search/songs', 'SongController@search');      // 曲名検索結果画面
 Route::get('/artists/{artist}/search/songs', 'SongController@search_by_artist');  // 特定アーティストの曲名検索結果画面
 
+Route::get('/ranking/beginners', 'SongController@ranking');   // 初心者向け曲ランキング
+Route::get('/ranking/beginners/selected', 'SongController@ranking_selected_instrument');  // 楽器選択時の初心者向け曲ランキング
+
+Route::post('/artists/{artist}/songs/{song}/posts/{post}/favorite', 'PostController@favorite');  // 役に立った機能
+Route::post('/artists/{artist}/songs/{song}/posts/{post}/unfavorite', 'PostController@unfavorite');  // 役に立った取り消し機能
+Route::get('/mypage/favorite', 'PostController@mypage');  // 役に立ったリスト
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

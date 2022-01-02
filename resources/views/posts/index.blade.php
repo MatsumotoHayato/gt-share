@@ -65,8 +65,18 @@
                     <h4>難易度: {{ $post->difficulty }}</h4>
                     @isset ($post->url) <p>URL: {{ $post->url }}</p> @endisset
                     <p class="body">感想: {{ $post->body }}</p>
-                    <div class="voted_count">
-                        <button type="submit">役に立った 〇〇人</button>
+                    <div class="favorite_count">
+                        @if($post->users()->where('user_id', Auth::id())->exists())
+                            <form action="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/{{ $post->id }}/unfavorite" method="POST">
+                              @csrf
+                              <button type="submit">役に立った {{ $post->users()->count() }}人  取り消す</button>
+                            </form>
+                        @else
+                            <form action="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/{{ $post->id }}/favorite" method="POST">
+                              @csrf
+                              <button type="submit">役に立った {{ $post->users()->count() }}人</button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             @endforeach

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Artist;
 use App\Song;
+use App\Instrument;
 use Illuminate\Http\Request;
 use App\Http\Requests\SongRequest;
 
@@ -54,6 +55,24 @@ class SongController extends Controller
             'songs' => $song->searchSongsByKeyword($request['song_keyword'], $artist->id),
             'keyword' => $request['song_keyword'],
             'artist' => $artist,
+        ]);
+    }
+    
+    // 初心者向けの曲ランキング
+    public function ranking(Song $song, Instrument $instrument)
+    {
+        return view('songs/ranking')->with([
+            'songs' => $song->getSongsForBeginnersByInstrument(),
+            'instruments' => $instrument->get(),
+        ]);
+    }
+    // 初心者向けの曲ランキング
+    public function ranking_selected_instrument(Request $request, Song $song, Instrument $instrument)
+    {
+        return view('songs/ranking')->with([
+            'songs' => $song->getSongsForBeginnersByInstrument($request['instrument_id']),
+            'selected_instrument_id' => $request['instrument_id'],
+            'instruments' => $instrument->get(),
         ]);
     }
 }
