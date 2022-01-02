@@ -31,9 +31,10 @@ Route::get('/artists/{artist}/search/songs', 'SongController@search_by_artist');
 Route::get('/ranking/beginners', 'SongController@ranking');   // 初心者向け曲ランキング
 Route::get('/ranking/beginners/selected', 'SongController@ranking_selected_instrument');  // 楽器選択時の初心者向け曲ランキング
 
-Route::post('/artists/{artist}/songs/{song}/posts/{post}/favorite', 'PostController@favorite');  // 役に立った機能
-Route::post('/artists/{artist}/songs/{song}/posts/{post}/unfavorite', 'PostController@unfavorite');  // 役に立った取り消し機能
-Route::get('/mypage/favorite', 'PostController@mypage');  // 役に立ったリスト
+Route::post('/artists/{artist}/songs/{song}/posts/{post}/favorite', 'PostController@favorite')->middleware('auth');  // 役に立った機能
+Route::post('/artists/{artist}/songs/{song}/posts/{post}/unfavorite', 'PostController@unfavorite')->middleware('auth');  // 役に立った取り消し機能
+Route::post('/mylist/{post}/unfavorite', 'PostController@unfavorite_mylist')->middleware('auth');  // マイリストで役に立った取り消し機能
+Route::get('/mylist', 'PostController@mylist')->middleware('auth');  // 役に立ったマイリスト
 
 Auth::routes();
 
