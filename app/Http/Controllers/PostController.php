@@ -19,9 +19,22 @@ class PostController extends Controller
         return view('posts/index')->with([
             'artist' => $artist,
             'song' => $song,
-            'posts'=> $song->getPostsByTargetSongAndInstrument($instrument->id),
+            'posts'=> $song->getPostsBySongAndInstrument($instrument->id),
             'selected_instrument' => $instrument,
             'instruments' => $instrument->get(),
+        ]);
+    }
+    
+    // レビュー一覧表示（役に立った順）
+    public function indexSortFavorite(Artist $artist, Song $song, Instrument $instrument)  // 引数の順番に注意（web.phpと揃える）
+    {
+        return view('posts/index')->with([
+            'artist' => $artist,
+            'song' => $song,
+            'posts'=> $song->sortPostsByFavoriteCount($instrument->id),
+            'selected_instrument' => $instrument,
+            'instruments' => $instrument->get(),
+            'sorted_flag' => 1,
         ]);
     }
 
@@ -97,7 +110,7 @@ class PostController extends Controller
     }
     
     // マイリストの役に立った取り消し機能
-    public function unfavorite_mylist(Post $post)
+    public function unfavoriteMylist(Post $post)
     {
         $post->users()->detach(Auth::id());
         return redirect('/mylist');

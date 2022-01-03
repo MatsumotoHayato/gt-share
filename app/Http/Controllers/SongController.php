@@ -14,7 +14,7 @@ class SongController extends Controller
     {
         return view('songs/index')->with([
             'artist'=> $artist, 
-            'songs' => $artist->getSongsByTargetArtist(),
+            'songs' => $artist->getSongsByArtist(),
         ]);
     }
 

@@ -46,7 +46,7 @@
                     @empty($artist)
                         <small><a href="/artists/{{ $song->artist_id }}">- {{ $song->artist->name }}</a></small>
                     @endempty
-                    <small>レビュー{{ $song->getPostCountByTargetSong() }}件</small>
+                    <small>レビュー{{ $song->getPostCountBySong() }}件</small>
                 </div>
             @endforeach
         </div>

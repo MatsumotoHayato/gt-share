@@ -20,6 +20,7 @@ Route::get('/artists/{artist}/songs/create', 'SongController@create')->middlewar
 Route::post('/artists/{artist}/songs', 'SongController@store')->middleware('auth');
 
 Route::get('/artists/{artist}/songs/{song}/posts/instruments/{instrument}', 'PostController@index');  // レビュー一覧表示
+Route::get('/artists/{artist}/songs/{song}/posts/instruments/{instrument}/favorite', 'PostController@indexSortFavorite');  // レビュー一覧並び替え（役に立った順）
 Route::get('/artists/{artist}/songs/{song}/posts/instruments/{instrument}/create', 'PostController@create')->middleware('auth');  // レビュー投稿画面
 Route::post('/artists/{artist}/songs/{song}/posts', 'PostController@store')->middleware('auth');
 Route::get('/artists/{artist}/songs/{song}/posts/{post}/edit', 'PostController@edit')->middleware('auth');  // レビュー編集
@@ -34,7 +35,7 @@ Route::get('/ranking/beginners/instruments/{instrument}', 'SongController@rankin
 
 Route::post('/artists/{artist}/songs/{song}/posts/{post}/favorite', 'PostController@favorite')->middleware('auth');  // 役に立った機能
 Route::post('/artists/{artist}/songs/{song}/posts/{post}/unfavorite', 'PostController@unfavorite')->middleware('auth');  // 役に立った取り消し機能
-Route::post('/mylist/{post}/unfavorite', 'PostController@unfavorite_mylist')->middleware('auth');  // マイリストで役に立った取り消し機能
+Route::post('/mylist/{post}/unfavorite', 'PostController@unfavoriteMylist')->middleware('auth');  // マイリストで役に立った取り消し機能
 Route::get('/mylist', 'PostController@mylist')->middleware('auth');  // 役に立ったマイリスト
 
 Auth::routes();

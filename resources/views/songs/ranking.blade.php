@@ -19,7 +19,7 @@
             @endphp
             <div>
                 <form method="GET">
-                    楽器<select onChange="location.href=value;">
+                    楽器<select onChange="location.href=value">
                             @foreach ($instruments as $instrument)
                                 @if ($instrument->id == $selected_instrument->id)
                                     <option value="/ranking/beginners/instruments/{{ $instrument->id }}" selected>{{ $instrument->name }}</option>
@@ -34,7 +34,7 @@
                 <div class="song">
                     <h4>{{ $index+1 }}. <a href="/artists/{{ $song->artist->id }}/songs/{{ $song->id }}/posts/instruments/{{ $selected_instrument->id }}">{{ $song->name }}</a> / 
                     <a href="/artists/{{ $song->artist->id }}">{{$song->artist->name}}</a></h4>
-                    <p>難易度 {{ $song->culcDifficultyByTargetInstrument($selected_instrument->id) }}</p>
+                    <p>難易度 {{ $song->culcDifficultyByInstrument($selected_instrument->id) }}</p>
                 </div>
             @endforeach
         </div>

@@ -20,7 +20,7 @@
         @endphp
         <div>
             <form method="GET">
-                楽器<select onChange="location.href=value;">
+                楽器<select onChange="location.href=value">
                         @foreach ($instruments as $instrument)
                             @if ($instrument->id == $selected_instrument->id)
                                 <option value="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/instruments/{{ $instrument->id }}" selected>{{ $instrument->name }}</option>
@@ -32,8 +32,8 @@
             </form>
         </div>
         <div>
-            @if ($song->culcDifficultyByTargetInstrument($selected_instrument->id) != 0)
-                <h4>難易度: {{ $song->culcDifficultyByTargetInstrument($selected_instrument->id)}}</h4>
+            @if ($song->culcDifficultyByInstrument($selected_instrument->id) != 0)
+                <h4>難易度: {{ $song->culcDifficultyByInstrument($selected_instrument->id)}}</h4>
             @else
                 <h4>難易度: なし</h4>
             @endif
@@ -43,10 +43,15 @@
             [<a href="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/instruments/{{ $selected_instrument->id }}/create">新規レビュー投稿</a>]
             <div>
                 @if($posts->isNotEmpty())
-                <form action="/" method="GET">
-                    <select onChange="submit(this.form)">
-                        <option>新しい順</option>
-                        <option>役に立った順</option>
+                <form method="GET">
+                    <select onChange="location.href=value">
+                        @empty ($sorted_flag)
+                        <option value="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/instruments/{{ $selected_instrument->id }}" selected>新しい順</option>
+                        <option value="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/instruments/{{ $selected_instrument->id }}/favorite">役に立った順</option>
+                        @else
+                        <option value="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/instruments/{{ $selected_instrument->id }}">新しい順</option>
+                        <option value="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/instruments/{{ $selected_instrument->id }}/favorite" selected>役に立った順</option>
+                        @endempty
                     </select>
                 </form>
                 @endif
@@ -61,7 +66,6 @@
                     @endif
                     </h4>
                     <p class="updated_at">{{ $post->updated_at }}</p>
-                    <h4>楽器: {{ $post->instrument->name }}</h4>
                     <h4>難易度: {{ $post->difficulty }}</h4>
                     @isset ($post->url) <p>URL: {{ $post->url }}</p> @endisset
                     <p class="body">感想: {{ $post->body }}</p>
