@@ -18,7 +18,9 @@
                 楽器<select name="post[instrument_id]">
                   <option value="未選択">選択してください</option>
                     @foreach ($instruments as $instrument)
-                        @if ($instrument->id == old("post.instrument_id"))
+                        @if ($instrument->id == $selected_instrument->id)
+                            <option value='{{ $instrument->id }}' selected>{{ $instrument->name }}</option>
+                        @elseif ($instrument->id == old("post.instrument_id"))
                             <option value='{{ $instrument->id }}' selected>{{ $instrument->name }}</option>
                         @else
                             <option value='{{ $instrument->id }}'>{{ $instrument->name }}</option>
