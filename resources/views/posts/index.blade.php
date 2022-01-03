@@ -16,31 +16,31 @@
             <h2>{{ $song->name }} / {{ $artist->name }}</h2>
         </div>
         @php
-            if (empty($selected_instrument_id)) { $selected_instrument_id = $instruments->first()->id; }
+            if (empty($selected_instrument)) { $selected_instrument = $instruments->first(); }
         @endphp
         <div>
-            <form action="/artists/{{ $artist->id }}/songs/{{ $song->id }}/selected" method="GET">
-                楽器<select name="instrument_id" onChange="submit(this.form)">
+            <form method="GET">
+                楽器<select onChange="location.href=value;">
                         @foreach ($instruments as $instrument)
-                            @if ($instrument->id == $selected_instrument_id)
-                                <option value='{{ $instrument->id }}' selected>{{ $instrument->name }}</option>
+                            @if ($instrument->id == $selected_instrument->id)
+                                <option value="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/{{ $instrument->id }}" selected>{{ $instrument->name }}</option>
                             @else
-                                <option value='{{ $instrument->id }}'>{{ $instrument->name }}</option>
+                                <option value="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/{{ $instrument->id }}">{{ $instrument->name }}</option>
                             @endif
                         @endforeach
                     </select>
             </form>
         </div>
         <div>
-            @if ($song->culcDifficultyByTargetInstrument($selected_instrument_id) != 0)
-                <h4>難易度: {{ $song->culcDifficultyByTargetInstrument($selected_instrument_id)}}</h4>
+            @if ($song->culcDifficultyByTargetInstrument($selected_instrument->id) != 0)
+                <h4>難易度: {{ $song->culcDifficultyByTargetInstrument($selected_instrument->id)}}</h4>
             @else
                 <h4>難易度: なし</h4>
             @endif
         </div>
         <div class="posts">
             <h2>レビュー一覧</h2>
-            [<a href="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/create">新規レビュー投稿</a>]
+            [<a href="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/{{ $selected_instrument->id }}/create">新規レビュー投稿</a>]
             <div>
                 @if($posts->isNotEmpty())
                 <form action="/" method="GET">

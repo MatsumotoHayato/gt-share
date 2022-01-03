@@ -19,17 +19,15 @@ Route::get('/artists/{artist}', 'SongController@index');  // 曲一覧表示
 Route::get('/artists/{artist}/songs/create', 'SongController@create')->middleware('auth');
 Route::post('/artists/{artist}/songs', 'SongController@store')->middleware('auth');
 
-Route::get('/artists/{artist}/songs/{song}', 'PostController@index');  // レビュー一覧表示
-Route::get('/artists/{artist}/songs/{song}/selected', 'PostController@index_selected_instrument');  // 楽器選択時のレビュー一覧表示
-Route::get('/artists/{artist}/songs/{song}/posts/create', 'PostController@create')->middleware('auth');
+Route::get('/artists/{artist}/songs/{song}/posts/{instrument}', 'PostController@index');  // レビュー一覧表示
+Route::get('/artists/{artist}/songs/{song}/posts/{instrument}/create', 'PostController@create')->middleware('auth');  // レビュー投稿画面
 Route::post('/artists/{artist}/songs/{song}/posts', 'PostController@store')->middleware('auth');
 
 Route::get('/search/artists', 'ArtistController@search');  // アーティスト名検索結果画面
 Route::get('/search/songs', 'SongController@search');      // 曲名検索結果画面
 Route::get('/artists/{artist}/search/songs', 'SongController@search_by_artist');  // 特定アーティストの曲名検索結果画面
 
-Route::get('/ranking/beginners', 'SongController@ranking');   // 初心者向け曲ランキング
-Route::get('/ranking/beginners/selected', 'SongController@ranking_selected_instrument');  // 楽器選択時の初心者向け曲ランキング
+Route::get('/ranking/beginners/{instrument}', 'SongController@ranking');   // 初心者向け曲ランキング
 
 Route::post('/artists/{artist}/songs/{song}/posts/{post}/favorite', 'PostController@favorite')->middleware('auth');  // 役に立った機能
 Route::post('/artists/{artist}/songs/{song}/posts/{post}/unfavorite', 'PostController@unfavorite')->middleware('auth');  // 役に立った取り消し機能

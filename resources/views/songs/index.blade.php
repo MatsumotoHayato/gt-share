@@ -28,15 +28,15 @@
                 @if($songs->isNotEmpty())
                 <form action="/" method="GET">
                     <select onChange="submit(this.form)">
-                        <option>投稿時間順</option>
-                        <option>役に立った順</option>
+                        <option>名前順</option>
+                        <option>レビュー数順</option>
                     </select>
                 </form>
                 @endif
             </div>
             @foreach ($songs as $song)
                 <div class="song">
-                    <h4><a href="/artists/{{ $artist->id }}/songs/{{ $song->id }}">{{ $song->name }}</a></h4>
+                    <h4><a href="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/1">{{ $song->name }}</a></h4>
                     <small>レビュー{{ $song->getPostCountByTargetSong() }}件</small>
                 </div>
             @endforeach

@@ -41,7 +41,7 @@
                 {{ $artists->links() }}
             </div>
         </div>
-        <p><a href="/ranking/beginners">初心者向け曲ランキング</a></p>
+        <p><a href="/ranking/beginners/1">初心者向け曲ランキング</a></p>
         <p><a href="/mylist">役に立ったマイリスト</a></p>
         @endsection
     </body>

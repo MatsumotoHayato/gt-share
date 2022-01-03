@@ -18,19 +18,8 @@ class PostController extends Controller
         return view('posts/index')->with([
             'artist' => $artist,
             'song' => $song,
-            'posts'=> $song->getPostsByTargetSongAndInstrument(),
-            'instruments' => $instrument->get(),
-        ]);
-    }
-
-    // 楽器選択後のレビュー一覧
-    public function index_selected_instrument(Request $request, Artist $artist, Song $song, Instrument $instrument)
-    {
-        return view('posts/index')->with([
-            'artist' => $artist,
-            'song' => $song,
-            'posts'=> $song->getPostsByTargetSongAndInstrument($request['instrument_id']),  // 受け取った楽器IDで絞り込み
-            'selected_instrument_id' => $request['instrument_id'],
+            'posts'=> $song->getPostsByTargetSongAndInstrument($instrument->id),
+            'selected_instrument' => $instrument,
             'instruments' => $instrument->get(),
         ]);
     }
@@ -40,6 +29,7 @@ class PostController extends Controller
         return view('posts/create')->with([
             'artist' => $artist,
             'song' => $song,
+            'selected_instrument' => $instrument,
             'instruments' => $instrument->get(),
             ]);
     }
@@ -60,14 +50,14 @@ class PostController extends Controller
     public function favorite(Artist $artist, Song $song, Post $post)
     {
         $post->users()->attach(Auth::id());
-        return redirect('/artists/'. $artist->id. '/songs/'. $song->id);
+        return redirect('/artists/'. $artist->id. '/songs/'. $song->id. '/posts/'. $post->instrument->id);
     }
     
     // 役に立った取り消し機能
     public function unfavorite(Artist $artist, Song $song, Post $post)
     {
         $post->users()->detach(Auth::id());
-        return redirect('/artists/'. $artist->id. '/songs/'. $song->id);
+        return redirect('/artists/'. $artist->id. '/songs/'. $song->id. '/posts/'. $post->instrument->id);
     }
     
     // 役に立ったマイリスト

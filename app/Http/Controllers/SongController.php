@@ -14,7 +14,7 @@ class SongController extends Controller
     {
         return view('songs/index')->with([
             'artist'=> $artist, 
-            'songs' => $artist->getSongsByTargetArtist()
+            'songs' => $artist->getSongsByTargetArtist(),
         ]);
     }
 
@@ -62,17 +62,8 @@ class SongController extends Controller
     public function ranking(Song $song, Instrument $instrument)
     {
         return view('songs/ranking')->with([
-            'songs' => $song->getSongsForBeginnersByInstrument(),
-            'instruments' => $instrument->get(),
-        ]);
-    }
-    
-    // 楽器選択時の初心者向けの曲ランキング
-    public function ranking_selected_instrument(Request $request, Song $song, Instrument $instrument)
-    {
-        return view('songs/ranking')->with([
-            'songs' => $song->getSongsForBeginnersByInstrument($request['instrument_id']),
-            'selected_instrument_id' => $request['instrument_id'],
+            'songs' => $song->getSongsForBeginnersByInstrument($instrument->id),
+            'selected_instrument' => $instrument,
             'instruments' => $instrument->get(),
         ]);
     }

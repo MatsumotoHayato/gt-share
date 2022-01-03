@@ -18,7 +18,7 @@
         <div class="posts">
             @foreach ($posts as $post)
                 <div class="post">
-                    <h3><a href="/artists/{{ $post->song->artist->id }}/songs/{{ $post->song->id }}">{{ $post->song->name}}</a> / 
+                    <h3><a href="/artists/{{ $post->song->artist->id }}/songs/{{ $post->song->id }}/posts/{{ $post->instrument->id }}">{{ $post->song->name}}</a> / 
                     <a href="/artists/{{ $post->song->artist->id }}">{{$post->song->artist->name}}</a></h3>
                     
                     <h4>{{ $post->user->name }}: 
