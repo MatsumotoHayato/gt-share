@@ -18,7 +18,7 @@
         <div class="posts">
             @foreach ($posts as $post)
                 <div class="post">
-                    <h3><a href="/artists/{{ $post->song->artist->id }}/songs/{{ $post->song->id }}/posts/{{ $post->instrument->id }}">{{ $post->song->name}}</a> / 
+                    <h3><a href="/artists/{{ $post->song->artist->id }}/songs/{{ $post->song->id }}/posts/instruments/{{ $post->instrument->id }}">{{ $post->song->name}}</a> / 
                     <a href="/artists/{{ $post->song->artist->id }}">{{$post->song->artist->name}}</a></h3>
                     
                     <h4>{{ $post->user->name }}: 
@@ -28,7 +28,7 @@
                         楽器経験{{ $post->experience }}年
                     @endif
                     </h4>
-                    <p class="created_at">{{ $post->created_at }}</p>
+                    <p class="updated_at">{{ $post->updated_at }}</p>
                     <h4>楽器: {{ $post->instrument->name }}</h4>
                     <h4>難易度: {{ $post->difficulty }}</h4>
                     @isset ($post->url) <p>URL: {{ $post->url }}</p> @endisset
@@ -36,7 +36,7 @@
                     <div class="favorite_count">
                         <form action="/mylist/{{ $post->id }}/unfavorite" method="POST">
                           @csrf
-                          <button type="submit">役に立った {{ $post->users()->count() }}人  取り消す</button>
+                          <button type="submit">役に立った {{ $post->users()->count() }}人  解除</button>
                         </form>
                     </div>
                 </div>

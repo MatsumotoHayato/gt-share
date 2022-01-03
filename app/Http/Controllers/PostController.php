@@ -13,6 +13,7 @@ use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
+    // レビュー一覧表示
     public function index(Artist $artist, Song $song, Instrument $instrument)  // 引数の順番に注意（web.phpと揃える）
     {
         return view('posts/index')->with([
@@ -24,6 +25,7 @@ class PostController extends Controller
         ]);
     }
 
+    // レビュー投稿画面
     public function create(Artist $artist, Song $song, Instrument $instrument)
     {
         return view('posts/create')->with([
@@ -34,30 +36,56 @@ class PostController extends Controller
             ]);
     }
 
+    // レビュー投稿
     public function store(PostRequest $request, Artist $artist, Song $song, Post $post)
     {
         $input = $request['post'];
         $input += [
-            // 'user_id' => auth()->user()->id,
             'user_id' => Auth::id(),
             'song_id' => $song->id,
         ];
         $post->fill($input)->save();
-        return redirect('/artists/'. $artist->id. '/songs/'. $song->id);
+        return redirect('/artists/'. $artist->id. '/songs/'. $song->id. '/posts/instruments/'. $post->instrument->id);
+    }
+    
+    // レビュー編集画面
+    public function edit(Artist $artist, Song $song, Post $post, Instrument $instrument)
+    {
+        return view('posts/edit')->with([
+            'artist' => $artist,
+            'song' => $song,
+            'post' => $post,
+            'instruments' => $instrument->get(),
+            ]);
+    }
+    
+    // レビュー編集の変更内容更新
+    public function update(PostRequest $request, Artist $artist, Song $song, Post $post)
+    {
+        $input = $request['post'];
+        $post->fill($input)->save();
+        return redirect('/artists/'. $artist->id. '/songs/'. $song->id. '/posts/instruments/'. $post->instrument->id);
+    }
+    
+    // レビュー削除
+    public function delete(Artist $artist, Song $song, Post $post)
+    {
+        $post->delete();
+        return redirect('/artists/'. $artist->id. '/songs/'. $song->id. '/posts/instruments/'. $post->instrument->id);
     }
     
     // 役に立った機能
     public function favorite(Artist $artist, Song $song, Post $post)
     {
         $post->users()->attach(Auth::id());
-        return redirect('/artists/'. $artist->id. '/songs/'. $song->id. '/posts/'. $post->instrument->id);
+        return redirect('/artists/'. $artist->id. '/songs/'. $song->id. '/posts/instruments/'. $post->instrument->id);
     }
     
     // 役に立った取り消し機能
     public function unfavorite(Artist $artist, Song $song, Post $post)
     {
         $post->users()->detach(Auth::id());
-        return redirect('/artists/'. $artist->id. '/songs/'. $song->id. '/posts/'. $post->instrument->id);
+        return redirect('/artists/'. $artist->id. '/songs/'. $song->id. '/posts/instruments/'. $post->instrument->id);
     }
     
     // 役に立ったマイリスト
