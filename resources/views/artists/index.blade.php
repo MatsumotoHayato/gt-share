@@ -22,19 +22,10 @@
         <div class="artists">
             <h2>アーティスト一覧</h2>
             [<a href="/artists/create">新規アーティスト追加</a>]
-            <div>
-                <form action="/" method="GET">
-                    <select onChange="submit(this.form)">
-                        <option>名前順</option>
-                        <option>レビュー数順</option>
-                        <option>曲数順</option>
-                    </select>
-                </form>
-            </div>
             @foreach ($artists as $artist)
                 <div class="artist">
                     <h3 class="artist-name"><a href="/artists/{{ $artist->id }}">{{ $artist->name }}</a></h3>
-                    <small class='posts-count'>レビュー{{ $artist->getPostCountByTargetArtist() }}件</small>
+                    <small class='posts-count'>レビュー{{ $artist->getPostCountByArtist() }}件</small>
                 </div>
             @endforeach
             <div class="paginate">

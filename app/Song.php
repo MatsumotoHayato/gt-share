@@ -29,27 +29,29 @@ class Song extends Model
     }
 
     // 対象曲のレビュー一覧を取得
-    public function getPostsByTargetSong(int $limit_count = 10)
+    public function getPostsBySongAndInstrument(int $instrument_id = 1, int $limit_count = 10)
     {
-        // 曲IDを指定し、名前順に並べたあと、ペジネーションをかける
-        return $this::with('posts')->find($this->id)->posts()->orderBy('updated_at', 'DESC')->paginate($limit_count);
-    }
-
-    // 対象曲のレビュー一覧を取得
-    public function getPostsByTargetSongAndInstrument(int $instrument_id = 1, int $limit_count = 10)
-    {
-        // 曲IDと楽器IDを指定し、投稿時間順に並べたあと、ペジネーションをかける
+        // 曲IDと楽器IDを指定し、投稿時間順に並べたあと、ペジネーション
         return $this::with('posts')->find($this->id)->posts()->where('instrument_id', $instrument_id)->orderBy('updated_at', 'DESC')->paginate($limit_count);
+    }
+    
+    // 対象曲のレビュー一覧を役に立った数順で並び替え
+    public function sortPostsByFavoriteCount(int $instrument_id = 1, int $limit_count = 10)
+    {
+        // withCountでリレーション先の件数を取得
+        // 曲IDと楽器IDを指定し、役に立った数順に並べたあと、ペジネーション
+        return Post::withCount('users')->where('song_id', $this->id)->where('instrument_id', $instrument_id)
+        ->orderBy('users_count', 'DESC')->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
 
     // 対象曲のレビュー件数取得
-    public function getPostCountByTargetSong()
+    public function getPostCountBySong()
     {
         return Post::where('song_id', $this->id)->count();
     }
 
     // 楽器ごとの曲の難易度を計算
-    public function culcDifficultyByTargetInstrument(int $instrument_id = 1)
+    public function culcDifficultyByInstrument(int $instrument_id = 1)
     {
         $difficulty = Post::where('song_id', $this->id)->where('instrument_id', $instrument_id)->avg('difficulty');
         return round($difficulty, 2);  // 小数点第2位まで表示
