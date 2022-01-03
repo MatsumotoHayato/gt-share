@@ -53,9 +53,10 @@
             <input type="submit" value="投稿"/>
         </form>
         <div class="footer">
-            <p><a href="/artists/{{ $artist->id }}/songs/{{ $song->id }}">{{ $song->name }}のレビュー一覧へ</a></p>
-            <p><a href="/artists/{{ $artist->id }}">{{ $artist->name }}の曲一覧へ</a></p>
-            <p><a href="/">アーティスト一覧へ</a></p>
+            <p><a href="/">アーティスト一覧</a> > 
+            <a href="/artists/{{ $artist->id }}">{{ $artist->name }}</a> > 
+            <a href="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/{{ $selected_instrument->id}}">{{ $song->name }}</a> > 
+            新規レビュー投稿</p>
         </div>
         @endsection
     </body>

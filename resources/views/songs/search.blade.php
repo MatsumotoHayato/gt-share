@@ -54,7 +54,11 @@
                 {{ $songs->links() }}
         </div>
         <div class="footer">
-            <p><a href="/">アーティスト一覧へ</a></p>
+            <p><a href="/">アーティスト一覧</a> > 
+            @isset($artist)
+                <a href="/artists/{{ $artist->id }}">{{ $artist->name }}</a> > 
+            @endisset
+            曲検索結果</p>
         </div>
         @endsection
     </body>

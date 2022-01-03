@@ -46,7 +46,8 @@
                 {{ $posts->links() }}
         </div>
         <div class="footer">
-            <p><a href="/">アーティスト一覧へ</a></p>
+            <p><a href="/">アーティスト一覧</a> > 
+            役に立ったマイリスト</p>
         </div>
         @endsection
     </body>
