@@ -36,7 +36,7 @@
             </div>
             @foreach ($songs as $song)
                 <div class="song">
-                    <h4><a href="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/1">{{ $song->name }}</a></h4>
+                    <h4><a href="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/instruments/1">{{ $song->name }}</a></h4>
                     <small>レビュー{{ $song->getPostCountByTargetSong() }}件</small>
                 </div>
             @endforeach

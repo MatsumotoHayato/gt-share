@@ -42,7 +42,7 @@
             @endisset
             @foreach ($songs as $song)
                 <div class="song">
-                    <h4><a href="/artists/{{ $song->artist_id }}/songs/{{ $song->id }}">{{ $song->name }}</a></h4>
+                    <h4><a href="/artists/{{ $song->artist_id }}/songs/{{ $song->id }}/posts/instruments/1">{{ $song->name }}</a></h4>
                     @empty($artist)
                         <small><a href="/artists/{{ $song->artist_id }}">- {{ $song->artist->name }}</a></small>
                     @endempty
@@ -58,7 +58,7 @@
             @isset($artist)
                 <a href="/artists/{{ $artist->id }}">{{ $artist->name }}</a> > 
             @endisset
-            曲検索結果</p>
+            曲名検索結果</p>
         </div>
         @endsection
     </body>

@@ -22,9 +22,9 @@
                     楽器<select onChange="location.href=value;">
                             @foreach ($instruments as $instrument)
                                 @if ($instrument->id == $selected_instrument->id)
-                                    <option value="/ranking/beginners/{{ $instrument->id }}" selected>{{ $instrument->name }}</option>
+                                    <option value="/ranking/beginners/instruments/{{ $instrument->id }}" selected>{{ $instrument->name }}</option>
                                 @else
-                                    <option value="/ranking/beginners/{{ $instrument->id }}">{{ $instrument->name }}</option>
+                                    <option value="/ranking/beginners/instruments/{{ $instrument->id }}">{{ $instrument->name }}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -32,7 +32,7 @@
             </div>
             @foreach ($songs as $index => $song)
                 <div class="song">
-                    <h4>{{ $index+1 }}. <a href="/artists/{{ $song->artist->id }}/songs/{{ $song->id }}/posts/{{ $selected_instrument->id }}">{{ $song->name }}</a> / 
+                    <h4>{{ $index+1 }}. <a href="/artists/{{ $song->artist->id }}/songs/{{ $song->id }}/posts/instruments/{{ $selected_instrument->id }}">{{ $song->name }}</a> / 
                     <a href="/artists/{{ $song->artist->id }}">{{$song->artist->name}}</a></h4>
                     <p>難易度 {{ $song->culcDifficultyByTargetInstrument($selected_instrument->id) }}</p>
                 </div>

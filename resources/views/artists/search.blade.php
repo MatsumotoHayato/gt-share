@@ -34,7 +34,7 @@
         </div>
         <div class="footer">
             <p><a href="/">アーティスト一覧</a> > 
-            アーティスト検索結果</p>
+            アーティスト名検索結果</p>
         </div>
         @endsection
     </body>
