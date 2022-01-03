@@ -45,7 +45,8 @@
             </div>
         </div>
         <div class="footer">
-            <p><a href="/">アーティスト一覧へ</a></p>
+            <p><a href="/">アーティスト一覧</a> > 
+            {{ $artist->name }}</p>
         </div>
         @endsection
     </body>

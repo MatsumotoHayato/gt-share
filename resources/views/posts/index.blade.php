@@ -85,8 +85,9 @@
                 {{ $posts->links() }}
         </div>
         <div class="footer">
-            <p><a href="/artists/{{ $artist->id }}">{{ $artist->name }}の曲一覧へ</a></p>
-            <p><a href="/">アーティスト一覧へ</a></p>
+            <p><a href="/">アーティスト一覧</a> > 
+            <a href="/artists/{{ $artist->id }}">{{ $artist->name }}</a> > 
+            {{ $song->name }}</p>
         </div>
         @endsection
     </body>

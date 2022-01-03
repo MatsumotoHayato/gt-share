@@ -39,7 +39,8 @@
             @endforeach
         </div>
         <div class="footer">
-            <p><a href="/">アーティスト一覧へ</a></p>
+            <p><a href="/">アーティスト一覧</a> > 
+            初心者向け曲ランキング</p>
         </div>
         @endsection
     </body>

@@ -22,7 +22,8 @@
             <input type="submit" value="追加"/>
         </form>
         <div class="footer">
-            <p><a href="/">アーティスト一覧へ</a></p>
+            <p><a href="/">アーティスト一覧</a> > 
+            新規アーティスト追加</p>
         </div>
         @endsection
     </body>

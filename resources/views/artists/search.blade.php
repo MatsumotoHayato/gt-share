@@ -33,7 +33,8 @@
             </div>
         </div>
         <div class="footer">
-            <p><a href="/">アーティスト一覧へ</a></p>
+            <p><a href="/">アーティスト一覧</a> > 
+            アーティスト検索結果</p>
         </div>
         @endsection
     </body>
