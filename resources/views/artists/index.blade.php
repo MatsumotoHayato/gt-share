@@ -34,6 +34,7 @@
         </div>
         <p><a href="/ranking/beginners/instruments/1">初心者向け曲ランキング</a></p>
         <p><a href="/mylist">役に立ったマイリスト</a></p>
+        <p><a href="/users/mypage/edit">マイページ</a></p>
         @endsection
     </body>
 </html>

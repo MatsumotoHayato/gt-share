@@ -25,7 +25,6 @@ class SongController extends Controller
 
     public function store(Request $request, Artist $artist, Song $song)
     {
-        // バリデーション
         $request->validate([
             'song.name' => [
                 'required', 'string', 'max:100',
@@ -41,7 +40,6 @@ class SongController extends Controller
     // 全曲からキーワード検索
     public function search(Request $request, Song $song)
     {
-        // バリデーション
         $request->validate([
             'keyword' => 'required|string|max:100'
         ]);
@@ -54,7 +52,6 @@ class SongController extends Controller
     // 特定アーティストの曲からキーワード検索
     public function searchByArtist(Request $request, Artist $artist, Song $song)
     {
-        // バリデーション
         $request->validate([
             'song_keyword' => 'required|string|max:100'
         ]);

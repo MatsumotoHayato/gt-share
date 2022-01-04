@@ -58,7 +58,7 @@
             </div>
             @foreach ($posts as $post)
                 <div class="post">
-                    <h4>{{ $post->user->name }}: 
+                    <h4><a href="/users/{{ $post->user->id }}">{{ $post->user->name }}</a>: 
                     @if ($post->experience < 1)
                         楽器経験1年未満
                     @else

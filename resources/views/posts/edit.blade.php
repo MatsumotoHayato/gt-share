@@ -44,7 +44,7 @@
                 <p style="color:red">{{ $errors->first("post.difficulty") }}</p>
                 
                 <p>感想（練習時間、演奏のコツ、使用機材、楽しかった箇所など…）</p>
-                <textarea type="text" name="post[body]" placeholder="演奏した感想を記入してください。（1000文字以下）">{{ $post->body }}</textarea>
+                <textarea type="text" name="post[body]" placeholder="演奏した感想を記入してください">{{ $post->body }}</textarea>
                 <p style="color:red">{{ $errors->first("post.body") }}</p>
                 
                 <p>URL（任意）<input type="text" name="post[url]" placeholder="演奏動画のURL" value="{{ $post->url }}"/></p>
