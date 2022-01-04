@@ -15,8 +15,7 @@
         <form action="/artists" method="POST">
             @csrf
             <div class="artist_name">
-                <h2>アーティスト名</h2>
-                <input type="text" name="artist[name]" placeholder="新規アーティスト名" value="{{ old("artist.name") }}"/>
+                <input type="text" name="artist[name]" placeholder="アーティスト名" value="{{ old("artist.name") }}"/>
                 <p class="name__error" style="color:red">{{ $errors->first("artist.name") }}</p>
             </div>
             <input type="submit" value="追加"/>

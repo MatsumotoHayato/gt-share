@@ -159,6 +159,19 @@ return [
         'song_keyword' => '曲名',
         'song.name' => '曲名', 
         'artist.name' => 'アーティスト名',
+        'post' => [
+            'instrument_id' => '楽器',
+            'experience' => '楽器経験',
+            'difficulty' => '難易度',
+            'body' => '感想',
+            'url' => 'URL',
+            ],
+        'user' => [
+            'name' => 'ユーザー名',
+            'email' => 'メールアドレス',
+            'age' => '年齢',
+            'occupation' => '職業',
+            ],
         ],
 
 ];
