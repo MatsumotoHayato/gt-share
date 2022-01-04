@@ -14,7 +14,7 @@ use App\Http\Requests\PostRequest;
 class PostController extends Controller
 {
     // レビュー一覧表示
-    public function index(Artist $artist, Song $song, Instrument $instrument)  // 引数の順番に注意（web.phpと揃える）
+    public function index(Artist $artist, Song $song, Instrument $instrument)
     {
         return view('posts/index')->with([
             'artist' => $artist,
@@ -26,7 +26,7 @@ class PostController extends Controller
     }
     
     // レビュー一覧表示（役に立った順）
-    public function indexSortFavorite(Artist $artist, Song $song, Instrument $instrument)  // 引数の順番に注意（web.phpと揃える）
+    public function indexSortFavorite(Artist $artist, Song $song, Instrument $instrument)
     {
         return view('posts/index')->with([
             'artist' => $artist,

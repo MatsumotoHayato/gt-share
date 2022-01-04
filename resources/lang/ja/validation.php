@@ -157,6 +157,8 @@ return [
     'attributes' => [
         'keyword' => 'アーティスト名または曲名',
         'song_keyword' => '曲名',
+        'song.name' => '曲名', 
+        'artist.name' => 'アーティスト名',
         ],
 
 ];
