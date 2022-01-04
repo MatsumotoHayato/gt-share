@@ -31,7 +31,7 @@ class PostRequest extends FormRequest
             'post.experience.between' => '0~100の半角数字を入力してください',
             'post.difficulty.integer' => '難易度を選択してください',
             'post.body.required' => '感想を入力してください',
-            'post.body.max' => '文字数が多すぎます',
+            'post.body.max' => '感想は 1000 文字以下のみ有効です',
             'post.url.url' => 'URLを正しく入力してください',
         ];
     }

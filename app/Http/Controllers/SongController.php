@@ -6,7 +6,7 @@ use App\Artist;
 use App\Song;
 use App\Instrument;
 use Illuminate\Http\Request;
-use App\Http\Requests\SongRequest;
+use Illuminate\Validation\Rule;
 
 class SongController extends Controller
 {
@@ -23,8 +23,15 @@ class SongController extends Controller
         return view('songs/create')->with(['artist' => $artist]);
     }
 
-    public function store(SongRequest $request, Artist $artist, Song $song)
+    public function store(Request $request, Artist $artist, Song $song)
     {
+        // バリデーション
+        $request->validate([
+            'song.name' => [
+                'required', 'string', 'max:100',
+                Rule::unique('songs', 'name')->where('artist_id', $artist->id)  // 同じアーティストで同じ曲名ならエラー
+            ],
+        ]);
         $input = $request['song'];
         $input += ['artist_id' => $artist->id];  // 要素artist_idの追加
         $song->fill($input)->save();
@@ -35,7 +42,7 @@ class SongController extends Controller
     public function search(Request $request, Song $song)
     {
         // バリデーション
-        $request = $request->validate([
+        $request->validate([
             'keyword' => 'required|string|max:100'
         ]);
         return view('songs/search')->with([
@@ -45,11 +52,11 @@ class SongController extends Controller
     }
 
     // 特定アーティストの曲からキーワード検索
-    public function search_by_artist(Request $request, Artist $artist, Song $song)
+    public function searchByArtist(Request $request, Artist $artist, Song $song)
     {
         // バリデーション
-        $request = $request->validate([
-            'song_keyword' => 'required|string|max:100'  // バリデーションメッセージを'song_keyword'=>'曲名'としているため
+        $request->validate([
+            'song_keyword' => 'required|string|max:100'
         ]);
         return view('songs/search')->with([
             'songs' => $song->searchSongsByKeyword($request['song_keyword'], $artist->id),
