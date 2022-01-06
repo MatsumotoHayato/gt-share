@@ -57,8 +57,8 @@
             @method('DELETE')
             <button type="submit" onclick="return confirm('本当に削除しますか?')">削除</button> 
         </form>
-        <div class="footer">
-            <p><a href="/">アーティスト一覧</a> > 
+        <div class="breadcrumbs">
+            <p><a href="/">トップ</a> > 
             <a href="/artists/{{ $artist->id }}">{{ $artist->name }}</a> > 
             <a href="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/instruments/{{ $post->instrument->id}}">{{ $song->name }}</a> > 
             レビュー編集</p>

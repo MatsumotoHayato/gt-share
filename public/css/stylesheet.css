@@ -14,29 +14,84 @@
     font-family: fantasy;
 }
 
-.search {
+.search-form {
+    display: flex;
     height: 80px;
+    margin-top: 20px;
+    position: relative;
+    left: 250px;
 }
 
-.search-keyword {
-    float: left;
+.search-form__input {
     text-align: center;
-    font-size: 1rem;
+    font-size: 16px;
     height: 38px;
-    width: 221px;
-    margin: 0.25rem;
+    width: 320px;
+    margin: 5px 0px;
 }
 
-.search-btn {
-    border-radius: 0.25rem;
+.search-form__button {
+    border-radius: 4px;
     color: #fff;
-    vertical-align: middle;
-    border: 1px solid transparent;
+    border: 0px;
     background-color: #007bff;
     border-color: #007bff;
-    font-size: .875rem;
-    padding: 0.25rem 0.5rem;
-    margin: 0.6rem;
+    font-size: 16px;
+    height: 38px;
+    padding: 0px 8px;
+    margin: 5px 0px 0px 15px;
+}
+
+.list__title {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+    background-color: #e0e0e0;
+    border-color: #e0e0e0;
+}
+
+.list__title b {
+    font-size: 25px;
+}
+
+.list__title-select {
+    display: flex;
+}
+
+.list__title-select form {
+    margin-top: 8px;
+    margin-left: 30px;
+    font-size: 16px;
+}
+
+.create__button {
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.top__title, .top__artist-name, .top__song-name {
+    font-size: 25px;
+}
+
+.artist, .song {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 20px;
+}
+
+.artist__name, .song__name {
+    font-size: 20px;
+}
+
+.artist__post-count, .song__post-count {
+    font-size: 12px;
+    margin-right: 100px;
+    margin-top: 12px;
+}
+
+.song__difficulty {
+    font-size: 16px;
+    margin-right: 400px;
 }
 
 .artists, .songs, .posts {
@@ -44,5 +99,5 @@
 }
 
 .artist, .song, .post {
-    border: 1px solid #e0e0e0;
+    border-bottom: 2px solid #e0e0e0;
 }

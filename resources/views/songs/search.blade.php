@@ -16,49 +16,49 @@
             <div class="siteTtl-logo">GTshare</div>
         </div>
         @empty($artist)
-            <div class="search">
-                <form method="GET">
-                    <input class="search-keyword" name="keyword" type="text" placeholder="アーティスト名や曲名を検索"/>
-                    <button class="search-btn" type="submit" formaction="/search/artists">アーティスト名検索</button>
-                    <button class="search-btn" type="submit" formaction="/search/songs">曲名検索</button>
-                    <p class="name__error" style="color:red">{{ $errors->first("keyword") }}</p>
-                </form>
-            </div>
-            <h1>曲名"{{ $keyword }}"の検索結果</h1>
+            <form class="search-form" method="GET">
+                <input class="search-form__input" name="keyword" type="text" placeholder="アーティスト名や曲名を検索"/>
+                <button class="search-form__button" type="submit" formaction="/search/artists">アーティスト名検索</button>
+                <button class="search-form__button" type="submit" formaction="/search/songs">曲名検索</button>
+                <!--<p class="search-form__error" style="color:red">{{ $errors->first("keyword") }}</p>-->
+            </form>
+            <b class="top__song-name">曲名"{{ $keyword }}"の検索結果</b>
         @else
-            <div class="search">
-                <form method="GET">
-                    <input class="search-keyword" name="song_keyword" type="text" placeholder="{{ $artist->name}}の曲名を検索"/>
-                    <button class="search-btn" type="submit" formaction="/artists/{{ $artist->id }}/search/songs">曲名検索</button>
-                    <p class="name__error" style="color:red">{{ $errors->first("song_keyword") }}</p>
-                </form>
-            </div>
-            <h1>{{ $artist->name}}の曲名"{{ $keyword }}"の検索結果</h1>
+            <form class="search-form" method="GET">
+                <input class="search-form__input" name="song_keyword" type="text" placeholder="{{ $artist->name}}の曲名を検索"/>
+                <button class="search-form__button" type="submit" formaction="/artists/{{ $artist->id }}/search/songs">曲名検索</button>
+                <p class="search-form__error" style="color:red">{{ $errors->first("song_keyword") }}</p>
+            </form>
+            <b class="top__song-name">{{ $artist->name}}の曲名"{{ $keyword }}"の検索結果</b>
         @endempty
-        <div class="songs">
-            <h2>曲一覧</h2>
-            @isset($artist)
-                [<a href="/artists/{{ $artist->id }}/songs/create">新規曲追加</a>]
-            @endisset
+        <div class="container">
+            <div class="list__title">
+                <b>曲一覧</b>
+                @isset($artist)
+                <form action="/artists/{{ $artist->id }}/songs/create" method="GET">
+                    <button class="create__button" type="submit">新規曲追加</button>
+                </form>
+                @endisset
+            </div>
             @foreach ($songs as $song)
                 <div class="song">
-                    <h4><a href="/artists/{{ $song->artist_id }}/songs/{{ $song->id }}/posts/instruments/1">{{ $song->name }}</a></h4>
+                    <b class="song__name"><a href="/artists/{{ $song->artist_id }}/songs/{{ $song->id }}/posts/instruments/1">{{ $song->name }}</a></b>
                     @empty($artist)
-                        <small><a href="/artists/{{ $song->artist_id }}">- {{ $song->artist->name }}</a></small>
+                        <small> / <a href="/artists/{{ $song->artist_id }}">{{ $song->artist->name }}</a></small>
                     @endempty
-                    <small>レビュー{{ $song->getPostCountBySong() }}件</small>
+                    <small class="song__post-count">レビュー{{ $song->getPostCountBySong() }}件</small>
                 </div>
             @endforeach
-        </div>
-        <div class="paginate">
-                {{ $songs->links() }}
-        </div>
-        <div class="footer">
-            <p><a href="/">アーティスト一覧</a> > 
-            @isset($artist)
-                <a href="/artists/{{ $artist->id }}">{{ $artist->name }}</a> > 
-            @endisset
-            曲名検索結果</p>
+            <div class="paginate">
+                    {{ $songs->links() }}
+            </div>
+            <div class="breadcrumbs">
+                <p><a href="/">トップ</a> > 
+                @isset($artist)
+                    <a href="/artists/{{ $artist->id }}">{{ $artist->name }}</a> > 
+                @endisset
+                曲名検索結果</p>
+            </div>
         </div>
         @endsection
     </body>

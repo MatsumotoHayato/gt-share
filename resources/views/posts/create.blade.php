@@ -53,8 +53,8 @@
             </div>
             <input type="submit" value="投稿"/>
         </form>
-        <div class="footer">
-            <p><a href="/">アーティスト一覧</a> > 
+        <div class="breadcrumbs">
+            <p><a href="/">トップ</a> > 
             <a href="/artists/{{ $artist->id }}">{{ $artist->name }}</a> > 
             <a href="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/instruments/{{ $selected_instrument->id}}">{{ $song->name }}</a> > 
             新規レビュー投稿</p>
