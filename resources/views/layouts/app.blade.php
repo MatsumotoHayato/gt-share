@@ -74,6 +74,11 @@
 
         <main class="py-4">
             @yield('content')
+            <div id="app">
+                <router-link to="/">トップ</router-link>
+                <router-link to="/mypage">マイページ</router-link>
+                <router-view>
+            </div>
         </main>
     </div>
 </body>

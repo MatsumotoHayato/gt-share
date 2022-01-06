@@ -9,7 +9,8 @@ class ArtistController extends Controller
 {
     public function index(Artist $artist)
     {
-        return view('artists/index')->with(['artists' => $artist->getArtistsPaginateByLimit()]);  
+        // return view('artists/index')->with(['artists' => $artist->getArtistsPaginateByLimit()]);  
+        return $artist->get();
     }
 
     public function create()
