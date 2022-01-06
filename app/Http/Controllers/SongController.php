@@ -12,10 +12,15 @@ class SongController extends Controller
 {
     public function index(Artist $artist)
     {
-        return view('songs/index')->with([
-            'artist'=> $artist, 
-            'songs' => $artist->getSongsByArtist(),
-        ]);
+        // return view('songs/index')->with([
+        //     'artist'=> $artist, 
+        //     'songs' => $artist->getSongsByArtist(),
+        // ]);
+        return Song::where('artist_id', $artist->id)->get();
+        // return [
+        //     'artist'=> $artist, 
+        //     'songs' => Song::where('artist_id', $artist->id)->get()
+        // ];
     }
 
     public function create(Artist $artist)
