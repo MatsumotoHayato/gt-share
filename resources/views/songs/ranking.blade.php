@@ -8,39 +8,42 @@
     <body>
         @extends('layouts.app')
         @section('content')
+        @php
+            if (empty($selected_instrument)) { $selected_instrument = $instruments->first()->id; }
+        @endphp
         <div class="siteTtl-outer">
             <div class="siteTtl-logo">GTshare</div>
         </div>
         </div>
-        <div class="songs">
-            <h2>初心者向け曲ランキング</h2>
-            @php
-                if (empty($selected_instrument)) { $selected_instrument = $instruments->first()->id; }
-            @endphp
-            <div>
-                <form method="GET">
-                    楽器<select onChange="location.href=value">
-                            @foreach ($instruments as $instrument)
-                                @if ($instrument->id == $selected_instrument->id)
-                                    <option value="/ranking/beginners/instruments/{{ $instrument->id }}" selected>{{ $instrument->name }}</option>
-                                @else
-                                    <option value="/ranking/beginners/instruments/{{ $instrument->id }}">{{ $instrument->name }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                </form>
+        <div class="container">
+            <b class="top__title">初心者向け曲ランキング</b>
+            <form method="GET">
+                楽器
+                <select onChange="location.href=value">
+                    @foreach ($instruments as $instrument)
+                        @if ($instrument->id == $selected_instrument->id)
+                            <option value="/ranking/beginners/instruments/{{ $instrument->id }}" selected>{{ $instrument->name }}</option>
+                        @else
+                            <option value="/ranking/beginners/instruments/{{ $instrument->id }}">{{ $instrument->name }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </form>
+            <br>
+            <div class="list__title">
+                <b>曲一覧</b>
             </div>
             @foreach ($songs as $index => $song)
                 <div class="song">
-                    <h4>{{ $index+1 }}. <a href="/artists/{{ $song->artist->id }}/songs/{{ $song->id }}/posts/instruments/{{ $selected_instrument->id }}">{{ $song->name }}</a> / 
-                    <a href="/artists/{{ $song->artist->id }}">{{$song->artist->name}}</a></h4>
-                    <p>難易度 {{ $song->culcDifficultyByInstrument($selected_instrument->id) }}</p>
+                    <b class="song__name">{{ $index+1 }}. <a href="/artists/{{ $song->artist->id }}/songs/{{ $song->id }}/posts/instruments/{{ $selected_instrument->id }}">{{ $song->name }}</a> / 
+                    <a href="/artists/{{ $song->artist->id }}">{{$song->artist->name}}</a></b>
+                    <p class="song__difficulty">難易度 {{ $song->culcDifficultyByInstrument($selected_instrument->id) }}</p>
                 </div>
             @endforeach
-        </div>
-        <div class="footer">
-            <p><a href="/">アーティスト一覧</a> > 
-            初心者向け曲ランキング</p>
+            <div class="breadcrumbs">
+                <p><a href="/">トップ</a> > 
+                初心者向け曲ランキング</p>
+            </div>
         </div>
         @endsection
     </body>

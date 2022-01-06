@@ -20,8 +20,8 @@
             </div>
             <input type="submit" value="追加"/>
         </form>
-        <div class="footer">
-            <p><a href="/">アーティスト一覧</a> > 
+        <div class="breadcrumbs">
+            <p><a href="/">トップ</a> > 
             <a href="/artists/{{ $artist->id }}">{{ $artist->name }}</a> > 
             新規曲追加</p>
         </div>
