@@ -2074,20 +2074,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'songIndex',
   data: function data() {
     return {
+      artist: [],
       songs: []
     };
+  },
+  computed: {
+    artistId: function artistId() {
+      return this.$route.params.artistId;
+    }
   },
   methods: {
     getSongs: function getSongs() {
       var _this = this;
 
-      axios.get('/artists/1').then(function (response) {
-        _this.songs = response.data;
+      axios.get("/artists/".concat(this.artistId)).then(function (response) {
+        _this.artist = response.data.artist;
+        _this.songs = response.data.songs; // console.log(response.data)
       });
     }
   },
@@ -37761,11 +37767,18 @@ var render = function () {
           _vm._l(_vm.artists, function (artist) {
             return _c("div", { key: artist.id }, [
               _c("div", { staticClass: "artist" }, [
-                _c("b", { staticClass: "artist__name" }, [
-                  _c("a", { attrs: { href: "/artists/" + artist.id } }, [
-                    _vm._v(_vm._s(artist.name)),
-                  ]),
-                ]),
+                _c(
+                  "b",
+                  { staticClass: "artist__name" },
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: { path: "vue/artists/" + artist.id } } },
+                      [_vm._v(_vm._s(artist.name))]
+                    ),
+                  ],
+                  1
+                ),
               ]),
             ])
           }),
@@ -37895,21 +37908,78 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("body", [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "container" },
+        [
+          _c("b", { staticClass: "top__artist-name" }, [
+            _vm._v(_vm._s(_vm.artist.name)),
+          ]),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._l(_vm.songs, function (song) {
+            return _c("div", { key: song.id }, [
+              _c("div", { staticClass: "song" }, [
+                song
+                  ? _c(
+                      "b",
+                      { staticClass: "song__name" },
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { to: { path: "vue/songs/" + song.id } } },
+                          [_vm._v(_vm._s(song.name))]
+                        ),
+                      ],
+                      1
+                    )
+                  : _vm._e(),
+              ]),
+            ])
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "breadcrumbs" }, [
+            _c(
+              "p",
+              [
+                _c("router-link", { attrs: { to: "/" } }, [_vm._v("トップ")]),
+                _vm._v(" > \n                " + _vm._s(_vm.artist.name)),
+              ],
+              1
+            ),
+          ]),
+        ],
+        2
+      ),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("body", [
-        _c("div", { staticClass: "siteTtl-outer" }, [
-          _c("div", { staticClass: "siteTtl-logo" }, [_vm._v("GTshare")]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "container" }),
-      ]),
+    return _c("div", { staticClass: "siteTtl-outer" }, [
+      _c("div", { staticClass: "siteTtl-logo" }, [_vm._v("GTshare")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "list__title" }, [
+      _c("b", [_vm._v("曲一覧")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "create__button", attrs: { type: "submit" } },
+        [_vm._v("新規曲追加")]
+      ),
     ])
   },
 ]
@@ -53670,7 +53740,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
     component: _components_artists_index__WEBPACK_IMPORTED_MODULE_2__["default"],
     name: 'artistIndex'
   }, {
-    path: '/artists/1',
+    path: '/vue/artists/:artistId',
     component: _components_songs_index__WEBPACK_IMPORTED_MODULE_3__["default"],
     name: 'songIndex'
   }],

@@ -9,7 +9,7 @@ import songIndex from './components/songs/index'
 export default new Router({
 	routes: [
           { path: '/', component: artistIndex, name: 'artistIndex' },
-          { path: '/artists/1', component: songIndex, name: 'songIndex' },
+          { path: '/vue/artists/:artistId', component: songIndex, name: 'songIndex' },
   ],
 	mode: 'history',
 })
