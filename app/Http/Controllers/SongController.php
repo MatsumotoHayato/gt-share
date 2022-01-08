@@ -16,11 +16,10 @@ class SongController extends Controller
         //     'artist'=> $artist, 
         //     'songs' => $artist->getSongsByArtist(),
         // ]);
-        return Song::where('artist_id', $artist->id)->get();
-        // return [
-        //     'artist'=> $artist, 
-        //     'songs' => Song::where('artist_id', $artist->id)->get()
-        // ];
+        return [
+            'artist'=> $artist, 
+            'songs' => Song::where('artist_id', $artist->id)->with('artist')->orderBy('name')->get()
+        ];
     }
 
     public function create(Artist $artist)

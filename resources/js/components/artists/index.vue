@@ -22,7 +22,7 @@
                 <div v-for='artist in artists' :key='artist.id'>
                     <div class="artist">
                         <b class="artist__name">
-                            <a :href="'/artists/'+artist.id">{{ artist.name }}</a>
+                            <router-link :to="{path:`vue/artists/${artist.id}`}">{{ artist.name }}</router-link>
                         </b>
                         <!--<small class="artist__post-count">レビュー {{ artist.getPostCountByArtist() }}件</small>-->
                     </div>
