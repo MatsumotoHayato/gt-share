@@ -77,7 +77,8 @@
             <div id="app">
                 <router-link to="/">トップ</router-link>
                 <router-link to="/mypage">マイページ</router-link>
-                <router-view>
+                <router-view/>
+                <!--<router-view name="sub"/>-->
             </div>
         </main>
     </div>

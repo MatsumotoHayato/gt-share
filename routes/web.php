@@ -19,7 +19,8 @@ Route::get('/artists/{artist}', 'SongController@index');  // 曲一覧表示
 Route::get('/artists/{artist}/songs/create', 'SongController@create')->middleware('auth');  // 新規曲追加画面
 Route::post('/artists/{artist}/songs', 'SongController@store')->middleware('auth');  // 新規曲追加
 
-Route::get('/artists/{artist}/songs/{song}/posts/instruments/{instrument}', 'PostController@index');  // レビュー一覧表示
+Route::get('/songs/{song}', 'PostController@index');  // レビュー一覧表示
+// Route::get('/artists/{artist}/songs/{song}/posts/instruments/{instrument}', 'PostController@index');  // レビュー一覧表示
 Route::get('/artists/{artist}/songs/{song}/posts/instruments/{instrument}/favorite', 'PostController@indexSortFavorite');  // レビュー一覧並び替え（役に立った順）
 Route::get('/artists/{artist}/songs/{song}/posts/instruments/{instrument}/create', 'PostController@create')->middleware('auth');  // 新規レビュー投稿画面
 Route::post('/artists/{artist}/songs/{song}/posts', 'PostController@store')->middleware('auth');  // 新規レビュー投稿

@@ -13,16 +13,25 @@ use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
+    // // レビュー一覧表示
+    // public function index(Artist $artist, Song $song, Instrument $instrument)
+    // {
+    //     return view('posts/index')->with([
+    //         'artist' => $artist,
+    //         'song' => $song,
+    //         'posts'=> $song->getPostsBySongAndInstrument($instrument->id),
+    //         'selected_instrument' => $instrument,
+    //         'instruments' => $instrument->get(),
+    //     ]);
+    // }
+    
     // レビュー一覧表示
-    public function index(Artist $artist, Song $song, Instrument $instrument)
+    public function index(Song $song)
     {
-        return view('posts/index')->with([
-            'artist' => $artist,
+        return [
             'song' => $song,
-            'posts'=> $song->getPostsBySongAndInstrument($instrument->id),
-            'selected_instrument' => $instrument,
-            'instruments' => $instrument->get(),
-        ]);
+            'posts' => Post::with('user')->where('song_id', $song->id)->get()
+        ];
     }
     
     // レビュー一覧表示（役に立った順）
