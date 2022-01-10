@@ -1,15 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+// import ArtistIndex from './components/artists/ArtistIndex'
+import SongIndex from './components/songs/SongIndex'
 
 Vue.use(Router)
 
-import artistIndex from './components/artists/index'
-import songIndex from './components/songs/index'
-
 export default new Router({
 	routes: [
-          { path: '/', component: artistIndex, name: 'artistIndex' },
-          { path: '/vue/artists/:artistId', component: songIndex, name: 'songIndex' },
+        //   { path: '/', component: ArtistIndex, name: 'ArtistIndex' },
+          { path: '/', component: ()=>import('./components/artists/ArtistIndex'), name: 'ArtistIndex' },
+          { path: '/vue/artists/:artistId', component: SongIndex, name: 'SongIndex' },
+          { path: '/vue/songs/:songId', component: ()=>import('./components/posts/PostIndex'), name: 'PostIndex' },
+          // { path: '*', redirect: '/'}
   ],
 	mode: 'history',
 })

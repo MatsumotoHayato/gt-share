@@ -19,7 +19,7 @@
                 <div v-for='song in songs' :key='song.id'>
                     <div class="song">
                         <b v-if='song' class="song__name">
-                            <router-link :to="{path:`vue/songs/${song.id}`}">{{ song.name }}</router-link>
+                            <router-link :to="{path:`/vue/songs/${song.id}`}">{{ song.name }}</router-link>
                         </b>
                         <!--<small class="song__post-count">レビュー {{ song.getPostCountBySong() }}件</small>-->
                     </div>
@@ -34,7 +34,7 @@
 </template>
 <script>
     export default {
-        name: 'songIndex',
+        name: 'SongIndex',
         data() {
             return {
                 artist: [],
