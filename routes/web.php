@@ -15,7 +15,8 @@ Route::get('/artists', 'ArtistController@index');  // アーティスト一覧�
 Route::get('/artists/create', 'ArtistController@create')->middleware('auth');  // 新規アーティスト追加画面
 Route::post('/artists', 'ArtistController@store')->middleware('auth');  // 新規アーティスト追加
 
-Route::get('/artists/{artist}', 'SongController@index');  // 曲一覧表示
+Route::get('/artists/{artist}', 'ArtistController@show');  // 特定アーティストの曲一覧表示
+Route::get('/songs', 'SongController@index');  // 全曲一覧表示
 Route::get('/artists/{artist}/songs/create', 'SongController@create')->middleware('auth');  // 新規曲追加画面
 Route::post('/artists/{artist}/songs', 'SongController@store')->middleware('auth');  // 新規曲追加
 
