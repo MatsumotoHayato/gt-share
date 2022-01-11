@@ -10,16 +10,9 @@ use Illuminate\Validation\Rule;
 
 class SongController extends Controller
 {
-    public function index(Artist $artist)
+    public function index()
     {
-        // return view('songs/index')->with([
-        //     'artist'=> $artist, 
-        //     'songs' => $artist->getSongsByArtist(),
-        // ]);
-        return [
-            'artist'=> $artist, 
-            'songs' => Song::where('artist_id', $artist->id)->with('artist')->orderBy('name')->get()
-        ];
+        return Song::with('artist')->orderBy('name')->get();
     }
 
     public function create(Artist $artist)

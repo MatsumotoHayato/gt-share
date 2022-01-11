@@ -76,7 +76,7 @@
             @yield('content')
             <div id="app">
                 <router-link to="/">トップ</router-link>
-                <router-link to="/mypage">マイページ</router-link>
+                <router-link to="/vue/songs">曲一覧</router-link>
                 <router-view/>
                 <!--<router-view name="sub"/>-->
             </div>

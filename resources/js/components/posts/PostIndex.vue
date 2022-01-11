@@ -1,8 +1,7 @@
 <template>
     <div class="container">
         <div class="top__song-name">
-            <!--<h2>{{ song.name }} / {{ song.artist.name }}</h2>-->
-            <h2>{{ song.name }}</h2>
+            <h2>{{ song.name }} / {{ artist.name }}</h2>
         </div>
         <!--<div>-->
         <!--    <form method="GET">-->
@@ -41,6 +40,7 @@
             </div>
             <!--<form action="/artists/{{ $artist->id }}/songs/{{ $song->id }}/posts/instruments/{{ $selected_instrument->id }}/create" method="GET">-->
             <!--    <button class="create__button" type="submit">新規レビュー投稿</button>-->
+                <router-link to="/songs/create" tag="button">新規レビュー投稿</router-link>  
             <!--</form>-->
         </div>
         
@@ -88,6 +88,7 @@
         name: 'PostIndex',
         data() {
             return {
+                artist:[],
                 song: [],
                 posts: []
             }
@@ -101,6 +102,7 @@
             getPosts() {
                 axios.get(`/songs/${this.songId}`)
                     .then((response)=>{
+                        this.artist=response.data.artist
                         this.song=response.data.song
                         this.posts=response.data.posts
                     })
@@ -111,3 +113,44 @@
         }
     }
 </script>
+
+<style scoped>
+    .list__title {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 20px;
+        background-color: #e0e0e0;
+        border-color: #e0e0e0;
+    }
+    
+    .list__title b {
+        font-size: 25px;
+    }
+    
+    .list__title-select {
+        display: flex;
+    }
+    
+    .list__title-select form {
+        margin-top: 8px;
+        margin-left: 30px;
+        font-size: 16px;
+    }
+    
+    .create__button {
+        margin-top: 5px;
+        margin-right: 10px;
+    }
+    
+    .top__song-name {
+        font-size: 25px;
+    }
+    
+    .posts {
+        width: 400px;
+    }
+    
+    .post {
+        border-bottom: 2px solid #e0e0e0;
+    }
+</style>

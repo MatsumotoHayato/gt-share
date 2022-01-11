@@ -46,7 +46,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ArtistIndex',
   data: function data() {
@@ -135,60 +134,65 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("body", [
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "container" },
-        [
-          _c(
-            "div",
-            { staticClass: "list__title" },
-            [
-              _c("b", [_vm._v("アーティスト一覧")]),
-              _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "container" },
+      [
+        _c(
+          "div",
+          { staticClass: "list__title" },
+          [
+            _c("b", [_vm._v("アーティスト一覧")]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "search-form__input",
+              attrs: {
+                name: "keyword",
+                type: "text",
+                placeholder: "アーティスト名を検索",
+              },
+            }),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              { attrs: { to: "/artists/create", tag: "button" } },
+              [_vm._v("新規アーティスト追加")]
+            ),
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm._l(_vm.artists, function (artist) {
+          return _c("div", { key: artist.id }, [
+            _c("div", { staticClass: "artist" }, [
               _c(
-                "router-link",
-                { attrs: { to: "/artists/create", tag: "button" } },
-                [_vm._v("新規アーティスト追加")]
+                "b",
+                { staticClass: "artist__name" },
+                [
+                  _c(
+                    "router-link",
+                    { attrs: { to: { path: "/vue/artists/" + artist.id } } },
+                    [_vm._v(_vm._s(artist.name))]
+                  ),
+                ],
+                1
               ),
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _vm._l(_vm.artists, function (artist) {
-            return _c("div", { key: artist.id }, [
-              _c("div", { staticClass: "artist" }, [
-                _c(
-                  "b",
-                  { staticClass: "artist__name" },
-                  [
-                    _c(
-                      "router-link",
-                      { attrs: { to: { path: "/vue/artists/" + artist.id } } },
-                      [_vm._v(_vm._s(artist.name))]
-                    ),
-                  ],
-                  1
-                ),
-              ]),
-            ])
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "paginate" }),
-          _vm._v(" "),
-          _vm._m(2),
-          _vm._v(" "),
-          _vm._m(3),
-          _vm._v(" "),
-          _vm._m(4),
-        ],
-        2
-      ),
-    ]),
+            ]),
+          ])
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "paginate" }),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _vm._m(2),
+        _vm._v(" "),
+        _vm._m(3),
+      ],
+      2
+    ),
   ])
 }
 var staticRenderFns = [
@@ -199,43 +203,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "siteTtl-outer" }, [
       _c("div", { staticClass: "siteTtl-logo" }, [_vm._v("GTshare")]),
     ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "form",
-      { staticClass: "search-form", attrs: { method: "GET" } },
-      [
-        _c("input", {
-          staticClass: "search-form__input",
-          attrs: {
-            name: "keyword",
-            type: "text",
-            placeholder: "アーティスト名や曲名を検索",
-          },
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "search-form__button",
-            attrs: { type: "submit", formaction: "/search/artists" },
-          },
-          [_vm._v("アーティスト名検索")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "search-form__button",
-            attrs: { type: "submit", formaction: "/search/songs" },
-          },
-          [_vm._v("曲名検索")]
-        ),
-      ]
-    )
   },
   function () {
     var _vm = this

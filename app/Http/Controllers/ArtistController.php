@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Artist;
+use App\Song;
 use Illuminate\Http\Request;
 
 class ArtistController extends Controller
@@ -11,6 +12,18 @@ class ArtistController extends Controller
     {
         // return view('artists/index')->with(['artists' => $artist->getArtistsPaginateByLimit()]);  
         return $artist->get();
+    }
+    
+    public function show(Artist $artist)
+    {
+        // return view('songs/index')->with([
+        //     'artist'=> $artist, 
+        //     'songs' => $artist->getSongsByArtist(),
+        // ]);
+        return [
+            'artist'=> $artist, 
+            'songs' => Song::where('artist_id', $artist->id)->with('artist')->orderBy('name')->get()
+        ];
     }
 
     public function create()

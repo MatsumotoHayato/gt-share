@@ -29,6 +29,7 @@ class PostController extends Controller
     public function index(Song $song)
     {
         return [
+            'artist' => $song->artist,
             'song' => $song,
             'posts' => Post::with('user')->where('song_id', $song->id)->get()
         ];
