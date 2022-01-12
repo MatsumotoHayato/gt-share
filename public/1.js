@@ -9,6 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _songs_SongIndex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../songs/SongIndex */ "./resources/js/components/songs/SongIndex.vue");
 //
 //
 //
@@ -46,11 +47,95 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ArtistIndex',
+  components: {
+    SongIndex: _songs_SongIndex__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
-      artists: []
+      artists: [],
+      headers: [{
+        text: "名前",
+        value: "name",
+        align: "start"
+      }],
+      dialog: false,
+      search: '',
+      newArtist: {
+        // id: ,
+        name: ''
+      }
     };
   },
   methods: {
@@ -60,61 +145,19 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/artists').then(function (response) {
         _this.artists = response.data;
       });
+    },
+    close: function close() {
+      this.dialog = false;
+    },
+    save: function save() {
+      this.artists.push(this.newArtist);
+      this.close();
     }
   },
   mounted: function mounted() {
     this.getArtists();
   }
 });
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistIndex.vue?vue&type=style&index=0&id=212f47a6&scoped=true&lang=css&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/artists/ArtistIndex.vue?vue&type=style&index=0&id=212f47a6&scoped=true&lang=css& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.siteTtl-outer[data-v-212f47a6] {\n    display: table;\n    background-color: #a5c2ee;\n    color: #fff;\n    height: 80px;\n    width: 200px;\n}\n.siteTtl-logo[data-v-212f47a6] {\n    display: table-cell;\n    text-align: center;\n    vertical-align: middle;\n    font-size: 45px;\n    font-family: fantasy;\n}\n.search-form[data-v-212f47a6] {\n    display: flex;\n    height: 80px;\n    margin-top: 20px;\n    position: relative;\n    left: 250px;\n}\n.search-form__input[data-v-212f47a6] {\n    text-align: center;\n    font-size: 16px;\n    height: 38px;\n    width: 320px;\n    margin: 5px 0px;\n}\n.search-form__button[data-v-212f47a6] {\n    border-radius: 4px;\n    color: #fff;\n    border: 0px;\n    background-color: #007bff;\n    border-color: #007bff;\n    font-size: 16px;\n    height: 38px;\n    padding: 0px 8px;\n    margin: 5px 0px 0px 15px;\n}\n.list__title[data-v-212f47a6] {\n    display: flex;\n    justify-content: space-between;\n    padding: 5px 20px;\n    background-color: #e0e0e0;\n    border-color: #e0e0e0;\n}\n.list__title b[data-v-212f47a6] {\n    font-size: 25px;\n}\n.list__title-select[data-v-212f47a6] {\n    display: flex;\n}\n.list__title-select form[data-v-212f47a6] {\n    margin-top: 8px;\n    margin-left: 30px;\n    font-size: 16px;\n}\n.create__button[data-v-212f47a6] {\n    margin-top: 5px;\n    margin-right: 10px;\n}\n.top__title[data-v-212f47a6], .top__artist-name[data-v-212f47a6], .top__song-name[data-v-212f47a6] {\n    font-size: 25px;\n}\n.artist[data-v-212f47a6], .song[data-v-212f47a6] {\n    display: flex;\n    justify-content: space-between;\n    padding: 12px 20px;\n}\n.artist__name[data-v-212f47a6], .song__name[data-v-212f47a6] {\n    font-size: 20px;\n}\n.artist__post-count[data-v-212f47a6], .song__post-count[data-v-212f47a6] {\n    font-size: 12px;\n    margin-right: 100px;\n    margin-top: 12px;\n}\n.song__difficulty[data-v-212f47a6] {\n    font-size: 16px;\n    margin-right: 400px;\n}\n.artists[data-v-212f47a6], .songs[data-v-212f47a6], .posts[data-v-212f47a6] {\n    width: 400px;\n}\n.artist[data-v-212f47a6], .song[data-v-212f47a6], .post[data-v-212f47a6] {\n    border-bottom: 2px solid #e0e0e0;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistIndex.vue?vue&type=style&index=0&id=212f47a6&scoped=true&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/artists/ArtistIndex.vue?vue&type=style&index=0&id=212f47a6&scoped=true&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ArtistIndex.vue?vue&type=style&index=0&id=212f47a6&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistIndex.vue?vue&type=style&index=0&id=212f47a6&scoped=true&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
 
 /***/ }),
 
@@ -133,106 +176,241 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "container" },
-      [
-        _c(
-          "div",
-          { staticClass: "list__title" },
-          [
-            _c("b", [_vm._v("アーティスト一覧")]),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "search-form__input",
-              attrs: {
-                name: "keyword",
-                type: "text",
-                placeholder: "アーティスト名を検索",
+  return _c(
+    "div",
+    [
+      _c(
+        "v-container",
+        [
+          _c("v-data-table", {
+            attrs: {
+              items: _vm.artists,
+              headers: _vm.headers,
+              search: _vm.search,
+              "sort-by": "name",
+              "hide-default-header": "",
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "top",
+                fn: function () {
+                  return [
+                    _c(
+                      "v-toolbar",
+                      {
+                        staticClass: "mb-1",
+                        attrs: { flat: "", dark: "", color: "blue darken-3" },
+                      },
+                      [
+                        _c(
+                          "v-toolbar-title",
+                          [
+                            _c("v-icon", [
+                              _vm._v(
+                                "\n                                mdi-account-music\n                        "
+                              ),
+                            ]),
+                            _vm._v(
+                              "\n                        アーティスト一覧\n                    "
+                            ),
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("v-divider", {
+                          staticClass: "mx-4",
+                          attrs: { inset: "", vertical: "" },
+                        }),
+                        _vm._v(" "),
+                        _c("v-text-field", {
+                          attrs: {
+                            clearable: "",
+                            flat: "",
+                            "solo-inverted": "",
+                            "hide-details": "",
+                            "prepend-inner-icon": "mdi-magnify",
+                            label: "アーティスト名を検索",
+                          },
+                          model: {
+                            value: _vm.search,
+                            callback: function ($$v) {
+                              _vm.search = $$v
+                            },
+                            expression: "search",
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("v-spacer"),
+                        _vm._v(" "),
+                        _c(
+                          "v-dialog",
+                          {
+                            attrs: { "max-width": "500px" },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "activator",
+                                fn: function (ref) {
+                                  var on = ref.on
+                                  var attrs = ref.attrs
+                                  return [
+                                    _c(
+                                      "v-btn",
+                                      _vm._g(
+                                        _vm._b(
+                                          {
+                                            staticClass: "ma-2",
+                                            attrs: { outlined: "" },
+                                          },
+                                          "v-btn",
+                                          attrs,
+                                          false
+                                        ),
+                                        on
+                                      ),
+                                      [
+                                        _vm._v(
+                                          "\n                                新規アーティスト\n                                "
+                                        ),
+                                        _c("v-icon", { attrs: { right: "" } }, [
+                                          _vm._v(
+                                            "\n                                    mdi-pencil-plus\n                                "
+                                          ),
+                                        ]),
+                                      ],
+                                      1
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                            model: {
+                              value: _vm.dialog,
+                              callback: function ($$v) {
+                                _vm.dialog = $$v
+                              },
+                              expression: "dialog",
+                            },
+                          },
+                          [
+                            _vm._v(" "),
+                            _c(
+                              "v-card",
+                              [
+                                _c("v-card-title", [
+                                  _vm._v(
+                                    "\n                                新規アーティスト追加\n                            "
+                                  ),
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "v-card-text",
+                                  [
+                                    _c(
+                                      "v-container",
+                                      [
+                                        _c(
+                                          "v-row",
+                                          [
+                                            _c(
+                                              "v-col",
+                                              { attrs: { cols: "10" } },
+                                              [
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    label: "アーティスト名",
+                                                  },
+                                                  model: {
+                                                    value: _vm.newArtist.name,
+                                                    callback: function ($$v) {
+                                                      _vm.$set(
+                                                        _vm.newArtist,
+                                                        "name",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "newArtist.name",
+                                                  },
+                                                }),
+                                              ],
+                                              1
+                                            ),
+                                          ],
+                                          1
+                                        ),
+                                      ],
+                                      1
+                                    ),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-card-actions",
+                                  [
+                                    _c("v-spacer"),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-btn",
+                                      {
+                                        attrs: {
+                                          color: "blue darken-1",
+                                          text: "",
+                                        },
+                                        on: { click: _vm.close },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                キャンセル\n                              "
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-btn",
+                                      {
+                                        attrs: {
+                                          color: "blue darken-1",
+                                          text: "",
+                                        },
+                                        on: { click: _vm.save },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                追加\n                              "
+                                        ),
+                                      ]
+                                    ),
+                                  ],
+                                  1
+                                ),
+                              ],
+                              1
+                            ),
+                          ],
+                          1
+                        ),
+                      ],
+                      1
+                    ),
+                  ]
+                },
+                proxy: true,
               },
-            }),
-            _vm._v(" "),
-            _c(
-              "router-link",
-              { attrs: { to: "/artists/create", tag: "button" } },
-              [_vm._v("新規アーティスト追加")]
-            ),
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm._l(_vm.artists, function (artist) {
-          return _c("div", { key: artist.id }, [
-            _c("div", { staticClass: "artist" }, [
-              _c(
-                "b",
-                { staticClass: "artist__name" },
-                [
-                  _c(
-                    "router-link",
-                    { attrs: { to: { path: "/vue/artists/" + artist.id } } },
-                    [_vm._v(_vm._s(artist.name))]
-                  ),
-                ],
-                1
-              ),
             ]),
-          ])
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "paginate" }),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _vm._m(3),
-      ],
-      2
-    ),
-  ])
+          }),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-row", { staticClass: "my-12" }),
+      _vm._v(" "),
+      _c("SongIndex"),
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "siteTtl-outer" }, [
-      _c("div", { staticClass: "siteTtl-logo" }, [_vm._v("GTshare")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _c("a", { attrs: { href: "/ranking/beginners/instruments/1" } }, [
-        _vm._v("初心者向け曲ランキング"),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _c("a", { attrs: { href: "/mylist" } }, [_vm._v("役に立ったマイリスト")]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _c("a", { attrs: { href: "/users/mypage/edit" } }, [
-        _vm._v("マイページ"),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -250,9 +428,7 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ArtistIndex_vue_vue_type_template_id_212f47a6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ArtistIndex.vue?vue&type=template&id=212f47a6&scoped=true& */ "./resources/js/components/artists/ArtistIndex.vue?vue&type=template&id=212f47a6&scoped=true&");
 /* harmony import */ var _ArtistIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ArtistIndex.vue?vue&type=script&lang=js& */ "./resources/js/components/artists/ArtistIndex.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _ArtistIndex_vue_vue_type_style_index_0_id_212f47a6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ArtistIndex.vue?vue&type=style&index=0&id=212f47a6&scoped=true&lang=css& */ "./resources/js/components/artists/ArtistIndex.vue?vue&type=style&index=0&id=212f47a6&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -260,7 +436,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _ArtistIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _ArtistIndex_vue_vue_type_template_id_212f47a6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
   _ArtistIndex_vue_vue_type_template_id_212f47a6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -289,22 +465,6 @@ component.options.__file = "resources/js/components/artists/ArtistIndex.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ArtistIndex.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistIndex.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/artists/ArtistIndex.vue?vue&type=style&index=0&id=212f47a6&scoped=true&lang=css&":
-/*!******************************************************************************************************************!*\
-  !*** ./resources/js/components/artists/ArtistIndex.vue?vue&type=style&index=0&id=212f47a6&scoped=true&lang=css& ***!
-  \******************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistIndex_vue_vue_type_style_index_0_id_212f47a6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ArtistIndex.vue?vue&type=style&index=0&id=212f47a6&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistIndex.vue?vue&type=style&index=0&id=212f47a6&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistIndex_vue_vue_type_style_index_0_id_212f47a6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistIndex_vue_vue_type_style_index_0_id_212f47a6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistIndex_vue_vue_type_style_index_0_id_212f47a6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistIndex_vue_vue_type_style_index_0_id_212f47a6_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
 
 /***/ }),
 
