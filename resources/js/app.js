@@ -11,6 +11,7 @@ window.Vue = require('vue');
 import router from './router.js'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Vuetify from './plugins/vuetify.js'
 Vue.use(VueAxios, axios)
 
 /**
@@ -35,4 +36,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     router,
     el: '#app',
+    vuetify: Vuetify,
 });

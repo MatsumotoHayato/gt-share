@@ -12,7 +12,10 @@ class SongController extends Controller
 {
     public function index()
     {
-        return Song::with('artist')->orderBy('name')->get();
+        return [
+            'artist'=> Artist::get(), 
+            'songs' => Song::with('artist')->orderBy('name')->get()
+        ];
     }
 
     public function create(Artist $artist)

@@ -75,10 +75,21 @@
         <main class="py-4">
             @yield('content')
             <div id="app">
-                <router-link to="/">トップ</router-link>
-                <router-link to="/vue/songs">曲一覧</router-link>
-                <router-view/>
-                <!--<router-view name="sub"/>-->
+                <v-app>
+                    <!--<v-navigation-drawer app>Navigation Lists</v-navigation-drawer>-->
+                    <!--<v-app-bar color="primary" dark app>-->
+                    <!--  <v-app-bar-nav-icon></v-app-bar-nav-icon>-->
+                    <!--  <v-toobar-title>Vuetify</v-toobar-title>-->
+                    <!--</v-app-bar>-->
+                    
+                    <router-link to="/">トップ</router-link>
+                    <router-link to="/vue/artists/1">[Alexandros]の曲一覧</router-link>
+                    
+                    <v-main>
+                       <router-view/>
+                       <!--<router-view name="sub"/>-->
+                    </v-main>
+                </v-app>
             </div>
         </main>
     </div>
