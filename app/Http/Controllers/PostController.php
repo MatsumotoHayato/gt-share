@@ -31,7 +31,8 @@ class PostController extends Controller
         return [
             'artist' => $song->artist,
             'song' => $song,
-            'posts' => Post::with('user')->where('song_id', $song->id)->get()
+            'posts' => Post::with(['user', 'instrument'])->where('song_id', $song->id)->get(),
+            'instruments' => Instrument::get()
         ];
     }
     

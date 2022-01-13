@@ -1,8 +1,9 @@
 <template>
     <div>
         <v-container>
-            <p class="text-h6 font-weight-bold">{{ artist.name }}</p>
+            <p class="text-h5 font-weight-bold">{{ artist.name }}</p>
             <v-data-table
+                class="elevation-1"
                 :items="songs"
                 :headers="headers"
                 :search="search"

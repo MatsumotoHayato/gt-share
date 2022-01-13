@@ -116,6 +116,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ArtistIndex',
@@ -183,6 +184,7 @@ var render = function () {
         "v-container",
         [
           _c("v-data-table", {
+            staticClass: "elevation-1",
             attrs: {
               items: _vm.artists,
               headers: _vm.headers,

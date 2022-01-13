@@ -2,6 +2,7 @@
     <div>
         <v-container>
             <v-data-table
+                class="elevation-1"
                 :items="artists"
                 :headers="headers"
                 :search="search"
@@ -98,7 +99,7 @@
             </v-data-table>
         </v-container>
         
-        <v-row class="my-12"></v-row>
+        <v-spacer class="my-12"/>
         
         <SongIndex></SongIndex>
     </div>
