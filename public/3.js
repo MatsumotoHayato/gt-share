@@ -1,14 +1,29 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistShow.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/artists/ArtistShow.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/PostIndex.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/PostIndex.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -113,56 +128,60 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'ArtistShow',
+  name: 'PostIndex',
   data: function data() {
     return {
       artist: [],
-      songs: [],
+      song: [],
+      posts: [],
+      instruments: [],
       headers: [{
         text: "名前",
-        value: "name",
+        value: "body",
         align: "start"
       }],
       dialog: false,
       search: '',
-      newSong: {
+      newPost: {
         name: ''
       }
     };
   },
   computed: {
-    artistId: function artistId() {
-      return this.$route.params.artistId;
+    songId: function songId() {
+      return this.$route.params.songId;
     }
   },
   methods: {
-    getSongs: function getSongs() {
+    getPosts: function getPosts() {
       var _this = this;
 
-      axios.get("/artists/".concat(this.artistId)).then(function (response) {
+      axios.get("/songs/".concat(this.songId)).then(function (response) {
         _this.artist = response.data.artist;
-        _this.songs = response.data.songs; // console.log(response.data)
+        _this.song = response.data.song;
+        _this.posts = response.data.posts;
+        _this.instruments = response.data.instruments;
       });
     },
     close: function close() {
       this.dialog = false;
     },
     save: function save() {
-      this.songs.push(this.newSong);
+      this.posts.push(this.newPost);
       this.close();
     }
   },
   mounted: function mounted() {
-    this.getSongs();
+    this.getPosts();
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistShow.vue?vue&type=template&id=267c6e1c&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/artists/ArtistShow.vue?vue&type=template&id=267c6e1c& ***!
-  \*********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/PostIndex.vue?vue&type=template&id=c6ee1b8a&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/PostIndex.vue?vue&type=template&id=c6ee1b8a& ***!
+  \******************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -180,21 +199,53 @@ var render = function () {
       _c(
         "v-container",
         [
-          _c("p", { staticClass: "text-h6 font-weight-bold" }, [
-            _vm._v(_vm._s(_vm.artist.name)),
+          _c("v-row", [
+            _c("p", { staticClass: "text-h5 font-weight-bold" }, [
+              _vm._v(_vm._s(_vm.song.name) + " / " + _vm._s(_vm.artist.name)),
+            ]),
           ]),
           _vm._v(" "),
-          _c("v-data-table", {
+          _c(
+            "v-row",
+            [
+              _c(
+                "v-col",
+                { attrs: { cols: "3" } },
+                [
+                  _c("v-select", {
+                    attrs: {
+                      items: _vm.instruments,
+                      "item-value": "id",
+                      "item-text": "name",
+                      "prepend-icon": "mdi-guitar-acoustic",
+                      label: "楽器を選択",
+                      outlined: "",
+                    },
+                    model: {
+                      value: _vm.id,
+                      callback: function ($$v) {
+                        _vm.id = $$v
+                      },
+                      expression: "id",
+                    },
+                  }),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-data-iterator", {
+            staticClass: "elevation-1",
             attrs: {
-              items: _vm.songs,
-              headers: _vm.headers,
-              search: _vm.search,
-              "sort-by": "name",
-              "hide-default-header": "",
+              items: _vm.posts,
+              "sort-by": "updated_at",
+              "hide-default-footer": "",
             },
             scopedSlots: _vm._u([
               {
-                key: "top",
+                key: "header",
                 fn: function () {
                   return [
                     _c(
@@ -209,37 +260,19 @@ var render = function () {
                           [
                             _c("v-icon", [
                               _vm._v(
-                                "\n                            mdi-music-note\n                        "
+                                "\n                            mdi-comment-text\n                        "
                               ),
                             ]),
                             _vm._v(
-                              "\n                        曲一覧\n                    "
+                              "\n                        レビュー一覧\n                    "
                             ),
                           ],
                           1
                         ),
                         _vm._v(" "),
                         _c("v-divider", {
-                          staticClass: "ml-4 mr-16",
+                          staticClass: "ml-4 mr-12",
                           attrs: { inset: "", vertical: "" },
-                        }),
-                        _vm._v(" "),
-                        _c("v-text-field", {
-                          attrs: {
-                            clearable: "",
-                            flat: "",
-                            "solo-inverted": "",
-                            "hide-details": "",
-                            "prepend-inner-icon": "mdi-magnify",
-                            label: _vm.artist.name + " の曲名を検索",
-                          },
-                          model: {
-                            value: _vm.search,
-                            callback: function ($$v) {
-                              _vm.search = $$v
-                            },
-                            expression: "search",
-                          },
                         }),
                         _vm._v(" "),
                         _c("v-spacer"),
@@ -271,7 +304,7 @@ var render = function () {
                                       ),
                                       [
                                         _vm._v(
-                                          "\n                                新規曲\n                                "
+                                          "\n                                新規レビュー\n                                "
                                         ),
                                         _c("v-icon", { attrs: { right: "" } }, [
                                           _vm._v(
@@ -301,8 +334,10 @@ var render = function () {
                                 _c("v-card-title", [
                                   _vm._v(
                                     "\n                                " +
+                                      _vm._s(_vm.song.name) +
+                                      " / " +
                                       _vm._s(_vm.artist.name) +
-                                      " の新規曲追加\n                            "
+                                      " の新規レビュー投稿\n                            "
                                   ),
                                 ]),
                                 _vm._v(" "),
@@ -321,17 +356,6 @@ var render = function () {
                                               [
                                                 _c("v-text-field", {
                                                   attrs: { label: "曲名" },
-                                                  model: {
-                                                    value: _vm.newSong.name,
-                                                    callback: function ($$v) {
-                                                      _vm.$set(
-                                                        _vm.newSong,
-                                                        "name",
-                                                        $$v
-                                                      )
-                                                    },
-                                                    expression: "newSong.name",
-                                                  },
                                                 }),
                                               ],
                                               1
@@ -362,7 +386,7 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                キャンセル\n                              "
+                                          "\n                                    キャンセル\n                                "
                                         ),
                                       ]
                                     ),
@@ -378,7 +402,7 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                追加\n                              "
+                                          "\n                                    追加\n                                "
                                         ),
                                       ]
                                     ),
@@ -398,6 +422,172 @@ var render = function () {
                 },
                 proxy: true,
               },
+              {
+                key: "default",
+                fn: function (props) {
+                  return [
+                    _c(
+                      "v-row",
+                      _vm._l(_vm.posts, function (post) {
+                        return _c(
+                          "v-col",
+                          { key: post.id, attrs: { cols: "12" } },
+                          [
+                            _c(
+                              "v-card",
+                              [
+                                _c(
+                                  "v-row",
+                                  [
+                                    _c(
+                                      "v-col",
+                                      { attrs: { cols: "4" } },
+                                      [
+                                        _c(
+                                          "v-list",
+                                          { attrs: { dense: "" } },
+                                          [
+                                            _c(
+                                              "v-list-item",
+                                              [
+                                                _c("v-list-item-content", [
+                                                  _vm._v(
+                                                    "User: " +
+                                                      _vm._s(post.user.name)
+                                                  ),
+                                                ]),
+                                              ],
+                                              1
+                                            ),
+                                          ],
+                                          1
+                                        ),
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c("v-divider", {
+                                      attrs: { vertical: "" },
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-col",
+                                      { attrs: { cols: "6" } },
+                                      [
+                                        _c(
+                                          "v-list",
+                                          { attrs: { dense: "" } },
+                                          [
+                                            _c(
+                                              "v-list-item",
+                                              [
+                                                _c("v-list-item-content", [
+                                                  _vm._v("難易度:"),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-list-item-content",
+                                                  { staticClass: "align-end" },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                " +
+                                                        _vm._s(
+                                                          post.difficulty
+                                                        ) +
+                                                        "\n                                            "
+                                                    ),
+                                                  ]
+                                                ),
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item",
+                                              [
+                                                _c("v-list-item-content", [
+                                                  _vm._v("楽器:"),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-list-item-content",
+                                                  { staticClass: "align-end" },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                " +
+                                                        _vm._s(
+                                                          post.instrument.name
+                                                        ) +
+                                                        "\n                                            "
+                                                    ),
+                                                  ]
+                                                ),
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item",
+                                              [
+                                                _c(
+                                                  "v-list-item-content",
+                                                  { staticClass: "align-end" },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                " +
+                                                        _vm._s(
+                                                          post.updated_at
+                                                        ) +
+                                                        "\n                                            "
+                                                    ),
+                                                  ]
+                                                ),
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item",
+                                              [
+                                                _c("v-list-item-content", [
+                                                  _vm._v("内容:"),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-list-item-content",
+                                                  { staticClass: "align-end" },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                " +
+                                                        _vm._s(post.body) +
+                                                        "\n                                            "
+                                                    ),
+                                                  ]
+                                                ),
+                                              ],
+                                              1
+                                            ),
+                                          ],
+                                          1
+                                        ),
+                                      ],
+                                      1
+                                    ),
+                                  ],
+                                  1
+                                ),
+                              ],
+                              1
+                            ),
+                          ],
+                          1
+                        )
+                      }),
+                      1
+                    ),
+                  ]
+                },
+              },
             ]),
           }),
         ],
@@ -414,17 +604,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/artists/ArtistShow.vue":
-/*!********************************************************!*\
-  !*** ./resources/js/components/artists/ArtistShow.vue ***!
-  \********************************************************/
+/***/ "./resources/js/components/posts/PostIndex.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/posts/PostIndex.vue ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ArtistShow_vue_vue_type_template_id_267c6e1c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ArtistShow.vue?vue&type=template&id=267c6e1c& */ "./resources/js/components/artists/ArtistShow.vue?vue&type=template&id=267c6e1c&");
-/* harmony import */ var _ArtistShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ArtistShow.vue?vue&type=script&lang=js& */ "./resources/js/components/artists/ArtistShow.vue?vue&type=script&lang=js&");
+/* harmony import */ var _PostIndex_vue_vue_type_template_id_c6ee1b8a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PostIndex.vue?vue&type=template&id=c6ee1b8a& */ "./resources/js/components/posts/PostIndex.vue?vue&type=template&id=c6ee1b8a&");
+/* harmony import */ var _PostIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PostIndex.vue?vue&type=script&lang=js& */ "./resources/js/components/posts/PostIndex.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -434,9 +624,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ArtistShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ArtistShow_vue_vue_type_template_id_267c6e1c___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ArtistShow_vue_vue_type_template_id_267c6e1c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _PostIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PostIndex_vue_vue_type_template_id_c6ee1b8a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PostIndex_vue_vue_type_template_id_c6ee1b8a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -446,38 +636,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/artists/ArtistShow.vue"
+component.options.__file = "resources/js/components/posts/PostIndex.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/artists/ArtistShow.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/artists/ArtistShow.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************/
+/***/ "./resources/js/components/posts/PostIndex.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/posts/PostIndex.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ArtistShow.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistShow.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PostIndex.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/PostIndex.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/artists/ArtistShow.vue?vue&type=template&id=267c6e1c&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/artists/ArtistShow.vue?vue&type=template&id=267c6e1c& ***!
-  \***************************************************************************************/
+/***/ "./resources/js/components/posts/PostIndex.vue?vue&type=template&id=c6ee1b8a&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/posts/PostIndex.vue?vue&type=template&id=c6ee1b8a& ***!
+  \************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistShow_vue_vue_type_template_id_267c6e1c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ArtistShow.vue?vue&type=template&id=267c6e1c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistShow.vue?vue&type=template&id=267c6e1c&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistShow_vue_vue_type_template_id_267c6e1c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIndex_vue_vue_type_template_id_c6ee1b8a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PostIndex.vue?vue&type=template&id=c6ee1b8a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/PostIndex.vue?vue&type=template&id=c6ee1b8a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIndex_vue_vue_type_template_id_c6ee1b8a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistShow_vue_vue_type_template_id_267c6e1c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIndex_vue_vue_type_template_id_c6ee1b8a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -84,6 +84,7 @@
                     
                     <router-link to="/">トップ</router-link>
                     <router-link to="/vue/artists/1">[Alexandros]の曲一覧</router-link>
+                    <router-link to="/vue/songs/78">レビュー一覧</router-link>
                     
                     <v-main>
                        <router-view/>

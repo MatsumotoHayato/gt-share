@@ -3,6 +3,7 @@
     <div>
         <v-container>
             <v-data-table
+                class="elevation-1"
                 :items="songs"
                 :headers="headers"
                 :search="search"
