@@ -37,4 +37,9 @@ const app = new Vue({
     router,
     el: '#app',
     vuetify: Vuetify,
+    data(){
+        return{
+            drawer: false
+        }
+    }
 });

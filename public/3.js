@@ -127,6 +127,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostIndex',
   data: function data() {
@@ -134,6 +135,8 @@ __webpack_require__.r(__webpack_exports__);
       artist: [],
       song: [],
       posts: [],
+      selectedPosts: [],
+      selectedInstrumentId: 1,
       instruments: [],
       headers: [{
         text: "名前",
@@ -161,6 +164,11 @@ __webpack_require__.r(__webpack_exports__);
         _this.song = response.data.song;
         _this.posts = response.data.posts;
         _this.instruments = response.data.instruments;
+      });
+    },
+    fetchPosts: function fetchPosts(e) {
+      this.selectedPosts = this.posts.filter(function (post) {
+        return post.instrument_id === e;
       });
     },
     close: function close() {
@@ -221,12 +229,13 @@ var render = function () {
                       label: "楽器を選択",
                       outlined: "",
                     },
+                    on: { change: _vm.fetchPosts },
                     model: {
-                      value: _vm.id,
+                      value: _vm.selectedInstrumentId,
                       callback: function ($$v) {
-                        _vm.id = $$v
+                        _vm.selectedInstrumentId = $$v
                       },
-                      expression: "id",
+                      expression: "selectedInstrumentId",
                     },
                   }),
                 ],
@@ -239,7 +248,7 @@ var render = function () {
           _c("v-data-iterator", {
             staticClass: "elevation-1",
             attrs: {
-              items: _vm.posts,
+              items: _vm.selectedPosts,
               "sort-by": "updated_at",
               "hide-default-footer": "",
             },
@@ -428,7 +437,7 @@ var render = function () {
                   return [
                     _c(
                       "v-row",
-                      _vm._l(_vm.posts, function (post) {
+                      _vm._l(_vm.selectedPosts, function (post) {
                         return _c(
                           "v-col",
                           { key: post.id, attrs: { cols: "12" } },
