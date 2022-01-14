@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
 </head>
 <body>
     <div id="app">
@@ -77,9 +77,16 @@
             <div id="app">
                 <v-app>
                     <header>
-                        <v-app-bar app>
+                        <v-app-bar app dark color="indigo darken-4">
                             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-                            <v-toolbar-title>Application</v-toolbar-title>
+                            <v-toolbar-title class="text-h5 font-weight-bold">GT-share</v-toolbar-title>
+                            <v-spacer></v-spacer>
+                            <v-btn icon to="/">
+                                <v-icon>mdi-home</v-icon>
+                            </v-btn>
+                            <v-btn icon>
+                                <v-icon>mdi-account</v-icon>
+                            </v-btn>
                         </v-app-bar>
                         <v-navigation-drawer v-model="drawer" fixed temporary>
                             <v-list nav>
@@ -91,17 +98,17 @@
                                     </v-list-item>
                                     <v-list-item to="/vue/artists/1">
                                         <v-list-item-title>
-                                            曲一覧
+                                            ArtistShow
                                         </v-list-item-title>
                                     </v-list-item>
                                     <v-list-item to="/vue/songs/78">
                                         <v-list-item-title>
-                                            レビュー一覧
+                                            PostIndex
                                         </v-list-item-title>
                                     </v-list-item>
                                     <v-list-item>
                                         <v-list-item-title>
-                                            マイページ
+                                            マイリスト
                                         </v-list-item-title>
                                     </v-list-item>
                                     <v-list-item>
