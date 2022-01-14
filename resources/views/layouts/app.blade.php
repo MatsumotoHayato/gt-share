@@ -76,19 +76,47 @@
             @yield('content')
             <div id="app">
                 <v-app>
-                    <!--<v-navigation-drawer app>Navigation Lists</v-navigation-drawer>-->
-                    <!--<v-app-bar color="primary" dark app>-->
-                    <!--  <v-app-bar-nav-icon></v-app-bar-nav-icon>-->
-                    <!--  <v-toobar-title>Vuetify</v-toobar-title>-->
-                    <!--</v-app-bar>-->
-                    
-                    <router-link to="/">トップ</router-link>
-                    <router-link to="/vue/artists/1">[Alexandros]の曲一覧</router-link>
-                    <router-link to="/vue/songs/78">レビュー一覧</router-link>
+                    <header>
+                        <v-app-bar app>
+                            <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+                            <v-toolbar-title>Application</v-toolbar-title>
+                        </v-app-bar>
+                        <v-navigation-drawer v-model="drawer" fixed temporary>
+                            <v-list nav>
+                                <v-list-item-group>
+                                    <v-list-item to="/">
+                                        <v-list-item-title>
+                                            トップページ
+                                        </v-list-item-title>
+                                    </v-list-item>
+                                    <v-list-item to="/vue/artists/1">
+                                        <v-list-item-title>
+                                            曲一覧
+                                        </v-list-item-title>
+                                    </v-list-item>
+                                    <v-list-item to="/vue/songs/78">
+                                        <v-list-item-title>
+                                            レビュー一覧
+                                        </v-list-item-title>
+                                    </v-list-item>
+                                    <v-list-item>
+                                        <v-list-item-title>
+                                            マイページ
+                                        </v-list-item-title>
+                                    </v-list-item>
+                                    <v-list-item>
+                                        <v-list-item-title>
+                                            ランキング
+                                        </v-list-item-title>
+                                    </v-list-item>
+                                </v-list-item-group>
+                            </v-list>
+                        </v-navigation-drawer>
+                    </header>
                     
                     <v-main>
-                       <router-view/>
-                       <!--<router-view name="sub"/>-->
+                        <router-view/>
+                        <!--<router-view name="sub"/>-->
                     </v-main>
                 </v-app>
             </div>

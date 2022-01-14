@@ -7,8 +7,9 @@
             <v-row>
                 <v-col cols="3">
                     <v-select
-                        v-model="id"
+                        v-model="selectedInstrumentId"
                         :items="instruments"
+                        @change="fetchPosts"
                         item-value="id"
                         item-text="name"
                         prepend-icon="mdi-guitar-acoustic"
@@ -17,7 +18,7 @@
                     ></v-select>
                 </v-col>
             </v-row>
-            <v-data-iterator class="elevation-1" :items="posts" sort-by="updated_at" hide-default-footer>
+            <v-data-iterator class="elevation-1" :items="selectedPosts" sort-by="updated_at" hide-default-footer>
                 <template v-slot:header>
                     <v-toolbar flat dark color="blue darken-3" class="mb-1">
                         <v-toolbar-title>
@@ -68,7 +69,7 @@
 
                 <template v-slot:default="props">
                     <v-row>
-                        <v-col v-for="post in posts" :key="post.id" cols="12">
+                        <v-col v-for="post in selectedPosts" :key="post.id" cols="12">
                             <v-card>
                                 <v-row>
                                     <v-col cols="4">
@@ -124,6 +125,8 @@
                 artist: [],
                 song: [],
                 posts: [],
+                selectedPosts: [],
+                selectedInstrumentId: 1,
                 instruments: [],
                 headers: [
                     { text: "名前", value: "body", align: "start" },
@@ -149,6 +152,9 @@
                         this.posts = response.data.posts
                         this.instruments = response.data.instruments
                     })
+            },
+            fetchPosts(e) {
+                this.selectedPosts = this.posts.filter((post) => post.instrument_id === e)
             },
             close() {
                 this.dialog = false

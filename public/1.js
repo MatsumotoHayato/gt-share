@@ -1,15 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistIndex.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/artists/ArtistIndex.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistShow.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/artists/ArtistShow.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _songs_SongIndex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../songs/SongIndex */ "./resources/js/components/songs/SongIndex.vue");
 //
 //
 //
@@ -114,18 +113,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'ArtistIndex',
-  components: {
-    SongIndex: _songs_SongIndex__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
+  name: 'ArtistShow',
   data: function data() {
     return {
-      artists: [],
+      artist: [],
+      songs: [],
       headers: [{
         text: "名前",
         value: "name",
@@ -133,39 +126,44 @@ __webpack_require__.r(__webpack_exports__);
       }],
       dialog: false,
       search: '',
-      newArtist: {
-        // id: ,
+      newSong: {
         name: ''
       }
     };
   },
+  computed: {
+    artistId: function artistId() {
+      return this.$route.params.artistId;
+    }
+  },
   methods: {
-    getArtists: function getArtists() {
+    getSongs: function getSongs() {
       var _this = this;
 
-      axios.get('/artists').then(function (response) {
-        _this.artists = response.data;
+      axios.get("/artists/".concat(this.artistId)).then(function (response) {
+        _this.artist = response.data.artist;
+        _this.songs = response.data.songs; // console.log(response.data)
       });
     },
     close: function close() {
       this.dialog = false;
     },
     save: function save() {
-      this.artists.push(this.newArtist);
+      this.songs.push(this.newSong);
       this.close();
     }
   },
   mounted: function mounted() {
-    this.getArtists();
+    this.getSongs();
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistIndex.vue?vue&type=template&id=212f47a6&scoped=true&":
-/*!**********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/artists/ArtistIndex.vue?vue&type=template&id=212f47a6&scoped=true& ***!
-  \**********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistShow.vue?vue&type=template&id=267c6e1c&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/artists/ArtistShow.vue?vue&type=template&id=267c6e1c& ***!
+  \*********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -183,10 +181,14 @@ var render = function () {
       _c(
         "v-container",
         [
+          _c("p", { staticClass: "text-h5 font-weight-bold" }, [
+            _vm._v(_vm._s(_vm.artist.name)),
+          ]),
+          _vm._v(" "),
           _c("v-data-table", {
             staticClass: "elevation-1",
             attrs: {
-              items: _vm.artists,
+              items: _vm.songs,
               headers: _vm.headers,
               search: _vm.search,
               "sort-by": "name",
@@ -209,18 +211,18 @@ var render = function () {
                           [
                             _c("v-icon", [
                               _vm._v(
-                                "\n                                mdi-account-music\n                        "
+                                "\n                            mdi-music-note\n                        "
                               ),
                             ]),
                             _vm._v(
-                              "\n                        アーティスト一覧\n                    "
+                              "\n                        曲一覧\n                    "
                             ),
                           ],
                           1
                         ),
                         _vm._v(" "),
                         _c("v-divider", {
-                          staticClass: "mx-4",
+                          staticClass: "ml-4 mr-16",
                           attrs: { inset: "", vertical: "" },
                         }),
                         _vm._v(" "),
@@ -231,7 +233,7 @@ var render = function () {
                             "solo-inverted": "",
                             "hide-details": "",
                             "prepend-inner-icon": "mdi-magnify",
-                            label: "アーティスト名を検索",
+                            label: _vm.artist.name + " の曲名を検索",
                           },
                           model: {
                             value: _vm.search,
@@ -271,7 +273,7 @@ var render = function () {
                                       ),
                                       [
                                         _vm._v(
-                                          "\n                                新規アーティスト\n                                "
+                                          "\n                                新規曲\n                                "
                                         ),
                                         _c("v-icon", { attrs: { right: "" } }, [
                                           _vm._v(
@@ -300,7 +302,9 @@ var render = function () {
                               [
                                 _c("v-card-title", [
                                   _vm._v(
-                                    "\n                                新規アーティスト追加\n                            "
+                                    "\n                                " +
+                                      _vm._s(_vm.artist.name) +
+                                      " の新規曲追加\n                            "
                                   ),
                                 ]),
                                 _vm._v(" "),
@@ -318,20 +322,17 @@ var render = function () {
                                               { attrs: { cols: "10" } },
                                               [
                                                 _c("v-text-field", {
-                                                  attrs: {
-                                                    label: "アーティスト名",
-                                                  },
+                                                  attrs: { label: "曲名" },
                                                   model: {
-                                                    value: _vm.newArtist.name,
+                                                    value: _vm.newSong.name,
                                                     callback: function ($$v) {
                                                       _vm.$set(
-                                                        _vm.newArtist,
+                                                        _vm.newSong,
                                                         "name",
                                                         $$v
                                                       )
                                                     },
-                                                    expression:
-                                                      "newArtist.name",
+                                                    expression: "newSong.name",
                                                   },
                                                 }),
                                               ],
@@ -404,10 +405,6 @@ var render = function () {
         ],
         1
       ),
-      _vm._v(" "),
-      _c("v-row", { staticClass: "my-12" }),
-      _vm._v(" "),
-      _c("SongIndex"),
     ],
     1
   )
@@ -419,17 +416,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/artists/ArtistIndex.vue":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/artists/ArtistIndex.vue ***!
-  \*********************************************************/
+/***/ "./resources/js/components/artists/ArtistShow.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/artists/ArtistShow.vue ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ArtistIndex_vue_vue_type_template_id_212f47a6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ArtistIndex.vue?vue&type=template&id=212f47a6&scoped=true& */ "./resources/js/components/artists/ArtistIndex.vue?vue&type=template&id=212f47a6&scoped=true&");
-/* harmony import */ var _ArtistIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ArtistIndex.vue?vue&type=script&lang=js& */ "./resources/js/components/artists/ArtistIndex.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ArtistShow_vue_vue_type_template_id_267c6e1c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ArtistShow.vue?vue&type=template&id=267c6e1c& */ "./resources/js/components/artists/ArtistShow.vue?vue&type=template&id=267c6e1c&");
+/* harmony import */ var _ArtistShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ArtistShow.vue?vue&type=script&lang=js& */ "./resources/js/components/artists/ArtistShow.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -439,50 +436,50 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ArtistIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ArtistIndex_vue_vue_type_template_id_212f47a6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ArtistIndex_vue_vue_type_template_id_212f47a6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ArtistShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ArtistShow_vue_vue_type_template_id_267c6e1c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ArtistShow_vue_vue_type_template_id_267c6e1c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "212f47a6",
+  null,
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/artists/ArtistIndex.vue"
+component.options.__file = "resources/js/components/artists/ArtistShow.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/artists/ArtistIndex.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/artists/ArtistIndex.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************/
+/***/ "./resources/js/components/artists/ArtistShow.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/artists/ArtistShow.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ArtistIndex.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistIndex.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ArtistShow.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistShow.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/artists/ArtistIndex.vue?vue&type=template&id=212f47a6&scoped=true&":
-/*!****************************************************************************************************!*\
-  !*** ./resources/js/components/artists/ArtistIndex.vue?vue&type=template&id=212f47a6&scoped=true& ***!
-  \****************************************************************************************************/
+/***/ "./resources/js/components/artists/ArtistShow.vue?vue&type=template&id=267c6e1c&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/artists/ArtistShow.vue?vue&type=template&id=267c6e1c& ***!
+  \***************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistIndex_vue_vue_type_template_id_212f47a6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ArtistIndex.vue?vue&type=template&id=212f47a6&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistIndex.vue?vue&type=template&id=212f47a6&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistIndex_vue_vue_type_template_id_212f47a6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistShow_vue_vue_type_template_id_267c6e1c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ArtistShow.vue?vue&type=template&id=267c6e1c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/artists/ArtistShow.vue?vue&type=template&id=267c6e1c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistShow_vue_vue_type_template_id_267c6e1c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistIndex_vue_vue_type_template_id_212f47a6_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ArtistShow_vue_vue_type_template_id_267c6e1c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

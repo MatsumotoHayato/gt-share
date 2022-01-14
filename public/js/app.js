@@ -100236,7 +100236,12 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   router: _router_js__WEBPACK_IMPORTED_MODULE_0__["default"],
   el: '#app',
-  vuetify: _plugins_vuetify_js__WEBPACK_IMPORTED_MODULE_3__["default"]
+  vuetify: _plugins_vuetify_js__WEBPACK_IMPORTED_MODULE_3__["default"],
+  data: function data() {
+    return {
+      drawer: false
+    };
+  }
 });
 
 /***/ }),
@@ -100399,7 +100404,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 
- // import ArtistIndex from './components/artists/ArtistIndex'
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
@@ -100414,13 +100418,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
   {
     path: '/vue/artists/:artistId',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/artists/ArtistShow */ "./resources/js/components/artists/ArtistShow.vue"));
+      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/artists/ArtistShow */ "./resources/js/components/artists/ArtistShow.vue"));
     },
     name: 'ArtistShow'
   }, {
     path: '/vue/songs/:songId',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./components/posts/PostIndex */ "./resources/js/components/posts/PostIndex.vue"));
+      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/posts/PostIndex */ "./resources/js/components/posts/PostIndex.vue"));
     },
     name: 'PostIndex'
   } // { path: '*', redirect: '/'}
