@@ -35,11 +35,10 @@ class ArtistController extends Controller
     {
         // バリデーション
         $request->validate([
-            'artist.name' => 'required|string|max:50|unique:artists,name',
+            'name' => 'required|string|max:50|unique:artists,name',
         ]);
-        $input = $request['artist'];
+        $input = ['name' => $request['name']];
         $artist->fill($input)->save();
-        return redirect('/');
     }
 
     public function search(Request $request, Artist $artist)

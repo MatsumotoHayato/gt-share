@@ -115,9 +115,10 @@ class PostController extends Controller
     // 役に立ったマイリスト
     public function mylist(Post $post)
     {
-        return view('posts/mylist')->with([
-            'posts' => $post->getMyFavoritePosts()
-        ]);
+        return [
+            'posts' => $post->getMyFavoritePosts(),
+            'user'=> Auth::user()
+        ];
     }
     
     // マイリストの役に立った取り消し機能

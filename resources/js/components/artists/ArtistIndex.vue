@@ -5,9 +5,9 @@
                 class="elevation-1"
                 :items="artists"
                 :headers="headers"
+                @click:row="clickRow"
                 :search="search"
                 sort-by="name"
-                hide-default-header
             >
                 <template v-slot:top>
                     <v-toolbar
@@ -18,7 +18,7 @@
                     >
                         <v-toolbar-title>
                             <v-icon>
-                                    mdi-account-music
+                                mdi-account-music
                             </v-icon>
                             アーティスト一覧
                         </v-toolbar-title>
@@ -100,8 +100,8 @@
         </v-container>
         
         <v-spacer class="my-12"/>
-        
-        <SongIndex></SongIndex>
+        <SongIndex />
+        <v-spacer class="my-12"/>
     </div>
 </template>
 
@@ -116,12 +116,12 @@
             return {
                 artists: [],
                 headers: [
-                    { text: "名前", value: "name", align: "start"},
+                    { text: 'アーティスト名', value: 'name', align: 'start', width: '70%'},
+                    { text: 'レビュー数', value: '', align: 'start', width: '30%'},
                   ],
                 dialog: false,
                 search: '',
                 newArtist: {
-                    // id: ,
                     name: ''
                 }
             }
@@ -137,9 +137,22 @@
                 this.dialog = false
             },
             save () {
-                this.artists.push(this.newArtist)
+                // this.artists.push(this.newArtist)
+                axios.post('/artists', this.newArtist)
+                    .then((reponse)=>{
+                        if(reponse.status == 200) {
+                            this.getArtists()
+                        } else {
+                            // v-alert
+                        }
+                    })
                 this.close()
             },
+            clickRow(e) {
+                this.$router.push({
+                    path: `/vue/artists/${e.id}`
+                })
+            }
         },
         mounted() {
             this.getArtists()
@@ -147,5 +160,11 @@
     }
 </script>
 
-<style scoped>
+<style>
+    .v-data-table tr:hover td {
+        background: #f0f8ff;
+    }
+    .v-data-table th {
+        background: #f5f5f5;
+    }
 </style>

@@ -1,0 +1,95 @@
+<template>
+    <div>
+        <v-container>
+            <v-row>
+                <p class="text-h5 font-weight-bold">{{ user.name }} の役に立ったマイリスト</p>
+            </v-row>
+            <v-data-iterator class="elevation-1" :items="posts" hide-default-footer>
+                <template v-slot:header>
+                    <v-toolbar flat dark color="blue darken-3" class="mb-1">
+                        <v-toolbar-title>
+                            <v-icon>
+                                mdi-thumb-up
+                            </v-icon>
+                            レビュー一覧
+                        </v-toolbar-title>
+                        <v-divider class="ml-4 mr-12" inset vertical></v-divider>
+                        <v-spacer></v-spacer>
+                    </v-toolbar>
+                </template>
+
+                <template v-slot:default="props">
+                    <v-row>
+                        <v-col v-for="post in posts" :key="post.id" cols="12">
+                            <v-card>
+                                <v-row>
+                                    <v-col cols="4">
+                                        <v-list dense>
+                                            <v-list-item>
+                                                <v-list-item-content>ユーザー名: </v-list-item-content>
+                                            </v-list-item>
+                                        </v-list>
+                                    </v-col>
+                                    <v-divider vertical></v-divider>
+                                    <v-col cols="6">
+                                        <v-list dense>
+                                            <v-list-item>
+                                                <v-list-item-content>
+                                                    楽器: 
+                                                </v-list-item-content>
+                                            </v-list-item>
+                                            <v-list-item>
+                                                <v-list-item-content>
+                                                    難易度: {{ post.difficulty }}
+                                                </v-list-item-content>
+                                            </v-list-item>
+                                            <v-list-item>
+                                                <v-list-item-content>
+                                                    {{ post.updated_at }}
+                                                </v-list-item-content>
+                                            </v-list-item>
+                                            <v-list-item>
+                                                <v-list-item-content>
+                                                    内容: {{ post.body }}
+                                                </v-list-item-content>
+                                            </v-list-item>
+                                        </v-list>
+                                    </v-col>
+                                </v-row>
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                </template>
+            </v-data-iterator>
+        </v-container>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: 'MyList',
+        data() {
+            return {
+                posts: [],
+                user: [],
+                headers: [
+                    { text: "名前", value: "body", align: "start" },
+                ],
+                dialog: false,
+            }
+        },
+        methods: {
+            getMyListPosts() {
+                axios.get('/mylist')
+                    .then((response) => {
+                        console.log(response.data.posts.data)
+                        this.posts = response.data.posts.data,
+                        this.user = response.data.user
+                    })
+            }
+        },
+        mounted() {
+            this.getMyListPosts()
+        }
+    }
+</script>
