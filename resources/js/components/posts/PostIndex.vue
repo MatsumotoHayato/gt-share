@@ -9,7 +9,6 @@
                     <v-select
                         v-model="selectedInstrumentId"
                         :items="instruments"
-                        @change="fetchPosts"
                         item-value="id"
                         item-text="name"
                         prepend-icon="mdi-guitar-acoustic"
@@ -75,7 +74,7 @@
                                     <v-col cols="4">
                                         <v-list dense>
                                             <v-list-item>
-                                                <v-list-item-content>User: {{ post.user.name }}</v-list-item-content>
+                                                <v-list-item-content>ユーザー名: {{ post.user.name }}</v-list-item-content>
                                             </v-list-item>
                                         </v-list>
                                     </v-col>
@@ -83,26 +82,18 @@
                                     <v-col cols="6">
                                         <v-list dense>
                                             <v-list-item>
-                                                <v-list-item-content>難易度:</v-list-item-content>
-                                                <v-list-item-content class="align-end">
-                                                    {{ post.difficulty }}
+                                                <v-list-item-content>
+                                                    難易度: {{ post.difficulty }}
                                                 </v-list-item-content>
                                             </v-list-item>
                                             <v-list-item>
-                                                <v-list-item-content>楽器:</v-list-item-content>
-                                                <v-list-item-content class="align-end">
-                                                    {{ post.instrument.name }}
-                                                </v-list-item-content>
-                                            </v-list-item>
-                                            <v-list-item>
-                                                <v-list-item-content class="align-end">
+                                                <v-list-item-content>
                                                     {{ post.updated_at }}
                                                 </v-list-item-content>
                                             </v-list-item>
                                             <v-list-item>
-                                                <v-list-item-content>内容:</v-list-item-content>
-                                                <v-list-item-content class="align-end">
-                                                    {{ post.body }}
+                                                <v-list-item-content>
+                                                    内容: {{ post.body }}
                                                 </v-list-item-content>
                                             </v-list-item>
                                         </v-list>
@@ -151,6 +142,7 @@
                         this.song = response.data.song
                         this.posts = response.data.posts
                         this.instruments = response.data.instruments
+                        this.init()
                     })
             },
             fetchPosts(e) {
@@ -163,9 +155,19 @@
                 this.posts.push(this.newPost)
                 this.close()
             },
+            init() {
+                if(this.posts.length > 0) {
+                this.selectedPosts = this.posts.filter((post) => post.instrument_id === 1)
+                }
+            }
         },
         mounted() {
             this.getPosts()
+        },
+        watch: {
+            selectedInstrumentId(newValue) {
+                this.fetchPosts(newValue)
+            }
         }
     }
 </script>

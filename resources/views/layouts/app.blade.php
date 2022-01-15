@@ -96,17 +96,7 @@
                                             トップページ
                                         </v-list-item-title>
                                     </v-list-item>
-                                    <v-list-item to="/vue/artists/1">
-                                        <v-list-item-title>
-                                            ArtistShow
-                                        </v-list-item-title>
-                                    </v-list-item>
-                                    <v-list-item to="/vue/songs/78">
-                                        <v-list-item-title>
-                                            PostIndex
-                                        </v-list-item-title>
-                                    </v-list-item>
-                                    <v-list-item>
+                                    <v-list-item to="/vue/mylist">
                                         <v-list-item-title>
                                             マイリスト
                                         </v-list-item-title>

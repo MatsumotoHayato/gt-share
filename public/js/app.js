@@ -100424,9 +100424,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
   }, {
     path: '/vue/songs/:songId',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/posts/PostIndex */ "./resources/js/components/posts/PostIndex.vue"));
+      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./components/posts/PostIndex */ "./resources/js/components/posts/PostIndex.vue"));
     },
     name: 'PostIndex'
+  }, {
+    path: '/vue/mylist',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/posts/MyList */ "./resources/js/components/posts/MyList.vue"));
+    },
+    name: 'MyList'
   } // { path: '*', redirect: '/'}
   ],
   mode: 'history'

@@ -6,9 +6,9 @@
                 class="elevation-1"
                 :items="songs"
                 :headers="headers"
+                @click:row="clickRow"
                 :search="search"
                 sort-by="name"
-                hide-default-header
             >
                 <template v-slot:top>
                     <v-toolbar
@@ -24,7 +24,7 @@
                             曲一覧
                         </v-toolbar-title>
                         <v-divider
-                            class="ml-4 mr-16"
+                            class="mx-4"
                             inset
                             vertical
                         ></v-divider>
@@ -121,8 +121,9 @@
                 artists: [],
                 songs: [],
                 headers: [
-                    { text: "曲名", value: "name", align: "start"},
-                    { text: "アーティスト名", value: "artist_id", align: "start"},
+                    { text: '曲名', value: 'name', align: 'start', width: '30%'},
+                    { text: 'アーティスト名', value: 'artist.name', align: 'start', width: '40%'},
+                    { text: 'レビュー数', value: '', align: 'start', width: '30%'},
                   ],
                 dialog: false,
                 search: '',
@@ -147,6 +148,11 @@
                 this.songs.push(this.newSong)
                 this.close()
             },
+            clickRow(e) {
+                this.$router.push({
+                    path: `/vue/songs/${e.id}`
+                })
+            }
         },
         mounted() {
             this.getSongs()

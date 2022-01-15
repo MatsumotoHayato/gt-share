@@ -10,6 +10,7 @@ export default new Router({
           // { path: '/vue/songs', component: ()=>import('./components/songs/SongIndex'), name: 'SongIndex' },
           { path: '/vue/artists/:artistId', component: ()=>import('./components/artists/ArtistShow'), name: 'ArtistShow' },
           { path: '/vue/songs/:songId', component: ()=>import('./components/posts/PostIndex'), name: 'PostIndex' },
+          { path: '/vue/mylist', component: ()=>import('./components/posts/MyList'), name: 'MyList' },
           // { path: '*', redirect: '/'}
   ],
 	mode: 'history',

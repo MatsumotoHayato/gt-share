@@ -119,15 +119,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostIndex',
   data: function data() {
@@ -164,6 +155,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.song = response.data.song;
         _this.posts = response.data.posts;
         _this.instruments = response.data.instruments;
+
+        _this.init();
       });
     },
     fetchPosts: function fetchPosts(e) {
@@ -177,10 +170,22 @@ __webpack_require__.r(__webpack_exports__);
     save: function save() {
       this.posts.push(this.newPost);
       this.close();
+    },
+    init: function init() {
+      if (this.posts.length > 0) {
+        this.selectedPosts = this.posts.filter(function (post) {
+          return post.instrument_id === 1;
+        });
+      }
     }
   },
   mounted: function mounted() {
     this.getPosts();
+  },
+  watch: {
+    selectedInstrumentId: function selectedInstrumentId(newValue) {
+      this.fetchPosts(newValue);
+    }
   }
 });
 
@@ -229,7 +234,6 @@ var render = function () {
                       label: "楽器を選択",
                       outlined: "",
                     },
-                    on: { change: _vm.fetchPosts },
                     model: {
                       value: _vm.selectedInstrumentId,
                       callback: function ($$v) {
@@ -461,7 +465,7 @@ var render = function () {
                                               [
                                                 _c("v-list-item-content", [
                                                   _vm._v(
-                                                    "User: " +
+                                                    "ユーザー名: " +
                                                       _vm._s(post.user.name)
                                                   ),
                                                 ]),
@@ -491,22 +495,12 @@ var render = function () {
                                               "v-list-item",
                                               [
                                                 _c("v-list-item-content", [
-                                                  _vm._v("難易度:"),
+                                                  _vm._v(
+                                                    "\n                                                難易度: " +
+                                                      _vm._s(post.difficulty) +
+                                                      "\n                                            "
+                                                  ),
                                                 ]),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "v-list-item-content",
-                                                  { staticClass: "align-end" },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                                                " +
-                                                        _vm._s(
-                                                          post.difficulty
-                                                        ) +
-                                                        "\n                                            "
-                                                    ),
-                                                  ]
-                                                ),
                                               ],
                                               1
                                             ),
@@ -515,42 +509,12 @@ var render = function () {
                                               "v-list-item",
                                               [
                                                 _c("v-list-item-content", [
-                                                  _vm._v("楽器:"),
+                                                  _vm._v(
+                                                    "\n                                                " +
+                                                      _vm._s(post.updated_at) +
+                                                      "\n                                            "
+                                                  ),
                                                 ]),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "v-list-item-content",
-                                                  { staticClass: "align-end" },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                                                " +
-                                                        _vm._s(
-                                                          post.instrument.name
-                                                        ) +
-                                                        "\n                                            "
-                                                    ),
-                                                  ]
-                                                ),
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-list-item",
-                                              [
-                                                _c(
-                                                  "v-list-item-content",
-                                                  { staticClass: "align-end" },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                                                " +
-                                                        _vm._s(
-                                                          post.updated_at
-                                                        ) +
-                                                        "\n                                            "
-                                                    ),
-                                                  ]
-                                                ),
                                               ],
                                               1
                                             ),
@@ -559,20 +523,12 @@ var render = function () {
                                               "v-list-item",
                                               [
                                                 _c("v-list-item-content", [
-                                                  _vm._v("内容:"),
+                                                  _vm._v(
+                                                    "\n                                                内容: " +
+                                                      _vm._s(post.body) +
+                                                      "\n                                            "
+                                                  ),
                                                 ]),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "v-list-item-content",
-                                                  { staticClass: "align-end" },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                                                " +
-                                                        _vm._s(post.body) +
-                                                        "\n                                            "
-                                                    ),
-                                                  ]
-                                                ),
                                               ],
                                               1
                                             ),
