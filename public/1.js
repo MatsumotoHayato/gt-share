@@ -173,8 +173,15 @@ __webpack_require__.r(__webpack_exports__);
       this.dialog = false;
     },
     save: function save() {
-      this.songs.push(this.newSong);
-      this.close();
+      var _this2 = this;
+
+      axios.post("/artists/".concat(this.artistId, "/songs"), this.newSong).then(function (response) {
+        if (response.status == 200) {
+          _this2.close();
+
+          _this2.getSongs();
+        }
+      });
     },
     clickRow: function clickRow(e) {
       this.$router.push({

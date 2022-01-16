@@ -110,7 +110,7 @@
                                         <v-list-item-title>マイリスト</v-list-item-title>
                                     </v-list-item-content>
                                 </v-list-item>
-                                <v-list-item>
+                                <v-list-item to="/vue/myposts">
                                     <v-list-item-icon>
                                         <v-icon>mdi-text-box</v-icon>
                                     </v-list-item-icon>
@@ -118,7 +118,7 @@
                                         <v-list-item-title>自分の投稿</v-list-item-title>
                                     </v-list-item-content>
                                 </v-list-item>
-                                <v-list-item>
+                                <v-list-item to="/vue/ranking">
                                     <v-list-item-icon>
                                         <v-icon>mdi-crown</v-icon>
                                     </v-list-item-icon>

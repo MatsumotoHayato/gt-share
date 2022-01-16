@@ -124,10 +124,71 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostIndex',
   data: function data() {
     return {
+      currentUser: [],
       artist: [],
       song: [],
       posts: [],
@@ -135,14 +196,33 @@ __webpack_require__.r(__webpack_exports__);
       selectedInstrumentId: 1,
       instruments: [],
       headers: [{
-        text: "名前",
-        value: "body",
+        text: "投稿日時",
+        value: "updated_at",
         align: "start"
       }],
       dialog: false,
       search: '',
       newPost: {
-        name: ''
+        instrument_id: '',
+        experience: '',
+        difficulty: '',
+        body: '',
+        url: ''
+      },
+      rules: {
+        required: function required(value) {
+          return !!value || '入力は必須です';
+        },
+        numeric: function numeric(value) {
+          return !!value || '半角数字のみ有効です';
+        },
+        between: function between(value) {
+          var pattern = /^([1-9]?[0-9]|100)+$/;
+          return pattern.test(value) || '0 ～ 100 までの半角数字のみ有効です';
+        },
+        counter: function counter(value) {
+          return value.length <= 4000 || '4000文字以内で入力してください';
+        }
       },
       breadCrumbs: [{
         text: 'ホーム',
@@ -161,6 +241,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/songs/".concat(this.songId)).then(function (response) {
+        _this.currentUser = response.data.user;
         _this.artist = response.data.artist;
         _this.song = response.data.song;
         _this.posts = response.data.posts;
@@ -190,8 +271,15 @@ __webpack_require__.r(__webpack_exports__);
       this.dialog = false;
     },
     save: function save() {
-      this.posts.push(this.newPost);
-      this.close();
+      var _this2 = this;
+
+      axios.post("/songs/".concat(this.songId, "/posts"), this.newPost).then(function (response) {
+        if (response.status == 200) {
+          _this2.close();
+
+          _this2.getPosts();
+        }
+      });
     },
     init: function init() {
       if (this.posts.length > 0) {
@@ -273,11 +361,7 @@ var render = function () {
           _vm._v(" "),
           _c("v-data-iterator", {
             staticClass: "elevation-1",
-            attrs: {
-              items: _vm.selectedPosts,
-              "sort-by": "updated_at",
-              "hide-default-footer": "",
-            },
+            attrs: { items: _vm.selectedPosts, "sort-by": "updated_at" },
             scopedSlots: _vm._u([
               {
                 key: "header",
@@ -315,7 +399,7 @@ var render = function () {
                         _c(
                           "v-dialog",
                           {
-                            attrs: { "max-width": "500px" },
+                            attrs: { persistent: "", "max-width": "600px" },
                             scopedSlots: _vm._u([
                               {
                                 key: "activator",
@@ -367,37 +451,223 @@ var render = function () {
                               "v-card",
                               [
                                 _c("v-card-title", [
-                                  _vm._v(
-                                    "\n                                " +
+                                  _c("span", { staticClass: "text-h5" }, [
+                                    _vm._v(
                                       _vm._s(_vm.song.name) +
-                                      " / " +
-                                      _vm._s(_vm.artist.name) +
-                                      " の新規レビュー投稿\n                            "
-                                  ),
+                                        " / " +
+                                        _vm._s(_vm.artist.name) +
+                                        " の新規レビュー投稿"
+                                    ),
+                                  ]),
                                 ]),
                                 _vm._v(" "),
                                 _c(
                                   "v-card-text",
                                   [
                                     _c(
-                                      "v-container",
+                                      "v-form",
                                       [
                                         _c(
-                                          "v-row",
+                                          "v-container",
                                           [
                                             _c(
-                                              "v-col",
-                                              { attrs: { cols: "10" } },
+                                              "v-row",
                                               [
-                                                _c("v-text-field", {
-                                                  attrs: { label: "曲名" },
-                                                }),
+                                                _c(
+                                                  "v-col",
+                                                  { attrs: { cols: "6" } },
+                                                  [
+                                                    _c("v-select", {
+                                                      attrs: {
+                                                        items: _vm.instruments,
+                                                        "item-text": "name",
+                                                        "item-value": "id",
+                                                        label: "楽器*",
+                                                        rules: [
+                                                          _vm.rules.required,
+                                                        ],
+                                                        "single-line": "",
+                                                        required: "",
+                                                      },
+                                                      model: {
+                                                        value:
+                                                          _vm.newPost
+                                                            .instrument_id,
+                                                        callback: function (
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.newPost,
+                                                            "instrument_id",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "newPost.instrument_id",
+                                                      },
+                                                    }),
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c("v-spacer"),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-col",
+                                                  { attrs: { cols: "4" } },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        type: "number",
+                                                        max: "100",
+                                                        min: "0",
+                                                        label: "楽器経験",
+                                                        suffix: "年",
+                                                      },
+                                                      model: {
+                                                        value:
+                                                          _vm.newPost
+                                                            .experience,
+                                                        callback: function (
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.newPost,
+                                                            "experience",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "newPost.experience",
+                                                      },
+                                                    }),
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c("v-spacer"),
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-row",
+                                              [
+                                                _c(
+                                                  "v-col",
+                                                  { attrs: { cols: "6" } },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        type: "number",
+                                                        max: "5",
+                                                        min: "1",
+                                                        label: "難易度",
+                                                        required: "",
+                                                      },
+                                                      model: {
+                                                        value:
+                                                          _vm.newPost
+                                                            .difficulty,
+                                                        callback: function (
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.newPost,
+                                                            "difficulty",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "newPost.difficulty",
+                                                      },
+                                                    }),
+                                                  ],
+                                                  1
+                                                ),
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-row",
+                                              [
+                                                _c(
+                                                  "v-col",
+                                                  { attrs: { cols: "12" } },
+                                                  [
+                                                    _c("v-textarea", {
+                                                      attrs: {
+                                                        label: "感想*",
+                                                        placeholder:
+                                                          "練習時間、演奏のコツ、使用機材、楽しかった箇所など…",
+                                                        rules: [
+                                                          _vm.rules.required,
+                                                          _vm.rules.counter,
+                                                        ],
+                                                        counter: "",
+                                                        required: "",
+                                                      },
+                                                      model: {
+                                                        value: _vm.newPost.body,
+                                                        callback: function (
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.newPost,
+                                                            "body",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "newPost.body",
+                                                      },
+                                                    }),
+                                                  ],
+                                                  1
+                                                ),
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-row",
+                                              [
+                                                _c(
+                                                  "v-col",
+                                                  { attrs: { cols: "12" } },
+                                                  [
+                                                    _c("v-text-field", {
+                                                      attrs: {
+                                                        label:
+                                                          "演奏動画へのURL",
+                                                      },
+                                                      model: {
+                                                        value: _vm.newPost.url,
+                                                        callback: function (
+                                                          $$v
+                                                        ) {
+                                                          _vm.$set(
+                                                            _vm.newPost,
+                                                            "url",
+                                                            $$v
+                                                          )
+                                                        },
+                                                        expression:
+                                                          "newPost.url",
+                                                      },
+                                                    }),
+                                                  ],
+                                                  1
+                                                ),
                                               ],
                                               1
                                             ),
                                           ],
                                           1
                                         ),
+                                        _vm._v(" "),
+                                        _c("small", [_vm._v("*必須項目")]),
                                       ],
                                       1
                                     ),
@@ -513,6 +783,31 @@ var render = function () {
                                           "v-list",
                                           { attrs: { dense: "" } },
                                           [
+                                            _c(
+                                              "v-list-item",
+                                              {
+                                                directives: [
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value:
+                                                      post.user.id ===
+                                                      _vm.currentUser.id,
+                                                    expression:
+                                                      "post.user.id === currentUser.id",
+                                                  },
+                                                ],
+                                              },
+                                              [
+                                                _c("v-list-item-content", [
+                                                  _vm._v(
+                                                    "\n                                                [編集]\n                                            "
+                                                  ),
+                                                ]),
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
                                             _c(
                                               "v-list-item",
                                               [

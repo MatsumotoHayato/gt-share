@@ -158,8 +158,13 @@
                 this.dialog = false
             },
             save () {
-                this.songs.push(this.newSong)
-                this.close()
+                axios.post(`/artists/${this.artistId}/songs`, this.newSong)
+                    .then((response)=>{
+                        if(response.status == 200) {
+                            this.close()
+                            this.getSongs()
+                        }
+                    })
             },
             clickRow(e) {
                 this.$router.push({

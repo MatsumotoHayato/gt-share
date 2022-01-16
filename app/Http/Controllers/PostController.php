@@ -9,7 +9,6 @@ use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -29,9 +28,10 @@ class PostController extends Controller
     public function index(Song $song)
     {
         return [
+            'user' => Auth::user(),
             'artist' => $song->artist,
             'song' => $song,
-            'posts' => Post::with(['user', 'instrument'])->where('song_id', $song->id)->get(),
+            'posts' => Post::with(['user', 'instrument'])->where('song_id', $song->id)->orderBy('updated_at', 'DESC')->get(),
             'instruments' => Instrument::get()
         ];
     }
@@ -61,15 +61,27 @@ class PostController extends Controller
     }
 
     // レビュー投稿
-    public function store(PostRequest $request, Artist $artist, Song $song, Post $post)
+    public function store(Request $request, Song $song, Post $post)
     {
-        $input = $request['post'];
+        $request->validate([
+            'instrument_id' => 'required|integer',
+            'experience' => 'required|integer|between:0,100',
+            'difficulty' => 'required|integer|between:1,5',
+            'body' => 'required|string|max:4000',
+            'url' => 'nullable|url'
+        ]);
+        $input = [
+            'instrument_id' => $request['instrument_id'],
+            'experience' => $request['experience'],
+            'difficulty' => $request['difficulty'],
+            'body' => $request['body'],
+            'url' => $request['url'],
+        ];
         $input += [
             'user_id' => Auth::id(),
             'song_id' => $song->id,
         ];
         $post->fill($input)->save();
-        return redirect('/artists/'. $artist->id. '/songs/'. $song->id. '/posts/instruments/'. $post->instrument->id);
     }
     
     // レビュー編集画面

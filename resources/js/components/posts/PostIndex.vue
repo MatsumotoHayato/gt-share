@@ -17,7 +17,7 @@
                     ></v-select>
                 </v-col>
             </v-row>
-            <v-data-iterator class="elevation-1" :items="selectedPosts" sort-by="updated_at" hide-default-footer>
+            <v-data-iterator class="elevation-1" :items="selectedPosts" sort-by="updated_at">
                 <template v-slot:header>
                     <v-toolbar flat dark color="blue darken-3" class="mb-1">
                         <v-toolbar-title>
@@ -28,7 +28,7 @@
                         </v-toolbar-title>
                         <v-divider class="ml-4 mr-12" inset vertical></v-divider>
                         <v-spacer></v-spacer>
-                        <v-dialog v-model="dialog" max-width="500px">
+                        <v-dialog v-model="dialog" persistent max-width="600px">
                             <template v-slot:activator="{ on, attrs }">
                                 <v-btn class="ma-2" outlined v-bind="attrs" v-on="on">
                                     新規レビュー
@@ -39,17 +39,72 @@
                             </template>
                             <v-card>
                                 <v-card-title>
-                                    {{ song.name }} / {{artist.name}} の新規レビュー投稿
+                                    <span class="text-h5">{{ song.name }} / {{artist.name}} の新規レビュー投稿</span>
                                 </v-card-title>
-
                                 <v-card-text>
-                                    <v-container>
-                                        <v-row>
-                                            <v-col cols="10">
-                                                <v-text-field label="曲名"></v-text-field>
-                                            </v-col>
-                                        </v-row>
-                                    </v-container>
+                                    <v-form>
+                                        <v-container>
+                                            <v-row>
+                                                <v-col cols="6">
+                                                    <v-select
+                                                        v-model="newPost.instrument_id"
+                                                        :items="instruments"
+                                                        item-text="name"
+                                                        item-value="id"
+                                                        label="楽器*"
+                                                        :rules="[rules.required]"
+                                                        single-line
+                                                        required
+                                                    ></v-select>
+                                                </v-col>
+                                                <v-spacer/>
+                                                <v-col cols="4">
+                                                    <v-text-field
+                                                        v-model="newPost.experience"
+                                                        type="number"
+                                                        max="100"
+                                                        min="0"
+                                                        label="楽器経験"
+                                                        suffix="年"
+                                                    ></v-text-field>
+                                                </v-col>
+                                                <v-spacer/>
+                                            </v-row>
+                                            <v-row>
+                                                <v-col cols="6">
+                                                    <v-text-field
+                                                        v-model="newPost.difficulty"
+                                                        type="number"
+                                                        max="5"
+                                                        min="1"
+                                                        label="難易度"
+                                                        required
+                                                    ></v-text-field>
+                                                </v-col>
+                                            </v-row>
+                                            <v-row>
+                                                <v-col cols="12">
+                                                    <v-textarea
+                                                        v-model="newPost.body"
+                                                        label="感想*"
+                                                        placeholder="練習時間、演奏のコツ、使用機材、楽しかった箇所など…"
+                                                        :rules="[rules.required, rules.counter]"
+                                                        counter
+                                                        required
+                                                    ></v-textarea>
+                                                </v-col>
+                                            </v-row>
+                                            <v-row>
+                                                <v-col cols="12">
+                                                    <v-text-field
+                                                        v-model="newPost.url"
+                                                        label="演奏動画へのURL"
+                                                        ></v-text-field>
+                                                </v-col>
+                                            </v-row>
+                                        </v-container>
+                                        <small>*必須項目</small>
+                                    </v-form>
                                 </v-card-text>
 
                                 <v-card-actions>
@@ -81,6 +136,11 @@
                                     <v-divider vertical></v-divider>
                                     <v-col cols="6">
                                         <v-list dense>
+                                            <v-list-item v-show="post.user.id === currentUser.id">
+                                                <v-list-item-content>
+                                                    [編集]
+                                                </v-list-item-content>
+                                            </v-list-item>
                                             <v-list-item>
                                                 <v-list-item-content>
                                                     難易度: {{ post.difficulty }}
@@ -118,6 +178,7 @@
         name: 'PostIndex',
         data() {
             return {
+                currentUser: [],
                 artist: [],
                 song: [],
                 posts: [],
@@ -125,12 +186,25 @@
                 selectedInstrumentId: 1,
                 instruments: [],
                 headers: [
-                    { text: "名前", value: "body", align: "start" },
+                    { text: "投稿日時", value: "updated_at", align: "start" },
                 ],
                 dialog: false,
                 search: '',
                 newPost: {
-                    name: ''
+                    instrument_id: '',
+                    experience: '',
+                    difficulty: '',
+                    body: '',
+                    url: '',
+                },
+                rules: {
+                    required: value => !!value || '入力は必須です',
+                    numeric: value => !!value || '半角数字のみ有効です',
+                    between: value => {
+                        const pattern = /^([1-9]?[0-9]|100)+$/
+                        return pattern.test(value) || '0 ～ 100 までの半角数字のみ有効です'
+                    },
+                    counter: value => value.length <= 4000 || '4000文字以内で入力してください',
                 },
                 breadCrumbs: [
                     {
@@ -150,6 +224,7 @@
             getPosts() {
                 axios.get(`/songs/${this.songId}`)
                     .then((response) => {
+                        this.currentUser = response.data.user
                         this.artist = response.data.artist
                         this.song = response.data.song
                         this.posts = response.data.posts
@@ -177,9 +252,14 @@
             close() {
                 this.dialog = false
             },
-            save() {
-                this.posts.push(this.newPost)
-                this.close()
+            save () {
+                axios.post(`/songs/${this.songId}/posts`, this.newPost)
+                    .then((response)=>{
+                        if(response.status == 200) {
+                            this.close()
+                            this.getPosts()
+                        }
+                    })
             },
             init() {
                 if(this.posts.length > 0) {

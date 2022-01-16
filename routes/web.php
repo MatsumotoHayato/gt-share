@@ -18,13 +18,13 @@ Route::post('/artists', 'ArtistController@store')->middleware('auth');  // 新�
 Route::get('/artists/{artist}', 'ArtistController@show');  // 特定アーティストの曲一覧表示
 Route::get('/songs', 'SongController@index');  // 全曲一覧表示
 Route::get('/artists/{artist}/songs/create', 'SongController@create')->middleware('auth');  // 新規曲追加画面
-Route::post('/artists/{artist}/songs', 'SongController@store')->middleware('auth');  // 新規曲追加
+Route::post('/artists/{artist}/songs', 'SongController@store')->middleware('auth');  // アーティスト詳細画面で新規曲追加
 
 Route::get('/songs/{song}', 'PostController@index');  // レビュー一覧表示
 // Route::get('/artists/{artist}/songs/{song}/posts/instruments/{instrument}', 'PostController@index');  // レビュー一覧表示
 Route::get('/artists/{artist}/songs/{song}/posts/instruments/{instrument}/favorite', 'PostController@indexSortFavorite');  // レビュー一覧並び替え（役に立った順）
 Route::get('/artists/{artist}/songs/{song}/posts/instruments/{instrument}/create', 'PostController@create')->middleware('auth');  // 新規レビュー投稿画面
-Route::post('/artists/{artist}/songs/{song}/posts', 'PostController@store')->middleware('auth');  // 新規レビュー投稿
+Route::post('/songs/{song}/posts', 'PostController@store')->middleware('auth');  // 新規レビュー投稿
 Route::get('/artists/{artist}/songs/{song}/posts/{post}/edit', 'PostController@edit')->middleware('auth');  // レビュー編集
 Route::put('/artists/{artist}/songs/{song}/posts/{post}', 'PostController@update')->middleware('auth');     // レビュー編集の変更内容更新
 Route::delete('/artists/{artist}/songs/{song}/posts/{post}', 'PostController@delete')->middleware('auth');  // レビュー削除
