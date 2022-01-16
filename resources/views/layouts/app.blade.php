@@ -89,24 +89,43 @@
                             </v-btn>
                         </v-app-bar>
                         <v-navigation-drawer v-model="drawer" fixed temporary>
+                            <v-toolbar class="elevation-0">
+                                <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+                                <v-toolbar-title class="text-h5 font-weight-bold">GT-share</v-toolbar-title>
+                            </v-toolbar>
                             <v-list nav>
-                                <v-list-item-group>
-                                    <v-list-item to="/">
-                                        <v-list-item-title>
-                                            トップページ
-                                        </v-list-item-title>
-                                    </v-list-item>
-                                    <v-list-item to="/vue/mylist">
-                                        <v-list-item-title>
-                                            マイリスト
-                                        </v-list-item-title>
-                                    </v-list-item>
-                                    <v-list-item>
-                                        <v-list-item-title>
-                                            ランキング
-                                        </v-list-item-title>
-                                    </v-list-item>
-                                </v-list-item-group>
+                                <v-list-item to="/">
+                                    <v-list-item-icon>
+                                        <v-icon>mdi-home</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                        <v-list-item-title>ホーム</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-list-item to="/vue/mylist">
+                                    <v-list-item-icon>
+                                        <v-icon>mdi-thumb-up</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                        <v-list-item-title>マイリスト</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-list-item>
+                                    <v-list-item-icon>
+                                        <v-icon>mdi-text-box</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                        <v-list-item-title>自分の投稿</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <v-list-item>
+                                    <v-list-item-icon>
+                                        <v-icon>mdi-crown</v-icon>
+                                    </v-list-item-icon>
+                                    <v-list-item-content>
+                                        <v-list-item-title>ランキング</v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
                             </v-list>
                         </v-navigation-drawer>
                     </header>

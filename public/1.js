@@ -113,6 +113,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ArtistShow',
   data: function data() {
@@ -134,7 +139,12 @@ __webpack_require__.r(__webpack_exports__);
       search: '',
       newSong: {
         name: ''
-      }
+      },
+      breadCrumbs: [{
+        text: 'ホーム',
+        disabled: false,
+        to: '/'
+      }]
     };
   },
   computed: {
@@ -148,7 +158,15 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/artists/".concat(this.artistId)).then(function (response) {
         _this.artist = response.data.artist;
-        _this.songs = response.data.songs; // console.log(response.data)
+        _this.songs = response.data.songs;
+
+        _this.setBreadCrumbs(response);
+      });
+    },
+    setBreadCrumbs: function setBreadCrumbs(response) {
+      this.breadCrumbs.push({
+        text: response.data.artist.name,
+        disabled: true
       });
     },
     close: function close() {
@@ -457,6 +475,19 @@ var render = function () {
                       1
                     ),
                   ]
+                },
+                proxy: true,
+              },
+            ]),
+          }),
+          _vm._v(" "),
+          _c("v-breadcrumbs", {
+            attrs: { items: _vm.breadCrumbs },
+            scopedSlots: _vm._u([
+              {
+                key: "divider",
+                fn: function () {
+                  return [_c("v-icon", [_vm._v("mdi-chevron-right")])]
                 },
                 proxy: true,
               },

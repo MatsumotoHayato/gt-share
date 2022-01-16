@@ -98,6 +98,11 @@
                     </v-toolbar>
                 </template>
             </v-data-table>
+            <v-breadcrumbs :items="breadCrumbs">
+                <template v-slot:divider>
+                    <v-icon>mdi-chevron-right</v-icon>
+                </template>
+            </v-breadcrumbs>
         </v-container>
     </div>
 </template>
@@ -117,7 +122,14 @@
                 search: '',
                 newSong: {
                     name: ''
-                }
+                },
+                breadCrumbs: [
+                    {
+                        text: 'ホーム',
+                        disabled: false,
+                        to: '/',
+                    }
+                ]
             }
         },
         computed: {
@@ -131,8 +143,16 @@
                     .then((response)=>{
                         this.artist=response.data.artist
                         this.songs=response.data.songs
-                        // console.log(response.data)
+                        this.setBreadCrumbs(response)
                     })
+            },
+            setBreadCrumbs(response) {
+                this.breadCrumbs.push(
+                    {
+                        text: response.data.artist.name,
+                        disabled: true,
+                    }
+                )
             },
             close () {
                 this.dialog = false
