@@ -119,6 +119,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostIndex',
   data: function data() {
@@ -138,7 +143,12 @@ __webpack_require__.r(__webpack_exports__);
       search: '',
       newPost: {
         name: ''
-      }
+      },
+      breadCrumbs: [{
+        text: 'ホーム',
+        disabled: false,
+        to: '/'
+      }]
     };
   },
   computed: {
@@ -157,6 +167,18 @@ __webpack_require__.r(__webpack_exports__);
         _this.instruments = response.data.instruments;
 
         _this.init();
+
+        _this.setBreadCrumbs(response);
+      });
+    },
+    setBreadCrumbs: function setBreadCrumbs(response) {
+      this.breadCrumbs.push({
+        text: response.data.artist.name,
+        disabled: false,
+        to: "/vue/artists/".concat(response.data.artist.id)
+      }, {
+        text: response.data.song.name,
+        disabled: true
       });
     },
     fetchPosts: function fetchPosts(e) {
@@ -273,7 +295,7 @@ var render = function () {
                           [
                             _c("v-icon", [
                               _vm._v(
-                                "\n                            mdi-comment-text\n                        "
+                                "\n                            mdi-text-box-multiple\n                        "
                               ),
                             ]),
                             _vm._v(
@@ -552,6 +574,19 @@ var render = function () {
                     ),
                   ]
                 },
+              },
+            ]),
+          }),
+          _vm._v(" "),
+          _c("v-breadcrumbs", {
+            attrs: { items: _vm.breadCrumbs },
+            scopedSlots: _vm._u([
+              {
+                key: "divider",
+                fn: function () {
+                  return [_c("v-icon", [_vm._v("mdi-chevron-right")])]
+                },
+                proxy: true,
               },
             ]),
           }),

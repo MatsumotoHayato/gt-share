@@ -22,7 +22,7 @@
                     <v-toolbar flat dark color="blue darken-3" class="mb-1">
                         <v-toolbar-title>
                             <v-icon>
-                                mdi-comment-text
+                                mdi-text-box-multiple
                             </v-icon>
                             レビュー一覧
                         </v-toolbar-title>
@@ -104,6 +104,11 @@
                     </v-row>
                 </template>
             </v-data-iterator>
+            <v-breadcrumbs :items="breadCrumbs">
+                <template v-slot:divider>
+                    <v-icon>mdi-chevron-right</v-icon>
+                </template>
+            </v-breadcrumbs>
         </v-container>
     </div>
 </template>
@@ -126,7 +131,14 @@
                 search: '',
                 newPost: {
                     name: ''
-                }
+                },
+                breadCrumbs: [
+                    {
+                        text: 'ホーム',
+                        disabled: false,
+                        to: '/',
+                    }
+                ]
             }
         },
         computed: {
@@ -143,7 +155,21 @@
                         this.posts = response.data.posts
                         this.instruments = response.data.instruments
                         this.init()
+                        this.setBreadCrumbs(response)
                     })
+            },
+            setBreadCrumbs(response) {
+                this.breadCrumbs.push(
+                    {
+                        text: response.data.artist.name,
+                        disabled: false,
+                        to: `/vue/artists/${response.data.artist.id}`
+                    },
+                    {
+                        text: response.data.song.name,
+                        disabled: true,
+                    },
+                )
             },
             fetchPosts(e) {
                 this.selectedPosts = this.posts.filter((post) => post.instrument_id === e)

@@ -12,6 +12,7 @@ import router from './router.js'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Vuetify from './plugins/vuetify.js'
+import MenuBar from './components/MenuBar.vue'
 Vue.use(VueAxios, axios)
 
 /**
@@ -37,9 +38,12 @@ const app = new Vue({
     router,
     el: '#app',
     vuetify: Vuetify,
-    data(){
-        return{
-            drawer: false
+    components: {
+        MenuBar
+    },
+    data() {
+        return {
+            drawer: false,
         }
     }
 });
