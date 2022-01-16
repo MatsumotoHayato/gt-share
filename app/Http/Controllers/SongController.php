@@ -26,15 +26,14 @@ class SongController extends Controller
     public function store(Request $request, Artist $artist, Song $song)
     {
         $request->validate([
-            'song.name' => [
+            'name' => [
                 'required', 'string', 'max:100',
                 Rule::unique('songs', 'name')->where('artist_id', $artist->id)  // 同じアーティストで同じ曲名ならエラー
             ],
         ]);
-        $input = $request['song'];
+        $input = ['name' => $request['name']];
         $input += ['artist_id' => $artist->id];  // 要素artist_idの追加
         $song->fill($input)->save();
-        return redirect('/artists/'. $artist->id);
     }
 
     // 全曲からキーワード検索

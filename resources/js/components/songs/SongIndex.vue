@@ -145,7 +145,13 @@
                 this.dialog = false
             },
             save () {
-                this.songs.push(this.newSong)
+                axios.post('/songs', this.newSong)
+                    .then((response)=>{
+                        if(response.status == 200) {
+                            this.getSongs()
+                            this.close()
+                        }
+                    })
                 this.close()
             },
             clickRow(e) {

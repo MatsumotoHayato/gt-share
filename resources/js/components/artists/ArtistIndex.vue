@@ -120,6 +120,7 @@
                     { text: 'レビュー数', value: '', align: 'start', width: '30%'},
                   ],
                 dialog: false,
+                isError: false,
                 search: '',
                 newArtist: {
                     name: ''
@@ -137,16 +138,13 @@
                 this.dialog = false
             },
             save () {
-                // this.artists.push(this.newArtist)
                 axios.post('/artists', this.newArtist)
-                    .then((reponse)=>{
-                        if(reponse.status == 200) {
+                    .then((response)=>{
+                        if(response.status == 200) {
+                            this.close()
                             this.getArtists()
-                        } else {
-                            // v-alert
                         }
                     })
-                this.close()
             },
             clickRow(e) {
                 this.$router.push({

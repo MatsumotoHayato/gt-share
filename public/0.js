@@ -138,6 +138,7 @@ __webpack_require__.r(__webpack_exports__);
         width: '30%'
       }],
       dialog: false,
+      isError: false,
       search: '',
       newArtist: {
         name: ''
@@ -158,14 +159,13 @@ __webpack_require__.r(__webpack_exports__);
     save: function save() {
       var _this2 = this;
 
-      // this.artists.push(this.newArtist)
-      axios.post('/artists', this.newArtist).then(function (reponse) {
-        if (reponse.status == 200) {
+      axios.post('/artists', this.newArtist).then(function (response) {
+        if (response.status == 200) {
+          _this2.close();
+
           _this2.getArtists();
-        } else {// v-alert
         }
       });
-      this.close();
     },
     clickRow: function clickRow(e) {
       this.$router.push({
@@ -347,7 +347,15 @@ __webpack_require__.r(__webpack_exports__);
       this.dialog = false;
     },
     save: function save() {
-      this.songs.push(this.newSong);
+      var _this2 = this;
+
+      axios.post('/songs', this.newSong).then(function (response) {
+        if (response.status == 200) {
+          _this2.getSongs();
+
+          _this2.close();
+        }
+      });
       this.close();
     },
     clickRow: function clickRow(e) {
