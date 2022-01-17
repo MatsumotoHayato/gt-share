@@ -122,8 +122,8 @@
                 songs: [],
                 headers: [
                     { text: '曲名', value: 'name', align: 'start', width: '30%'},
-                    { text: 'アーティスト名', value: 'artist.name', align: 'start', width: '40%'},
-                    { text: 'レビュー数', value: '', align: 'start', width: '30%'},
+                    { text: 'アーティスト名', value: 'artist.name', align: 'start', width: '40%', filterable: false},
+                    { text: 'レビュー数', value: '', align: 'start', width: '30%', filterable: false},
                   ],
                 dialog: false,
                 search: '',

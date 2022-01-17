@@ -135,7 +135,8 @@ __webpack_require__.r(__webpack_exports__);
         text: 'レビュー数',
         value: '',
         align: 'start',
-        width: '30%'
+        width: '30%',
+        filterable: false
       }],
       dialog: false,
       isError: false,
@@ -319,12 +320,14 @@ __webpack_require__.r(__webpack_exports__);
         text: 'アーティスト名',
         value: 'artist.name',
         align: 'start',
-        width: '40%'
+        width: '40%',
+        filterable: false
       }, {
         text: 'レビュー数',
         value: '',
         align: 'start',
-        width: '30%'
+        width: '30%',
+        filterable: false
       }],
       dialog: false,
       search: '',
