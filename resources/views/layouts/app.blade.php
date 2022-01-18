@@ -74,7 +74,7 @@
 
         <main class="py-4">
             @yield('content')
-            <div id="app-vue">
+            <div id="app">
                 <v-app>
                     <menu-bar></menu-bar>
                     

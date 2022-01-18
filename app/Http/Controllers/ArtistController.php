@@ -11,7 +11,7 @@ class ArtistController extends Controller
     public function index(Artist $artist)
     {
         // return view('artists/index')->with(['artists' => $artist->getArtistsPaginateByLimit()]);  
-        return $artist->get();
+        return $artist->orderBy('name')->get();
     }
     
     public function show(Artist $artist)

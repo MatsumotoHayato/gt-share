@@ -82,8 +82,7 @@
             getMyListPosts() {
                 axios.get('/mylist')
                     .then((response) => {
-                        console.log(response.data.posts.data)
-                        this.posts = response.data.posts.data,
+                        this.posts = response.data.posts,
                         this.user = response.data.user
                     })
             }
