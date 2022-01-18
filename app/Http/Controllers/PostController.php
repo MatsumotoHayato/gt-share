@@ -127,7 +127,9 @@ class PostController extends Controller
     // 役に立ったマイリスト
     public function mylist(Post $post)
     {
+        // dd($post->getMyFavoritePosts());
         return [
+            // 'posts' => $post::with(['user', 'instrument'])->getMyFavoritePosts(),
             'posts' => $post->getMyFavoritePosts(),
             'user'=> Auth::user()
         ];

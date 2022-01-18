@@ -23,7 +23,7 @@ class Post extends Model
     }
 
     // Instrumentに対するリレーション
-    public function Instrument()
+    public function instrument()
     {
         return $this->belongsTo('App\Instrument');
     }
@@ -45,6 +45,11 @@ class Post extends Model
     {
         // 役に立ったを押した最新順に並べるために内部結合
         // select句がないと、post_userテーブルのcreated_at,updated_atが表示されてしまう
-        return $this::Join('post_user', 'posts.id', '=', 'post_user.post_id')->where('post_user.user_id', Auth::id())->orderBy('post_user.updated_at', 'DESC')->select('posts.*')->paginate($limit_count);
+        
+        return $this::Join('post_user', 'posts.id', '=', 'post_user.post_id')->where('post_user.user_id', Auth::id())
+        ->orderBy('post_user.updated_at', 'DESC')->select('posts.*')->paginate($limit_count);
+        
+        // return $this::Join('post_user', 'posts.id', '=', 'post_user.post_id')->where('post_user.user_id', Auth::id())
+        // ->orderBy('post_user.updated_at', 'DESC')->select('posts.*')->get();
     }
 }
