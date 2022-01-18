@@ -77,7 +77,8 @@
                                                         type="number"
                                                         max="5"
                                                         min="1"
-                                                        label="難易度"
+                                                        label="難易度*"
+                                                        :rules="[rules.required]"
                                                         required
                                                     ></v-text-field>
                                                 </v-col>
@@ -224,7 +225,7 @@
             getPosts() {
                 axios.get(`/songs/${this.songId}`)
                     .then((response) => {
-                        this.currentUser = response.data.user
+                        this.currentUserId = response.data.user
                         this.artist = response.data.artist
                         this.song = response.data.song
                         this.posts = response.data.posts

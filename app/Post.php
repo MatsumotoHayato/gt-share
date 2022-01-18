@@ -41,15 +41,12 @@ class Post extends Model
     }
     
     // 自分が役に立ったを押したレビュー一覧を取得
-    public function getMyFavoritePosts(int $limit_count = 10)
+    public function getMyFavoritePosts()
     {
         // 役に立ったを押した最新順に並べるために内部結合
         // select句がないと、post_userテーブルのcreated_at,updated_atが表示されてしまう
         
         return $this::Join('post_user', 'posts.id', '=', 'post_user.post_id')->where('post_user.user_id', Auth::id())
-        ->orderBy('post_user.updated_at', 'DESC')->select('posts.*')->paginate($limit_count);
-        
-        // return $this::Join('post_user', 'posts.id', '=', 'post_user.post_id')->where('post_user.user_id', Auth::id())
-        // ->orderBy('post_user.updated_at', 'DESC')->select('posts.*')->get();
+        ->orderBy('post_user.updated_at', 'DESC')->select('posts.*')->get();
     }
 }

@@ -68,8 +68,10 @@
                                                 cols="10"
                                             >
                                             <v-autocomplete
-                                                v-model="artists"
+                                                v-model="newSong.artist_id"
                                                 :items="artists"
+                                                item-text="name"
+                                                item-value="id"
                                                 label="アーティスト名"
                                             ></v-autocomplete>
                                             </v-col>
@@ -122,14 +124,14 @@
                 songs: [],
                 headers: [
                     { text: '曲名', value: 'name', align: 'start', width: '30%'},
-                    { text: 'アーティスト名', value: 'artist.name', align: 'start', width: '40%', filterable: false},
+                    { text: 'アーティスト名', value: 'artist.name', align: 'start', width: '40%', filterable: false, sortable: false},
                     { text: 'レビュー数', value: '', align: 'start', width: '30%', filterable: false},
                   ],
                 dialog: false,
                 search: '',
                 newSong: {
                     name: '',
-                    // artist_id:
+                    artist_id: ''
                 }
             }
         },
@@ -145,14 +147,13 @@
                 this.dialog = false
             },
             save () {
-                axios.post('/songs', this.newSong)
+                axios.post(`/artists/${this.newSong.artist_id}/songs`, this.newSong)
                     .then((response)=>{
                         if(response.status == 200) {
-                            this.getSongs()
                             this.close()
+                            this.getSongs()
                         }
                     })
-                this.close()
             },
             clickRow(e) {
                 this.$router.push({

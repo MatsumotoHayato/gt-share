@@ -305,6 +305,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SongIndex',
   data: function data() {
@@ -321,7 +323,8 @@ __webpack_require__.r(__webpack_exports__);
         value: 'artist.name',
         align: 'start',
         width: '40%',
-        filterable: false
+        filterable: false,
+        sortable: false
       }, {
         text: 'レビュー数',
         value: '',
@@ -332,8 +335,8 @@ __webpack_require__.r(__webpack_exports__);
       dialog: false,
       search: '',
       newSong: {
-        name: '' // artist_id:
-
+        name: '',
+        artist_id: ''
       }
     };
   },
@@ -352,14 +355,13 @@ __webpack_require__.r(__webpack_exports__);
     save: function save() {
       var _this2 = this;
 
-      axios.post('/songs', this.newSong).then(function (response) {
+      axios.post("/artists/".concat(this.newSong.artist_id, "/songs"), this.newSong).then(function (response) {
         if (response.status == 200) {
-          _this2.getSongs();
-
           _this2.close();
+
+          _this2.getSongs();
         }
       });
-      this.close();
     },
     clickRow: function clickRow(e) {
       this.$router.push({
@@ -840,14 +842,22 @@ var render = function () {
                                                 _c("v-autocomplete", {
                                                   attrs: {
                                                     items: _vm.artists,
+                                                    "item-text": "name",
+                                                    "item-value": "id",
                                                     label: "アーティスト名",
                                                   },
                                                   model: {
-                                                    value: _vm.artists,
+                                                    value:
+                                                      _vm.newSong.artist_id,
                                                     callback: function ($$v) {
-                                                      _vm.artists = $$v
+                                                      _vm.$set(
+                                                        _vm.newSong,
+                                                        "artist_id",
+                                                        $$v
+                                                      )
                                                     },
-                                                    expression: "artists",
+                                                    expression:
+                                                      "newSong.artist_id",
                                                   },
                                                 }),
                                               ],

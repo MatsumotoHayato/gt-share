@@ -95,8 +95,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/mylist').then(function (response) {
-        console.log(response.data.posts.data);
-        _this.posts = response.data.posts.data, _this.user = response.data.user;
+        _this.posts = response.data.posts, _this.user = response.data.user;
       });
     }
   },

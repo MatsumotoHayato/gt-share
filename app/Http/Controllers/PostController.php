@@ -28,7 +28,7 @@ class PostController extends Controller
     public function index(Song $song)
     {
         return [
-            'user' => Auth::user(),
+            'user_id' => Auth::user(),
             'artist' => $song->artist,
             'song' => $song,
             'posts' => Post::with(['user', 'instrument'])->where('song_id', $song->id)->orderBy('updated_at', 'DESC')->get(),
@@ -127,7 +127,6 @@ class PostController extends Controller
     // 役に立ったマイリスト
     public function mylist(Post $post)
     {
-        // dd($post->getMyFavoritePosts());
         return [
             // 'posts' => $post::with(['user', 'instrument'])->getMyFavoritePosts(),
             'posts' => $post->getMyFavoritePosts(),
