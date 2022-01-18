@@ -36,7 +36,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     router,
-    el: '#app',
+    el: '#app-vue',
     vuetify: Vuetify,
     components: {
         MenuBar
