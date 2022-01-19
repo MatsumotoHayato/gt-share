@@ -26,7 +26,10 @@
                                     <v-col cols="4">
                                         <v-list dense>
                                             <v-list-item>
-                                                <v-list-item-content>ユーザー名: </v-list-item-content>
+                                                <v-list-item-content>{{ post.song.name }} / {{ post.song.artist.name }}</v-list-item-content>
+                                            </v-list-item>
+                                            <v-list-item>
+                                                <v-list-item-content>ユーザー名: {{ post.user.name }}</v-list-item-content>
                                             </v-list-item>
                                         </v-list>
                                     </v-col>
@@ -35,7 +38,7 @@
                                         <v-list dense>
                                             <v-list-item>
                                                 <v-list-item-content>
-                                                    楽器: 
+                                                    楽器: {{ post.instrument.name }}
                                                 </v-list-item-content>
                                             </v-list-item>
                                             <v-list-item>

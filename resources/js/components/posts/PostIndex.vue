@@ -225,7 +225,7 @@
             getPosts() {
                 axios.get(`/songs/${this.songId}`)
                     .then((response) => {
-                        this.currentUserId = response.data.user
+                        this.currentUser = response.data.user
                         this.artist = response.data.artist
                         this.song = response.data.song
                         this.posts = response.data.posts

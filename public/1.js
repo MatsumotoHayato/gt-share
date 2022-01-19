@@ -128,12 +128,12 @@ __webpack_require__.r(__webpack_exports__);
         text: "曲名",
         value: "name",
         align: "start",
-        width: '70%'
+        width: '80%'
       }, {
         text: 'レビュー数',
         value: '',
         align: 'start',
-        width: '30%'
+        width: '20%'
       }],
       dialog: false,
       search: '',

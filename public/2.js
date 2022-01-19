@@ -76,6 +76,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'MyList',
   data: function data() {
@@ -205,7 +208,26 @@ var render = function () {
                                               "v-list-item",
                                               [
                                                 _c("v-list-item-content", [
-                                                  _vm._v("ユーザー名: "),
+                                                  _vm._v(
+                                                    _vm._s(post.song.name) +
+                                                      " / " +
+                                                      _vm._s(
+                                                        post.song.artist.name
+                                                      )
+                                                  ),
+                                                ]),
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item",
+                                              [
+                                                _c("v-list-item-content", [
+                                                  _vm._v(
+                                                    "ユーザー名: " +
+                                                      _vm._s(post.user.name)
+                                                  ),
                                                 ]),
                                               ],
                                               1
@@ -234,7 +256,11 @@ var render = function () {
                                               [
                                                 _c("v-list-item-content", [
                                                   _vm._v(
-                                                    "\n                                                楽器: \n                                            "
+                                                    "\n                                                楽器: " +
+                                                      _vm._s(
+                                                        post.instrument.name
+                                                      ) +
+                                                      "\n                                            "
                                                   ),
                                                 ]),
                                               ],

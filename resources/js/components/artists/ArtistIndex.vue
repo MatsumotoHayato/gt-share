@@ -116,8 +116,9 @@
             return {
                 artists: [],
                 headers: [
-                    { text: 'アーティスト名', value: 'name', align: 'start', width: '70%'},
-                    { text: 'レビュー数', value: '', align: 'start', width: '30%', filterable: false},
+                    { text: 'アーティスト名', value: 'name', align: 'start', width: '60%'},
+                    { text: '曲数', value: '', align: 'start', width: '20%', filterable: false},
+                    { text: 'レビュー数', value: '', align: 'start', width: '20%', filterable: false},
                   ],
                 dialog: false,
                 isError: false,
