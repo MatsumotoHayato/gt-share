@@ -28,7 +28,7 @@ class PostController extends Controller
     public function index(Song $song)
     {
         return [
-            'user_id' => Auth::user(),
+            'user' => Auth::user(),
             'artist' => $song->artist,
             'song' => $song,
             'posts' => Post::with(['user', 'instrument'])->where('song_id', $song->id)->orderBy('updated_at', 'DESC')->get(),
@@ -128,7 +128,6 @@ class PostController extends Controller
     public function mylist(Post $post)
     {
         return [
-            // 'posts' => $post::with(['user', 'instrument'])->getMyFavoritePosts(),
             'posts' => $post->getMyFavoritePosts(),
             'user'=> Auth::user()
         ];
