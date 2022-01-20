@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getMyListPosts: function getMyListPosts() {
+    getMyList: function getMyList() {
       var _this = this;
 
       axios.get('/mylist').then(function (response) {
@@ -103,7 +103,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    this.getMyListPosts();
+    this.getMyList();
   }
 });
 
