@@ -52,4 +52,9 @@ class Post extends Model
         return $this::with(['song', 'song.artist', 'user', 'instrument'])->Join('post_user', 'posts.id', '=', 'post_user.post_id')->where('post_user.user_id', Auth::id())
         ->orderBy('post_user.updated_at', 'DESC')->select('posts.*')->get();
     }
+    
+    public function getMyPosts()
+    {
+        return $this::with(['song', 'song.artist', 'user', 'instrument'])->where('user_id', Auth::id())->orderBy('updated_at', 'DESC')->get();
+    }
 }

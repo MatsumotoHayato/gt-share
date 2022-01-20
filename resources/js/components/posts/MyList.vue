@@ -82,7 +82,7 @@
             }
         },
         methods: {
-            getMyListPosts() {
+            getMyList() {
                 axios.get('/mylist')
                     .then((response) => {
                         this.posts = response.data.posts,
@@ -91,7 +91,7 @@
             }
         },
         mounted() {
-            this.getMyListPosts()
+            this.getMyList()
         }
     }
 </script>

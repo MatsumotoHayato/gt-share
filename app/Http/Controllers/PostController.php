@@ -133,6 +133,15 @@ class PostController extends Controller
         ];
     }
     
+    // 自分の投稿
+    public function myposts(Post $post)
+    {
+        return [
+            'posts' => $post->getMyPosts(),
+            'user'=> Auth::user()
+        ];
+    }
+    
     // マイリストの役に立った取り消し機能
     public function unfavoriteMylist(Post $post)
     {
