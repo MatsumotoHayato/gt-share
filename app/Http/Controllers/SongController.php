@@ -14,7 +14,7 @@ class SongController extends Controller
     {
         return [
             'artists'=> Artist::orderBy('name')->get(), 
-            'songs' => Song::with('artist')->orderBy('name')->get()
+            'songs' => Song::with('artist')->withCount('posts')->orderBy('name')->get()
         ];
     }
 

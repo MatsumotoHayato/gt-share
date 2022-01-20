@@ -11,7 +11,7 @@ class ArtistController extends Controller
     public function index(Artist $artist)
     {
         // return view('artists/index')->with(['artists' => $artist->getArtistsPaginateByLimit()]);  
-        return $artist->orderBy('name')->get();
+        return $artist::withCount(['songs', 'posts'])->orderBy('name')->get();
     }
     
     public function show(Artist $artist)
@@ -22,7 +22,7 @@ class ArtistController extends Controller
         // ]);
         return [
             'artist'=> $artist, 
-            'songs' => Song::where('artist_id', $artist->id)->with('artist')->orderBy('name')->get()
+            'songs' => Song::where('artist_id', $artist->id)->with('artist')->withCount('posts')->orderBy('name')->get()
         ];
     }
 

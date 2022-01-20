@@ -131,7 +131,7 @@ __webpack_require__.r(__webpack_exports__);
         width: '80%'
       }, {
         text: 'レビュー数',
-        value: '',
+        value: 'posts_count',
         align: 'start',
         width: '20%'
       }],

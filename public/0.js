@@ -133,19 +133,18 @@ __webpack_require__.r(__webpack_exports__);
         width: '60%'
       }, {
         text: '曲数',
-        value: '',
+        value: 'songs_count',
         align: 'start',
         width: '20%',
         filterable: false
       }, {
         text: 'レビュー数',
-        value: '',
+        value: 'posts_count',
         align: 'start',
         width: '20%',
         filterable: false
       }],
       dialog: false,
-      isError: false,
       search: '',
       newArtist: {
         name: ''
@@ -333,7 +332,7 @@ __webpack_require__.r(__webpack_exports__);
         sortable: false
       }, {
         text: 'レビュー数',
-        value: '',
+        value: 'posts_count',
         align: 'start',
         width: '20%',
         filterable: false
