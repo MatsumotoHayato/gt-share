@@ -117,11 +117,10 @@
                 artists: [],
                 headers: [
                     { text: 'アーティスト名', value: 'name', align: 'start', width: '60%'},
-                    { text: '曲数', value: '', align: 'start', width: '20%', filterable: false},
-                    { text: 'レビュー数', value: '', align: 'start', width: '20%', filterable: false},
+                    { text: '曲数', value: 'songs_count', align: 'start', width: '20%', filterable: false},
+                    { text: 'レビュー数', value: 'posts_count', align: 'start', width: '20%', filterable: false},
                   ],
                 dialog: false,
-                isError: false,
                 search: '',
                 newArtist: {
                     name: ''

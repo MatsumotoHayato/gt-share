@@ -116,7 +116,7 @@
                 songs: [],
                 headers: [
                     { text: "曲名", value: "name", align: "start", width: '80%'},
-                    { text: 'レビュー数', value: '', align: 'start', width: '20%'},
+                    { text: 'レビュー数', value: 'posts_count', align: 'start', width: '20%'},
                   ],
                 dialog: false,
                 search: '',

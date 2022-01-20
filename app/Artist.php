@@ -14,16 +14,22 @@ class Artist extends Model
         'name',
     ];
     
-    public function getArtistsPaginateByLimit(int $limit_count = 40)
-    {
-        // 名前順に並べたあと、limitで件数制限をかける
-        return $this->orderBy('name')->paginate($limit_count);
-    }
-
     // Songに対するリレーション
     public function songs()
     {
         return $this->hasMany('App\Song');
+    }
+    
+    // Song経由のPostに対するリレーション
+    public function posts()
+    {
+        return $this->hasManyThrough('App\Post', 'App\Song');
+    }
+    
+    public function getArtistsPaginateByLimit(int $limit_count = 40)
+    {
+        // 名前順に並べたあと、limitで件数制限をかける
+        return $this->orderBy('name')->paginate($limit_count);
     }
 
     // 対象アーティストの曲一覧取得
