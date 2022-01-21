@@ -122,7 +122,7 @@
                     </v-toolbar>
                 </template>
 
-                <template v-slot:default="props">
+                <template v-slot:default>
                     <v-row>
                         <v-col v-for="post in selectedPosts" :key="post.id" cols="12">
                             <v-card>
@@ -200,11 +200,6 @@
                 },
                 rules: {
                     required: value => !!value || '入力は必須です',
-                    numeric: value => !!value || '半角数字のみ有効です',
-                    between: value => {
-                        const pattern = /^([1-9]?[0-9]|100)+$/
-                        return pattern.test(value) || '0 ～ 100 までの半角数字のみ有効です'
-                    },
                     counter: value => value.length <= 4000 || '4000文字以内で入力してください',
                 },
                 breadCrumbs: [
@@ -230,7 +225,7 @@
                         this.song = response.data.song
                         this.posts = response.data.posts
                         this.instruments = response.data.instruments
-                        this.init()
+                        this.initFetchPosts()
                         this.setBreadCrumbs(response)
                     })
             },
@@ -250,6 +245,11 @@
             fetchPosts(e) {
                 this.selectedPosts = this.posts.filter((post) => post.instrument_id === e)
             },
+            initFetchPosts() {
+                if(this.posts.length > 0) {
+                    this.selectedPosts = this.posts.filter((post) => post.instrument_id === 1)
+                }
+            },
             close() {
                 this.dialog = false
             },
@@ -261,11 +261,6 @@
                             this.getPosts()
                         }
                     })
-            },
-            init() {
-                if(this.posts.length > 0) {
-                this.selectedPosts = this.posts.filter((post) => post.instrument_id === 1)
-                }
             }
         },
         mounted() {

@@ -10,6 +10,7 @@ export default new Router({
         { path: '/vue/songs/:songId', component: ()=>import('./components/posts/PostIndex'), name: 'PostIndex' },
         { path: '/vue/mylist', component: ()=>import('./components/posts/MyList'), name: 'MyList' },
         { path: '/vue/myposts', component: ()=>import('./components/posts/MyPosts'), name: 'MyPosts' },
+        { path: '/vue/ranking', component: ()=>import('./components/songs/Ranking'), name: 'Ranking' },
         { path: '*', redirect: '/'}
   ],
 	mode: 'history',

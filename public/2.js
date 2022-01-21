@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getMyList: function getMyList() {
+    getPosts: function getPosts() {
       var _this = this;
 
       axios.get('/mylist').then(function (response) {
@@ -103,7 +103,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    this.getMyList();
+    this.getPosts();
   }
 });
 
@@ -181,7 +181,7 @@ var render = function () {
               },
               {
                 key: "default",
-                fn: function (props) {
+                fn: function () {
                   return [
                     _c(
                       "v-row",
@@ -328,6 +328,7 @@ var render = function () {
                     ),
                   ]
                 },
+                proxy: true,
               },
             ]),
           }),

@@ -65,6 +65,16 @@ class Song extends Model
         return $this::Join('posts', 'songs.id', '=', 'posts.song_id')->where('posts.instrument_id', $instrument_id)->groupBy('songs.id', 'songs.name', 'songs.artist_id')
         ->orderByRaw('avg(posts.difficulty)')->select('songs.id', 'songs.name', 'songs.artist_id')->limit($limit_count)->get();
     }
+    
+    // 難易度の低い順から曲を取得
+    public function getSongsForBeginners(int $limit_count = 100)
+    {
+        // 曲IDと楽器IDでグループ化して平均難易度を計算し、難易度昇順に曲を並び替える
+        return $this::with('artist')->Join('posts', 'songs.id', '=', 'posts.song_id')
+        ->select('songs.id', 'songs.name', 'songs.artist_id', 'posts.instrument_id', DB::raw('round(AVG(posts.difficulty), 2) as average_difficulty'))
+        ->groupBy('songs.id', 'songs.name', 'songs.artist_id', 'posts.instrument_id')
+        ->orderBy('average_difficulty')->limit($limit_count)->get();
+    }
 
     // キーワードから曲名検索、$artist_idが渡されればアーティストでも絞り込み
     public function searchSongsByKeyword($keyword, $artist_id = NULL, int $limit_count = 40)

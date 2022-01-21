@@ -35,6 +35,7 @@ Route::post('/artists/{artist}/songs/{song}/posts/{post}/unfavorite', 'PostContr
 Route::post('/mylist/{post}/unfavorite', 'PostController@unfavoriteMylist')->middleware('auth');  // マイリストで役に立った取り消し機能
 Route::get('/mylist', 'PostController@mylist')->middleware('auth');  // 役に立ったマイリスト
 Route::get('/myposts', 'PostController@myposts')->middleware('auth');  // 自分の投稿
+Route::get('/ranking', 'SongController@ranking');  // ランキング
 
 Route::get('/users/{user}', 'UserController@index');  // ユーザーページ
 Route::get('/users/mypage/edit', 'UserController@edit')->middleware('auth');  // 自分のユーザー情報編集
