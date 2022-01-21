@@ -64,10 +64,10 @@ class SongController extends Controller
     // 初心者向けの曲ランキング
     public function ranking(Song $song, Instrument $instrument)
     {
-        return view('songs/ranking')->with([
-            'songs' => $song->getSongsForBeginnersByInstrument($instrument->id),
-            'selected_instrument' => $instrument,
+        return [
+            'songs' => $song->getSongsForBeginners(),
+            // 'selected_instrument' => $instrument->first(),
             'instruments' => $instrument->get(),
-        ]);
+        ];
     }
 }

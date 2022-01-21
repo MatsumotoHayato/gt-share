@@ -18,7 +18,7 @@
                     </v-toolbar>
                 </template>
 
-                <template v-slot:default="props">
+                <template v-slot:default>
                     <v-row>
                         <v-col v-for="post in posts" :key="post.id" cols="12">
                             <v-card>
@@ -76,7 +76,7 @@
             }
         },
         methods: {
-            getMyPosts() {
+            getPosts() {
                 axios.get('/myposts')
                     .then((response) => {
                         this.posts = response.data.posts,
@@ -85,7 +85,7 @@
             }
         },
         mounted() {
-            this.getMyPosts()
+            this.getPosts()
         }
     }
 </script>

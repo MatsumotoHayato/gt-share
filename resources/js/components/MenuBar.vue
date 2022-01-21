@@ -40,7 +40,7 @@
                     { title: 'ホーム', icon: 'mdi-home', path: '/' },
                     { title: 'マイリスト', icon: 'mdi-thumb-up', path: '/vue/mylist' },
                     { title: '自分の投稿', icon: 'mdi-text-box', path: '/vue/myposts' },
-                    { title: 'ランキング', icon: 'mdi-crown', path: '/vue/songs/1' },
+                    { title: 'ランキング', icon: 'mdi-crown', path: '/vue/ranking' },
                 ]
             }
         }
