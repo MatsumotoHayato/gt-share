@@ -189,7 +189,10 @@ __webpack_require__.r(__webpack_exports__);
   name: 'PostIndex',
   data: function data() {
     return {
-      currentUser: [],
+      currentUser: {
+        id: -1,
+        name: 'ゲスト'
+      },
       artist: [],
       song: [],
       posts: [],
@@ -235,7 +238,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get("/songs/".concat(this.songId)).then(function (response) {
-        _this.currentUser = response.data.user;
+        if (response.data.user) {
+          _this.currentUser = response.data.user;
+        }
+
         _this.artist = response.data.artist;
         _this.song = response.data.song;
         _this.posts = response.data.posts;

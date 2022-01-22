@@ -27,6 +27,11 @@ class PostController extends Controller
     // レビュー一覧表示
     public function index(Song $song)
     {
+        // // var_dump(Auth::user());
+        // if (Auth::user() === null){
+        //     $user = {
+        //     }
+        // }
         return [
             'user' => Auth::user(),
             'artist' => $song->artist,

@@ -4,10 +4,11 @@
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title class="text-h5 font-weight-bold">GT-share</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn icon to="/">
-                <v-icon>mdi-home</v-icon>
-            </v-btn>
-            <v-btn icon>
+            <v-btn
+            icon
+            class="ma-2"
+            to="/vue/login"
+            >
                 <v-icon>mdi-account</v-icon>
             </v-btn>
         </v-app-bar>
@@ -41,7 +42,7 @@
                     { title: 'マイリスト', icon: 'mdi-thumb-up', path: '/vue/mylist' },
                     { title: '自分の投稿', icon: 'mdi-text-box', path: '/vue/myposts' },
                     { title: 'ランキング', icon: 'mdi-crown', path: '/vue/ranking' },
-                ]
+                ],
             }
         }
     }

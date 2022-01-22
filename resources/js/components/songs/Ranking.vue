@@ -18,10 +18,11 @@
                 </v-col>
             </v-row>
             <v-data-table
-                class="elevation-1"
+                class="elevation-1 song-ranking"
                 :items="selectedSongs"
                 :headers="headers"
                 @click:row="clickRow"
+                @pagination="pagination"
             >
                 <template v-slot:top>
                     <v-toolbar
@@ -45,7 +46,7 @@
                     </v-toolbar>
                 </template>
                 <template v-slot:item.rank="{ index }">
-                    {{ index + 1}}
+                    {{ (pageNumber-1)*10 + index + 1}}
                 </template>
             </v-data-table>
         </v-container>
@@ -67,6 +68,7 @@
                     { text: 'アーティスト名', value: 'artist.name', align: 'start', width: '45%', sortable: false},
                     { text: '難易度', value: 'average_difficulty', align: 'start', width: '20%', sortable: false},
                   ],
+                pageNumber: ''
             }
         },
         methods: {
@@ -91,6 +93,9 @@
                     this.selectedSongs = this.songs.filter((song) => song.instrument_id === 1)
                 }
             },
+            pagination(e) {
+                this.pageNumber = e.page
+            }
         },
         mounted() {
             this.getSongs()
@@ -102,3 +107,12 @@
         }
     }
 </script>
+
+<style>
+    .song-ranking tr:hover td {
+        background: #f0f8ff;
+    }
+    .song-ranking th {
+        background: #f5f5f5;
+    }
+</style>
