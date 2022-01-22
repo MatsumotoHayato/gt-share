@@ -208,7 +208,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.v-data-table tr:hover td {\n    background: #f0f8ff;\n}\n.v-data-table th {\n    background: #f5f5f5;\n}\n", ""]);
+exports.push([module.i, "\n.artist-show tr:hover td {\n    background: #f0f8ff;\n}\n.artist-show th {\n    background: #f5f5f5;\n}\n", ""]);
 
 // exports
 
@@ -271,7 +271,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("v-data-table", {
-            staticClass: "elevation-1",
+            staticClass: "elevation-1 artist-show",
             attrs: {
               items: _vm.songs,
               headers: _vm.headers,
@@ -386,11 +386,11 @@ var render = function () {
                               "v-card",
                               [
                                 _c("v-card-title", [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(_vm.artist.name) +
-                                      " の新規曲追加\n                            "
-                                  ),
+                                  _c("span", { staticClass: "text-h5" }, [
+                                    _vm._v(
+                                      _vm._s(_vm.artist.name) + " の新規曲追加"
+                                    ),
+                                  ]),
                                 ]),
                                 _vm._v(" "),
                                 _c(

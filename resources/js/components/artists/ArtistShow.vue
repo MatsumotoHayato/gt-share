@@ -3,7 +3,7 @@
         <v-container>
             <p class="text-h5 font-weight-bold">{{ artist.name }}</p>
             <v-data-table
-                class="elevation-1"
+                class="elevation-1 artist-show"
                 :items="songs"
                 :headers="headers"
                 @click:row="clickRow"
@@ -58,7 +58,7 @@
                             </template>
                             <v-card>
                                 <v-card-title>
-                                    {{artist.name}} の新規曲追加
+                                    <span class="text-h5">{{artist.name}} の新規曲追加</span>
                                 </v-card-title>
                                 
                                 <v-card-text>
@@ -179,10 +179,10 @@
 </script>
 
 <style>
-    .v-data-table tr:hover td {
+    .artist-show tr:hover td {
         background: #f0f8ff;
     }
-    .v-data-table th {
+    .artist-show th {
         background: #f5f5f5;
     }
 </style>

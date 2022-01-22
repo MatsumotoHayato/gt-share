@@ -2,7 +2,7 @@
     <div>
         <v-container>
             <v-data-table
-                class="elevation-1"
+                class="elevation-1 song-index"
                 :items="songs"
                 :headers="headers"
                 @click:row="clickRow"
@@ -57,7 +57,7 @@
                             </template>
                             <v-card>
                                 <v-card-title>
-                                    新規曲追加
+                                    <span class="text-h5">新規曲追加</span>
                                 </v-card-title>
                                 
                                 <v-card-text>
@@ -165,3 +165,12 @@
         }
     }
 </script>
+
+<style>
+    .song-index tr:hover td {
+        background: #f0f8ff;
+    }
+    .song-index th {
+        background: #f5f5f5;
+    }
+</style>

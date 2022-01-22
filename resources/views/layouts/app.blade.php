@@ -74,16 +74,13 @@
 
         <main class="py-4">
             @yield('content')
-            <div id="app">
-                <v-app>
-                    <menu-bar></menu-bar>
-                    
-                    <v-main>
-                        <router-view/>
-                        <!--<router-view name="sub"/>-->
-                    </v-main>
-                </v-app>
-            </div>
+            <v-app>
+                <menu-bar></menu-bar>
+                
+                <v-main>
+                    <router-view/>
+                </v-main>
+            </v-app>
         </main>
     </div>
 </body>

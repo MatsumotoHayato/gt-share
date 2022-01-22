@@ -2,7 +2,7 @@
     <div>
         <v-container>
             <v-data-table
-                class="elevation-1"
+                class="elevation-1 artist-index"
                 :items="artists"
                 :headers="headers"
                 @click:row="clickRow"
@@ -57,7 +57,7 @@
                             </template>
                             <v-card>
                                 <v-card-title>
-                                    新規アーティスト追加
+                                    <span class="text-h5">新規アーティスト追加</span>
                                 </v-card-title>
                                 
                                 <v-card-text>
@@ -159,10 +159,10 @@
 </script>
 
 <style>
-    .v-data-table tr:hover td {
+    .artist-index tr:hover td {
         background: #f0f8ff;
     }
-    .v-data-table th {
+    .artist-index th {
         background: #f5f5f5;
     }
 </style>
