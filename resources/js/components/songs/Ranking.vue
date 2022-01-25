@@ -46,7 +46,13 @@
                     </v-toolbar>
                 </template>
                 <template v-slot:item.rank="{ index }">
-                    {{ (pageNumber-1)*10 + index + 1}}
+                    <span class="font-weight-bold pink--text">{{ (pageNumber-1)*10 + index + 1}}</span>
+                </template>
+                <template v-slot:item.name="{ item }">
+                    <router-link class="font-weight-bold song-link" :to="`/vue/songs/${item.id}`">{{ item.name }}</router-link>
+                </template>
+                <template v-slot:item.artist="{ item }">
+                    <router-link class="artist-link" :to="`/vue/artists/${item.artist_id}`">{{ item.artist.name }}</router-link>
                 </template>
             </v-data-table>
         </v-container>
@@ -65,7 +71,7 @@
                 headers: [
                     { text: '', value: 'rank', align: 'start', width: '5%', sortable: false},
                     { text: '曲名', value: 'name', align: 'start', width: '30%', sortable: false},
-                    { text: 'アーティスト名', value: 'artist.name', align: 'start', width: '45%', sortable: false},
+                    { text: 'アーティスト名', value: 'artist', align: 'start', width: '45%', sortable: false},
                     { text: '難易度', value: 'average_difficulty', align: 'start', width: '20%', sortable: false},
                   ],
                 pageNumber: ''
@@ -114,5 +120,9 @@
     }
     .song-ranking th {
         background: #f5f5f5;
+    }
+    .song-link, .artist-link {
+        text-decoration: none;
+        color: inherit!important;
     }
 </style>

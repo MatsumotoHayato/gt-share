@@ -64,6 +64,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Ranking',
   data: function data() {
@@ -86,7 +92,7 @@ __webpack_require__.r(__webpack_exports__);
         sortable: false
       }, {
         text: 'アーティスト名',
-        value: 'artist.name',
+        value: 'artist',
         align: 'start',
         width: '45%',
         sortable: false
@@ -156,7 +162,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.song-ranking tr:hover td {\n    background: #f0f8ff;\n}\n.song-ranking th {\n    background: #f5f5f5;\n}\n", ""]);
+exports.push([module.i, "\n.song-ranking tr:hover td {\n    background: #f0f8ff;\n}\n.song-ranking th {\n    background: #f5f5f5;\n}\n.song-link, .artist-link {\n    text-decoration: none;\n    color: inherit!important;\n}\n", ""]);
 
 // exports
 
@@ -300,10 +306,40 @@ var render = function () {
                 fn: function (ref) {
                   var index = ref.index
                   return [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s((_vm.pageNumber - 1) * 10 + index + 1) +
-                        "\n            "
+                    _c("span", { staticClass: "font-weight-bold pink--text" }, [
+                      _vm._v(_vm._s((_vm.pageNumber - 1) * 10 + index + 1)),
+                    ]),
+                  ]
+                },
+              },
+              {
+                key: "item.name",
+                fn: function (ref) {
+                  var item = ref.item
+                  return [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "font-weight-bold song-link",
+                        attrs: { to: "/vue/songs/" + item.id },
+                      },
+                      [_vm._v(_vm._s(item.name))]
+                    ),
+                  ]
+                },
+              },
+              {
+                key: "item.artist",
+                fn: function (ref) {
+                  var item = ref.item
+                  return [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "artist-link",
+                        attrs: { to: "/vue/artists/" + item.artist_id },
+                      },
+                      [_vm._v(_vm._s(item.artist.name))]
                     ),
                   ]
                 },

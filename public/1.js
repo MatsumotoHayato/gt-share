@@ -118,6 +118,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ArtistShow',
   data: function data() {
@@ -208,7 +211,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.artist-show tr:hover td {\n    background: #f0f8ff;\n}\n.artist-show th {\n    background: #f5f5f5;\n}\n", ""]);
+exports.push([module.i, "\n.artist-show tr:hover td {\n    background: #f0f8ff;\n}\n.artist-show th {\n    background: #f5f5f5;\n}\n.song-link {\n    text-decoration: none;\n    color: inherit!important;\n}\n", ""]);
 
 // exports
 
@@ -484,6 +487,22 @@ var render = function () {
                   ]
                 },
                 proxy: true,
+              },
+              {
+                key: "item.name",
+                fn: function (ref) {
+                  var item = ref.item
+                  return [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "font-weight-bold song-link",
+                        attrs: { to: "/vue/songs/" + item.id },
+                      },
+                      [_vm._v(_vm._s(item.name))]
+                    ),
+                  ]
+                },
               },
             ]),
           }),
