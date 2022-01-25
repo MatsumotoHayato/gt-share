@@ -2,7 +2,9 @@
     <header>
         <v-app-bar app class="elevation-0" color="indigo darken-4" dark>
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-            <v-toolbar-title class="text-h5 font-weight-bold">GT-share</v-toolbar-title>
+            <v-toolbar-title class="text-h5 font-weight-bold">
+                <router-link to="/" class="home-link">GT-share</router-link>
+            </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn
             icon
@@ -58,3 +60,10 @@
         }
     }
 </script>
+
+<style scoped>
+    .home-link {
+        text-decoration: none;
+        color: inherit!important;
+    }
+</style>

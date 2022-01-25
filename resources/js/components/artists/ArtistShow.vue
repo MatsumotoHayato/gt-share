@@ -97,6 +97,9 @@
                         </v-dialog>
                     </v-toolbar>
                 </template>
+                <template v-slot:item.name="{ item }">
+                    <router-link class="font-weight-bold song-link" :to="`/vue/songs/${item.id}`">{{ item.name }}</router-link>
+                </template>
             </v-data-table>
             <v-breadcrumbs :items="breadCrumbs">
                 <template v-slot:divider>
@@ -184,5 +187,9 @@
     }
     .artist-show th {
         background: #f5f5f5;
+    }
+    .song-link {
+        text-decoration: none;
+        color: inherit!important;
     }
 </style>

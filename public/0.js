@@ -117,6 +117,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ArtistIndex',
@@ -311,6 +314,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SongIndex',
   data: function data() {
@@ -324,7 +333,7 @@ __webpack_require__.r(__webpack_exports__);
         width: '30%'
       }, {
         text: 'アーティスト名',
-        value: 'artist.name',
+        value: 'artist',
         align: 'start',
         width: '50%',
         filterable: false,
@@ -392,7 +401,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.artist-index tr:hover td {\n    background: #f0f8ff;\n}\n.artist-index th {\n    background: #f5f5f5;\n}\n", ""]);
+exports.push([module.i, "\n.artist-index tr:hover td {\n    background: #f0f8ff;\n}\n.artist-index th {\n    background: #f5f5f5;\n}\n.artist-link {\n    text-decoration: none;\n    color: inherit!important;\n}\n", ""]);
 
 // exports
 
@@ -411,7 +420,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.song-index tr:hover td {\n    background: #f0f8ff;\n}\n.song-index th {\n    background: #f5f5f5;\n}\n", ""]);
+exports.push([module.i, "\n.song-index tr:hover td {\n    background: #f0f8ff;\n}\n.song-index th {\n    background: #f5f5f5;\n}\n.song-link, .artist-link {\n    text-decoration: none;\n    color: inherit!important;\n}\n", ""]);
 
 // exports
 
@@ -715,6 +724,22 @@ var render = function () {
                 },
                 proxy: true,
               },
+              {
+                key: "item.name",
+                fn: function (ref) {
+                  var item = ref.item
+                  return [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "font-weight-bold artist-link",
+                        attrs: { to: "/vue/artists/" + item.id },
+                      },
+                      [_vm._v(_vm._s(item.name))]
+                    ),
+                  ]
+                },
+              },
             ]),
           }),
         ],
@@ -1005,6 +1030,38 @@ var render = function () {
                   ]
                 },
                 proxy: true,
+              },
+              {
+                key: "item.name",
+                fn: function (ref) {
+                  var item = ref.item
+                  return [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "font-weight-bold song-link",
+                        attrs: { to: "/vue/songs/" + item.id },
+                      },
+                      [_vm._v(_vm._s(item.name))]
+                    ),
+                  ]
+                },
+              },
+              {
+                key: "item.artist",
+                fn: function (ref) {
+                  var item = ref.item
+                  return [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "artist-link",
+                        attrs: { to: "/vue/artists/" + item.artist_id },
+                      },
+                      [_vm._v(_vm._s(item.artist.name))]
+                    ),
+                  ]
+                },
               },
             ]),
           }),

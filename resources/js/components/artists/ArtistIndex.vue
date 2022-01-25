@@ -96,6 +96,9 @@
                         </v-dialog>
                     </v-toolbar>
                 </template>
+                <template v-slot:item.name="{ item }">
+                    <router-link class="font-weight-bold artist-link" :to="`/vue/artists/${item.id}`">{{ item.name }}</router-link>
+                </template>
             </v-data-table>
         </v-container>
         
@@ -164,5 +167,9 @@
     }
     .artist-index th {
         background: #f5f5f5;
+    }
+    .artist-link {
+        text-decoration: none;
+        color: inherit!important;
     }
 </style>

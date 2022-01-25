@@ -25,9 +25,8 @@
             @yield('content')
             <v-app>
                 <menu-bar></menu-bar>
-                
                 <v-main>
-                    <v-spacer class="my-12"></v-spacer>
+                    <v-spacer class="my-12"/>
                     <router-view/>
                 </v-main>
             </v-app>
