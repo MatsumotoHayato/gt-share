@@ -1,6 +1,6 @@
 <template>
     <header>
-        <v-app-bar app dark color="indigo darken-4">
+        <v-app-bar app class="elevation-0" color="indigo darken-4" dark>
             <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
             <v-toolbar-title class="text-h5 font-weight-bold">GT-share</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -10,6 +10,9 @@
             to="/vue/login"
             >
                 <v-icon>mdi-account</v-icon>
+            </v-btn>
+            <v-btn @click="logout" outlined>
+                ログアウト
             </v-btn>
         </v-app-bar>
         <v-navigation-drawer v-model="drawer" fixed temporary>
@@ -43,6 +46,14 @@
                     { title: '自分の投稿', icon: 'mdi-text-box', path: '/vue/myposts' },
                     { title: 'ランキング', icon: 'mdi-crown', path: '/vue/ranking' },
                 ],
+            }
+        },
+        methods: {
+            logout() {
+                axios.post("/logout")
+                    .then((response)=>{
+                        this.$router.push("/")
+                    })
             }
         }
     }

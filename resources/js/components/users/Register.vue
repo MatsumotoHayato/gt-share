@@ -97,7 +97,7 @@
                 passwordRules: {
                     required: v => !!v || '入力は必須です',
                     min: v => (v && v.length >= 8) || '8文字以上入力してください',
-                    confirm: v => v == this.userInfo.password || 'パスワードが一致しません',
+                    confirm: v => v === this.userInfo.password || 'パスワードが一致しません',
                 },
             }
         },
@@ -106,13 +106,18 @@
                 axios.post('/register', this.userInfo)
                     .then((response)=>{
                         if(response.status == 200) {
+                            this.login()
+                        }
+                    })
+            },
+            login() {
+                axios.post('/login', this.userInfo)
+                    .then((response)=>{
+                        if(response.status == 200) {
                             this.$router.push({
                                 path: '/'
                             })
                         }
-                    })
-                    .catch(function(error){
-                        console.log(error)
                     })
             }
         }
