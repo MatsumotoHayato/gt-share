@@ -21,7 +21,7 @@ Route::post('/artists/{artist}/songs', 'SongController@store')->middleware('auth
 Route::get('/songs/{song}', 'PostController@index');  // レビュー一覧表示
 Route::post('/songs/{song}/posts', 'PostController@store')->middleware('auth');  // 新規レビュー投稿
 Route::get('/artists/{artist}/songs/{song}/posts/{post}/edit', 'PostController@edit')->middleware('auth');  // レビュー編集
-Route::put('/artists/{artist}/songs/{song}/posts/{post}', 'PostController@update')->middleware('auth');     // レビュー編集の変更内容更新
+Route::put('/posts/{post}', 'PostController@update')->middleware('auth');     // レビュー編集の変更内容更新
 Route::delete('/artists/{artist}/songs/{song}/posts/{post}', 'PostController@delete')->middleware('auth');  // レビュー削除
 
 // Route::get('/search/artists', 'ArtistController@search');  // アーティスト名検索結果画面

@@ -185,6 +185,95 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostIndex',
   data: function data() {
@@ -204,7 +293,8 @@ __webpack_require__.r(__webpack_exports__);
         value: "updated_at",
         align: "start"
       }],
-      dialog: false,
+      createDialog: false,
+      editDialog: false,
       search: '',
       newPost: {
         instrument_id: '',
@@ -274,17 +364,31 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    close: function close() {
-      this.dialog = false;
+    closeCreate: function closeCreate() {
+      this.createDialog = false;
     },
-    save: function save() {
+    closeEdit: function closeEdit() {
+      this.editDialog = false;
+    },
+    createPost: function createPost() {
       var _this2 = this;
 
       axios.post("/songs/".concat(this.songId, "/posts"), this.newPost).then(function (response) {
         if (response.status == 200) {
-          _this2.close();
+          _this2.closeCreate();
 
           _this2.getPosts();
+        }
+      });
+    },
+    editPost: function editPost(post) {
+      var _this3 = this;
+
+      axios.put("/posts/".concat(post.id), post).then(function (response) {
+        if (response.status == 200) {
+          _this3.closeEdit();
+
+          _this3.getPosts();
         }
       });
     }
@@ -438,11 +542,11 @@ var render = function () {
                               },
                             ]),
                             model: {
-                              value: _vm.dialog,
+                              value: _vm.createDialog,
                               callback: function ($$v) {
-                                _vm.dialog = $$v
+                                _vm.createDialog = $$v
                               },
-                              expression: "dialog",
+                              expression: "createDialog",
                             },
                           },
                           [
@@ -690,7 +794,7 @@ var render = function () {
                                           color: "blue darken-1",
                                           text: "",
                                         },
-                                        on: { click: _vm.close },
+                                        on: { click: _vm.closeCreate },
                                       },
                                       [
                                         _vm._v(
@@ -706,7 +810,7 @@ var render = function () {
                                           color: "blue darken-1",
                                           text: "",
                                         },
-                                        on: { click: _vm.save },
+                                        on: { click: _vm.createPost },
                                       },
                                       [
                                         _vm._v(
@@ -788,31 +892,6 @@ var render = function () {
                                           [
                                             _c(
                                               "v-list-item",
-                                              {
-                                                directives: [
-                                                  {
-                                                    name: "show",
-                                                    rawName: "v-show",
-                                                    value:
-                                                      post.user.id ===
-                                                      _vm.currentUser.id,
-                                                    expression:
-                                                      "post.user.id === currentUser.id",
-                                                  },
-                                                ],
-                                              },
-                                              [
-                                                _c("v-list-item-content", [
-                                                  _vm._v(
-                                                    "\n                                                [編集]\n                                            "
-                                                  ),
-                                                ]),
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-list-item",
                                               [
                                                 _c("v-list-item-content", [
                                                   _vm._v(
@@ -849,6 +928,515 @@ var render = function () {
                                                       "\n                                            "
                                                   ),
                                                 ]),
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item",
+                                              {
+                                                directives: [
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value:
+                                                      post.user.id ===
+                                                      _vm.currentUser.id,
+                                                    expression:
+                                                      "post.user.id === currentUser.id",
+                                                  },
+                                                ],
+                                              },
+                                              [
+                                                _c(
+                                                  "v-list-item-content",
+                                                  [
+                                                    _c(
+                                                      "v-dialog",
+                                                      {
+                                                        attrs: {
+                                                          "max-width": "600px",
+                                                        },
+                                                        scopedSlots: _vm._u(
+                                                          [
+                                                            {
+                                                              key: "activator",
+                                                              fn: function (
+                                                                ref
+                                                              ) {
+                                                                var on = ref.on
+                                                                var attrs =
+                                                                  ref.attrs
+                                                                return [
+                                                                  _c(
+                                                                    "v-btn",
+                                                                    _vm._g(
+                                                                      _vm._b(
+                                                                        {
+                                                                          staticClass:
+                                                                            "ma-2",
+                                                                          attrs:
+                                                                            {
+                                                                              outlined:
+                                                                                "",
+                                                                            },
+                                                                        },
+                                                                        "v-btn",
+                                                                        attrs,
+                                                                        false
+                                                                      ),
+                                                                      on
+                                                                    ),
+                                                                    [
+                                                                      _vm._v(
+                                                                        "\n                                                            編集\n                                                            "
+                                                                      ),
+                                                                      _c(
+                                                                        "v-icon",
+                                                                        {
+                                                                          attrs:
+                                                                            {
+                                                                              right:
+                                                                                "",
+                                                                            },
+                                                                        },
+                                                                        [
+                                                                          _vm._v(
+                                                                            "\n                                                                mdi-pencil-plus\n                                                            "
+                                                                          ),
+                                                                        ]
+                                                                      ),
+                                                                    ],
+                                                                    1
+                                                                  ),
+                                                                ]
+                                                              },
+                                                            },
+                                                          ],
+                                                          null,
+                                                          true
+                                                        ),
+                                                        model: {
+                                                          value: _vm.editDialog,
+                                                          callback: function (
+                                                            $$v
+                                                          ) {
+                                                            _vm.editDialog = $$v
+                                                          },
+                                                          expression:
+                                                            "editDialog",
+                                                        },
+                                                      },
+                                                      [
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "v-card",
+                                                          [
+                                                            _c("v-card-title", [
+                                                              _c(
+                                                                "span",
+                                                                {
+                                                                  staticClass:
+                                                                    "text-h5",
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      _vm.song
+                                                                        .name
+                                                                    ) +
+                                                                      " / " +
+                                                                      _vm._s(
+                                                                        _vm
+                                                                          .artist
+                                                                          .name
+                                                                      ) +
+                                                                      " のレビュー編集"
+                                                                  ),
+                                                                ]
+                                                              ),
+                                                            ]),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "v-card-text",
+                                                              [
+                                                                _c(
+                                                                  "v-form",
+                                                                  [
+                                                                    _c(
+                                                                      "v-container",
+                                                                      [
+                                                                        _c(
+                                                                          "v-row",
+                                                                          [
+                                                                            _c(
+                                                                              "v-col",
+                                                                              {
+                                                                                attrs:
+                                                                                  {
+                                                                                    cols: "6",
+                                                                                  },
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-select",
+                                                                                  {
+                                                                                    attrs:
+                                                                                      {
+                                                                                        items:
+                                                                                          _vm.instruments,
+                                                                                        "item-text":
+                                                                                          "name",
+                                                                                        "item-value":
+                                                                                          "id",
+                                                                                        label:
+                                                                                          "楽器*",
+                                                                                        rules:
+                                                                                          [
+                                                                                            _vm
+                                                                                              .rules
+                                                                                              .required,
+                                                                                          ],
+                                                                                        "single-line":
+                                                                                          "",
+                                                                                        required:
+                                                                                          "",
+                                                                                      },
+                                                                                    model:
+                                                                                      {
+                                                                                        value:
+                                                                                          post.instrument_id,
+                                                                                        callback:
+                                                                                          function (
+                                                                                            $$v
+                                                                                          ) {
+                                                                                            _vm.$set(
+                                                                                              post,
+                                                                                              "instrument_id",
+                                                                                              $$v
+                                                                                            )
+                                                                                          },
+                                                                                        expression:
+                                                                                          "post.instrument_id",
+                                                                                      },
+                                                                                  }
+                                                                                ),
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "v-spacer"
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "v-col",
+                                                                              {
+                                                                                attrs:
+                                                                                  {
+                                                                                    cols: "4",
+                                                                                  },
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-text-field",
+                                                                                  {
+                                                                                    attrs:
+                                                                                      {
+                                                                                        type: "number",
+                                                                                        max: "100",
+                                                                                        min: "0",
+                                                                                        label:
+                                                                                          "楽器経験",
+                                                                                        suffix:
+                                                                                          "年",
+                                                                                      },
+                                                                                    model:
+                                                                                      {
+                                                                                        value:
+                                                                                          post.experience,
+                                                                                        callback:
+                                                                                          function (
+                                                                                            $$v
+                                                                                          ) {
+                                                                                            _vm.$set(
+                                                                                              post,
+                                                                                              "experience",
+                                                                                              $$v
+                                                                                            )
+                                                                                          },
+                                                                                        expression:
+                                                                                          "post.experience",
+                                                                                      },
+                                                                                  }
+                                                                                ),
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                            _vm._v(
+                                                                              " "
+                                                                            ),
+                                                                            _c(
+                                                                              "v-spacer"
+                                                                            ),
+                                                                          ],
+                                                                          1
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "v-row",
+                                                                          [
+                                                                            _c(
+                                                                              "v-col",
+                                                                              {
+                                                                                attrs:
+                                                                                  {
+                                                                                    cols: "6",
+                                                                                  },
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-text-field",
+                                                                                  {
+                                                                                    attrs:
+                                                                                      {
+                                                                                        type: "number",
+                                                                                        max: "5",
+                                                                                        min: "1",
+                                                                                        label:
+                                                                                          "難易度*",
+                                                                                        rules:
+                                                                                          [
+                                                                                            _vm
+                                                                                              .rules
+                                                                                              .required,
+                                                                                          ],
+                                                                                        required:
+                                                                                          "",
+                                                                                      },
+                                                                                    model:
+                                                                                      {
+                                                                                        value:
+                                                                                          post.difficulty,
+                                                                                        callback:
+                                                                                          function (
+                                                                                            $$v
+                                                                                          ) {
+                                                                                            _vm.$set(
+                                                                                              post,
+                                                                                              "difficulty",
+                                                                                              $$v
+                                                                                            )
+                                                                                          },
+                                                                                        expression:
+                                                                                          "post.difficulty",
+                                                                                      },
+                                                                                  }
+                                                                                ),
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                          ],
+                                                                          1
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "v-row",
+                                                                          [
+                                                                            _c(
+                                                                              "v-col",
+                                                                              {
+                                                                                attrs:
+                                                                                  {
+                                                                                    cols: "12",
+                                                                                  },
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-textarea",
+                                                                                  {
+                                                                                    attrs:
+                                                                                      {
+                                                                                        label:
+                                                                                          "感想*",
+                                                                                        placeholder:
+                                                                                          "練習時間、演奏のコツ、使用機材、楽しかった箇所など…",
+                                                                                        rules:
+                                                                                          [
+                                                                                            _vm
+                                                                                              .rules
+                                                                                              .required,
+                                                                                            _vm
+                                                                                              .rules
+                                                                                              .counter,
+                                                                                          ],
+                                                                                        counter:
+                                                                                          "",
+                                                                                        required:
+                                                                                          "",
+                                                                                      },
+                                                                                    model:
+                                                                                      {
+                                                                                        value:
+                                                                                          post.body,
+                                                                                        callback:
+                                                                                          function (
+                                                                                            $$v
+                                                                                          ) {
+                                                                                            _vm.$set(
+                                                                                              post,
+                                                                                              "body",
+                                                                                              $$v
+                                                                                            )
+                                                                                          },
+                                                                                        expression:
+                                                                                          "post.body",
+                                                                                      },
+                                                                                  }
+                                                                                ),
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                          ],
+                                                                          1
+                                                                        ),
+                                                                        _vm._v(
+                                                                          " "
+                                                                        ),
+                                                                        _c(
+                                                                          "v-row",
+                                                                          [
+                                                                            _c(
+                                                                              "v-col",
+                                                                              {
+                                                                                attrs:
+                                                                                  {
+                                                                                    cols: "12",
+                                                                                  },
+                                                                              },
+                                                                              [
+                                                                                _c(
+                                                                                  "v-text-field",
+                                                                                  {
+                                                                                    attrs:
+                                                                                      {
+                                                                                        label:
+                                                                                          "演奏動画へのURL",
+                                                                                      },
+                                                                                    model:
+                                                                                      {
+                                                                                        value:
+                                                                                          post.url,
+                                                                                        callback:
+                                                                                          function (
+                                                                                            $$v
+                                                                                          ) {
+                                                                                            _vm.$set(
+                                                                                              post,
+                                                                                              "url",
+                                                                                              $$v
+                                                                                            )
+                                                                                          },
+                                                                                        expression:
+                                                                                          "post.url",
+                                                                                      },
+                                                                                  }
+                                                                                ),
+                                                                              ],
+                                                                              1
+                                                                            ),
+                                                                          ],
+                                                                          1
+                                                                        ),
+                                                                      ],
+                                                                      1
+                                                                    ),
+                                                                    _vm._v(" "),
+                                                                    _c(
+                                                                      "small",
+                                                                      [
+                                                                        _vm._v(
+                                                                          "*必須項目"
+                                                                        ),
+                                                                      ]
+                                                                    ),
+                                                                  ],
+                                                                  1
+                                                                ),
+                                                              ],
+                                                              1
+                                                            ),
+                                                            _vm._v(" "),
+                                                            _c(
+                                                              "v-card-actions",
+                                                              [
+                                                                _c("v-spacer"),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "v-btn",
+                                                                  {
+                                                                    attrs: {
+                                                                      color:
+                                                                        "blue darken-1",
+                                                                      text: "",
+                                                                    },
+                                                                    on: {
+                                                                      click:
+                                                                        _vm.closeEdit,
+                                                                    },
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      "\n                                                                キャンセル\n                                                            "
+                                                                    ),
+                                                                  ]
+                                                                ),
+                                                                _vm._v(" "),
+                                                                _c(
+                                                                  "v-btn",
+                                                                  {
+                                                                    attrs: {
+                                                                      color:
+                                                                        "blue darken-1",
+                                                                      text: "",
+                                                                    },
+                                                                    on: {
+                                                                      click:
+                                                                        function (
+                                                                          $event
+                                                                        ) {
+                                                                          return _vm.editPost(
+                                                                            post
+                                                                          )
+                                                                        },
+                                                                    },
+                                                                  },
+                                                                  [
+                                                                    _vm._v(
+                                                                      "\n                                                                編集\n                                                            "
+                                                                    ),
+                                                                  ]
+                                                                ),
+                                                              ],
+                                                              1
+                                                            ),
+                                                          ],
+                                                          1
+                                                        ),
+                                                      ],
+                                                      1
+                                                    ),
+                                                  ],
+                                                  1
+                                                ),
                                               ],
                                               1
                                             ),
