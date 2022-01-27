@@ -1,193 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[7],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/PostIndex.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/PostIndex.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/CreateForm.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/CreateForm.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -275,7 +96,177 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'CreateForm',
+  data: function data() {
+    return {
+      newPost: {
+        instrument_id: '',
+        experience: '',
+        difficulty: '',
+        body: '',
+        url: ''
+      },
+      rules: {
+        required: function required(value) {
+          return !!value || '入力は必須です';
+        },
+        counter: function counter(value) {
+          return value.length <= 4000 || '4000文字以内で入力してください';
+        }
+      }
+    };
+  },
+  props: {
+    createDialog: false,
+    artist: [],
+    song: [],
+    instruments: []
+  },
+  methods: {
+    close: function close() {
+      this.$emit('close');
+    },
+    save: function save() {
+      this.$emit('save', this.newPost);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/PostIndex.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/PostIndex.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CreateForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateForm */ "./resources/js/components/posts/CreateForm.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostIndex',
+  components: {
+    CreateForm: _CreateForm__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       currentUser: {
@@ -295,22 +286,6 @@ __webpack_require__.r(__webpack_exports__);
       }],
       createDialog: false,
       editDialog: false,
-      search: '',
-      newPost: {
-        instrument_id: '',
-        experience: '',
-        difficulty: '',
-        body: '',
-        url: ''
-      },
-      rules: {
-        required: function required(value) {
-          return !!value || '入力は必須です';
-        },
-        counter: function counter(value) {
-          return value.length <= 4000 || '4000文字以内で入力してください';
-        }
-      },
       breadCrumbs: [{
         text: 'ホーム',
         disabled: false,
@@ -370,10 +345,10 @@ __webpack_require__.r(__webpack_exports__);
     closeEdit: function closeEdit() {
       this.editDialog = false;
     },
-    createPost: function createPost() {
+    createPost: function createPost(obj) {
       var _this2 = this;
 
-      axios.post("/songs/".concat(this.songId, "/posts"), this.newPost).then(function (response) {
+      axios.post("/songs/".concat(this.songId, "/posts"), obj).then(function (response) {
         if (response.status == 200) {
           _this2.closeCreate();
 
@@ -402,6 +377,354 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 });
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/CreateForm.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/CreateForm.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.post-index tr:hover td {\n    background: #FFFFFF;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/PostIndex.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/PostIndex.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.post-index tr:hover td {\n    background: #FFFFFF;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/CreateForm.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/CreateForm.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./CreateForm.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/CreateForm.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/PostIndex.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/PostIndex.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./PostIndex.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/PostIndex.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/CreateForm.vue?vue&type=template&id=7ece0407&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/CreateForm.vue?vue&type=template&id=7ece0407& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-dialog",
+    {
+      attrs: { persistent: "", "max-width": "600px" },
+      model: {
+        value: _vm.createDialog,
+        callback: function ($$v) {
+          _vm.createDialog = $$v
+        },
+        expression: "createDialog",
+      },
+    },
+    [
+      _c(
+        "v-card",
+        [
+          _c("v-card-title", [
+            _c("span", { staticClass: "text-h5" }, [
+              _vm._v(
+                _vm._s(_vm.song.name) +
+                  " / " +
+                  _vm._s(_vm.artist.name) +
+                  " の新規レビュー投稿"
+              ),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c(
+            "v-card-text",
+            [
+              _c(
+                "v-form",
+                [
+                  _c(
+                    "v-container",
+                    [
+                      _c(
+                        "v-row",
+                        [
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "6" } },
+                            [
+                              _c("v-select", {
+                                attrs: {
+                                  items: _vm.instruments,
+                                  "item-text": "name",
+                                  "item-value": "id",
+                                  label: "楽器*",
+                                  rules: [_vm.rules.required],
+                                  "single-line": "",
+                                  required: "",
+                                },
+                                model: {
+                                  value: _vm.newPost.instrument_id,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.newPost, "instrument_id", $$v)
+                                  },
+                                  expression: "newPost.instrument_id",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-spacer"),
+                          _vm._v(" "),
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "4" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  type: "number",
+                                  max: "100",
+                                  min: "0",
+                                  label: "楽器経験",
+                                  suffix: "年",
+                                },
+                                model: {
+                                  value: _vm.newPost.experience,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.newPost, "experience", $$v)
+                                  },
+                                  expression: "newPost.experience",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("v-spacer"),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-row",
+                        [
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "6" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  type: "number",
+                                  max: "5",
+                                  min: "1",
+                                  label: "難易度*",
+                                  rules: [_vm.rules.required],
+                                  required: "",
+                                },
+                                model: {
+                                  value: _vm.newPost.difficulty,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.newPost, "difficulty", $$v)
+                                  },
+                                  expression: "newPost.difficulty",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-row",
+                        [
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12" } },
+                            [
+                              _c("v-textarea", {
+                                attrs: {
+                                  label: "感想*",
+                                  placeholder:
+                                    "練習時間、演奏のコツ、使用機材、楽しかった箇所など…",
+                                  rules: [
+                                    _vm.rules.required,
+                                    _vm.rules.counter,
+                                  ],
+                                  counter: "",
+                                  required: "",
+                                },
+                                model: {
+                                  value: _vm.newPost.body,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.newPost, "body", $$v)
+                                  },
+                                  expression: "newPost.body",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-row",
+                        [
+                          _c(
+                            "v-col",
+                            { attrs: { cols: "12" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: { label: "演奏動画へのURL" },
+                                model: {
+                                  value: _vm.newPost.url,
+                                  callback: function ($$v) {
+                                    _vm.$set(_vm.newPost, "url", $$v)
+                                  },
+                                  expression: "newPost.url",
+                                },
+                              }),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("small", [_vm._v("*必須項目")]),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-card-actions",
+            [
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "blue darken-1", text: "" },
+                  on: { click: _vm.close },
+                },
+                [_vm._v("\n                キャンセル\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "blue darken-1", text: "" },
+                  on: { click: _vm.save },
+                },
+                [_vm._v("\n                追加\n            ")]
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
 
 /***/ }),
 
@@ -463,9 +786,13 @@ var render = function () {
             1
           ),
           _vm._v(" "),
-          _c("v-data-iterator", {
-            staticClass: "elevation-1",
-            attrs: { items: _vm.selectedPosts, "sort-by": "updated_at" },
+          _c("v-data-table", {
+            staticClass: "elevation-1 post-index",
+            attrs: {
+              items: _vm.selectedPosts,
+              "sort-by": "updated_at",
+              headers: _vm.headers,
+            },
             scopedSlots: _vm._u([
               {
                 key: "header",
@@ -501,280 +828,193 @@ var render = function () {
                         _c("v-spacer"),
                         _vm._v(" "),
                         _c(
-                          "v-dialog",
+                          "v-btn",
                           {
-                            attrs: { persistent: "", "max-width": "600px" },
-                            scopedSlots: _vm._u([
-                              {
-                                key: "activator",
-                                fn: function (ref) {
-                                  var on = ref.on
-                                  var attrs = ref.attrs
-                                  return [
-                                    _c(
-                                      "v-btn",
-                                      _vm._g(
-                                        _vm._b(
-                                          {
-                                            staticClass: "ma-2",
-                                            attrs: { outlined: "" },
-                                          },
-                                          "v-btn",
-                                          attrs,
-                                          false
-                                        ),
-                                        on
-                                      ),
-                                      [
-                                        _vm._v(
-                                          "\n                                新規レビュー\n                                "
-                                        ),
-                                        _c("v-icon", { attrs: { right: "" } }, [
-                                          _vm._v(
-                                            "\n                                    mdi-pencil-plus\n                                "
-                                          ),
-                                        ]),
-                                      ],
-                                      1
-                                    ),
-                                  ]
-                                },
+                            staticClass: "ma-2",
+                            attrs: { outlined: "" },
+                            on: {
+                              click: function ($event) {
+                                _vm.createDialog = true
                               },
-                            ]),
-                            model: {
-                              value: _vm.createDialog,
-                              callback: function ($$v) {
-                                _vm.createDialog = $$v
-                              },
-                              expression: "createDialog",
                             },
                           },
                           [
-                            _vm._v(" "),
+                            _vm._v(
+                              "\n                        新規レビュー\n                        "
+                            ),
+                            _c("v-icon", { attrs: { right: "" } }, [
+                              _vm._v(
+                                "\n                            mdi-pencil-plus\n                        "
+                              ),
+                            ]),
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("create-form", {
+                          attrs: {
+                            artist: _vm.artist,
+                            song: _vm.song,
+                            instruments: _vm.instruments,
+                            createDialog: _vm.createDialog,
+                          },
+                          on: { save: _vm.createPost, close: _vm.closeCreate },
+                        }),
+                      ],
+                      1
+                    ),
+                  ]
+                },
+                proxy: true,
+              },
+              {
+                key: "item.updated_at",
+                fn: function (ref) {
+                  var item = ref.item
+                  return [
+                    _c(
+                      "v-row",
+                      [
+                        _c(
+                          "v-list-item",
+                          [
                             _c(
-                              "v-card",
+                              "v-list-item-content",
                               [
-                                _c("v-card-title", [
-                                  _c("span", { staticClass: "text-h5" }, [
+                                _c(
+                                  "v-list-item-title",
+                                  { staticClass: "mt-4" },
+                                  [
                                     _vm._v(
-                                      _vm._s(_vm.song.name) +
-                                        " / " +
-                                        _vm._s(_vm.artist.name) +
-                                        " の新規レビュー投稿"
+                                      "\n                                ユーザー名: " +
+                                        _vm._s(item.user.name) +
+                                        "    \n                            "
                                     ),
-                                  ]),
-                                ]),
+                                  ]
+                                ),
+                              ],
+                              1
+                            ),
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-col",
+                          { attrs: { cols: "2" } },
+                          [
+                            _c(
+                              "v-list",
+                              { attrs: { dense: "" } },
+                              [
+                                _c(
+                                  "v-list-item",
+                                  [
+                                    _c("v-list-item-content", [
+                                      _vm._v(
+                                        "\n                                    難易度: " +
+                                          _vm._s(item.difficulty) +
+                                          "\n                                "
+                                      ),
+                                    ]),
+                                  ],
+                                  1
+                                ),
                                 _vm._v(" "),
                                 _c(
-                                  "v-card-text",
+                                  "v-list-item",
+                                  [
+                                    _c("v-list-item-content", [
+                                      _vm._v(
+                                        "\n                                    難易度: " +
+                                          _vm._s(item.difficulty) +
+                                          "\n                                "
+                                      ),
+                                    ]),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-list-item",
+                                  [
+                                    _c("v-list-item-content", [
+                                      _vm._v(
+                                        "\n                                    難易度: " +
+                                          _vm._s(item.difficulty) +
+                                          "\n                                "
+                                      ),
+                                    ]),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-list-item",
+                                  [
+                                    _c("v-list-item-content", [
+                                      _vm._v(
+                                        "\n                                    難易度: " +
+                                          _vm._s(item.difficulty) +
+                                          "\n                                "
+                                      ),
+                                    ]),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-list-item",
+                                  [
+                                    _c("v-list-item-content", [
+                                      _vm._v(
+                                        "\n                                    難易度: " +
+                                          _vm._s(item.difficulty) +
+                                          "\n                                "
+                                      ),
+                                    ]),
+                                  ],
+                                  1
+                                ),
+                              ],
+                              1
+                            ),
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-col",
+                          { attrs: { cols: "10" } },
+                          [
+                            _c(
+                              "v-list",
+                              { attrs: { dense: "" } },
+                              [
+                                _c(
+                                  "v-list-item",
                                   [
                                     _c(
-                                      "v-form",
+                                      "v-card",
+                                      {
+                                        attrs: {
+                                          "max-width": "700",
+                                          "min-width": "700",
+                                          elevation: "1",
+                                        },
+                                      },
                                       [
                                         _c(
-                                          "v-container",
+                                          "v-card-text",
+                                          { staticClass: "text-subtitle-1" },
                                           [
-                                            _c(
-                                              "v-row",
-                                              [
-                                                _c(
-                                                  "v-col",
-                                                  { attrs: { cols: "6" } },
-                                                  [
-                                                    _c("v-select", {
-                                                      attrs: {
-                                                        items: _vm.instruments,
-                                                        "item-text": "name",
-                                                        "item-value": "id",
-                                                        label: "楽器*",
-                                                        rules: [
-                                                          _vm.rules.required,
-                                                        ],
-                                                        "single-line": "",
-                                                        required: "",
-                                                      },
-                                                      model: {
-                                                        value:
-                                                          _vm.newPost
-                                                            .instrument_id,
-                                                        callback: function (
-                                                          $$v
-                                                        ) {
-                                                          _vm.$set(
-                                                            _vm.newPost,
-                                                            "instrument_id",
-                                                            $$v
-                                                          )
-                                                        },
-                                                        expression:
-                                                          "newPost.instrument_id",
-                                                      },
-                                                    }),
-                                                  ],
-                                                  1
-                                                ),
-                                                _vm._v(" "),
-                                                _c("v-spacer"),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "v-col",
-                                                  { attrs: { cols: "4" } },
-                                                  [
-                                                    _c("v-text-field", {
-                                                      attrs: {
-                                                        type: "number",
-                                                        max: "100",
-                                                        min: "0",
-                                                        label: "楽器経験",
-                                                        suffix: "年",
-                                                      },
-                                                      model: {
-                                                        value:
-                                                          _vm.newPost
-                                                            .experience,
-                                                        callback: function (
-                                                          $$v
-                                                        ) {
-                                                          _vm.$set(
-                                                            _vm.newPost,
-                                                            "experience",
-                                                            $$v
-                                                          )
-                                                        },
-                                                        expression:
-                                                          "newPost.experience",
-                                                      },
-                                                    }),
-                                                  ],
-                                                  1
-                                                ),
-                                                _vm._v(" "),
-                                                _c("v-spacer"),
-                                              ],
-                                              1
+                                            _vm._v(
+                                              "\n                                        " +
+                                                _vm._s(item.body) +
+                                                "\n                                    "
                                             ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-row",
-                                              [
-                                                _c(
-                                                  "v-col",
-                                                  { attrs: { cols: "6" } },
-                                                  [
-                                                    _c("v-text-field", {
-                                                      attrs: {
-                                                        type: "number",
-                                                        max: "5",
-                                                        min: "1",
-                                                        label: "難易度*",
-                                                        rules: [
-                                                          _vm.rules.required,
-                                                        ],
-                                                        required: "",
-                                                      },
-                                                      model: {
-                                                        value:
-                                                          _vm.newPost
-                                                            .difficulty,
-                                                        callback: function (
-                                                          $$v
-                                                        ) {
-                                                          _vm.$set(
-                                                            _vm.newPost,
-                                                            "difficulty",
-                                                            $$v
-                                                          )
-                                                        },
-                                                        expression:
-                                                          "newPost.difficulty",
-                                                      },
-                                                    }),
-                                                  ],
-                                                  1
-                                                ),
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-row",
-                                              [
-                                                _c(
-                                                  "v-col",
-                                                  { attrs: { cols: "12" } },
-                                                  [
-                                                    _c("v-textarea", {
-                                                      attrs: {
-                                                        label: "感想*",
-                                                        placeholder:
-                                                          "練習時間、演奏のコツ、使用機材、楽しかった箇所など…",
-                                                        rules: [
-                                                          _vm.rules.required,
-                                                          _vm.rules.counter,
-                                                        ],
-                                                        counter: "",
-                                                        required: "",
-                                                      },
-                                                      model: {
-                                                        value: _vm.newPost.body,
-                                                        callback: function (
-                                                          $$v
-                                                        ) {
-                                                          _vm.$set(
-                                                            _vm.newPost,
-                                                            "body",
-                                                            $$v
-                                                          )
-                                                        },
-                                                        expression:
-                                                          "newPost.body",
-                                                      },
-                                                    }),
-                                                  ],
-                                                  1
-                                                ),
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-row",
-                                              [
-                                                _c(
-                                                  "v-col",
-                                                  { attrs: { cols: "12" } },
-                                                  [
-                                                    _c("v-text-field", {
-                                                      attrs: {
-                                                        label:
-                                                          "演奏動画へのURL",
-                                                      },
-                                                      model: {
-                                                        value: _vm.newPost.url,
-                                                        callback: function (
-                                                          $$v
-                                                        ) {
-                                                          _vm.$set(
-                                                            _vm.newPost,
-                                                            "url",
-                                                            $$v
-                                                          )
-                                                        },
-                                                        expression:
-                                                          "newPost.url",
-                                                      },
-                                                    }),
-                                                  ],
-                                                  1
-                                                ),
-                                              ],
-                                              1
-                                            ),
-                                          ],
-                                          1
+                                          ]
                                         ),
-                                        _vm._v(" "),
-                                        _c("small", [_vm._v("*必須項目")]),
                                       ],
                                       1
                                     ),
@@ -783,41 +1023,39 @@ var render = function () {
                                 ),
                                 _vm._v(" "),
                                 _c(
-                                  "v-card-actions",
+                                  "v-list-item",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: item.url,
+                                        expression: "item.url",
+                                      },
+                                    ],
+                                  },
                                   [
-                                    _c("v-spacer"),
-                                    _vm._v(" "),
-                                    _c(
-                                      "v-btn",
-                                      {
-                                        attrs: {
-                                          color: "blue darken-1",
-                                          text: "",
-                                        },
-                                        on: { click: _vm.closeCreate },
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                    キャンセル\n                                "
-                                        ),
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "v-btn",
-                                      {
-                                        attrs: {
-                                          color: "blue darken-1",
-                                          text: "",
-                                        },
-                                        on: { click: _vm.createPost },
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                    追加\n                                "
-                                        ),
-                                      ]
-                                    ),
+                                    _c("v-list-item-content", [
+                                      _vm._v(
+                                        "\n                                    演奏動画: " +
+                                          _vm._s(item.url) +
+                                          "\n                                "
+                                      ),
+                                    ]),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-list-item",
+                                  [
+                                    _c("v-list-item-content", [
+                                      _vm._v(
+                                        "\n                                    " +
+                                          _vm._s(item.updated_at) +
+                                          "\n                                "
+                                      ),
+                                    ]),
                                   ],
                                   1
                                 ),
@@ -832,635 +1070,6 @@ var render = function () {
                     ),
                   ]
                 },
-                proxy: true,
-              },
-              {
-                key: "default",
-                fn: function () {
-                  return [
-                    _c(
-                      "v-row",
-                      _vm._l(_vm.selectedPosts, function (post) {
-                        return _c(
-                          "v-col",
-                          { key: post.id, attrs: { cols: "12" } },
-                          [
-                            _c(
-                              "v-card",
-                              [
-                                _c(
-                                  "v-row",
-                                  [
-                                    _c(
-                                      "v-col",
-                                      { attrs: { cols: "4" } },
-                                      [
-                                        _c(
-                                          "v-list",
-                                          { attrs: { dense: "" } },
-                                          [
-                                            _c(
-                                              "v-list-item",
-                                              [
-                                                _c("v-list-item-content", [
-                                                  _vm._v(
-                                                    "ユーザー名: " +
-                                                      _vm._s(post.user.name)
-                                                  ),
-                                                ]),
-                                              ],
-                                              1
-                                            ),
-                                          ],
-                                          1
-                                        ),
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c("v-divider", {
-                                      attrs: { vertical: "" },
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "v-col",
-                                      { attrs: { cols: "6" } },
-                                      [
-                                        _c(
-                                          "v-list",
-                                          { attrs: { dense: "" } },
-                                          [
-                                            _c(
-                                              "v-list-item",
-                                              [
-                                                _c("v-list-item-content", [
-                                                  _vm._v(
-                                                    "\n                                                難易度: " +
-                                                      _vm._s(post.difficulty) +
-                                                      "\n                                            "
-                                                  ),
-                                                ]),
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-list-item",
-                                              [
-                                                _c("v-list-item-content", [
-                                                  _vm._v(
-                                                    "\n                                                " +
-                                                      _vm._s(post.updated_at) +
-                                                      "\n                                            "
-                                                  ),
-                                                ]),
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-list-item",
-                                              [
-                                                _c("v-list-item-content", [
-                                                  _vm._v(
-                                                    "\n                                                内容: " +
-                                                      _vm._s(post.body) +
-                                                      "\n                                            "
-                                                  ),
-                                                ]),
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-list-item",
-                                              {
-                                                directives: [
-                                                  {
-                                                    name: "show",
-                                                    rawName: "v-show",
-                                                    value:
-                                                      post.user.id ===
-                                                      _vm.currentUser.id,
-                                                    expression:
-                                                      "post.user.id === currentUser.id",
-                                                  },
-                                                ],
-                                              },
-                                              [
-                                                _c(
-                                                  "v-list-item-content",
-                                                  [
-                                                    _c(
-                                                      "v-dialog",
-                                                      {
-                                                        attrs: {
-                                                          "max-width": "600px",
-                                                        },
-                                                        scopedSlots: _vm._u(
-                                                          [
-                                                            {
-                                                              key: "activator",
-                                                              fn: function (
-                                                                ref
-                                                              ) {
-                                                                var on = ref.on
-                                                                var attrs =
-                                                                  ref.attrs
-                                                                return [
-                                                                  _c(
-                                                                    "v-btn",
-                                                                    _vm._g(
-                                                                      _vm._b(
-                                                                        {
-                                                                          staticClass:
-                                                                            "ma-2",
-                                                                          attrs:
-                                                                            {
-                                                                              outlined:
-                                                                                "",
-                                                                            },
-                                                                        },
-                                                                        "v-btn",
-                                                                        attrs,
-                                                                        false
-                                                                      ),
-                                                                      on
-                                                                    ),
-                                                                    [
-                                                                      _vm._v(
-                                                                        "\n                                                            編集\n                                                            "
-                                                                      ),
-                                                                      _c(
-                                                                        "v-icon",
-                                                                        {
-                                                                          attrs:
-                                                                            {
-                                                                              right:
-                                                                                "",
-                                                                            },
-                                                                        },
-                                                                        [
-                                                                          _vm._v(
-                                                                            "\n                                                                mdi-pencil-plus\n                                                            "
-                                                                          ),
-                                                                        ]
-                                                                      ),
-                                                                    ],
-                                                                    1
-                                                                  ),
-                                                                ]
-                                                              },
-                                                            },
-                                                          ],
-                                                          null,
-                                                          true
-                                                        ),
-                                                        model: {
-                                                          value: _vm.editDialog,
-                                                          callback: function (
-                                                            $$v
-                                                          ) {
-                                                            _vm.editDialog = $$v
-                                                          },
-                                                          expression:
-                                                            "editDialog",
-                                                        },
-                                                      },
-                                                      [
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "v-card",
-                                                          [
-                                                            _c("v-card-title", [
-                                                              _c(
-                                                                "span",
-                                                                {
-                                                                  staticClass:
-                                                                    "text-h5",
-                                                                },
-                                                                [
-                                                                  _vm._v(
-                                                                    _vm._s(
-                                                                      _vm.song
-                                                                        .name
-                                                                    ) +
-                                                                      " / " +
-                                                                      _vm._s(
-                                                                        _vm
-                                                                          .artist
-                                                                          .name
-                                                                      ) +
-                                                                      " のレビュー編集"
-                                                                  ),
-                                                                ]
-                                                              ),
-                                                            ]),
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "v-card-text",
-                                                              [
-                                                                _c(
-                                                                  "v-form",
-                                                                  [
-                                                                    _c(
-                                                                      "v-container",
-                                                                      [
-                                                                        _c(
-                                                                          "v-row",
-                                                                          [
-                                                                            _c(
-                                                                              "v-col",
-                                                                              {
-                                                                                attrs:
-                                                                                  {
-                                                                                    cols: "6",
-                                                                                  },
-                                                                              },
-                                                                              [
-                                                                                _c(
-                                                                                  "v-select",
-                                                                                  {
-                                                                                    attrs:
-                                                                                      {
-                                                                                        items:
-                                                                                          _vm.instruments,
-                                                                                        "item-text":
-                                                                                          "name",
-                                                                                        "item-value":
-                                                                                          "id",
-                                                                                        label:
-                                                                                          "楽器*",
-                                                                                        rules:
-                                                                                          [
-                                                                                            _vm
-                                                                                              .rules
-                                                                                              .required,
-                                                                                          ],
-                                                                                        "single-line":
-                                                                                          "",
-                                                                                        required:
-                                                                                          "",
-                                                                                      },
-                                                                                    model:
-                                                                                      {
-                                                                                        value:
-                                                                                          post.instrument_id,
-                                                                                        callback:
-                                                                                          function (
-                                                                                            $$v
-                                                                                          ) {
-                                                                                            _vm.$set(
-                                                                                              post,
-                                                                                              "instrument_id",
-                                                                                              $$v
-                                                                                            )
-                                                                                          },
-                                                                                        expression:
-                                                                                          "post.instrument_id",
-                                                                                      },
-                                                                                  }
-                                                                                ),
-                                                                              ],
-                                                                              1
-                                                                            ),
-                                                                            _vm._v(
-                                                                              " "
-                                                                            ),
-                                                                            _c(
-                                                                              "v-spacer"
-                                                                            ),
-                                                                            _vm._v(
-                                                                              " "
-                                                                            ),
-                                                                            _c(
-                                                                              "v-col",
-                                                                              {
-                                                                                attrs:
-                                                                                  {
-                                                                                    cols: "4",
-                                                                                  },
-                                                                              },
-                                                                              [
-                                                                                _c(
-                                                                                  "v-text-field",
-                                                                                  {
-                                                                                    attrs:
-                                                                                      {
-                                                                                        type: "number",
-                                                                                        max: "100",
-                                                                                        min: "0",
-                                                                                        label:
-                                                                                          "楽器経験",
-                                                                                        suffix:
-                                                                                          "年",
-                                                                                      },
-                                                                                    model:
-                                                                                      {
-                                                                                        value:
-                                                                                          post.experience,
-                                                                                        callback:
-                                                                                          function (
-                                                                                            $$v
-                                                                                          ) {
-                                                                                            _vm.$set(
-                                                                                              post,
-                                                                                              "experience",
-                                                                                              $$v
-                                                                                            )
-                                                                                          },
-                                                                                        expression:
-                                                                                          "post.experience",
-                                                                                      },
-                                                                                  }
-                                                                                ),
-                                                                              ],
-                                                                              1
-                                                                            ),
-                                                                            _vm._v(
-                                                                              " "
-                                                                            ),
-                                                                            _c(
-                                                                              "v-spacer"
-                                                                            ),
-                                                                          ],
-                                                                          1
-                                                                        ),
-                                                                        _vm._v(
-                                                                          " "
-                                                                        ),
-                                                                        _c(
-                                                                          "v-row",
-                                                                          [
-                                                                            _c(
-                                                                              "v-col",
-                                                                              {
-                                                                                attrs:
-                                                                                  {
-                                                                                    cols: "6",
-                                                                                  },
-                                                                              },
-                                                                              [
-                                                                                _c(
-                                                                                  "v-text-field",
-                                                                                  {
-                                                                                    attrs:
-                                                                                      {
-                                                                                        type: "number",
-                                                                                        max: "5",
-                                                                                        min: "1",
-                                                                                        label:
-                                                                                          "難易度*",
-                                                                                        rules:
-                                                                                          [
-                                                                                            _vm
-                                                                                              .rules
-                                                                                              .required,
-                                                                                          ],
-                                                                                        required:
-                                                                                          "",
-                                                                                      },
-                                                                                    model:
-                                                                                      {
-                                                                                        value:
-                                                                                          post.difficulty,
-                                                                                        callback:
-                                                                                          function (
-                                                                                            $$v
-                                                                                          ) {
-                                                                                            _vm.$set(
-                                                                                              post,
-                                                                                              "difficulty",
-                                                                                              $$v
-                                                                                            )
-                                                                                          },
-                                                                                        expression:
-                                                                                          "post.difficulty",
-                                                                                      },
-                                                                                  }
-                                                                                ),
-                                                                              ],
-                                                                              1
-                                                                            ),
-                                                                          ],
-                                                                          1
-                                                                        ),
-                                                                        _vm._v(
-                                                                          " "
-                                                                        ),
-                                                                        _c(
-                                                                          "v-row",
-                                                                          [
-                                                                            _c(
-                                                                              "v-col",
-                                                                              {
-                                                                                attrs:
-                                                                                  {
-                                                                                    cols: "12",
-                                                                                  },
-                                                                              },
-                                                                              [
-                                                                                _c(
-                                                                                  "v-textarea",
-                                                                                  {
-                                                                                    attrs:
-                                                                                      {
-                                                                                        label:
-                                                                                          "感想*",
-                                                                                        placeholder:
-                                                                                          "練習時間、演奏のコツ、使用機材、楽しかった箇所など…",
-                                                                                        rules:
-                                                                                          [
-                                                                                            _vm
-                                                                                              .rules
-                                                                                              .required,
-                                                                                            _vm
-                                                                                              .rules
-                                                                                              .counter,
-                                                                                          ],
-                                                                                        counter:
-                                                                                          "",
-                                                                                        required:
-                                                                                          "",
-                                                                                      },
-                                                                                    model:
-                                                                                      {
-                                                                                        value:
-                                                                                          post.body,
-                                                                                        callback:
-                                                                                          function (
-                                                                                            $$v
-                                                                                          ) {
-                                                                                            _vm.$set(
-                                                                                              post,
-                                                                                              "body",
-                                                                                              $$v
-                                                                                            )
-                                                                                          },
-                                                                                        expression:
-                                                                                          "post.body",
-                                                                                      },
-                                                                                  }
-                                                                                ),
-                                                                              ],
-                                                                              1
-                                                                            ),
-                                                                          ],
-                                                                          1
-                                                                        ),
-                                                                        _vm._v(
-                                                                          " "
-                                                                        ),
-                                                                        _c(
-                                                                          "v-row",
-                                                                          [
-                                                                            _c(
-                                                                              "v-col",
-                                                                              {
-                                                                                attrs:
-                                                                                  {
-                                                                                    cols: "12",
-                                                                                  },
-                                                                              },
-                                                                              [
-                                                                                _c(
-                                                                                  "v-text-field",
-                                                                                  {
-                                                                                    attrs:
-                                                                                      {
-                                                                                        label:
-                                                                                          "演奏動画へのURL",
-                                                                                      },
-                                                                                    model:
-                                                                                      {
-                                                                                        value:
-                                                                                          post.url,
-                                                                                        callback:
-                                                                                          function (
-                                                                                            $$v
-                                                                                          ) {
-                                                                                            _vm.$set(
-                                                                                              post,
-                                                                                              "url",
-                                                                                              $$v
-                                                                                            )
-                                                                                          },
-                                                                                        expression:
-                                                                                          "post.url",
-                                                                                      },
-                                                                                  }
-                                                                                ),
-                                                                              ],
-                                                                              1
-                                                                            ),
-                                                                          ],
-                                                                          1
-                                                                        ),
-                                                                      ],
-                                                                      1
-                                                                    ),
-                                                                    _vm._v(" "),
-                                                                    _c(
-                                                                      "small",
-                                                                      [
-                                                                        _vm._v(
-                                                                          "*必須項目"
-                                                                        ),
-                                                                      ]
-                                                                    ),
-                                                                  ],
-                                                                  1
-                                                                ),
-                                                              ],
-                                                              1
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "v-card-actions",
-                                                              [
-                                                                _c("v-spacer"),
-                                                                _vm._v(" "),
-                                                                _c(
-                                                                  "v-btn",
-                                                                  {
-                                                                    attrs: {
-                                                                      color:
-                                                                        "blue darken-1",
-                                                                      text: "",
-                                                                    },
-                                                                    on: {
-                                                                      click:
-                                                                        _vm.closeEdit,
-                                                                    },
-                                                                  },
-                                                                  [
-                                                                    _vm._v(
-                                                                      "\n                                                                キャンセル\n                                                            "
-                                                                    ),
-                                                                  ]
-                                                                ),
-                                                                _vm._v(" "),
-                                                                _c(
-                                                                  "v-btn",
-                                                                  {
-                                                                    attrs: {
-                                                                      color:
-                                                                        "blue darken-1",
-                                                                      text: "",
-                                                                    },
-                                                                    on: {
-                                                                      click:
-                                                                        function (
-                                                                          $event
-                                                                        ) {
-                                                                          return _vm.editPost(
-                                                                            post
-                                                                          )
-                                                                        },
-                                                                    },
-                                                                  },
-                                                                  [
-                                                                    _vm._v(
-                                                                      "\n                                                                編集\n                                                            "
-                                                                    ),
-                                                                  ]
-                                                                ),
-                                                              ],
-                                                              1
-                                                            ),
-                                                          ],
-                                                          1
-                                                        ),
-                                                      ],
-                                                      1
-                                                    ),
-                                                  ],
-                                                  1
-                                                ),
-                                              ],
-                                              1
-                                            ),
-                                          ],
-                                          1
-                                        ),
-                                      ],
-                                      1
-                                    ),
-                                  ],
-                                  1
-                                ),
-                              ],
-                              1
-                            ),
-                          ],
-                          1
-                        )
-                      }),
-                      1
-                    ),
-                  ]
-                },
-                proxy: true,
               },
             ]),
           }),
@@ -1491,6 +1100,93 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./resources/js/components/posts/CreateForm.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/posts/CreateForm.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CreateForm_vue_vue_type_template_id_7ece0407___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateForm.vue?vue&type=template&id=7ece0407& */ "./resources/js/components/posts/CreateForm.vue?vue&type=template&id=7ece0407&");
+/* harmony import */ var _CreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateForm.vue?vue&type=script&lang=js& */ "./resources/js/components/posts/CreateForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _CreateForm_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CreateForm.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/posts/CreateForm.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _CreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CreateForm_vue_vue_type_template_id_7ece0407___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CreateForm_vue_vue_type_template_id_7ece0407___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/posts/CreateForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/posts/CreateForm.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/posts/CreateForm.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CreateForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/CreateForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/posts/CreateForm.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/posts/CreateForm.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateForm_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./CreateForm.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/CreateForm.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateForm_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateForm_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateForm_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateForm_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./resources/js/components/posts/CreateForm.vue?vue&type=template&id=7ece0407&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/posts/CreateForm.vue?vue&type=template&id=7ece0407& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateForm_vue_vue_type_template_id_7ece0407___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CreateForm.vue?vue&type=template&id=7ece0407& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/CreateForm.vue?vue&type=template&id=7ece0407&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateForm_vue_vue_type_template_id_7ece0407___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateForm_vue_vue_type_template_id_7ece0407___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/posts/PostIndex.vue":
 /*!*****************************************************!*\
   !*** ./resources/js/components/posts/PostIndex.vue ***!
@@ -1502,7 +1198,9 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PostIndex_vue_vue_type_template_id_c6ee1b8a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PostIndex.vue?vue&type=template&id=c6ee1b8a& */ "./resources/js/components/posts/PostIndex.vue?vue&type=template&id=c6ee1b8a&");
 /* harmony import */ var _PostIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PostIndex.vue?vue&type=script&lang=js& */ "./resources/js/components/posts/PostIndex.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _PostIndex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PostIndex.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/posts/PostIndex.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -1510,7 +1208,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _PostIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _PostIndex_vue_vue_type_template_id_c6ee1b8a___WEBPACK_IMPORTED_MODULE_0__["render"],
   _PostIndex_vue_vue_type_template_id_c6ee1b8a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -1539,6 +1237,22 @@ component.options.__file = "resources/js/components/posts/PostIndex.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PostIndex.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/PostIndex.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/posts/PostIndex.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/posts/PostIndex.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIndex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./PostIndex.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/PostIndex.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIndex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIndex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIndex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIndex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
 
 /***/ }),
 
