@@ -101,11 +101,25 @@ class PostController extends Controller
     }
     
     // レビュー編集の変更内容更新
-    public function update(PostRequest $request, Artist $artist, Song $song, Post $post)
+    public function update(Request $request, Post $post)
     {
-        $input = $request['post'];
+        $request->validate([
+            'instrument_id' => 'required|integer',
+            'experience' => 'required|integer|between:0,100',
+            'difficulty' => 'required|integer|between:1,5',
+            'body' => 'required|string|max:4000',
+            'url' => 'nullable|url'
+        ]);
+        // dd($request);
+        $input = [
+            'id' => $request['id'],
+            'instrument_id' => $request['instrument_id'],
+            'experience' => $request['experience'],
+            'difficulty' => $request['difficulty'],
+            'body' => $request['body'],
+            'url' => $request['url'],
+        ];
         $post->fill($input)->save();
-        return redirect('/artists/'. $artist->id. '/songs/'. $song->id. '/posts/instruments/'. $post->instrument->id);
     }
     
     // レビュー削除
