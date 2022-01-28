@@ -21,10 +21,16 @@
 </head>
 <body>
     <div id="app">
-        <main class="py-4">
-            @yield('content')
+        <main>
             <v-app>
-                <menu-bar></menu-bar>
+                @auth
+                    <menu-bar
+                    :user="{{ Auth::user() }}"
+                    ></menu-bar>
+                @else
+                    <menu-bar
+                    ></menu-bar>
+                @endauth
                 <v-main>
                     <v-spacer class="my-12"/>
                     <router-view/>

@@ -18,7 +18,7 @@
                 </v-col>
             </v-row>
             <v-data-table class="elevation-1 post-index" :items="selectedPosts" sort-by="updated_at" :headers="headers">
-                <template v-slot:header>
+                <template v-slot:top>
                     <v-toolbar flat dark color="blue darken-3" class="mb-1">
                         <v-toolbar-title>
                             <v-icon>
@@ -53,36 +53,36 @@
                                 </v-list-item-title>
                             </v-list-item-content>
                         </v-list-item>
-                        <v-col cols="2">
+                        <v-col cols="3">
                             <v-list dense>
                                 <v-list-item>
                                     <v-list-item-content>
-                                        難易度: {{ item.difficulty }}
+                                        簡単度: {{ item.difficulty }}点
                                     </v-list-item-content>
                                 </v-list-item>
                                 <v-list-item>
                                     <v-list-item-content>
-                                        難易度: {{ item.difficulty }}
+                                        耳コピしやすさ: {{ item.difficulty }}点
                                     </v-list-item-content>
                                 </v-list-item>
                                 <v-list-item>
                                     <v-list-item-content>
-                                        難易度: {{ item.difficulty }}
+                                        覚えやすさ: {{ item.difficulty }}点
                                     </v-list-item-content>
                                 </v-list-item>
                                 <v-list-item>
                                     <v-list-item-content>
-                                        難易度: {{ item.difficulty }}
+                                        必要機材の少なさ: {{ item.difficulty }}点
                                     </v-list-item-content>
                                 </v-list-item>
                                 <v-list-item>
                                     <v-list-item-content>
-                                        難易度: {{ item.difficulty }}
+                                        楽しさ: {{ item.difficulty }}点
                                     </v-list-item-content>
                                 </v-list-item>
                             </v-list>
                         </v-col>
-                        <v-col cols="10">
+                        <v-col cols="9">
                             <v-list dense>
                                 <v-list-item>
                                     <v-card max-width="700" min-width="700" elevation="1">
@@ -101,6 +101,21 @@
                                         {{ item.updated_at }}
                                     </v-list-item-content>
                                 </v-list-item>
+                                <v-list-item>
+                                    <v-btn class="ma-2" outlined @click="editDialog = true">
+                                        編集
+                                        <v-icon right>
+                                            mdi-pencil
+                                        </v-icon>
+                                    </v-btn>
+                                    <edit-form
+                                        :post=item
+                                        :instruments=instruments
+                                        :editDialog=editDialog
+                                        @save="editPost"
+                                        @close="closeEdit"
+                                    ></edit-form>
+                                </v-list-item>
                             </v-list>
                         </v-col>
                     </v-row>
@@ -117,10 +132,12 @@
 
 <script>
     import CreateForm from './CreateForm'
+    import EditForm from './EditForm'
     export default {
         name: 'PostIndex',
         components: {
-            CreateForm
+            CreateForm,
+            EditForm
         },
         data() {
             return {
