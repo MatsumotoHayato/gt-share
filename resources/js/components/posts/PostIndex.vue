@@ -17,7 +17,7 @@
                     ></v-select>
                 </v-col>
             </v-row>
-            <v-data-table class="elevation-1 post-index" :items="selectedPosts" sort-by="updated_at" :headers="headers">
+            <v-data-table class="elevation-1 post-index" :items="selectedPosts" :sort-by="sortBy" sort-desc :headers="headers" hide-default-header>
                 <template v-slot:top>
                     <v-toolbar flat dark color="blue darken-3" class="mb-1">
                         <v-toolbar-title>
@@ -26,7 +26,17 @@
                             </v-icon>
                             レビュー一覧
                         </v-toolbar-title>
-                        <v-divider class="ml-4 mr-12" inset vertical></v-divider>
+                        <v-divider class="mx-4" inset vertical></v-divider>
+                        <v-select
+                            class="sort-select"
+                            v-model="sortBy"
+                            :items="sortList"
+                            item-value="value"
+                            item-text="text"
+                            flat
+                            solo-inverted
+                            hide-details
+                        ></v-select>
                         <v-spacer></v-spacer>
                         <v-btn class="ma-2" outlined @click="createDialog = true">
                             新規レビュー
@@ -101,7 +111,7 @@
                                         {{ item.updated_at }}
                                     </v-list-item-content>
                                 </v-list-item>
-                                <v-list-item>
+                                <v-list-item v-if="item.user.id === currentUser.id">
                                     <v-btn outlined @click="editDialog = true">
                                         編集
                                         <v-icon right>
@@ -170,6 +180,11 @@
                 headers: [
                     { text: "投稿日時", value: "updated_at", align: "start" },
                 ],
+                sortBy: 'users_count',
+                sortList: [
+                    { text: 'いいねが多い順', value: 'users_count'},
+                    { text: '新しい順', value: 'updated_at'},
+                ],
                 createDialog: false,
                 editDialog: false,
                 breadCrumbs: [
@@ -198,21 +213,22 @@
                         this.posts = response.data.posts
                         this.instruments = response.data.instruments
                         this.initFetchPosts()
-                        this.setBreadCrumbs(response)
                     })
             },
-            setBreadCrumbs(response) {
-                this.breadCrumbs.push(
-                    {
-                        text: response.data.artist.name,
-                        disabled: false,
-                        to: `/vue/artists/${response.data.artist.id}`
-                    },
-                    {
-                        text: response.data.song.name,
-                        disabled: true,
-                    },
-                )
+            setBreadCrumbs() {
+                axios.get(`/songs/${this.songId}`)
+                    .then((response)=>{
+                        this.breadCrumbs.push(
+                            {
+                                text: response.data.artist.name,
+                                disabled: false,
+                                to: `/vue/artists/${response.data.artist.id}`
+                            },
+                            {
+                                text: response.data.song.name,
+                                disabled: true,
+                            }
+                    )})
             },
             fetchPosts(e) {
                 this.selectedPosts = this.posts.filter((post) => post.instrument_id === e)
@@ -265,6 +281,7 @@
         },
         mounted() {
             this.getPosts()
+            this.setBreadCrumbs()
         },
         watch: {
             selectedInstrumentId(newValue) {

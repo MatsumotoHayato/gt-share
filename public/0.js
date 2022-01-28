@@ -411,6 +411,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -435,6 +445,14 @@ __webpack_require__.r(__webpack_exports__);
         text: "投稿日時",
         value: "updated_at",
         align: "start"
+      }],
+      sortBy: 'users_count',
+      sortList: [{
+        text: 'いいねが多い順',
+        value: 'users_count'
+      }, {
+        text: '新しい順',
+        value: 'updated_at'
       }],
       createDialog: false,
       editDialog: false,
@@ -465,18 +483,20 @@ __webpack_require__.r(__webpack_exports__);
         _this.instruments = response.data.instruments;
 
         _this.initFetchPosts();
-
-        _this.setBreadCrumbs(response);
       });
     },
-    setBreadCrumbs: function setBreadCrumbs(response) {
-      this.breadCrumbs.push({
-        text: response.data.artist.name,
-        disabled: false,
-        to: "/vue/artists/".concat(response.data.artist.id)
-      }, {
-        text: response.data.song.name,
-        disabled: true
+    setBreadCrumbs: function setBreadCrumbs() {
+      var _this2 = this;
+
+      axios.get("/songs/".concat(this.songId)).then(function (response) {
+        _this2.breadCrumbs.push({
+          text: response.data.artist.name,
+          disabled: false,
+          to: "/vue/artists/".concat(response.data.artist.id)
+        }, {
+          text: response.data.song.name,
+          disabled: true
+        });
       });
     },
     fetchPosts: function fetchPosts(e) {
@@ -498,48 +518,49 @@ __webpack_require__.r(__webpack_exports__);
       this.editDialog = false;
     },
     createPost: function createPost(post) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.post("/songs/".concat(this.songId, "/posts"), post).then(function (response) {
         if (response.status == 200) {
-          _this2.closeCreate();
-
-          _this2.getPosts();
-        }
-      });
-    },
-    editPost: function editPost(post) {
-      var _this3 = this;
-
-      axios.put("/posts/".concat(post.id), post).then(function (response) {
-        if (response.status == 200) {
-          _this3.closeEdit();
+          _this3.closeCreate();
 
           _this3.getPosts();
         }
       });
     },
-    favorite: function favorite(post) {
+    editPost: function editPost(post) {
       var _this4 = this;
 
-      axios.post("/posts/".concat(post.id, "/favorite"), post).then(function (response) {
+      axios.put("/posts/".concat(post.id), post).then(function (response) {
         if (response.status == 200) {
+          _this4.closeEdit();
+
           _this4.getPosts();
         }
       });
     },
-    unfavorite: function unfavorite(post) {
+    favorite: function favorite(post) {
       var _this5 = this;
+
+      axios.post("/posts/".concat(post.id, "/favorite"), post).then(function (response) {
+        if (response.status == 200) {
+          _this5.getPosts();
+        }
+      });
+    },
+    unfavorite: function unfavorite(post) {
+      var _this6 = this;
 
       axios.post("/posts/".concat(post.id, "/unfavorite"), post).then(function (response) {
         if (response.status == 200) {
-          _this5.getPosts();
+          _this6.getPosts();
         }
       });
     }
   },
   mounted: function mounted() {
     this.getPosts();
+    this.setBreadCrumbs();
   },
   watch: {
     selectedInstrumentId: function selectedInstrumentId(newValue) {
@@ -1170,8 +1191,10 @@ var render = function () {
             staticClass: "elevation-1 post-index",
             attrs: {
               items: _vm.selectedPosts,
-              "sort-by": "updated_at",
+              "sort-by": _vm.sortBy,
+              "sort-desc": "",
               headers: _vm.headers,
+              "hide-default-header": "",
             },
             scopedSlots: _vm._u([
               {
@@ -1201,8 +1224,27 @@ var render = function () {
                         ),
                         _vm._v(" "),
                         _c("v-divider", {
-                          staticClass: "ml-4 mr-12",
+                          staticClass: "mx-4",
                           attrs: { inset: "", vertical: "" },
+                        }),
+                        _vm._v(" "),
+                        _c("v-select", {
+                          staticClass: "sort-select",
+                          attrs: {
+                            items: _vm.sortList,
+                            "item-value": "value",
+                            "item-text": "text",
+                            flat: "",
+                            "solo-inverted": "",
+                            "hide-details": "",
+                          },
+                          model: {
+                            value: _vm.sortBy,
+                            callback: function ($$v) {
+                              _vm.sortBy = $$v
+                            },
+                            expression: "sortBy",
+                          },
                         }),
                         _vm._v(" "),
                         _c("v-spacer"),
@@ -1440,46 +1482,52 @@ var render = function () {
                                   1
                                 ),
                                 _vm._v(" "),
-                                _c(
-                                  "v-list-item",
-                                  [
-                                    _c(
-                                      "v-btn",
-                                      {
-                                        attrs: { outlined: "" },
-                                        on: {
-                                          click: function ($event) {
-                                            _vm.editDialog = true
-                                          },
-                                        },
-                                      },
+                                item.user.id === _vm.currentUser.id
+                                  ? _c(
+                                      "v-list-item",
                                       [
-                                        _vm._v(
-                                          "\n                                    編集\n                                    "
+                                        _c(
+                                          "v-btn",
+                                          {
+                                            attrs: { outlined: "" },
+                                            on: {
+                                              click: function ($event) {
+                                                _vm.editDialog = true
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                    編集\n                                    "
+                                            ),
+                                            _c(
+                                              "v-icon",
+                                              { attrs: { right: "" } },
+                                              [
+                                                _vm._v(
+                                                  "\n                                        mdi-pencil\n                                    "
+                                                ),
+                                              ]
+                                            ),
+                                          ],
+                                          1
                                         ),
-                                        _c("v-icon", { attrs: { right: "" } }, [
-                                          _vm._v(
-                                            "\n                                        mdi-pencil\n                                    "
-                                          ),
-                                        ]),
+                                        _vm._v(" "),
+                                        _c("edit-form", {
+                                          attrs: {
+                                            post: item,
+                                            instruments: _vm.instruments,
+                                            editDialog: _vm.editDialog,
+                                          },
+                                          on: {
+                                            save: _vm.editPost,
+                                            close: _vm.closeEdit,
+                                          },
+                                        }),
                                       ],
                                       1
-                                    ),
-                                    _vm._v(" "),
-                                    _c("edit-form", {
-                                      attrs: {
-                                        post: item,
-                                        instruments: _vm.instruments,
-                                        editDialog: _vm.editDialog,
-                                      },
-                                      on: {
-                                        save: _vm.editPost,
-                                        close: _vm.closeEdit,
-                                      },
-                                    }),
-                                  ],
-                                  1
-                                ),
+                                    )
+                                  : _vm._e(),
                                 _vm._v(" "),
                                 _c(
                                   "v-list-item",

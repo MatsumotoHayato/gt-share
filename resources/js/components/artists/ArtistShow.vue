@@ -146,16 +146,17 @@
                     .then((response)=>{
                         this.artist=response.data.artist
                         this.songs=response.data.songs
-                        this.setBreadCrumbs(response)
                     })
             },
-            setBreadCrumbs(response) {
-                this.breadCrumbs.push(
-                    {
-                        text: response.data.artist.name,
-                        disabled: true,
-                    }
-                )
+            setBreadCrumbs() {
+                axios.get(`/artists/${this.artistId}`)
+                    .then((response)=>{
+                        this.breadCrumbs.push(
+                            {
+                                text: response.data.artist.name,
+                                disabled: true,
+                            }
+                    )})
             },
             close () {
                 this.dialog = false
@@ -177,6 +178,7 @@
         },
         mounted() {
             this.getSongs()
+            this.setBreadCrumbs()
         }
     }
 </script>
