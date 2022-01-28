@@ -162,27 +162,29 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("/artists/".concat(this.artistId)).then(function (response) {
         _this.artist = response.data.artist;
         _this.songs = response.data.songs;
-
-        _this.setBreadCrumbs(response);
       });
     },
-    setBreadCrumbs: function setBreadCrumbs(response) {
-      this.breadCrumbs.push({
-        text: response.data.artist.name,
-        disabled: true
+    setBreadCrumbs: function setBreadCrumbs() {
+      var _this2 = this;
+
+      axios.get("/artists/".concat(this.artistId)).then(function (response) {
+        _this2.breadCrumbs.push({
+          text: response.data.artist.name,
+          disabled: true
+        });
       });
     },
     close: function close() {
       this.dialog = false;
     },
     save: function save() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.post("/artists/".concat(this.artistId, "/songs"), this.newSong).then(function (response) {
         if (response.status == 200) {
-          _this2.close();
+          _this3.close();
 
-          _this2.getSongs();
+          _this3.getSongs();
         }
       });
     },
@@ -194,6 +196,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getSongs();
+    this.setBreadCrumbs();
   }
 });
 
