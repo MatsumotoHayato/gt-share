@@ -36,7 +36,7 @@ class PostController extends Controller
             'user' => Auth::user(),
             'artist' => $song->artist,
             'song' => $song,
-            'posts' => Post::with(['user', 'instrument'])->where('song_id', $song->id)->orderBy('updated_at', 'DESC')->get(),
+            'posts' => Post::with(['user', 'instrument'])->withCount('users')->where('song_id', $song->id)->orderBy('updated_at', 'DESC')->get(),
             'instruments' => Instrument::get()
         ];
     }
@@ -129,21 +129,19 @@ class PostController extends Controller
         return redirect('/artists/'. $artist->id. '/songs/'. $song->id. '/posts/instruments/'. $post->instrument->id);
     }
     
-    // 役に立った機能
-    public function favorite(Artist $artist, Song $song, Post $post)
+    // いいね機能
+    public function favorite(Post $post)
     {
         $post->users()->attach(Auth::id());
-        return redirect('/artists/'. $artist->id. '/songs/'. $song->id. '/posts/instruments/'. $post->instrument->id);
     }
     
-    // 役に立った取り消し機能
-    public function unfavorite(Artist $artist, Song $song, Post $post)
+    // いいね取り消し機能
+    public function unfavorite(Post $post)
     {
         $post->users()->detach(Auth::id());
-        return redirect('/artists/'. $artist->id. '/songs/'. $song->id. '/posts/instruments/'. $post->instrument->id);
     }
     
-    // 役に立ったマイリスト
+    // いいねマイリスト
     public function mylist(Post $post)
     {
         return [

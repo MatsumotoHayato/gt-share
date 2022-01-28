@@ -132,7 +132,7 @@ var render = function () {
         [
           _c("v-row", [
             _c("p", { staticClass: "text-h5 font-weight-bold" }, [
-              _vm._v(_vm._s(_vm.user.name) + " の役に立ったマイリスト"),
+              _vm._v("いいねマイリスト"),
             ]),
           ]),
           _vm._v(" "),

@@ -66,8 +66,8 @@
                 menus: [
                     { title: 'ホーム', icon: 'mdi-home', path: '/' },
                     { title: 'ランキング', icon: 'mdi-crown', path: '/vue/ranking' },
-                    { title: 'マイリスト', icon: 'mdi-thumb-up', path: '/vue/mylist' },
-                    { title: '自分の投稿', icon: 'mdi-text-box', path: '/vue/myposts' },
+                    { title: 'いいねマイリスト', icon: 'mdi-thumb-up', path: '/vue/mylist' },
+                    { title: 'あなたの投稿', icon: 'mdi-text-box', path: '/vue/myposts' },
                 ],
             }
         },

@@ -2,7 +2,7 @@
     <div>
         <v-container>
             <v-row>
-                <p class="text-h5 font-weight-bold">{{ user.name }} の投稿</p>
+                <p class="text-h5 font-weight-bold">あなたの投稿</p>
             </v-row>
             <v-data-iterator class="elevation-1" :items="posts">
                 <template v-slot:header>
