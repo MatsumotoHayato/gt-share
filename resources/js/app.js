@@ -40,5 +40,5 @@ const app = new Vue({
     vuetify: Vuetify,
     components: {
         MenuBar
-    }
+    },
 });

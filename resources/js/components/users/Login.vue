@@ -29,18 +29,18 @@
                     @click:append="passwordShow = !passwordShow"
                 ></v-text-field>
             </v-row>
-            <v-row>
-                <span>パスワードを忘れた場合は</span>
-                <v-btn
-                    class="x-small link-text align-center"
-                    color="blue darken-1"
-                    width="64"
-                    text
-                    to="/"
-                >
-                    こちら
-                </v-btn>
-            </v-row>
+            <!--<v-row>-->
+            <!--    <span>パスワードを忘れた場合は</span>-->
+            <!--    <v-btn-->
+            <!--        class="x-small link-text align-center"-->
+            <!--        color="blue darken-1"-->
+            <!--        width="64"-->
+            <!--        text-->
+            <!--        to="/"-->
+            <!--    >-->
+            <!--        こちら-->
+            <!--    </v-btn>-->
+            <!--</v-row>-->
             <v-row class="mt-16 mb-8">
                 <v-btn
                     class="text-subtitle-1"

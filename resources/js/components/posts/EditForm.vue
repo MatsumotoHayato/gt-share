@@ -1,8 +1,8 @@
 <template>
-    <v-dialog v-model="createDialog" persistent max-width="600px">
+    <v-dialog v-model="editDialog" max-width="600px" @click:outside="close" @keydown.esc="close">
         <v-card>
             <v-card-title>
-                <span class="text-h5">{{ song.name }} / {{ artist.name }} の新規レビュー投稿</span>
+                <span class="text-h5">レビュー編集</span>
             </v-card-title>
             <v-card-text>
                 <v-form>
@@ -10,7 +10,7 @@
                         <v-row>
                             <v-col cols="6">
                                 <v-select
-                                    v-model="newPost.instrument_id"
+                                    v-model="editedPost.instrument_id"
                                     :items="instruments"
                                     item-text="name"
                                     item-value="id"
@@ -23,7 +23,7 @@
                             <v-spacer/>
                             <v-col cols="4">
                                 <v-text-field
-                                    v-model="newPost.experience"
+                                    v-model="editedPost.experience"
                                     type="number"
                                     max="100"
                                     min="0"
@@ -36,7 +36,7 @@
                         <v-row>
                             <v-col cols="6">
                                 <v-text-field
-                                    v-model="newPost.difficulty"
+                                    v-model="editedPost.difficulty"
                                     type="number"
                                     max="5"
                                     min="1"
@@ -49,7 +49,7 @@
                         <v-row>
                             <v-col cols="12">
                                 <v-textarea
-                                    v-model="newPost.body"
+                                    v-model="editedPost.body"
                                     label="感想*"
                                     placeholder="練習時間、演奏のコツ、使用機材、楽しかった箇所など…"
                                     :rules="[rules.required, rules.counter]"
@@ -61,7 +61,7 @@
                         <v-row>
                             <v-col cols="12">
                                 <v-text-field
-                                    v-model="newPost.url"
+                                    v-model="editedPost.url"
                                     label="演奏動画へのURL"
                                     ></v-text-field>
                             </v-col>
@@ -77,7 +77,7 @@
                     キャンセル
                 </v-btn>
                 <v-btn color="blue darken-1" text @click="save">
-                    追加
+                    編集
                 </v-btn>
             </v-card-actions>
         </v-card>
@@ -86,22 +86,15 @@
 
 <script>
     export default {
-        name: 'CreateForm',
+        name: 'EditForm',
         props: [
-            'createDialog',
-            'artist',
-            'song',
-            'instruments'
+            'editDialog',
+            'post',
+            'instruments',
         ],
         data() {
             return {
-                newPost: {
-                    instrument_id: '',
-                    experience: '',
-                    difficulty: '',
-                    body: '',
-                    url: '',
-                },
+                editedPost: this.post,
                 rules: {
                     required: value => !!value || '入力は必須です',
                     counter: value => value.length <= 4000 || '4000文字以内で入力してください',
@@ -113,8 +106,8 @@
                 this.$emit('close')
             },
             save() {
-                this.$emit('save', this.newPost)
+                this.$emit('save', this.editedPost)
             }
-        }
+        },
     }
 </script>
