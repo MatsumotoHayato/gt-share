@@ -2,7 +2,7 @@
     <div>
         <v-container>
             <v-row>
-                <p class="text-h5 font-weight-bold">{{ user.name }} の役に立ったマイリスト</p>
+                <p class="text-h5 font-weight-bold">いいねマイリスト</p>
             </v-row>
             <v-data-iterator class="elevation-1" :items="posts" hide-default-footer>
                 <template v-slot:header>

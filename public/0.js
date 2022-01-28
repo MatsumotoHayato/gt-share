@@ -395,6 +395,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -481,10 +497,10 @@ __webpack_require__.r(__webpack_exports__);
     closeEdit: function closeEdit() {
       this.editDialog = false;
     },
-    createPost: function createPost(obj) {
+    createPost: function createPost(post) {
       var _this2 = this;
 
-      axios.post("/songs/".concat(this.songId, "/posts"), obj).then(function (response) {
+      axios.post("/songs/".concat(this.songId, "/posts"), post).then(function (response) {
         if (response.status == 200) {
           _this2.closeCreate();
 
@@ -500,6 +516,24 @@ __webpack_require__.r(__webpack_exports__);
           _this3.closeEdit();
 
           _this3.getPosts();
+        }
+      });
+    },
+    favorite: function favorite(post) {
+      var _this4 = this;
+
+      axios.post("/posts/".concat(post.id, "/favorite"), post).then(function (response) {
+        if (response.status == 200) {
+          _this4.getPosts();
+        }
+      });
+    },
+    unfavorite: function unfavorite(post) {
+      var _this5 = this;
+
+      axios.post("/posts/".concat(post.id, "/unfavorite"), post).then(function (response) {
+        if (response.status == 200) {
+          _this5.getPosts();
         }
       });
     }
@@ -1412,7 +1446,6 @@ var render = function () {
                                     _c(
                                       "v-btn",
                                       {
-                                        staticClass: "ma-2",
                                         attrs: { outlined: "" },
                                         on: {
                                           click: function ($event) {
@@ -1444,6 +1477,80 @@ var render = function () {
                                         close: _vm.closeEdit,
                                       },
                                     }),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-list-item",
+                                  [
+                                    _c(
+                                      "v-btn",
+                                      {
+                                        attrs: { outlined: "", color: "grey" },
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.favorite(item)
+                                          },
+                                        },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                    いいね\n                                    "
+                                        ),
+                                        _c(
+                                          "v-icon",
+                                          {
+                                            staticClass: "ml-3 mr-1",
+                                            attrs: { right: "" },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                        mdi-thumb-up\n                                    "
+                                            ),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("span", [
+                                          _vm._v(_vm._s(item.users_count)),
+                                        ]),
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-btn",
+                                      {
+                                        attrs: { color: "primary" },
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.unfavorite(item)
+                                          },
+                                        },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                    いいね\n                                    "
+                                        ),
+                                        _c(
+                                          "v-icon",
+                                          {
+                                            staticClass: "ml-3 mr-1",
+                                            attrs: { right: "" },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                        mdi-thumb-up\n                                    "
+                                            ),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("span", [
+                                          _vm._v(_vm._s(item.users_count)),
+                                        ]),
+                                      ],
+                                      1
+                                    ),
                                   ],
                                   1
                                 ),

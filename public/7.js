@@ -124,7 +124,7 @@ var render = function () {
         [
           _c("v-row", [
             _c("p", { staticClass: "text-h5 font-weight-bold" }, [
-              _vm._v(_vm._s(_vm.user.name) + " の投稿"),
+              _vm._v("あなたの投稿"),
             ]),
           ]),
           _vm._v(" "),

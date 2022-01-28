@@ -102,7 +102,7 @@
                                     </v-list-item-content>
                                 </v-list-item>
                                 <v-list-item>
-                                    <v-btn class="ma-2" outlined @click="editDialog = true">
+                                    <v-btn outlined @click="editDialog = true">
                                         編集
                                         <v-icon right>
                                             mdi-pencil
@@ -115,6 +115,22 @@
                                         @save="editPost"
                                         @close="closeEdit"
                                     ></edit-form>
+                                </v-list-item>
+                                <v-list-item>
+                                    <v-btn outlined color="grey" @click="favorite(item)">
+                                        いいね
+                                        <v-icon right class="ml-3 mr-1">
+                                            mdi-thumb-up
+                                        </v-icon>
+                                        <span>{{ item.users_count }}</span>
+                                    </v-btn>
+                                    <v-btn color="primary" @click="unfavorite(item)">
+                                        いいね
+                                        <v-icon right class="ml-3 mr-1">
+                                            mdi-thumb-up
+                                        </v-icon>
+                                        <span>{{ item.users_count }}</span>
+                                    </v-btn>
                                 </v-list-item>
                             </v-list>
                         </v-col>
@@ -212,8 +228,8 @@
             closeEdit() {
                 this.editDialog = false
             },
-            createPost(obj) {
-                axios.post(`/songs/${this.songId}/posts`, obj)
+            createPost(post) {
+                axios.post(`/songs/${this.songId}/posts`, post)
                     .then((response)=>{
                         if(response.status == 200) {
                             this.closeCreate()
@@ -230,6 +246,22 @@
                         }
                     })
             },
+            favorite(post) {
+                axios.post(`/posts/${post.id}/favorite`, post)
+                    .then((response)=>{
+                        if(response.status == 200) {
+                            this.getPosts()
+                        }
+                    })
+            },
+            unfavorite(post) {
+                axios.post(`/posts/${post.id}/unfavorite`, post)
+                    .then((response)=>{
+                        if(response.status == 200) {
+                            this.getPosts()
+                        }
+                    })
+            }
         },
         mounted() {
             this.getPosts()
