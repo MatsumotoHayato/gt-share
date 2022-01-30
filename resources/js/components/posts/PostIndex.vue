@@ -1,13 +1,6 @@
 <template>
     <div>
         <v-container>
-            <edit-form
-                :post=editedPost
-                :instruments=instruments
-                :editDialog=editDialog
-                @save="editPost"
-                @close="closeEdit"
-            ></edit-form>
             <v-row>
                 <p class="text-h5 font-weight-bold">{{ song.name}} / {{ artist.name }}</p>
             </v-row>
@@ -51,14 +44,12 @@
                                 mdi-pencil-plus
                             </v-icon>
                         </v-btn>
-                        <create-form
-                            :artist=artist
-                            :song=song
-                            :instruments=instruments
+                        <CreateForm
                             :createDialog=createDialog
+                            :instruments=instruments
                             @save="createPost"
                             @close="closeCreate"
-                        ></create-form>
+                        />
                     </v-toolbar>
                 </template>
                 <template v-slot:item.updated_at="{ item }">
@@ -125,7 +116,13 @@
                                             mdi-pencil
                                         </v-icon>
                                     </v-btn>
-                                    
+                                    <EditForm
+                                        :editDialog=editDialog
+                                        :post=postToEditForm
+                                        :instruments=instruments
+                                        @save="editPost"
+                                        @close="closeEdit"
+                                    />
                                 </v-list-item>
                                 <v-list-item>
                                     <v-btn v-if="item.favorite_check" color="primary" @click="unfavorite(item)">
@@ -175,7 +172,7 @@
                 artist: [],
                 song: [],
                 posts: [],
-                editedPost: [],
+                postToEditForm: [],
                 selectedPosts: [],
                 selectedInstrumentId: 1,
                 instruments: [],
@@ -264,6 +261,10 @@
                         }
                     })
             },
+            openEditForm(post) {
+                this.postToEditForm = post
+                this.editDialog = true
+            },
             favorite(post) {
                 axios.post(`/posts/${post.id}/favorite`, post)
                     .then((response)=>{
@@ -280,10 +281,6 @@
                         }
                     })
             },
-            openEditForm(post) {
-                this.editedPost = post
-                this.editDialog = true
-            }
         },
         mounted() {
             this.getPosts()

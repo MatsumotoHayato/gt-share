@@ -2,7 +2,7 @@
     <v-dialog v-model="createDialog" persistent max-width="600px">
         <v-card>
             <v-card-title>
-                <span class="text-h5">{{ song.name }} / {{ artist.name }} の新規レビュー投稿</span>
+                <span class="text-h5">新規レビュー投稿</span>
             </v-card-title>
             <v-card-text>
                 <v-form>
@@ -89,8 +89,6 @@
         name: 'CreateForm',
         props: [
             'createDialog',
-            'artist',
-            'song',
             'instruments'
         ],
         data() {

@@ -15,9 +15,8 @@
                                     item-text="name"
                                     item-value="id"
                                     label="楽器*"
-                                    :rules="[rules.required]"
                                     single-line
-                                    required
+                                    disabled
                                 ></v-select>
                             </v-col>
                             <v-spacer/>

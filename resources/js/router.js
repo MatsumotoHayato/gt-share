@@ -6,8 +6,8 @@ Vue.use(Router)
 export default new Router({
 	routes: [
         { path: '/', component: ()=>import('./components/artists/ArtistIndex'), name: 'ArtistIndex' },
-        { path: '/vue/login', component: ()=>import('./components/users/Login'), name: 'Login' },
-        { path: '/vue/register', component: ()=>import('./components/users/Register'), name: 'Register' },
+        // { path: '/vue/login', component: ()=>import('./components/users/LoginPage'), name: 'LoginPage' },
+        // { path: '/vue/register', component: ()=>import('./components/users/RegisterPage'), name: 'RegisterPage' },
         { path: '/vue/artists/:artistId', component: ()=>import('./components/artists/ArtistShow'), name: 'ArtistShow' },
         { path: '/vue/songs/:songId', component: ()=>import('./components/posts/PostIndex'), name: 'PostIndex' },
         { path: '/vue/mylist', component: ()=>import('./components/posts/MyList'), name: 'MyList' },

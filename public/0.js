@@ -97,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateForm',
-  props: ['createDialog', 'artist', 'song', 'instruments'],
+  props: ['createDialog', 'instruments'],
   data: function data() {
     return {
       newPost: {
@@ -138,7 +138,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -424,9 +423,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -444,7 +440,7 @@ __webpack_require__.r(__webpack_exports__);
       artist: [],
       song: [],
       posts: [],
-      editedPost: [],
+      postToEditForm: [],
       selectedPosts: [],
       selectedInstrumentId: 1,
       instruments: [],
@@ -546,6 +542,10 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    openEditForm: function openEditForm(post) {
+      this.postToEditForm = post;
+      this.editDialog = true;
+    },
     favorite: function favorite(post) {
       var _this5 = this;
 
@@ -563,10 +563,6 @@ __webpack_require__.r(__webpack_exports__);
           _this6.getPosts();
         }
       });
-    },
-    openEditForm: function openEditForm(post) {
-      this.editedPost = post;
-      this.editDialog = true;
     }
   },
   mounted: function mounted() {
@@ -664,12 +660,7 @@ var render = function () {
         [
           _c("v-card-title", [
             _c("span", { staticClass: "text-h5" }, [
-              _vm._v(
-                _vm._s(_vm.song.name) +
-                  " / " +
-                  _vm._s(_vm.artist.name) +
-                  " の新規レビュー投稿"
-              ),
+              _vm._v("新規レビュー投稿"),
             ]),
           ]),
           _vm._v(" "),
@@ -950,9 +941,8 @@ var render = function () {
                                   "item-text": "name",
                                   "item-value": "id",
                                   label: "楽器*",
-                                  rules: [_vm.rules.required],
                                   "single-line": "",
-                                  required: "",
+                                  disabled: "",
                                 },
                                 model: {
                                   value: _vm.editedPost.instrument_id,
@@ -1161,15 +1151,6 @@ var render = function () {
       _c(
         "v-container",
         [
-          _c("edit-form", {
-            attrs: {
-              post: _vm.editedPost,
-              instruments: _vm.instruments,
-              editDialog: _vm.editDialog,
-            },
-            on: { save: _vm.editPost, close: _vm.closeEdit },
-          }),
-          _vm._v(" "),
           _c("v-row", [
             _c("p", { staticClass: "text-h5 font-weight-bold" }, [
               _vm._v(_vm._s(_vm.song.name) + " / " + _vm._s(_vm.artist.name)),
@@ -1293,12 +1274,10 @@ var render = function () {
                           1
                         ),
                         _vm._v(" "),
-                        _c("create-form", {
+                        _c("CreateForm", {
                           attrs: {
-                            artist: _vm.artist,
-                            song: _vm.song,
-                            instruments: _vm.instruments,
                             createDialog: _vm.createDialog,
+                            instruments: _vm.instruments,
                           },
                           on: { save: _vm.createPost, close: _vm.closeCreate },
                         }),
@@ -1532,6 +1511,18 @@ var render = function () {
                                           ],
                                           1
                                         ),
+                                        _vm._v(" "),
+                                        _c("EditForm", {
+                                          attrs: {
+                                            editDialog: _vm.editDialog,
+                                            post: _vm.postToEditForm,
+                                            instruments: _vm.instruments,
+                                          },
+                                          on: {
+                                            save: _vm.editPost,
+                                            close: _vm.closeEdit,
+                                          },
+                                        }),
                                       ],
                                       1
                                     )
