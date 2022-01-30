@@ -1,6 +1,13 @@
 <template>
     <div>
         <v-container>
+            <edit-form
+                :post=editedPost
+                :instruments=instruments
+                :editDialog=editDialog
+                @save="editPost"
+                @close="closeEdit"
+            ></edit-form>
             <v-row>
                 <p class="text-h5 font-weight-bold">{{ song.name}} / {{ artist.name }}</p>
             </v-row>
@@ -112,29 +119,23 @@
                                     </v-list-item-content>
                                 </v-list-item>
                                 <v-list-item v-if="item.user.id === currentUser.id">
-                                    <v-btn outlined @click="editDialog = true">
+                                    <v-btn outlined @click="openEditForm(item)">
                                         編集
                                         <v-icon right>
                                             mdi-pencil
                                         </v-icon>
                                     </v-btn>
-                                    <edit-form
-                                        :post=item
-                                        :instruments=instruments
-                                        :editDialog=editDialog
-                                        @save="editPost"
-                                        @close="closeEdit"
-                                    ></edit-form>
+                                    
                                 </v-list-item>
                                 <v-list-item>
-                                    <v-btn outlined color="grey" @click="favorite(item)">
+                                    <v-btn v-if="item.favorite_check" color="primary" @click="unfavorite(item)">
                                         いいね
                                         <v-icon right class="ml-3 mr-1">
                                             mdi-thumb-up
                                         </v-icon>
                                         <span>{{ item.users_count }}</span>
                                     </v-btn>
-                                    <v-btn color="primary" @click="unfavorite(item)">
+                                    <v-btn v-else outlined color="grey" @click="favorite(item)">
                                         いいね
                                         <v-icon right class="ml-3 mr-1">
                                             mdi-thumb-up
@@ -174,6 +175,7 @@
                 artist: [],
                 song: [],
                 posts: [],
+                editedPost: [],
                 selectedPosts: [],
                 selectedInstrumentId: 1,
                 instruments: [],
@@ -277,6 +279,10 @@
                             this.getPosts()
                         }
                     })
+            },
+            openEditForm(post) {
+                this.editedPost = post
+                this.editDialog = true
             }
         },
         mounted() {

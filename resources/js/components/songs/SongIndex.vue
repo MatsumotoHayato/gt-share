@@ -110,10 +110,10 @@
                     </v-toolbar>
                 </template>
                 <template v-slot:item.name="{ item }">
-                    <router-link class="font-weight-bold song-link" :to="`/vue/songs/${item.id}`">{{ item.name }}</router-link>
+                    <a class="font-weight-bold song-link" @click.stop="postIndexLink(item)">{{ item.name }}</a>
                 </template>
                 <template v-slot:item.artist="{ item }">
-                    <router-link class="artist-link" :to="`/vue/artists/${item.artist_id}`">{{ item.artist.name }}</router-link>
+                    <a class="artist-link" @click.stop="artistShowLink(item)">{{ item.artist.name }}</a>
                 </template>
             </v-data-table>
         </v-container>
@@ -163,6 +163,16 @@
             clickRow(e) {
                 this.$router.push({
                     path: `/vue/songs/${e.id}`
+                })
+            },
+            postIndexLink(item) {
+                this.$router.push({
+                    path: `/vue/songs/${item.id}`
+                })
+            },
+            artistShowLink(item) {
+                this.$router.push({
+                    path: `/vue/artists/${item.artist_id}`
                 })
             }
         },

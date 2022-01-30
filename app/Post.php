@@ -15,6 +15,10 @@ class Post extends Model
         'user_id', 'song_id', 'instrument_id',
         'experience', 'difficulty', 'body', 'url'
     ];
+    
+    protected $appends = [
+        'favorite_check'
+    ];
 
     // Songに対するリレーション
     public function song()
@@ -38,6 +42,11 @@ class Post extends Model
     public function users()
     {
         return $this->belongsToMany('App\User')->withTimestamps();
+    }
+    
+    public function getFavoriteCheckAttribute()
+    {
+        return $this->users()->get()->contains(auth()->user());
     }
     
     // 自分が役に立ったを押したレビュー一覧を取得

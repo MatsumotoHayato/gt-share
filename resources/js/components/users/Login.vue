@@ -13,6 +13,7 @@
                 <v-text-field
                     v-model="userInfo.email"
                     :rules="[emailRules.required, emailRules.regex]"
+                    validate-on-blur
                     autofocus
                     outlined
                     label="メールアドレス"
@@ -23,6 +24,7 @@
                     v-model="userInfo.password"
                     :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'"
                     :rules="[passwordRules.required, passwordRules.min]"
+                    validate-on-blur
                     :type="passwordShow ? 'text' : 'password'"
                     outlined
                     label="パスワード"
@@ -100,10 +102,7 @@
                             })
                         }
                     })
-                    .catch(function(error){
-                        console.log(error)
-                    })
-            }
+            },
         }
     }
 </script>

@@ -136,6 +136,16 @@ __webpack_require__.r(__webpack_exports__);
     },
     pagination: function pagination(e) {
       this.pageNumber = e.page;
+    },
+    postIndexLink: function postIndexLink(item) {
+      this.$router.push({
+        path: "/vue/songs/".concat(item.id)
+      });
+    },
+    artistShowLink: function artistShowLink(item) {
+      this.$router.push({
+        path: "/vue/artists/".concat(item.artist_id)
+      });
     }
   },
   mounted: function mounted() {
@@ -318,10 +328,15 @@ var render = function () {
                   var item = ref.item
                   return [
                     _c(
-                      "router-link",
+                      "a",
                       {
                         staticClass: "font-weight-bold song-link",
-                        attrs: { to: "/vue/songs/" + item.id },
+                        on: {
+                          click: function ($event) {
+                            $event.stopPropagation()
+                            return _vm.postIndexLink(item)
+                          },
+                        },
                       },
                       [_vm._v(_vm._s(item.name))]
                     ),
@@ -334,10 +349,15 @@ var render = function () {
                   var item = ref.item
                   return [
                     _c(
-                      "router-link",
+                      "a",
                       {
                         staticClass: "artist-link",
-                        attrs: { to: "/vue/artists/" + item.artist_id },
+                        on: {
+                          click: function ($event) {
+                            $event.stopPropagation()
+                            return _vm.artistShowLink(item)
+                          },
+                        },
                       },
                       [_vm._v(_vm._s(item.artist.name))]
                     ),
