@@ -229,7 +229,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['editDialog', 'post', 'instruments'],
   data: function data() {
     return {
-      editedPost: this.post,
+      editedPost: [],
       rules: {
         required: function required(value) {
           return !!value || '入力は必須です';
@@ -246,6 +246,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     save: function save() {
       this.$emit('save', this.editedPost);
+    }
+  },
+  watch: {
+    post: function post(value) {
+      this.editedPost = value;
     }
   }
 });
@@ -421,6 +426,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -438,6 +444,7 @@ __webpack_require__.r(__webpack_exports__);
       artist: [],
       song: [],
       posts: [],
+      editedPost: [],
       selectedPosts: [],
       selectedInstrumentId: 1,
       instruments: [],
@@ -556,6 +563,10 @@ __webpack_require__.r(__webpack_exports__);
           _this6.getPosts();
         }
       });
+    },
+    openEditForm: function openEditForm(post) {
+      this.editedPost = post;
+      this.editDialog = true;
     }
   },
   mounted: function mounted() {
@@ -1150,6 +1161,15 @@ var render = function () {
       _c(
         "v-container",
         [
+          _c("edit-form", {
+            attrs: {
+              post: _vm.editedPost,
+              instruments: _vm.instruments,
+              editDialog: _vm.editDialog,
+            },
+            on: { save: _vm.editPost, close: _vm.closeEdit },
+          }),
+          _vm._v(" "),
           _c("v-row", [
             _c("p", { staticClass: "text-h5 font-weight-bold" }, [
               _vm._v(_vm._s(_vm.song.name) + " / " + _vm._s(_vm.artist.name)),
@@ -1492,7 +1512,7 @@ var render = function () {
                                             attrs: { outlined: "" },
                                             on: {
                                               click: function ($event) {
-                                                _vm.editDialog = true
+                                                return _vm.openEditForm(item)
                                               },
                                             },
                                           },
@@ -1512,18 +1532,6 @@ var render = function () {
                                           ],
                                           1
                                         ),
-                                        _vm._v(" "),
-                                        _c("edit-form", {
-                                          attrs: {
-                                            post: item,
-                                            instruments: _vm.instruments,
-                                            editDialog: _vm.editDialog,
-                                          },
-                                          on: {
-                                            save: _vm.editPost,
-                                            close: _vm.closeEdit,
-                                          },
-                                        }),
                                       ],
                                       1
                                     )
@@ -1532,73 +1540,76 @@ var render = function () {
                                 _c(
                                   "v-list-item",
                                   [
-                                    _c(
-                                      "v-btn",
-                                      {
-                                        attrs: { outlined: "", color: "grey" },
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.favorite(item)
-                                          },
-                                        },
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                    いいね\n                                    "
-                                        ),
-                                        _c(
-                                          "v-icon",
+                                    item.favorite_check
+                                      ? _c(
+                                          "v-btn",
                                           {
-                                            staticClass: "ml-3 mr-1",
-                                            attrs: { right: "" },
+                                            attrs: { color: "primary" },
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.unfavorite(item)
+                                              },
+                                            },
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                        mdi-thumb-up\n                                    "
+                                              "\n                                    いいね\n                                    "
                                             ),
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c("span", [
-                                          _vm._v(_vm._s(item.users_count)),
-                                        ]),
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "v-btn",
-                                      {
-                                        attrs: { color: "primary" },
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.unfavorite(item)
-                                          },
-                                        },
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                                    いいね\n                                    "
-                                        ),
-                                        _c(
-                                          "v-icon",
+                                            _c(
+                                              "v-icon",
+                                              {
+                                                staticClass: "ml-3 mr-1",
+                                                attrs: { right: "" },
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                        mdi-thumb-up\n                                    "
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("span", [
+                                              _vm._v(_vm._s(item.users_count)),
+                                            ]),
+                                          ],
+                                          1
+                                        )
+                                      : _c(
+                                          "v-btn",
                                           {
-                                            staticClass: "ml-3 mr-1",
-                                            attrs: { right: "" },
+                                            attrs: {
+                                              outlined: "",
+                                              color: "grey",
+                                            },
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.favorite(item)
+                                              },
+                                            },
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                        mdi-thumb-up\n                                    "
+                                              "\n                                    いいね\n                                    "
                                             ),
-                                          ]
+                                            _c(
+                                              "v-icon",
+                                              {
+                                                staticClass: "ml-3 mr-1",
+                                                attrs: { right: "" },
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                                        mdi-thumb-up\n                                    "
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("span", [
+                                              _vm._v(_vm._s(item.users_count)),
+                                            ]),
+                                          ],
+                                          1
                                         ),
-                                        _vm._v(" "),
-                                        _c("span", [
-                                          _vm._v(_vm._s(item.users_count)),
-                                        ]),
-                                      ],
-                                      1
-                                    ),
                                   ],
                                   1
                                 ),

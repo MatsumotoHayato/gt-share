@@ -13,6 +13,7 @@
                 <v-text-field
                     v-model="userInfo.name"
                     :rules="[nameRules.required]"
+                    validate-on-blur
                     autofocus
                     outlined
                     label="ユーザー名"
@@ -22,6 +23,7 @@
                 <v-text-field
                     v-model="userInfo.email"
                     :rules="[emailRules.required, emailRules.regex]"
+                    validate-on-blur
                     outlined
                     label="メールアドレス"
                 ></v-text-field>
@@ -31,6 +33,7 @@
                     v-model="userInfo.password"
                     :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'"
                     :rules="[passwordRules.required, passwordRules.min]"
+                    validate-on-blur
                     :type="passwordShow ? 'text' : 'password'"
                     outlined
                     label="パスワード"

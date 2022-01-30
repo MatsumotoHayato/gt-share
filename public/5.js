@@ -86,6 +86,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Register',
   data: function data() {
@@ -242,6 +245,7 @@ var render = function () {
                   _c("v-text-field", {
                     attrs: {
                       rules: [_vm.nameRules.required],
+                      "validate-on-blur": "",
                       autofocus: "",
                       outlined: "",
                       label: "ユーザー名",
@@ -265,6 +269,7 @@ var render = function () {
                   _c("v-text-field", {
                     attrs: {
                       rules: [_vm.emailRules.required, _vm.emailRules.regex],
+                      "validate-on-blur": "",
                       outlined: "",
                       label: "メールアドレス",
                     },
@@ -293,6 +298,7 @@ var render = function () {
                         _vm.passwordRules.required,
                         _vm.passwordRules.min,
                       ],
+                      "validate-on-blur": "",
                       type: _vm.passwordShow ? "text" : "password",
                       outlined: "",
                       label: "パスワード",

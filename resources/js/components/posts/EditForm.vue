@@ -94,7 +94,7 @@
         ],
         data() {
             return {
-                editedPost: this.post,
+                editedPost: [],
                 rules: {
                     required: value => !!value || '入力は必須です',
                     counter: value => value.length <= 4000 || '4000文字以内で入力してください',
@@ -109,5 +109,10 @@
                 this.$emit('save', this.editedPost)
             }
         },
+        watch: {
+            post(value) {
+                this.editedPost = value
+            }
+        }
     }
 </script>

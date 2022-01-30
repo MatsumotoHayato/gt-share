@@ -81,6 +81,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Login',
   data: function data() {
@@ -118,8 +120,6 @@ __webpack_require__.r(__webpack_exports__);
             path: '/'
           });
         }
-      })["catch"](function (error) {
-        console.log(error);
       });
     }
   }
@@ -218,6 +218,7 @@ var render = function () {
                   _c("v-text-field", {
                     attrs: {
                       rules: [_vm.emailRules.required, _vm.emailRules.regex],
+                      "validate-on-blur": "",
                       autofocus: "",
                       outlined: "",
                       label: "メールアドレス",
@@ -247,6 +248,7 @@ var render = function () {
                         _vm.passwordRules.required,
                         _vm.passwordRules.min,
                       ],
+                      "validate-on-blur": "",
                       type: _vm.passwordShow ? "text" : "password",
                       outlined: "",
                       label: "パスワード",
