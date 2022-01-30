@@ -29,12 +29,33 @@
                 </v-menu>
             </div>
             <div v-else>
-                <v-btn to="/vue/login" outlined class="mr-4">
+                <v-btn
+                class="mr-4"
+                outlined
+                @click="loginDialog = true"
+                >
                     ログイン
                 </v-btn>
-                <v-btn to="/vue/register" light class="font-weight-bold indigo--text text--darken-4 mr-8">
+                <LoginForm
+                :loginDialog="loginDialog"
+                @login="login"
+                @registerLink="registerFromLogin"
+                @close="loginDialog = false"
+                />
+                
+                <v-btn
+                class="font-weight-bold indigo--text text--darken-4 mr-8"
+                light
+                @click="registerDialog = true"
+                >
                     新規登録
                 </v-btn>
+                <RegisterForm
+                :registerDialog="registerDialog"
+                @register="register"
+                @loginLink="loginFromRegister"
+                @close="registerDialog = false"
+                />
             </div>
         </v-app-bar>
         <v-navigation-drawer v-model="drawer" fixed temporary>
@@ -57,11 +78,17 @@
 </template>
 
 <script>
+    import LoginForm from './users/LoginForm'
+    import RegisterForm from './users/RegisterForm'
     export default {
         name: 'MenuBar',
-        props: ['user'],
+        components: {
+            LoginForm,
+            RegisterForm
+        },
         data() {
             return {
+                user: null,
                 drawer: false,
                 menus: [
                     { title: 'ホーム', icon: 'mdi-home', path: '/' },
@@ -69,15 +96,57 @@
                     { title: 'いいねマイリスト', icon: 'mdi-thumb-up', path: '/vue/mylist' },
                     { title: 'あなたの投稿', icon: 'mdi-text-box', path: '/vue/myposts' },
                 ],
+                loginDialog: false,
+                registerDialog: false,
             }
         },
         methods: {
+            getUser() {
+                axios.get('/users/get')
+                    .then((response)=>{
+                        this.user = response.data.user
+                    })
+            },
+            login(userInfo) {
+                axios.post('/login', userInfo)
+                    .then((response)=>{
+                        if(response.status == 200) {
+                            this.loginDialog = false
+                            this.getUser()
+                            this.$router.push('/')
+                        }
+                    })
+            },
             logout() {
                 axios.post('/logout')
                     .then((response)=>{
-                        this.$router.push('/')
+                        if(response.status == 200) {
+                            this.getUser()
+                            this.$router.push('/')
+                        }
                     })
-            }
+            },
+            register(userInfo) {
+                axios.post('/register', userInfo)
+                    .then((response)=>{
+                        if(response.status == 200) {
+                            this.registerDialog = false
+                            this.getUser()
+                            this.$router.push('/')
+                        }
+                    })
+            },
+            registerFromLogin() {
+                this.loginDialog = false
+                this.registerDialog = true
+            },
+            loginFromRegister() {
+                this.registerDialog = false
+                this.loginDialog = true
+            },
+        },
+        mounted() {
+            this.getUser()
         }
     }
 </script>

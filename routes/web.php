@@ -37,6 +37,7 @@ Route::get('/mylist', 'PostController@mylist')->middleware('auth');  // 役に�
 Route::get('/myposts', 'PostController@myposts')->middleware('auth');  // 自分の投稿
 Route::get('/ranking', 'SongController@ranking');  // ランキング
 
+Route::get('/users/get', 'UserController@get'); // 現在のユーザー情報取得
 Route::get('/users/{user}', 'UserController@index');  // ユーザーページ
 Route::get('/users/mypage/edit', 'UserController@edit')->middleware('auth');  // 自分のユーザー情報編集
 Route::put('/users/mypage', 'UserController@update')->middleware('auth');     // 自分のユーザー情報更新

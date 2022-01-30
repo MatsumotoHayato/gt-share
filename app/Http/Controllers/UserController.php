@@ -9,6 +9,14 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+    // 現在のユーザー情報取得
+    public function get()
+    {
+        return [
+            'user'=> Auth::user()
+        ];
+    }
+    
     // ユーザー情報表示画面
     public function index(User $user)
     {

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>GT-share</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -23,14 +23,7 @@
     <div id="app">
         <main>
             <v-app>
-                @auth
-                    <menu-bar
-                    :user="{{ Auth::user() }}"
-                    ></menu-bar>
-                @else
-                    <menu-bar
-                    ></menu-bar>
-                @endauth
+                <menu-bar></menu-bar>
                 <v-main>
                     <v-spacer class="my-12"/>
                     <router-view/>
