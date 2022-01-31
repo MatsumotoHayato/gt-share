@@ -84,7 +84,7 @@ __webpack_require__.r(__webpack_exports__);
       newPost: {
         instrument_id: '',
         experience: '',
-        difficulty: '',
+        difficulty: 3,
         body: '',
         url: ''
       },
@@ -100,6 +100,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     close: function close() {
+      this.newPost = {
+        instrument_id: '',
+        experience: '',
+        difficulty: 3,
+        body: '',
+        url: ''
+      };
+      this.$refs.form.resetValidation();
       this.$emit('close');
     },
     save: function save() {
@@ -165,7 +173,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'DeleteForm',
   props: ['deleteDialog', 'post'],
@@ -176,11 +183,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     close: function close() {
-      this.deleteCheck = false;
+      this.$refs.form.reset();
       this.$emit('close');
     },
     deletePost: function deletePost() {
-      this.deleteCheck = false;
+      this.$refs.form.reset();
       this.$emit('delete');
     }
   }
@@ -1017,14 +1024,9 @@ var render = function () {
                     },
                     [_vm._v("\n        削除する\n      ")]
                   )
-                : _c(
-                    "v-btn",
-                    {
-                      attrs: { disabled: "", text: "" },
-                      on: { click: _vm.deletePost },
-                    },
-                    [_vm._v("\n        削除する\n      ")]
-                  ),
+                : _c("v-btn", { attrs: { disabled: "", text: "" } }, [
+                    _vm._v("\n        削除する\n      "),
+                  ]),
             ],
             1
           ),
@@ -1575,7 +1577,7 @@ var render = function () {
                                   [
                                     _c("v-list-item-content", [
                                       _vm._v(
-                                        "\n                  簡単度: " +
+                                        "\n                  簡単さ: " +
                                           _vm._s(item.difficulty) +
                                           "点\n                "
                                       ),
@@ -1617,7 +1619,7 @@ var render = function () {
                                   [
                                     _c("v-list-item-content", [
                                       _vm._v(
-                                        "\n                  必要機材の少なさ: " +
+                                        "\n                  必要機材の揃えやすさ: " +
                                           _vm._s(item.difficulty) +
                                           "点\n                "
                                       ),
@@ -1631,7 +1633,7 @@ var render = function () {
                                   [
                                     _c("v-list-item-content", [
                                       _vm._v(
-                                        "\n                  楽しさ: " +
+                                        "\n                  演奏時の楽しさ: " +
                                           _vm._s(item.difficulty) +
                                           "点\n                "
                                       ),

@@ -72,9 +72,11 @@
         }
       },
       loginLink() {
+        this.$refs.form.reset()
         this.$emit('loginLink')
       },
       close() {
+        this.$refs.form.reset()
         this.$emit('close')
       },
     }

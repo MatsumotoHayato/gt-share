@@ -34,7 +34,6 @@
           v-else
           disabled
           text
-          @click="deletePost"
         >
           削除する
         </v-btn>
@@ -57,11 +56,11 @@
     },
     methods: {
       close() {
-        this.deleteCheck = false
+        this.$refs.form.reset()
         this.$emit('close')
       },
       deletePost() {
-        this.deleteCheck = false
+        this.$refs.form.reset()
         this.$emit('delete')
       }
     }
