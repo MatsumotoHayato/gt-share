@@ -76,25 +76,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateForm',
   props: ['createDialog', 'instruments'],
@@ -122,7 +103,9 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('close');
     },
     save: function save() {
-      this.$emit('save', this.newPost);
+      if (this.$refs.form.validate()) {
+        this.$emit('save', this.newPost);
+      }
     }
   }
 });
@@ -138,24 +121,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -244,7 +209,9 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('close');
     },
     save: function save() {
-      this.$emit('save', this.editedPost);
+      if (this.$refs.form.validate()) {
+        this.$emit('save', this.editedPost);
+      }
     }
   },
   watch: {
@@ -267,28 +234,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CreateForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateForm */ "./resources/js/components/posts/CreateForm.vue");
 /* harmony import */ var _EditForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditForm */ "./resources/js/components/posts/EditForm.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -590,7 +535,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.post-index tr:hover td {\n    background: #FFFFFF;\n}\n", ""]);
+exports.push([module.i, "\n.post-index tr:hover td {\n  background: #FFFFFF;\n}\n", ""]);
 
 // exports
 
@@ -669,155 +614,149 @@ var render = function () {
             [
               _c(
                 "v-form",
+                { ref: "form" },
                 [
                   _c(
-                    "v-container",
+                    "v-row",
                     [
                       _c(
-                        "v-row",
+                        "v-col",
+                        { attrs: { cols: "6" } },
                         [
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "6" } },
-                            [
-                              _c("v-select", {
-                                attrs: {
-                                  items: _vm.instruments,
-                                  "item-text": "name",
-                                  "item-value": "id",
-                                  label: "楽器*",
-                                  rules: [_vm.rules.required],
-                                  "single-line": "",
-                                  required: "",
-                                },
-                                model: {
-                                  value: _vm.newPost.instrument_id,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.newPost, "instrument_id", $$v)
-                                  },
-                                  expression: "newPost.instrument_id",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-spacer"),
-                          _vm._v(" "),
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "4" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: {
-                                  type: "number",
-                                  max: "100",
-                                  min: "0",
-                                  label: "楽器経験",
-                                  suffix: "年",
-                                },
-                                model: {
-                                  value: _vm.newPost.experience,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.newPost, "experience", $$v)
-                                  },
-                                  expression: "newPost.experience",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-spacer"),
+                          _c("v-select", {
+                            attrs: {
+                              items: _vm.instruments,
+                              "item-text": "name",
+                              "item-value": "id",
+                              label: "楽器*",
+                              rules: [_vm.rules.required],
+                              "single-line": "",
+                              required: "",
+                            },
+                            model: {
+                              value: _vm.newPost.instrument_id,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.newPost, "instrument_id", $$v)
+                              },
+                              expression: "newPost.instrument_id",
+                            },
+                          }),
                         ],
                         1
                       ),
                       _vm._v(" "),
+                      _c("v-spacer"),
+                      _vm._v(" "),
                       _c(
-                        "v-row",
+                        "v-col",
+                        { attrs: { cols: "4" } },
                         [
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "6" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: {
-                                  type: "number",
-                                  max: "5",
-                                  min: "1",
-                                  label: "難易度*",
-                                  rules: [_vm.rules.required],
-                                  required: "",
-                                },
-                                model: {
-                                  value: _vm.newPost.difficulty,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.newPost, "difficulty", $$v)
-                                  },
-                                  expression: "newPost.difficulty",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
+                          _c("v-text-field", {
+                            attrs: {
+                              type: "number",
+                              max: "100",
+                              min: "0",
+                              label: "楽器経験",
+                              suffix: "年",
+                            },
+                            model: {
+                              value: _vm.newPost.experience,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.newPost, "experience", $$v)
+                              },
+                              expression: "newPost.experience",
+                            },
+                          }),
                         ],
                         1
                       ),
                       _vm._v(" "),
+                      _c("v-spacer"),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-row",
+                    [
                       _c(
-                        "v-row",
+                        "v-col",
+                        { attrs: { cols: "10" } },
                         [
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "12" } },
-                            [
-                              _c("v-textarea", {
-                                attrs: {
-                                  label: "感想*",
-                                  placeholder:
-                                    "練習時間、演奏のコツ、使用機材、楽しかった箇所など…",
-                                  rules: [
-                                    _vm.rules.required,
-                                    _vm.rules.counter,
-                                  ],
-                                  counter: "",
-                                  required: "",
-                                },
-                                model: {
-                                  value: _vm.newPost.body,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.newPost, "body", $$v)
-                                  },
-                                  expression: "newPost.body",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
+                          _c("v-slider", {
+                            attrs: {
+                              label: "難易度*",
+                              "tick-labels": [1, 2, 3, 4, 5],
+                              max: "5",
+                              min: "1",
+                              dense: "",
+                              ticks: "always",
+                              "tick-size": "4",
+                            },
+                            model: {
+                              value: _vm.newPost.difficulty,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.newPost, "difficulty", $$v)
+                              },
+                              expression: "newPost.difficulty",
+                            },
+                          }),
                         ],
                         1
                       ),
-                      _vm._v(" "),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-row",
+                    [
                       _c(
-                        "v-row",
+                        "v-col",
+                        { attrs: { cols: "12" } },
                         [
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "12" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "演奏動画へのURL" },
-                                model: {
-                                  value: _vm.newPost.url,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.newPost, "url", $$v)
-                                  },
-                                  expression: "newPost.url",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
+                          _c("v-textarea", {
+                            attrs: {
+                              label: "感想*",
+                              placeholder:
+                                "練習時間、演奏のコツ、使用機材、楽しかった箇所など…",
+                              rules: [_vm.rules.required, _vm.rules.counter],
+                              "auto-grow": "",
+                              counter: "4000",
+                              required: "",
+                            },
+                            model: {
+                              value: _vm.newPost.body,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.newPost, "body", $$v)
+                              },
+                              expression: "newPost.body",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-row",
+                    [
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "12" } },
+                        [
+                          _c("v-text-field", {
+                            attrs: { label: "演奏動画へのURL" },
+                            model: {
+                              value: _vm.newPost.url,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.newPost, "url", $$v)
+                              },
+                              expression: "newPost.url",
+                            },
+                          }),
                         ],
                         1
                       ),
@@ -844,7 +783,7 @@ var render = function () {
                   attrs: { color: "blue darken-1", text: "" },
                   on: { click: _vm.close },
                 },
-                [_vm._v("\n                キャンセル\n            ")]
+                [_vm._v("\n        キャンセル\n      ")]
               ),
               _vm._v(" "),
               _c(
@@ -853,7 +792,7 @@ var render = function () {
                   attrs: { color: "blue darken-1", text: "" },
                   on: { click: _vm.save },
                 },
-                [_vm._v("\n                追加\n            ")]
+                [_vm._v("\n        追加\n      ")]
               ),
             ],
             1
@@ -924,158 +863,148 @@ var render = function () {
             [
               _c(
                 "v-form",
+                { ref: "form" },
                 [
                   _c(
-                    "v-container",
+                    "v-row",
                     [
                       _c(
-                        "v-row",
+                        "v-col",
+                        { attrs: { cols: "6" } },
                         [
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "6" } },
-                            [
-                              _c("v-select", {
-                                attrs: {
-                                  items: _vm.instruments,
-                                  "item-text": "name",
-                                  "item-value": "id",
-                                  label: "楽器*",
-                                  "single-line": "",
-                                  disabled: "",
-                                },
-                                model: {
-                                  value: _vm.editedPost.instrument_id,
-                                  callback: function ($$v) {
-                                    _vm.$set(
-                                      _vm.editedPost,
-                                      "instrument_id",
-                                      $$v
-                                    )
-                                  },
-                                  expression: "editedPost.instrument_id",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-spacer"),
-                          _vm._v(" "),
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "4" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: {
-                                  type: "number",
-                                  max: "100",
-                                  min: "0",
-                                  label: "楽器経験",
-                                  suffix: "年",
-                                },
-                                model: {
-                                  value: _vm.editedPost.experience,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.editedPost, "experience", $$v)
-                                  },
-                                  expression: "editedPost.experience",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-spacer"),
+                          _c("v-select", {
+                            attrs: {
+                              items: _vm.instruments,
+                              "item-text": "name",
+                              "item-value": "id",
+                              label: "楽器*",
+                              "single-line": "",
+                              disabled: "",
+                            },
+                            model: {
+                              value: _vm.editedPost.instrument_id,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.editedPost, "instrument_id", $$v)
+                              },
+                              expression: "editedPost.instrument_id",
+                            },
+                          }),
                         ],
                         1
                       ),
                       _vm._v(" "),
+                      _c("v-spacer"),
+                      _vm._v(" "),
                       _c(
-                        "v-row",
+                        "v-col",
+                        { attrs: { cols: "4" } },
                         [
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "6" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: {
-                                  type: "number",
-                                  max: "5",
-                                  min: "1",
-                                  label: "難易度*",
-                                  rules: [_vm.rules.required],
-                                  required: "",
-                                },
-                                model: {
-                                  value: _vm.editedPost.difficulty,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.editedPost, "difficulty", $$v)
-                                  },
-                                  expression: "editedPost.difficulty",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
+                          _c("v-text-field", {
+                            attrs: {
+                              type: "number",
+                              max: "100",
+                              min: "0",
+                              label: "楽器経験",
+                              suffix: "年",
+                            },
+                            model: {
+                              value: _vm.editedPost.experience,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.editedPost, "experience", $$v)
+                              },
+                              expression: "editedPost.experience",
+                            },
+                          }),
                         ],
                         1
                       ),
                       _vm._v(" "),
+                      _c("v-spacer"),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-row",
+                    [
                       _c(
-                        "v-row",
+                        "v-col",
+                        { attrs: { cols: "10" } },
                         [
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "12" } },
-                            [
-                              _c("v-textarea", {
-                                attrs: {
-                                  label: "感想*",
-                                  placeholder:
-                                    "練習時間、演奏のコツ、使用機材、楽しかった箇所など…",
-                                  rules: [
-                                    _vm.rules.required,
-                                    _vm.rules.counter,
-                                  ],
-                                  counter: "",
-                                  required: "",
-                                },
-                                model: {
-                                  value: _vm.editedPost.body,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.editedPost, "body", $$v)
-                                  },
-                                  expression: "editedPost.body",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
+                          _c("v-slider", {
+                            attrs: {
+                              label: "難易度*",
+                              "tick-labels": [1, 2, 3, 4, 5],
+                              max: "5",
+                              min: "1",
+                              dense: "",
+                              ticks: "always",
+                              "tick-size": "4",
+                            },
+                            model: {
+                              value: _vm.editedPost.difficulty,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.editedPost, "difficulty", $$v)
+                              },
+                              expression: "editedPost.difficulty",
+                            },
+                          }),
                         ],
                         1
                       ),
-                      _vm._v(" "),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-row",
+                    [
                       _c(
-                        "v-row",
+                        "v-col",
+                        { attrs: { cols: "12" } },
                         [
-                          _c(
-                            "v-col",
-                            { attrs: { cols: "12" } },
-                            [
-                              _c("v-text-field", {
-                                attrs: { label: "演奏動画へのURL" },
-                                model: {
-                                  value: _vm.editedPost.url,
-                                  callback: function ($$v) {
-                                    _vm.$set(_vm.editedPost, "url", $$v)
-                                  },
-                                  expression: "editedPost.url",
-                                },
-                              }),
-                            ],
-                            1
-                          ),
+                          _c("v-textarea", {
+                            attrs: {
+                              label: "感想*",
+                              placeholder:
+                                "練習時間、演奏のコツ、使用機材、楽しかった箇所など…",
+                              rules: [_vm.rules.required, _vm.rules.counter],
+                              "auto-grow": "",
+                              counter: "4000",
+                              required: "",
+                            },
+                            model: {
+                              value: _vm.editedPost.body,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.editedPost, "body", $$v)
+                              },
+                              expression: "editedPost.body",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-row",
+                    [
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "12" } },
+                        [
+                          _c("v-text-field", {
+                            attrs: { label: "演奏動画へのURL" },
+                            model: {
+                              value: _vm.editedPost.url,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.editedPost, "url", $$v)
+                              },
+                              expression: "editedPost.url",
+                            },
+                          }),
                         ],
                         1
                       ),
@@ -1102,7 +1031,7 @@ var render = function () {
                   attrs: { color: "blue darken-1", text: "" },
                   on: { click: _vm.close },
                 },
-                [_vm._v("\n                キャンセル\n            ")]
+                [_vm._v("\n        キャンセル\n      ")]
               ),
               _vm._v(" "),
               _c(
@@ -1111,7 +1040,7 @@ var render = function () {
                   attrs: { color: "blue darken-1", text: "" },
                   on: { click: _vm.save },
                 },
-                [_vm._v("\n                編集\n            ")]
+                [_vm._v("\n        編集\n      ")]
               ),
             ],
             1
@@ -1151,6 +1080,23 @@ var render = function () {
       _c(
         "v-container",
         [
+          _c("CreateForm", {
+            attrs: {
+              createDialog: _vm.createDialog,
+              instruments: _vm.instruments,
+            },
+            on: { save: _vm.createPost, close: _vm.closeCreate },
+          }),
+          _vm._v(" "),
+          _c("EditForm", {
+            attrs: {
+              editDialog: _vm.editDialog,
+              post: _vm.postToEditForm,
+              instruments: _vm.instruments,
+            },
+            on: { save: _vm.editPost, close: _vm.closeEdit },
+          }),
+          _vm._v(" "),
           _c("v-row", [
             _c("p", { staticClass: "text-h5 font-weight-bold" }, [
               _vm._v(_vm._s(_vm.song.name) + " / " + _vm._s(_vm.artist.name)),
@@ -1214,12 +1160,10 @@ var render = function () {
                           [
                             _c("v-icon", [
                               _vm._v(
-                                "\n                            mdi-text-box-multiple\n                        "
+                                "\n              mdi-text-box-multiple\n            "
                               ),
                             ]),
-                            _vm._v(
-                              "\n                        レビュー一覧\n                    "
-                            ),
+                            _vm._v("\n            レビュー一覧\n          "),
                           ],
                           1
                         ),
@@ -1262,25 +1206,15 @@ var render = function () {
                             },
                           },
                           [
-                            _vm._v(
-                              "\n                        新規レビュー\n                        "
-                            ),
+                            _vm._v("\n            新規レビュー\n            "),
                             _c("v-icon", { attrs: { right: "" } }, [
                               _vm._v(
-                                "\n                            mdi-pencil-plus\n                        "
+                                "\n              mdi-pencil-plus\n            "
                               ),
                             ]),
                           ],
                           1
                         ),
-                        _vm._v(" "),
-                        _c("CreateForm", {
-                          attrs: {
-                            createDialog: _vm.createDialog,
-                            instruments: _vm.instruments,
-                          },
-                          on: { save: _vm.createPost, close: _vm.closeCreate },
-                        }),
                       ],
                       1
                     ),
@@ -1304,13 +1238,78 @@ var render = function () {
                               [
                                 _c(
                                   "v-list-item-title",
-                                  { staticClass: "mt-4" },
+                                  {
+                                    staticClass:
+                                      "mt-4 d-flex justify-space-between",
+                                  },
                                   [
-                                    _vm._v(
-                                      "\n                                ユーザー名: " +
-                                        _vm._s(item.user.name) +
-                                        "    \n                            "
-                                    ),
+                                    _c("span", [
+                                      _vm._v(
+                                        "ユーザー名: " + _vm._s(item.user.name)
+                                      ),
+                                    ]),
+                                    _vm._v(" "),
+                                    item.user.id === _vm.currentUser.id
+                                      ? _c(
+                                          "div",
+                                          [
+                                            _c(
+                                              "v-btn",
+                                              {
+                                                attrs: { outlined: "" },
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.openEditForm(
+                                                      item
+                                                    )
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                    編集\n                    "
+                                                ),
+                                                _c(
+                                                  "v-icon",
+                                                  { attrs: { right: "" } },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                      mdi-pencil\n                    "
+                                                    ),
+                                                  ]
+                                                ),
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-btn",
+                                              {
+                                                attrs: {
+                                                  outlined: "",
+                                                  color: "red",
+                                                },
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                    削除\n                    "
+                                                ),
+                                                _c(
+                                                  "v-icon",
+                                                  { attrs: { right: "" } },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                      mdi-delete\n                    "
+                                                    ),
+                                                  ]
+                                                ),
+                                              ],
+                                              1
+                                            ),
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e(),
                                   ]
                                 ),
                               ],
@@ -1333,9 +1332,9 @@ var render = function () {
                                   [
                                     _c("v-list-item-content", [
                                       _vm._v(
-                                        "\n                                    簡単度: " +
+                                        "\n                  簡単度: " +
                                           _vm._s(item.difficulty) +
-                                          "点\n                                "
+                                          "点\n                "
                                       ),
                                     ]),
                                   ],
@@ -1347,9 +1346,9 @@ var render = function () {
                                   [
                                     _c("v-list-item-content", [
                                       _vm._v(
-                                        "\n                                    耳コピしやすさ: " +
+                                        "\n                  耳コピしやすさ: " +
                                           _vm._s(item.difficulty) +
-                                          "点\n                                "
+                                          "点\n                "
                                       ),
                                     ]),
                                   ],
@@ -1361,9 +1360,9 @@ var render = function () {
                                   [
                                     _c("v-list-item-content", [
                                       _vm._v(
-                                        "\n                                    覚えやすさ: " +
+                                        "\n                  覚えやすさ: " +
                                           _vm._s(item.difficulty) +
-                                          "点\n                                "
+                                          "点\n                "
                                       ),
                                     ]),
                                   ],
@@ -1375,9 +1374,9 @@ var render = function () {
                                   [
                                     _c("v-list-item-content", [
                                       _vm._v(
-                                        "\n                                    必要機材の少なさ: " +
+                                        "\n                  必要機材の少なさ: " +
                                           _vm._s(item.difficulty) +
-                                          "点\n                                "
+                                          "点\n                "
                                       ),
                                     ]),
                                   ],
@@ -1389,9 +1388,9 @@ var render = function () {
                                   [
                                     _c("v-list-item-content", [
                                       _vm._v(
-                                        "\n                                    楽しさ: " +
+                                        "\n                  楽しさ: " +
                                           _vm._s(item.difficulty) +
-                                          "点\n                                "
+                                          "点\n                "
                                       ),
                                     ]),
                                   ],
@@ -1430,9 +1429,9 @@ var render = function () {
                                           { staticClass: "text-subtitle-1" },
                                           [
                                             _vm._v(
-                                              "\n                                        " +
+                                              "\n                    " +
                                                 _vm._s(item.body) +
-                                                "\n                                    "
+                                                "\n                  "
                                             ),
                                           ]
                                         ),
@@ -1458,9 +1457,9 @@ var render = function () {
                                   [
                                     _c("v-list-item-content", [
                                       _vm._v(
-                                        "\n                                    演奏動画: " +
+                                        "\n                  演奏動画: " +
                                           _vm._s(item.url) +
-                                          "\n                                "
+                                          "\n                "
                                       ),
                                     ]),
                                   ],
@@ -1472,61 +1471,14 @@ var render = function () {
                                   [
                                     _c("v-list-item-content", [
                                       _vm._v(
-                                        "\n                                    " +
+                                        "\n                  " +
                                           _vm._s(item.updated_at) +
-                                          "\n                                "
+                                          "\n                "
                                       ),
                                     ]),
                                   ],
                                   1
                                 ),
-                                _vm._v(" "),
-                                item.user.id === _vm.currentUser.id
-                                  ? _c(
-                                      "v-list-item",
-                                      [
-                                        _c(
-                                          "v-btn",
-                                          {
-                                            attrs: { outlined: "" },
-                                            on: {
-                                              click: function ($event) {
-                                                return _vm.openEditForm(item)
-                                              },
-                                            },
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                                    編集\n                                    "
-                                            ),
-                                            _c(
-                                              "v-icon",
-                                              { attrs: { right: "" } },
-                                              [
-                                                _vm._v(
-                                                  "\n                                        mdi-pencil\n                                    "
-                                                ),
-                                              ]
-                                            ),
-                                          ],
-                                          1
-                                        ),
-                                        _vm._v(" "),
-                                        _c("EditForm", {
-                                          attrs: {
-                                            editDialog: _vm.editDialog,
-                                            post: _vm.postToEditForm,
-                                            instruments: _vm.instruments,
-                                          },
-                                          on: {
-                                            save: _vm.editPost,
-                                            close: _vm.closeEdit,
-                                          },
-                                        }),
-                                      ],
-                                      1
-                                    )
-                                  : _vm._e(),
                                 _vm._v(" "),
                                 _c(
                                   "v-list-item",
@@ -1544,7 +1496,7 @@ var render = function () {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                    いいね\n                                    "
+                                              "\n                  いいね\n                  "
                                             ),
                                             _c(
                                               "v-icon",
@@ -1554,7 +1506,7 @@ var render = function () {
                                               },
                                               [
                                                 _vm._v(
-                                                  "\n                                        mdi-thumb-up\n                                    "
+                                                  "\n                    mdi-thumb-up\n                  "
                                                 ),
                                               ]
                                             ),
@@ -1580,7 +1532,7 @@ var render = function () {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                                    いいね\n                                    "
+                                              "\n                  いいね\n                  "
                                             ),
                                             _c(
                                               "v-icon",
@@ -1590,7 +1542,7 @@ var render = function () {
                                               },
                                               [
                                                 _vm._v(
-                                                  "\n                                        mdi-thumb-up\n                                    "
+                                                  "\n                    mdi-thumb-up\n                  "
                                                 ),
                                               ]
                                             ),

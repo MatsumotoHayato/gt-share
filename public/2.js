@@ -79,51 +79,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ArtistShow',
   data: function data() {
+    var _this = this;
+
     return {
       artist: [],
       songs: [],
@@ -143,6 +103,21 @@ __webpack_require__.r(__webpack_exports__);
       newSong: {
         name: ''
       },
+      rules: {
+        required: function required(value) {
+          return !!value || '入力は必須です';
+        },
+        counter: function counter(value) {
+          return value.length <= 100 || '100文字以内で入力してください';
+        },
+        exists: function exists(value) {
+          return !_this.songs.some(function (object) {
+            if (object.name === value) {
+              return true;
+            }
+          }) || '既に登録済みです';
+        }
+      },
       breadCrumbs: [{
         text: 'ホーム',
         disabled: false,
@@ -157,18 +132,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getSongs: function getSongs() {
-      var _this = this;
-
-      axios.get("/artists/".concat(this.artistId)).then(function (response) {
-        _this.artist = response.data.artist;
-        _this.songs = response.data.songs;
-      });
-    },
-    setBreadCrumbs: function setBreadCrumbs() {
       var _this2 = this;
 
       axios.get("/artists/".concat(this.artistId)).then(function (response) {
-        _this2.breadCrumbs.push({
+        _this2.artist = response.data.artist;
+        _this2.songs = response.data.songs;
+      });
+    },
+    setBreadCrumbs: function setBreadCrumbs() {
+      var _this3 = this;
+
+      axios.get("/artists/".concat(this.artistId)).then(function (response) {
+        _this3.breadCrumbs.push({
           text: response.data.artist.name,
           disabled: true
         });
@@ -178,19 +153,26 @@ __webpack_require__.r(__webpack_exports__);
       this.dialog = false;
     },
     save: function save() {
-      var _this3 = this;
+      var _this4 = this;
 
-      axios.post("/artists/".concat(this.artistId, "/songs"), this.newSong).then(function (response) {
-        if (response.status == 200) {
-          _this3.close();
+      if (this.$refs.form.validate()) {
+        axios.post("/artists/".concat(this.artistId, "/songs"), this.newSong).then(function (response) {
+          if (response.status == 200) {
+            _this4.close();
 
-          _this3.getSongs();
-        }
-      });
+            _this4.getSongs();
+          }
+        });
+      }
     },
     clickRow: function clickRow(e) {
       this.$router.push({
         path: "/vue/songs/".concat(e.id)
+      });
+    },
+    postIndexLink: function postIndexLink(item) {
+      this.$router.push({
+        path: "/vue/songs/".concat(item.id)
       });
     }
   },
@@ -214,7 +196,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.artist-show tr:hover td {\n    background: #f0f8ff;\n}\n.artist-show th {\n    background: #f5f5f5;\n}\n.song-link {\n    text-decoration: none;\n    color: inherit!important;\n}\n", ""]);
+exports.push([module.i, "\n.artist-show tr:hover td {\n  background: #f0f8ff;\n}\n.artist-show th {\n  background: #f5f5f5;\n}\n.song-link {\n  text-decoration: none;\n  color: inherit !important;\n}\n", ""]);
 
 // exports
 
@@ -302,12 +284,10 @@ var render = function () {
                           [
                             _c("v-icon", [
                               _vm._v(
-                                "\n                            mdi-music-note\n                        "
+                                "\n              mdi-music-note\n            "
                               ),
                             ]),
-                            _vm._v(
-                              "\n                        曲一覧\n                    "
-                            ),
+                            _vm._v("\n            曲一覧\n          "),
                           ],
                           1
                         ),
@@ -364,11 +344,11 @@ var render = function () {
                                       ),
                                       [
                                         _vm._v(
-                                          "\n                                新規曲\n                                "
+                                          "\n                新規曲\n                "
                                         ),
                                         _c("v-icon", { attrs: { right: "" } }, [
                                           _vm._v(
-                                            "\n                                    mdi-pencil-plus\n                                "
+                                            "\n                  mdi-pencil-plus\n                "
                                           ),
                                         ]),
                                       ],
@@ -400,10 +380,11 @@ var render = function () {
                                 ]),
                                 _vm._v(" "),
                                 _c(
-                                  "v-card-text",
+                                  "v-form",
+                                  { ref: "form" },
                                   [
                                     _c(
-                                      "v-container",
+                                      "v-card-text",
                                       [
                                         _c(
                                           "v-row",
@@ -413,7 +394,15 @@ var render = function () {
                                               { attrs: { cols: "10" } },
                                               [
                                                 _c("v-text-field", {
-                                                  attrs: { label: "曲名" },
+                                                  attrs: {
+                                                    label: "曲名",
+                                                    rules: [
+                                                      _vm.rules.required,
+                                                      _vm.rules.counter,
+                                                      _vm.rules.exists,
+                                                    ],
+                                                    autofocus: "",
+                                                  },
                                                   model: {
                                                     value: _vm.newSong.name,
                                                     callback: function ($$v) {
@@ -455,7 +444,7 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                キャンセル\n                              "
+                                          "\n                  キャンセル\n                "
                                         ),
                                       ]
                                     ),
@@ -471,7 +460,7 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                追加\n                              "
+                                          "\n                  追加\n                "
                                         ),
                                       ]
                                     ),
@@ -497,10 +486,15 @@ var render = function () {
                   var item = ref.item
                   return [
                     _c(
-                      "router-link",
+                      "a",
                       {
                         staticClass: "font-weight-bold song-link",
-                        attrs: { to: "/vue/songs/" + item.id },
+                        on: {
+                          click: function ($event) {
+                            $event.stopPropagation()
+                            return _vm.postIndexLink(item)
+                          },
+                        },
                       },
                       [_vm._v(_vm._s(item.name))]
                     ),
