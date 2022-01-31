@@ -9,7 +9,12 @@
       <div v-if="user">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn icon class="ma-2" v-bind="attrs" v-on="on">
+            <v-btn
+              class="ma-2"
+              icon
+              v-bind="attrs"
+              v-on="on"
+            >
               <v-icon>mdi-account</v-icon>
             </v-btn>
           </template>

@@ -86,7 +86,6 @@
         newArtist: {
           name: ''
         },
-        test: ['test', 'test2'],
         rules: {
           required: value => !!value || '入力は必須です',
           counter: value => value.length <= 50 || '50文字以内で入力してください',

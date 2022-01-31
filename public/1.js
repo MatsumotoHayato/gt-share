@@ -112,7 +112,6 @@ __webpack_require__.r(__webpack_exports__);
       newArtist: {
         name: ''
       },
-      test: ['test', 'test2'],
       rules: {
         required: function required(value) {
           return !!value || '入力は必須です';
