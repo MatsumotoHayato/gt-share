@@ -3,6 +3,7 @@
     <v-container>
       <CreateForm :createDialog=createDialog :instruments=instruments @save="createPost" @close="closeCreate" />
       <EditForm :editDialog=editDialog :post=postToEditForm :instruments=instruments @save="editPost" @close="closeEdit" />
+      <DeleteForm :deleteDialog=deleteDialog @delete="deletePost" @close="closeDelete" />
       <v-row>
         <p class="text-h5 font-weight-bold">{{ song.name}} / {{ artist.name }}</p>
       </v-row>
@@ -44,7 +45,7 @@
                         mdi-pencil
                       </v-icon>
                     </v-btn>
-                    <v-btn outlined color="red">
+                    <v-btn outlined color="red" @click="openDeleteForm(item)">
                       削除
                       <v-icon right>
                         mdi-delete
@@ -135,11 +136,13 @@
 <script>
   import CreateForm from './CreateForm'
   import EditForm from './EditForm'
+  import DeleteForm from './DeleteForm'
   export default {
     name: 'PostIndex',
     components: {
       CreateForm,
-      EditForm
+      EditForm,
+      DeleteForm
     },
     data() {
       return {
@@ -151,6 +154,7 @@
         song: [],
         posts: [],
         postToEditForm: [],
+        deleteConfirmedPost: [],
         selectedPosts: [],
         selectedInstrumentId: 1,
         instruments: [],
@@ -164,6 +168,7 @@
         ],
         createDialog: false,
         editDialog: false,
+        deleteDialog: false,
         breadCrumbs: [{
           text: 'ホーム',
           disabled: false,
@@ -217,6 +222,9 @@
       closeEdit() {
         this.editDialog = false
       },
+      closeDelete() {
+        this.deleteDialog = false
+      },
       createPost(post) {
         axios.post(`/songs/${this.songId}/posts`, post)
           .then((response) => {
@@ -235,9 +243,22 @@
             }
           })
       },
+      deletePost() {
+        axios.delete(`/posts/${this.deleteConfirmedPost.id}`, this.deleteConfirmedPost)
+          .then((response) => {
+            if (response.status == 200) {
+              this.closeDelete()
+              this.getPosts()
+            }
+          })
+      },
       openEditForm(post) {
         this.postToEditForm = post
         this.editDialog = true
+      },
+      openDeleteForm(post) {
+        this.deleteConfirmedPost = post
+        this.deleteDialog = true
       },
       favorite(post) {
         axios.post(`/posts/${post.id}/favorite`, post)

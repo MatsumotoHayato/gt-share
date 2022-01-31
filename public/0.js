@@ -112,6 +112,82 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/DeleteForm.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/DeleteForm.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'DeleteForm',
+  props: ['deleteDialog', 'post'],
+  data: function data() {
+    return {
+      deleteCheck: false
+    };
+  },
+  methods: {
+    close: function close() {
+      this.deleteCheck = false;
+      this.$emit('close');
+    },
+    deletePost: function deletePost() {
+      this.deleteCheck = false;
+      this.$emit('delete');
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/EditForm.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/EditForm.vue?vue&type=script&lang=js& ***!
@@ -234,6 +310,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CreateForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateForm */ "./resources/js/components/posts/CreateForm.vue");
 /* harmony import */ var _EditForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditForm */ "./resources/js/components/posts/EditForm.vue");
+/* harmony import */ var _DeleteForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DeleteForm */ "./resources/js/components/posts/DeleteForm.vue");
 //
 //
 //
@@ -368,13 +445,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostIndex',
   components: {
     CreateForm: _CreateForm__WEBPACK_IMPORTED_MODULE_0__["default"],
-    EditForm: _EditForm__WEBPACK_IMPORTED_MODULE_1__["default"]
+    EditForm: _EditForm__WEBPACK_IMPORTED_MODULE_1__["default"],
+    DeleteForm: _DeleteForm__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -386,6 +466,7 @@ __webpack_require__.r(__webpack_exports__);
       song: [],
       posts: [],
       postToEditForm: [],
+      deleteConfirmedPost: [],
       selectedPosts: [],
       selectedInstrumentId: 1,
       instruments: [],
@@ -404,6 +485,7 @@ __webpack_require__.r(__webpack_exports__);
       }],
       createDialog: false,
       editDialog: false,
+      deleteDialog: false,
       breadCrumbs: [{
         text: 'ホーム',
         disabled: false,
@@ -465,6 +547,9 @@ __webpack_require__.r(__webpack_exports__);
     closeEdit: function closeEdit() {
       this.editDialog = false;
     },
+    closeDelete: function closeDelete() {
+      this.deleteDialog = false;
+    },
     createPost: function createPost(post) {
       var _this3 = this;
 
@@ -487,25 +572,40 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    openEditForm: function openEditForm(post) {
-      this.postToEditForm = post;
-      this.editDialog = true;
-    },
-    favorite: function favorite(post) {
+    deletePost: function deletePost() {
       var _this5 = this;
 
-      axios.post("/posts/".concat(post.id, "/favorite"), post).then(function (response) {
+      axios["delete"]("/posts/".concat(this.deleteConfirmedPost.id), this.deleteConfirmedPost).then(function (response) {
         if (response.status == 200) {
+          _this5.closeDelete();
+
           _this5.getPosts();
         }
       });
     },
-    unfavorite: function unfavorite(post) {
+    openEditForm: function openEditForm(post) {
+      this.postToEditForm = post;
+      this.editDialog = true;
+    },
+    openDeleteForm: function openDeleteForm(post) {
+      this.deleteConfirmedPost = post;
+      this.deleteDialog = true;
+    },
+    favorite: function favorite(post) {
       var _this6 = this;
+
+      axios.post("/posts/".concat(post.id, "/favorite"), post).then(function (response) {
+        if (response.status == 200) {
+          _this6.getPosts();
+        }
+      });
+    },
+    unfavorite: function unfavorite(post) {
+      var _this7 = this;
 
       axios.post("/posts/".concat(post.id, "/unfavorite"), post).then(function (response) {
         if (response.status == 200) {
-          _this6.getPosts();
+          _this7.getPosts();
         }
       });
     }
@@ -811,6 +911,137 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/DeleteForm.vue?vue&type=template&id=651a6c94&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/DeleteForm.vue?vue&type=template&id=651a6c94& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-dialog",
+    {
+      attrs: { "max-width": "600px" },
+      on: {
+        "click:outside": _vm.close,
+        keydown: function ($event) {
+          if (
+            !$event.type.indexOf("key") &&
+            _vm._k($event.keyCode, "esc", 27, $event.key, ["Esc", "Escape"])
+          ) {
+            return null
+          }
+          return _vm.close.apply(null, arguments)
+        },
+      },
+      model: {
+        value: _vm.deleteDialog,
+        callback: function ($$v) {
+          _vm.deleteDialog = $$v
+        },
+        expression: "deleteDialog",
+      },
+    },
+    [
+      _c(
+        "v-card",
+        [
+          _c("v-card-title", [
+            _c("span", { staticClass: "text-h5" }, [_vm._v("削除確認")]),
+          ]),
+          _vm._v(" "),
+          _c(
+            "v-card-text",
+            [
+              _c(
+                "v-form",
+                { ref: "form" },
+                [
+                  _c(
+                    "v-row",
+                    [
+                      _c(
+                        "v-col",
+                        [
+                          _c("v-checkbox", {
+                            attrs: { label: "本当にこの投稿を削除しますか？" },
+                            model: {
+                              value: _vm.deleteCheck,
+                              callback: function ($$v) {
+                                _vm.deleteCheck = $$v
+                              },
+                              expression: "deleteCheck",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-card-actions",
+            [
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "blue darken-1", text: "" },
+                  on: { click: _vm.close },
+                },
+                [_vm._v("\n        キャンセル\n      ")]
+              ),
+              _vm._v(" "),
+              _c("v-spacer"),
+              _vm._v(" "),
+              _vm.deleteCheck
+                ? _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "red", text: "" },
+                      on: { click: _vm.deletePost },
+                    },
+                    [_vm._v("\n        削除する\n      ")]
+                  )
+                : _c(
+                    "v-btn",
+                    {
+                      attrs: { disabled: "", text: "" },
+                      on: { click: _vm.deletePost },
+                    },
+                    [_vm._v("\n        削除する\n      ")]
+                  ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/EditForm.vue?vue&type=template&id=872e0a56&":
 /*!*****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/EditForm.vue?vue&type=template&id=872e0a56& ***!
@@ -1097,6 +1328,11 @@ var render = function () {
             on: { save: _vm.editPost, close: _vm.closeEdit },
           }),
           _vm._v(" "),
+          _c("DeleteForm", {
+            attrs: { deleteDialog: _vm.deleteDialog },
+            on: { delete: _vm.deletePost, close: _vm.closeDelete },
+          }),
+          _vm._v(" "),
           _c("v-row", [
             _c("p", { staticClass: "text-h5 font-weight-bold" }, [
               _vm._v(_vm._s(_vm.song.name) + " / " + _vm._s(_vm.artist.name)),
@@ -1288,6 +1524,13 @@ var render = function () {
                                                 attrs: {
                                                   outlined: "",
                                                   color: "red",
+                                                },
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.openDeleteForm(
+                                                      item
+                                                    )
+                                                  },
                                                 },
                                               },
                                               [
@@ -1661,6 +1904,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateForm_vue_vue_type_template_id_7ece0407___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateForm_vue_vue_type_template_id_7ece0407___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/posts/DeleteForm.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/posts/DeleteForm.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DeleteForm_vue_vue_type_template_id_651a6c94___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeleteForm.vue?vue&type=template&id=651a6c94& */ "./resources/js/components/posts/DeleteForm.vue?vue&type=template&id=651a6c94&");
+/* harmony import */ var _DeleteForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeleteForm.vue?vue&type=script&lang=js& */ "./resources/js/components/posts/DeleteForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DeleteForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DeleteForm_vue_vue_type_template_id_651a6c94___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DeleteForm_vue_vue_type_template_id_651a6c94___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/posts/DeleteForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/posts/DeleteForm.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/posts/DeleteForm.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./DeleteForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/DeleteForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/posts/DeleteForm.vue?vue&type=template&id=651a6c94&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/posts/DeleteForm.vue?vue&type=template&id=651a6c94& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteForm_vue_vue_type_template_id_651a6c94___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./DeleteForm.vue?vue&type=template&id=651a6c94& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/DeleteForm.vue?vue&type=template&id=651a6c94&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteForm_vue_vue_type_template_id_651a6c94___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteForm_vue_vue_type_template_id_651a6c94___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

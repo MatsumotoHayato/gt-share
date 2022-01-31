@@ -123,10 +123,9 @@ class PostController extends Controller
     }
     
     // レビュー削除
-    public function delete(Artist $artist, Song $song, Post $post)
+    public function delete(Post $post)
     {
         $post->delete();
-        return redirect('/artists/'. $artist->id. '/songs/'. $song->id. '/posts/instruments/'. $post->instrument->id);
     }
     
     // いいね機能
