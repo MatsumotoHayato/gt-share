@@ -150,6 +150,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     close: function close() {
+      this.$refs.form.reset();
       this.dialog = false;
     },
     save: function save() {
@@ -321,6 +322,24 @@ var render = function () {
                           "v-dialog",
                           {
                             attrs: { "max-width": "500px" },
+                            on: {
+                              "click:outside": _vm.close,
+                              keydown: function ($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "esc",
+                                    27,
+                                    $event.key,
+                                    ["Esc", "Escape"]
+                                  )
+                                ) {
+                                  return null
+                                }
+                                return _vm.close.apply(null, arguments)
+                              },
+                            },
                             scopedSlots: _vm._u([
                               {
                                 key: "activator",

@@ -77,7 +77,7 @@
         newPost: {
           instrument_id: '',
           experience: '',
-          difficulty: '',
+          difficulty: 3,
           body: '',
           url: '',
         },
@@ -89,6 +89,14 @@
     },
     methods: {
       close() {
+        this.newPost = {
+          instrument_id: '',
+          experience: '',
+          difficulty: 3,
+          body: '',
+          url: '',
+        }
+        this.$refs.form.resetValidation()
         this.$emit('close')
       },
       save() {

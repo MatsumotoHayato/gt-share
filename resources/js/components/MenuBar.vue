@@ -6,7 +6,7 @@
         <router-link to="/" class="home-link">GT-share</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <div v-if="user">
+      <div v-if="user" class="mr-16">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn
@@ -21,6 +21,9 @@
           <v-list>
             <v-list-item to="/vue/mypage">
               <v-list-item-title>マイページ</v-list-item-title>
+            </v-list-item>
+            <v-list-item to="/vue/password">
+              <v-list-item-title>パスワード変更</v-list-item-title>
             </v-list-item>
             <v-list-item @click="logout">
               <v-list-item-title>ログアウト</v-list-item-title>

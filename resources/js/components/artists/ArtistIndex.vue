@@ -14,7 +14,7 @@
             <v-text-field v-model="search" clearable flat solo-inverted hide-details prepend-inner-icon="mdi-magnify" label="アーティスト名を検索">
             </v-text-field>
             <v-spacer></v-spacer>
-            <v-dialog v-model="dialog" max-width="500px">
+            <v-dialog v-model="dialog" max-width="500px" @click:outside="close" @keydown.esc="close">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn class="ma-2" outlined v-bind="attrs" v-on="on">
                   新規アーティスト
@@ -105,6 +105,7 @@
           })
       },
       close() {
+        this.$refs.form.reset()
         this.dialog = false
       },
       save() {

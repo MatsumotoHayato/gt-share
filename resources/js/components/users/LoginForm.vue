@@ -60,9 +60,11 @@
         }
       },
       registerLink() {
+        this.$refs.form.reset()
         this.$emit('registerLink')
       },
       close() {
+        this.$refs.form.reset()
         this.$emit('close')
       },
     }
