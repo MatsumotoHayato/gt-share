@@ -47,29 +47,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Ranking',
   data: function data() {
@@ -172,7 +149,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.song-ranking tr:hover td {\n    background: #f0f8ff;\n}\n.song-ranking th {\n    background: #f5f5f5;\n}\n.song-link, .artist-link {\n    text-decoration: none;\n    color: inherit!important;\n}\n", ""]);
+exports.push([module.i, "\n.song-ranking tr:hover td {\n  background: #f0f8ff;\n}\n.song-ranking th {\n  background: #f5f5f5;\n}\n.song-link,\n.artist-link {\n  text-decoration: none;\n  color: inherit !important;\n}\n", ""]);
 
 // exports
 
@@ -287,13 +264,9 @@ var render = function () {
                           "v-toolbar-title",
                           [
                             _c("v-icon", [
-                              _vm._v(
-                                "\n                            mdi-crown\n                        "
-                              ),
+                              _vm._v("\n              mdi-crown\n            "),
                             ]),
-                            _vm._v(
-                              "\n                        曲一覧\n                    "
-                            ),
+                            _vm._v("\n            曲一覧\n          "),
                           ],
                           1
                         ),

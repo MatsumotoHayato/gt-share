@@ -24,15 +24,8 @@ Route::get('/artists/{artist}/songs/{song}/posts/{post}/edit', 'PostController@e
 Route::put('/posts/{post}', 'PostController@update')->middleware('auth');     // レビュー編集の変更内容更新
 Route::delete('/artists/{artist}/songs/{song}/posts/{post}', 'PostController@delete')->middleware('auth');  // レビュー削除
 
-// Route::get('/search/artists', 'ArtistController@search');  // アーティスト名検索結果画面
-// Route::get('/search/songs', 'SongController@search');      // 曲名検索結果画面
-// Route::get('/artists/{artist}/search/songs', 'SongController@searchByArtist');  // 特定アーティストの曲名検索結果画面
-
-Route::get('/ranking/beginners/instruments/{instrument}', 'SongController@ranking');   // 初心者向け曲ランキング
-
 Route::post('/posts/{post}/favorite', 'PostController@favorite')->middleware('auth');  // 役に立った機能
 Route::post('/posts/{post}/unfavorite', 'PostController@unfavorite')->middleware('auth');  // 役に立った取り消し機能
-Route::post('/mylist/{post}/unfavorite', 'PostController@unfavoriteMylist')->middleware('auth');  // マイリストで役に立った取り消し機能
 Route::get('/mylist', 'PostController@mylist')->middleware('auth');  // 役に立ったマイリスト
 Route::get('/myposts', 'PostController@myposts')->middleware('auth');  // 自分の投稿
 Route::get('/ranking', 'SongController@ranking');  // ランキング
@@ -47,5 +40,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/{any}', function(){
-        return view('layouts/app');
-    })->where('any', '.*');
+    return view('layouts/app');
+})->where('any', '.*');
