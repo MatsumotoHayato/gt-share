@@ -7,13 +7,38 @@
       <v-form ref="form">
         <v-card-text style="max-width:424px" class="mx-auto">
           <v-row class="my-4">
-            <v-text-field v-model="userInfo.email" :rules="[emailRules.required, emailRules.regex]" validate-on-blur autofocus outlined label="メールアドレス"></v-text-field>
+            <v-text-field
+              v-model="userInfo.email"
+              :rules="[emailRules.required, emailRules.regex]"
+              validate-on-blur
+              autofocus
+              outlined
+              label="メールアドレス"
+              @keydown.enter="focusNext"
+            ></v-text-field>
           </v-row>
           <v-row class="mt-4">
-            <v-text-field v-model="userInfo.password" :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'" :rules="[passwordRules.required, passwordRules.min]" validate-on-blur :type="passwordShow ? 'text' : 'password'" outlined label="パスワード" @click:append="passwordShow = !passwordShow"></v-text-field>
+            <v-text-field
+              v-model="userInfo.password"
+              :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'"
+              :rules="[passwordRules.required, passwordRules.min]"
+              validate-on-blur
+              :type="passwordShow ? 'text' : 'password'"
+              outlined
+              label="パスワード"
+              @click:append="passwordShow = !passwordShow"
+              ref="focusThis"
+              @keydown.enter="login"
+            ></v-text-field>
           </v-row>
           <v-row class="mt-16 mb-8">
-            <v-btn class="text-subtitle-1" color="primary" height="56" block @click="login">
+            <v-btn
+              class="text-subtitle-1"
+              color="primary"
+              height="56"
+              block
+              @click="login"
+            >
               ログイン
             </v-btn>
           </v-row>
@@ -67,6 +92,9 @@
         this.$refs.form.reset()
         this.$emit('close')
       },
+      focusNext() {
+        this.$refs.focusThis.focus()
+      }
     }
   }
 </script>
