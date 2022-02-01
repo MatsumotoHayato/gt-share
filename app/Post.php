@@ -13,7 +13,9 @@ class Post extends Model
 
     protected $fillable = [
         'user_id', 'song_id', 'instrument_id',
-        'experience', 'difficulty', 'body', 'url'
+        'experience', 'score_easy', 'score_copy',
+        'score_memorize', 'score_cost', 'score_enjoyment',
+        'body', 'url'
     ];
     
     protected $appends = [

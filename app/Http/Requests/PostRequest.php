@@ -16,17 +16,13 @@ class PostRequest extends FormRequest
         return [
             'post.instrument_id' => 'required|integer',
             'post.experience' => 'required|integer|between:0,100',
-            'post.difficulty' => 'required|integer|between:1,5',
+            'post.score_easy' => 'required|integer|between:1,5',
+            'post.score_copy' => 'required|integer|between:1,5',
+            'post.score_memorize' => 'required|integer|between:1,5',
+            'post.score_cost' => 'required|integer|between:1,5',
+            'post.score_enjoyment' => 'required|integer|between:1,5',
             'post.body' => 'required|string|max:4000',
             'post.url' => 'nullable|url',
-        ];
-    }
-    
-    public function messages()
-    {
-        return [
-            'post.instrument_id.integer' => '楽器 は必須です',
-            'post.difficulty.integer' => '難易度 は必須です',
         ];
     }
 }

@@ -18,11 +18,6 @@ class SongController extends Controller
         ];
     }
 
-    public function create(Artist $artist)
-    {
-        return view('songs/create')->with(['artist' => $artist]);
-    }
-
     public function store(Request $request, Artist $artist, Song $song)
     {
         $request->validate([
@@ -35,38 +30,12 @@ class SongController extends Controller
         $input += ['artist_id' => $artist->id];  // 要素artist_idの追加
         $song->fill($input)->save();
     }
-
-    // 全曲からキーワード検索
-    public function search(Request $request, Song $song)
-    {
-        $request->validate([
-            'keyword' => 'required|string|max:100'
-        ]);
-        return view('songs/search')->with([
-            'songs' => $song->searchSongsByKeyword($request['keyword']),
-            'keyword' => $request['keyword'],
-        ]);
-    }
-
-    // 特定アーティストの曲からキーワード検索
-    public function searchByArtist(Request $request, Artist $artist, Song $song)
-    {
-        $request->validate([
-            'song_keyword' => 'required|string|max:100'
-        ]);
-        return view('songs/search')->with([
-            'songs' => $song->searchSongsByKeyword($request['song_keyword'], $artist->id),
-            'keyword' => $request['song_keyword'],
-            'artist' => $artist,
-        ]);
-    }
     
     // 初心者向けの曲ランキング
     public function ranking(Song $song, Instrument $instrument)
     {
         return [
             'songs' => $song->getSongsForBeginners(),
-            // 'selected_instrument' => $instrument->first(),
             'instruments' => $instrument->get(),
         ];
     }

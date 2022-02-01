@@ -49,7 +49,7 @@
           { text: '', value: 'rank', align: 'start', width: '5%', sortable: false },
           { text: '曲名', value: 'name', align: 'start', width: '30%', sortable: false },
           { text: 'アーティスト名', value: 'artist', align: 'start', width: '45%', sortable: false },
-          { text: '難易度', value: 'average_difficulty', align: 'start', width: '20%', sortable: false },
+          { text: '簡単さ', value: 'average_score_easy', align: 'start', width: '20%', sortable: false },
         ],
         pageNumber: ''
       }

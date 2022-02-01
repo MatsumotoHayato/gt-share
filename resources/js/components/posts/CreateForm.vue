@@ -8,19 +8,64 @@
         <v-form ref="form">
           <v-row>
             <v-col cols="6">
-              <v-select v-model="newPost.instrument_id" :items="instruments" item-text="name" item-value="id" label="楽器*" :rules="[rules.required]" single-line required></v-select>
+              <v-select
+                v-model="newPost.instrument_id"
+                :items="instruments"
+                item-text="name"
+                item-value="id"
+                label="楽器*"
+                :rules="[rules.required]"
+                single-line
+                required
+              ></v-select>
             </v-col>
             <v-spacer />
             <v-col cols="4">
-              <v-text-field v-model="newPost.experience" type="number" max="100" min="0" label="楽器経験" suffix="年"></v-text-field>
+              <v-text-field
+                v-model="newPost.experience"
+                type="number"
+                max="100"
+                min="0"
+                label="楽器経験"
+                suffix="年"
+              ></v-text-field>
+            </v-col>
+            <v-spacer />
+          </v-row>
+          <!--<v-row v-for="slider in sliders" :key="slider.label">-->
+          <!--  <v-col cols="10">-->
+          <!--    <v-slider-->
+          <!--      v-model="slider.value"-->
+          <!--      :label="slider.label"-->
+          <!--      :tick-labels="[1, 2, 3, 4, 5]"-->
+          <!--      max="5"-->
+          <!--      min="1"-->
+          <!--      dense-->
+          <!--      ticks="always"-->
+          <!--      tick-size="4"-->
+          <!--    ></v-slider>-->
+          <!--  </v-col>-->
+          <!--</v-row>-->
+          <v-row>
+            <v-col cols="11">
+              <v-slider
+                v-model="newPost.score_easy"
+                label="簡単さ*　　　　　　　"
+                :tick-labels="['1', 2, 3, 4, 5]"
+                max="5"
+                min="1"
+                dense
+                ticks="always"
+                tick-size="4"
+              ></v-slider>
             </v-col>
             <v-spacer />
           </v-row>
           <v-row>
-            <v-col cols="10">
+            <v-col cols="11">
               <v-slider
-                v-model="newPost.difficulty"
-                label="難易度*"
+                v-model="newPost.score_copy"
+                label="耳コピしやすさ*　　　"
                 :tick-labels="[1, 2, 3, 4, 5]"
                 max="5"
                 min="1"
@@ -29,6 +74,52 @@
                 tick-size="4"
               ></v-slider>
             </v-col>
+            <v-spacer />
+          </v-row>
+          <v-row>
+            <v-col cols="11">
+              <v-slider
+                v-model="newPost.score_memorize"
+                label="覚えやすさ*　　　　　"
+                :tick-labels="[1, 2, 3, 4, 5]"
+                max="5"
+                min="1"
+                dense
+                ticks="always"
+                tick-size="4"
+              ></v-slider>
+            </v-col>
+            <v-spacer />
+          </v-row>
+          <v-row>
+            <v-col cols="11">
+              <v-slider
+                v-model="newPost.score_cost"
+                label="必要機材の揃えやすさ*"
+                :tick-labels="[1, 2, 3, 4, 5]"
+                max="5"
+                min="1"
+                dense
+                ticks="always"
+                tick-size="4"
+              ></v-slider>
+            </v-col>
+            <v-spacer />
+          </v-row>
+          <v-row>
+            <v-col cols="11">
+              <v-slider
+                v-model="newPost.score_enjoyment"
+                label="演奏時の楽しさ*　　　"
+                :tick-labels="[1, 2, 3, 4, 5]"
+                max="5"
+                min="1"
+                dense
+                ticks="always"
+                tick-size="4"
+              ></v-slider>
+            </v-col>
+            <v-spacer />
           </v-row>
           <v-row>
             <v-col cols="12">
@@ -77,7 +168,11 @@
         newPost: {
           instrument_id: '',
           experience: '',
-          difficulty: 3,
+          score_easy: 3,
+          score_copy: 3,
+          score_memorize: 3,
+          score_cost: 3,
+          score_enjoyment: 3,
           body: '',
           url: '',
         },
@@ -92,7 +187,11 @@
         this.newPost = {
           instrument_id: '',
           experience: '',
-          difficulty: 3,
+          score_easy: 3,
+          score_copy: 3,
+          score_memorize: 3,
+          score_cost: 3,
+          score_enjoyment: 3,
           body: '',
           url: '',
         }

@@ -59,27 +59,27 @@
               <v-list dense>
                 <v-list-item>
                   <v-list-item-content>
-                    簡単さ: {{ item.difficulty }}点
+                    簡単さ: {{ item.score_easy }}点
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item>
                   <v-list-item-content>
-                    耳コピしやすさ: {{ item.difficulty }}点
+                    耳コピしやすさ: {{ item.score_copy }}点
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item>
                   <v-list-item-content>
-                    覚えやすさ: {{ item.difficulty }}点
+                    覚えやすさ: {{ item.score_memorize }}点
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item>
                   <v-list-item-content>
-                    必要機材の揃えやすさ: {{ item.difficulty }}点
+                    必要機材の揃えやすさ: {{ item.score_cost }}点
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item>
                   <v-list-item-content>
-                    演奏時の楽しさ: {{ item.difficulty }}点
+                    演奏時の楽しさ: {{ item.score_enjoyment }}点
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
