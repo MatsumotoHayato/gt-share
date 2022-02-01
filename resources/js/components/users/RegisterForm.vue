@@ -7,16 +7,51 @@
       <v-form ref="form">
         <v-card-text style="max-width:424px" class="mx-auto">
           <v-row class="my-4">
-            <v-text-field v-model="userInfo.name" :rules="[nameRules.required]" validate-on-blur autofocus outlined label="ユーザー名"></v-text-field>
+            <v-text-field
+              v-model="userInfo.name"
+              :rules="[nameRules.required]"
+              validate-on-blur
+              autofocus
+              outlined
+              label="ユーザー名"
+              @keydown.enter="focusNext('email')"
+            ></v-text-field>
           </v-row>
           <v-row class="my-4">
-            <v-text-field v-model="userInfo.email" :rules="[emailRules.required, emailRules.regex]" validate-on-blur outlined label="メールアドレス"></v-text-field>
+            <v-text-field
+              v-model="userInfo.email"
+              :rules="[emailRules.required, emailRules.regex]"
+              validate-on-blur
+              outlined
+              ref="focusEmail"
+              label="メールアドレス"
+              @keydown.enter="focusNext('password')"
+            ></v-text-field>
           </v-row>
           <v-row class="my-4">
-            <v-text-field v-model="userInfo.password" :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'" :rules="[passwordRules.required, passwordRules.min]" validate-on-blur :type="passwordShow ? 'text' : 'password'" outlined label="パスワード" @click:append="passwordShow = !passwordShow"></v-text-field>
+            <v-text-field
+              v-model="userInfo.password"
+              :append-icon="passwordShow ? 'mdi-eye' : 'mdi-eye-off'"
+              :rules="[passwordRules.required, passwordRules.min]"
+              validate-on-blur
+              :type="passwordShow ? 'text' : 'password'"
+              outlined
+              ref="focusPassword"
+              label="パスワード"
+              @click:append="passwordShow = !passwordShow"
+              @keydown.enter="focusNext('confirm')"
+            ></v-text-field>
           </v-row>
           <v-row class="my-4">
-            <v-text-field v-model="userInfo.password_confirmation" :rules="[passwordRules.required, passwordRules.confirm]" type="password" outlined label="パスワード（確認用）"></v-text-field>
+            <v-text-field
+              v-model="userInfo.password_confirmation"
+              :rules="[passwordRules.required, passwordRules.confirm]"
+              type="password"
+              outlined
+              ref="focusConfirm"
+              label="パスワード（確認用）"
+              @keydown.enter="register"
+              ></v-text-field>
           </v-row>
           <v-row class="mt-12 mb-8">
             <v-btn class="text-subtitle-1" color="primary" height="56" block @click="register">
@@ -79,6 +114,15 @@
         this.$refs.form.reset()
         this.$emit('close')
       },
+      focusNext(text) {
+        if (text === 'email') {
+          this.$refs.focusEmail.focus()
+        } else if (text === 'password') {
+          this.$refs.focusPassword.focus()
+        } else if (text === 'confirm') {
+          this.$refs.focusConfirm.focus()
+        }
+      }
     }
   }
 </script>
