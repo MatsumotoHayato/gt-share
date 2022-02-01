@@ -17,10 +17,25 @@
             <v-spacer />
           </v-row>
           <v-row>
-            <v-col cols="10">
+            <v-col cols="11">
               <v-slider
-                v-model="editedPost.difficulty"
-                label="難易度*"
+                v-model="editedPost.score_easy"
+                label="簡単さ*　　　　　　　"
+                :tick-labels="['1', 2, 3, 4, 5]"
+                max="5"
+                min="1"
+                dense
+                ticks="always"
+                tick-size="4"
+              ></v-slider>
+            </v-col>
+            <v-spacer />
+          </v-row>
+          <v-row>
+            <v-col cols="11">
+              <v-slider
+                v-model="editedPost.score_copy"
+                label="耳コピしやすさ*　　　"
                 :tick-labels="[1, 2, 3, 4, 5]"
                 max="5"
                 min="1"
@@ -29,6 +44,52 @@
                 tick-size="4"
               ></v-slider>
             </v-col>
+            <v-spacer />
+          </v-row>
+          <v-row>
+            <v-col cols="11">
+              <v-slider
+                v-model="editedPost.score_memorize"
+                label="覚えやすさ*　　　　　"
+                :tick-labels="[1, 2, 3, 4, 5]"
+                max="5"
+                min="1"
+                dense
+                ticks="always"
+                tick-size="4"
+              ></v-slider>
+            </v-col>
+            <v-spacer />
+          </v-row>
+          <v-row>
+            <v-col cols="11">
+              <v-slider
+                v-model="editedPost.score_cost"
+                label="必要機材の揃えやすさ*"
+                :tick-labels="[1, 2, 3, 4, 5]"
+                max="5"
+                min="1"
+                dense
+                ticks="always"
+                tick-size="4"
+              ></v-slider>
+            </v-col>
+            <v-spacer />
+          </v-row>
+          <v-row>
+            <v-col cols="11">
+              <v-slider
+                v-model="editedPost.score_enjoyment"
+                label="演奏時の楽しさ*　　　"
+                :tick-labels="[1, 2, 3, 4, 5]"
+                max="5"
+                min="1"
+                dense
+                ticks="always"
+                tick-size="4"
+              ></v-slider>
+            </v-col>
+            <v-spacer />
           </v-row>
           <v-row>
             <v-col cols="12">

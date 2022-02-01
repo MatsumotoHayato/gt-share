@@ -12,26 +12,9 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
-    // // レビュー一覧表示
-    // public function index(Artist $artist, Song $song, Instrument $instrument)
-    // {
-    //     return view('posts/index')->with([
-    //         'artist' => $artist,
-    //         'song' => $song,
-    //         'posts'=> $song->getPostsBySongAndInstrument($instrument->id),
-    //         'selected_instrument' => $instrument,
-    //         'instruments' => $instrument->get(),
-    //     ]);
-    // }
-    
     // レビュー一覧表示
     public function index(Song $song)
     {
-        // // var_dump(Auth::user());
-        // if (Auth::user() === null){
-        //     $user = {
-        //     }
-        // }
         return [
             'user' => Auth::user(),
             'artist' => $song->artist,
@@ -41,44 +24,28 @@ class PostController extends Controller
         ];
     }
     
-    // レビュー一覧表示（役に立った順）
-    public function indexSortFavorite(Artist $artist, Song $song, Instrument $instrument)
-    {
-        return view('posts/index')->with([
-            'artist' => $artist,
-            'song' => $song,
-            'posts'=> $song->sortPostsByFavoriteCount($instrument->id),
-            'selected_instrument' => $instrument,
-            'instruments' => $instrument->get(),
-            'sorted_flag' => 1,
-        ]);
-    }
-
-    // レビュー投稿画面
-    public function create(Artist $artist, Song $song, Instrument $instrument)
-    {
-        return view('posts/create')->with([
-            'artist' => $artist,
-            'song' => $song,
-            'selected_instrument' => $instrument,
-            'instruments' => $instrument->get(),
-            ]);
-    }
-
     // レビュー投稿
     public function store(Request $request, Song $song, Post $post)
     {
         $request->validate([
             'instrument_id' => 'required|integer',
             'experience' => 'required|integer|between:0,100',
-            'difficulty' => 'required|integer|between:1,5',
+            'score_easy' => 'required|integer|between:1,5',
+            'score_copy' => 'required|integer|between:1,5',
+            'score_memorize' => 'required|integer|between:1,5',
+            'score_cost' => 'required|integer|between:1,5',
+            'score_enjoyment' => 'required|integer|between:1,5',
             'body' => 'required|string|max:4000',
             'url' => 'nullable|url'
         ]);
         $input = [
             'instrument_id' => $request['instrument_id'],
             'experience' => $request['experience'],
-            'difficulty' => $request['difficulty'],
+            'score_easy' => $request['score_easy'],
+            'score_copy' => $request['score_copy'],
+            'score_memorize' => $request['score_memorize'],
+            'score_cost' => $request['score_cost'],
+            'score_enjoyment' => $request['score_enjoyment'],
             'body' => $request['body'],
             'url' => $request['url'],
         ];
@@ -88,34 +55,30 @@ class PostController extends Controller
         ];
         $post->fill($input)->save();
     }
-    
-    // レビュー編集画面
-    public function edit(Artist $artist, Song $song, Post $post, Instrument $instrument)
-    {
-        return view('posts/edit')->with([
-            'artist' => $artist,
-            'song' => $song,
-            'post' => $post,
-            'instruments' => $instrument->get(),
-            ]);
-    }
-    
+
     // レビュー編集の変更内容更新
     public function update(Request $request, Post $post)
     {
         $request->validate([
             'instrument_id' => 'required|integer',
             'experience' => 'required|integer|between:0,100',
-            'difficulty' => 'required|integer|between:1,5',
+            'score_easy' => 'required|integer|between:1,5',
+            'score_copy' => 'required|integer|between:1,5',
+            'score_memorize' => 'required|integer|between:1,5',
+            'score_cost' => 'required|integer|between:1,5',
+            'score_enjoyment' => 'required|integer|between:1,5',
             'body' => 'required|string|max:4000',
             'url' => 'nullable|url'
         ]);
-        // dd($request);
         $input = [
             'id' => $request['id'],
             'instrument_id' => $request['instrument_id'],
             'experience' => $request['experience'],
-            'difficulty' => $request['difficulty'],
+            'score_easy' => $request['score_easy'],
+            'score_copy' => $request['score_copy'],
+            'score_memorize' => $request['score_memorize'],
+            'score_cost' => $request['score_cost'],
+            'score_enjoyment' => $request['score_enjoyment'],
             'body' => $request['body'],
             'url' => $request['url'],
         ];
@@ -156,12 +119,5 @@ class PostController extends Controller
             'posts' => $post->getMyPosts(),
             'user'=> Auth::user()
         ];
-    }
-    
-    // マイリストの役に立った取り消し機能
-    public function unfavoriteMylist(Post $post)
-    {
-        $post->users()->detach(Auth::id());
-        return redirect('/mylist');
     }
 }

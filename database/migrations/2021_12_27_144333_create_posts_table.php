@@ -18,8 +18,12 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedSmallInteger('song_id');
             $table->unsignedSmallInteger('instrument_id');
-            $table->unsignedTinyInteger('experience'); // 経験年数（0,1,2...年）
-            $table->unsignedTinyInteger('difficulty');  // 難易度(1~5)
+            $table->unsignedTinyInteger('experience')->nullable(); // 経験年数（0,1,2...年）
+            $table->unsignedTinyInteger('score_easy');  // 簡単さ(1~5)
+            $table->unsignedTinyInteger('score_copy');  // 耳コピしやすさ(1~5)
+            $table->unsignedTinyInteger('score_memorize');  // 覚えやすさ(1~5)
+            $table->unsignedTinyInteger('score_cost');  // 必要機材の揃えやすさ(1~5)
+            $table->unsignedTinyInteger('score_enjoyment');  // 演奏時の楽しさ(1~5)
             $table->text('body');  // レビュー内容
             $table->string('url')->nullable(); // URL
             $table->timestamps();

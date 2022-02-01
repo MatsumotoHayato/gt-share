@@ -76,6 +76,97 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateForm',
   props: ['createDialog', 'instruments'],
@@ -84,7 +175,11 @@ __webpack_require__.r(__webpack_exports__);
       newPost: {
         instrument_id: '',
         experience: '',
-        difficulty: 3,
+        score_easy: 3,
+        score_copy: 3,
+        score_memorize: 3,
+        score_cost: 3,
+        score_enjoyment: 3,
         body: '',
         url: ''
       },
@@ -103,7 +198,11 @@ __webpack_require__.r(__webpack_exports__);
       this.newPost = {
         instrument_id: '',
         experience: '',
-        difficulty: 3,
+        score_easy: 3,
+        score_copy: 3,
+        score_memorize: 3,
+        score_cost: 3,
+        score_enjoyment: 3,
         body: '',
         url: ''
       };
@@ -204,6 +303,67 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -788,11 +948,45 @@ var render = function () {
                     [
                       _c(
                         "v-col",
-                        { attrs: { cols: "10" } },
+                        { attrs: { cols: "11" } },
                         [
                           _c("v-slider", {
                             attrs: {
-                              label: "難易度*",
+                              label: "簡単さ*　　　　　　　",
+                              "tick-labels": ["1", 2, 3, 4, 5],
+                              max: "5",
+                              min: "1",
+                              dense: "",
+                              ticks: "always",
+                              "tick-size": "4",
+                            },
+                            model: {
+                              value: _vm.newPost.score_easy,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.newPost, "score_easy", $$v)
+                              },
+                              expression: "newPost.score_easy",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-spacer"),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-row",
+                    [
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "11" } },
+                        [
+                          _c("v-slider", {
+                            attrs: {
+                              label: "耳コピしやすさ*　　　",
                               "tick-labels": [1, 2, 3, 4, 5],
                               max: "5",
                               min: "1",
@@ -801,16 +995,120 @@ var render = function () {
                               "tick-size": "4",
                             },
                             model: {
-                              value: _vm.newPost.difficulty,
+                              value: _vm.newPost.score_copy,
                               callback: function ($$v) {
-                                _vm.$set(_vm.newPost, "difficulty", $$v)
+                                _vm.$set(_vm.newPost, "score_copy", $$v)
                               },
-                              expression: "newPost.difficulty",
+                              expression: "newPost.score_copy",
                             },
                           }),
                         ],
                         1
                       ),
+                      _vm._v(" "),
+                      _c("v-spacer"),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-row",
+                    [
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "11" } },
+                        [
+                          _c("v-slider", {
+                            attrs: {
+                              label: "覚えやすさ*　　　　　",
+                              "tick-labels": [1, 2, 3, 4, 5],
+                              max: "5",
+                              min: "1",
+                              dense: "",
+                              ticks: "always",
+                              "tick-size": "4",
+                            },
+                            model: {
+                              value: _vm.newPost.score_memorize,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.newPost, "score_memorize", $$v)
+                              },
+                              expression: "newPost.score_memorize",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-spacer"),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-row",
+                    [
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "11" } },
+                        [
+                          _c("v-slider", {
+                            attrs: {
+                              label: "必要機材の揃えやすさ*",
+                              "tick-labels": [1, 2, 3, 4, 5],
+                              max: "5",
+                              min: "1",
+                              dense: "",
+                              ticks: "always",
+                              "tick-size": "4",
+                            },
+                            model: {
+                              value: _vm.newPost.score_cost,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.newPost, "score_cost", $$v)
+                              },
+                              expression: "newPost.score_cost",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-spacer"),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-row",
+                    [
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "11" } },
+                        [
+                          _c("v-slider", {
+                            attrs: {
+                              label: "演奏時の楽しさ*　　　",
+                              "tick-labels": [1, 2, 3, 4, 5],
+                              max: "5",
+                              min: "1",
+                              dense: "",
+                              ticks: "always",
+                              "tick-size": "4",
+                            },
+                            model: {
+                              value: _vm.newPost.score_enjoyment,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.newPost, "score_enjoyment", $$v)
+                              },
+                              expression: "newPost.score_enjoyment",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-spacer"),
                     ],
                     1
                   ),
@@ -1162,11 +1460,45 @@ var render = function () {
                     [
                       _c(
                         "v-col",
-                        { attrs: { cols: "10" } },
+                        { attrs: { cols: "11" } },
                         [
                           _c("v-slider", {
                             attrs: {
-                              label: "難易度*",
+                              label: "簡単さ*　　　　　　　",
+                              "tick-labels": ["1", 2, 3, 4, 5],
+                              max: "5",
+                              min: "1",
+                              dense: "",
+                              ticks: "always",
+                              "tick-size": "4",
+                            },
+                            model: {
+                              value: _vm.editedPost.score_easy,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.editedPost, "score_easy", $$v)
+                              },
+                              expression: "editedPost.score_easy",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-spacer"),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-row",
+                    [
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "11" } },
+                        [
+                          _c("v-slider", {
+                            attrs: {
+                              label: "耳コピしやすさ*　　　",
                               "tick-labels": [1, 2, 3, 4, 5],
                               max: "5",
                               min: "1",
@@ -1175,16 +1507,120 @@ var render = function () {
                               "tick-size": "4",
                             },
                             model: {
-                              value: _vm.editedPost.difficulty,
+                              value: _vm.editedPost.score_copy,
                               callback: function ($$v) {
-                                _vm.$set(_vm.editedPost, "difficulty", $$v)
+                                _vm.$set(_vm.editedPost, "score_copy", $$v)
                               },
-                              expression: "editedPost.difficulty",
+                              expression: "editedPost.score_copy",
                             },
                           }),
                         ],
                         1
                       ),
+                      _vm._v(" "),
+                      _c("v-spacer"),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-row",
+                    [
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "11" } },
+                        [
+                          _c("v-slider", {
+                            attrs: {
+                              label: "覚えやすさ*　　　　　",
+                              "tick-labels": [1, 2, 3, 4, 5],
+                              max: "5",
+                              min: "1",
+                              dense: "",
+                              ticks: "always",
+                              "tick-size": "4",
+                            },
+                            model: {
+                              value: _vm.editedPost.score_memorize,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.editedPost, "score_memorize", $$v)
+                              },
+                              expression: "editedPost.score_memorize",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-spacer"),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-row",
+                    [
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "11" } },
+                        [
+                          _c("v-slider", {
+                            attrs: {
+                              label: "必要機材の揃えやすさ*",
+                              "tick-labels": [1, 2, 3, 4, 5],
+                              max: "5",
+                              min: "1",
+                              dense: "",
+                              ticks: "always",
+                              "tick-size": "4",
+                            },
+                            model: {
+                              value: _vm.editedPost.score_cost,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.editedPost, "score_cost", $$v)
+                              },
+                              expression: "editedPost.score_cost",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-spacer"),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-row",
+                    [
+                      _c(
+                        "v-col",
+                        { attrs: { cols: "11" } },
+                        [
+                          _c("v-slider", {
+                            attrs: {
+                              label: "演奏時の楽しさ*　　　",
+                              "tick-labels": [1, 2, 3, 4, 5],
+                              max: "5",
+                              min: "1",
+                              dense: "",
+                              ticks: "always",
+                              "tick-size": "4",
+                            },
+                            model: {
+                              value: _vm.editedPost.score_enjoyment,
+                              callback: function ($$v) {
+                                _vm.$set(_vm.editedPost, "score_enjoyment", $$v)
+                              },
+                              expression: "editedPost.score_enjoyment",
+                            },
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("v-spacer"),
                     ],
                     1
                   ),
@@ -1578,7 +2014,7 @@ var render = function () {
                                     _c("v-list-item-content", [
                                       _vm._v(
                                         "\n                  簡単さ: " +
-                                          _vm._s(item.difficulty) +
+                                          _vm._s(item.score_easy) +
                                           "点\n                "
                                       ),
                                     ]),
@@ -1592,7 +2028,7 @@ var render = function () {
                                     _c("v-list-item-content", [
                                       _vm._v(
                                         "\n                  耳コピしやすさ: " +
-                                          _vm._s(item.difficulty) +
+                                          _vm._s(item.score_copy) +
                                           "点\n                "
                                       ),
                                     ]),
@@ -1606,7 +2042,7 @@ var render = function () {
                                     _c("v-list-item-content", [
                                       _vm._v(
                                         "\n                  覚えやすさ: " +
-                                          _vm._s(item.difficulty) +
+                                          _vm._s(item.score_memorize) +
                                           "点\n                "
                                       ),
                                     ]),
@@ -1620,7 +2056,7 @@ var render = function () {
                                     _c("v-list-item-content", [
                                       _vm._v(
                                         "\n                  必要機材の揃えやすさ: " +
-                                          _vm._s(item.difficulty) +
+                                          _vm._s(item.score_cost) +
                                           "点\n                "
                                       ),
                                     ]),
@@ -1634,7 +2070,7 @@ var render = function () {
                                     _c("v-list-item-content", [
                                       _vm._v(
                                         "\n                  演奏時の楽しさ: " +
-                                          _vm._s(item.difficulty) +
+                                          _vm._s(item.score_enjoyment) +
                                           "点\n                "
                                       ),
                                     ]),
