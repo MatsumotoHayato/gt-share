@@ -478,6 +478,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CreateForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateForm */ "./resources/js/components/posts/CreateForm.vue");
 /* harmony import */ var _EditForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditForm */ "./resources/js/components/posts/EditForm.vue");
 /* harmony import */ var _DeleteForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DeleteForm */ "./resources/js/components/posts/DeleteForm.vue");
+/* harmony import */ var vue_google_charts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-google-charts */ "./node_modules/vue-google-charts/index.js");
 //
 //
 //
@@ -614,6 +615,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -622,7 +631,8 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     CreateForm: _CreateForm__WEBPACK_IMPORTED_MODULE_0__["default"],
     EditForm: _EditForm__WEBPACK_IMPORTED_MODULE_1__["default"],
-    DeleteForm: _DeleteForm__WEBPACK_IMPORTED_MODULE_2__["default"]
+    DeleteForm: _DeleteForm__WEBPACK_IMPORTED_MODULE_2__["default"],
+    GChart: vue_google_charts__WEBPACK_IMPORTED_MODULE_3__["GChart"]
   },
   data: function data() {
     return {
@@ -1771,6 +1781,17 @@ var render = function () {
             attrs: { deleteDialog: _vm.deleteDialog },
             on: { delete: _vm.deletePost, close: _vm.closeDelete },
           }),
+          _vm._v(" "),
+          _vm.selectedPosts
+            ? _c("GChart", {
+                attrs: {
+                  settings: { packages: ["vegachart"] },
+                  type: "VegaChart",
+                  data: _vm.chartData,
+                  options: _vm.chartOptions,
+                },
+              })
+            : _vm._e(),
           _vm._v(" "),
           _c("v-row", [
             _c("p", { staticClass: "text-h5 font-weight-bold" }, [

@@ -13,7 +13,9 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Vuetify from './plugins/vuetify.js'
 import MenuBar from './components/MenuBar.vue'
+import VueGoogleCharts from 'vue-google-charts'
 Vue.use(VueAxios, axios)
+Vue.use(VueGoogleCharts)
 
 /**
  * The following block of code may be used to automatically register your

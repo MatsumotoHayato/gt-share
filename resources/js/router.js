@@ -11,6 +11,7 @@ export default new Router({
     { path: '/vue/mylist', component: () => import('./components/posts/MyList'), name: 'MyList' },
     { path: '/vue/myposts', component: () => import('./components/posts/MyPosts'), name: 'MyPosts' },
     { path: '/vue/ranking', component: () => import('./components/songs/Ranking'), name: 'Ranking' },
+    { path: '/vue/chart', component: () => import('./components/posts/RadarChart'), name: 'RadarChart' },
     { path: '*', redirect: '/' }
   ],
   mode: 'history',
