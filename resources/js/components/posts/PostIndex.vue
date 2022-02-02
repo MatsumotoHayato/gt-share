@@ -37,7 +37,8 @@
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title class="mt-4 d-flex justify-space-between">
-                  <span>ユーザー名: {{ item.user.name }}</span>
+                  <span v-if="item.experience">ユーザー: {{ item.user.name }} （経験年数{{ item.experience }}年）</span>
+                  <span v-else>ユーザー: {{ item.user.name }}</span>
                   <div v-if="item.user.id === currentUser.id">
                     <v-btn outlined @click="openEditForm(item)">
                       編集
