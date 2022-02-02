@@ -613,6 +613,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -1917,11 +1918,22 @@ var render = function () {
                                       "mt-4 d-flex justify-space-between",
                                   },
                                   [
-                                    _c("span", [
-                                      _vm._v(
-                                        "ユーザー名: " + _vm._s(item.user.name)
-                                      ),
-                                    ]),
+                                    item.experience
+                                      ? _c("span", [
+                                          _vm._v(
+                                            "ユーザー: " +
+                                              _vm._s(item.user.name) +
+                                              " （経験年数" +
+                                              _vm._s(item.experience) +
+                                              "年）"
+                                          ),
+                                        ])
+                                      : _c("span", [
+                                          _vm._v(
+                                            "ユーザー: " +
+                                              _vm._s(item.user.name)
+                                          ),
+                                        ]),
                                     _vm._v(" "),
                                     item.user.id === _vm.currentUser.id
                                       ? _c(

@@ -29,7 +29,7 @@ class PostController extends Controller
     {
         $request->validate([
             'instrument_id' => 'required|integer',
-            'experience' => 'required|integer|between:0,100',
+            'experience' => 'nullable|integer|between:0,100',
             'score_easy' => 'required|integer|between:1,5',
             'score_copy' => 'required|integer|between:1,5',
             'score_memorize' => 'required|integer|between:1,5',
@@ -61,7 +61,7 @@ class PostController extends Controller
     {
         $request->validate([
             'instrument_id' => 'required|integer',
-            'experience' => 'required|integer|between:0,100',
+            'experience' => 'nullable|integer|between:0,100',
             'score_easy' => 'required|integer|between:1,5',
             'score_copy' => 'required|integer|between:1,5',
             'score_memorize' => 'required|integer|between:1,5',
