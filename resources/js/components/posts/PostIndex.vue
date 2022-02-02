@@ -4,6 +4,13 @@
       <CreateForm :createDialog=createDialog :instruments=instruments @save="createPost" @close="closeCreate" />
       <EditForm :editDialog=editDialog :post=postToEditForm :instruments=instruments @save="editPost" @close="closeEdit" />
       <DeleteForm :deleteDialog=deleteDialog @delete="deletePost" @close="closeDelete" />
+      <GChart
+        v-if="selectedPosts"
+        :settings="{packages: ['vegachart']}"
+        type="VegaChart"
+        :data="chartData"
+        :options="chartOptions"
+      />
       <v-row>
         <p class="text-h5 font-weight-bold">{{ song.name}} / {{ artist.name }}</p>
       </v-row>
@@ -138,12 +145,14 @@
   import CreateForm from './CreateForm'
   import EditForm from './EditForm'
   import DeleteForm from './DeleteForm'
+  import { GChart } from "vue-google-charts"
   export default {
     name: 'PostIndex',
     components: {
       CreateForm,
       EditForm,
-      DeleteForm
+      DeleteForm,
+      GChart
     },
     data() {
       return {
@@ -174,7 +183,7 @@
           text: 'ホーム',
           disabled: false,
           to: '/',
-        }]
+        }],
       }
     },
     computed: {
