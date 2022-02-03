@@ -4,13 +4,6 @@
       <CreateForm :createDialog=createDialog :instruments=instruments @save="createPost" @close="closeCreate" />
       <EditForm :editDialog=editDialog :post=postToEditForm :instruments=instruments @save="editPost" @close="closeEdit" />
       <DeleteForm :deleteDialog=deleteDialog @delete="deletePost" @close="closeDelete" />
-      <GChart
-        v-if="selectedPosts"
-        :settings="{packages: ['vegachart']}"
-        type="VegaChart"
-        :data="chartData"
-        :options="chartOptions"
-      />
       <v-row>
         <p class="text-h5 font-weight-bold">{{ song.name}} / {{ artist.name }}</p>
       </v-row>
@@ -63,36 +56,14 @@
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-col cols="3">
-              <v-list dense>
-                <v-list-item>
-                  <v-list-item-content>
-                    簡単さ: {{ item.score_easy }}点
-                  </v-list-item-content>
-                </v-list-item>
-                <v-list-item>
-                  <v-list-item-content>
-                    耳コピしやすさ: {{ item.score_copy }}点
-                  </v-list-item-content>
-                </v-list-item>
-                <v-list-item>
-                  <v-list-item-content>
-                    覚えやすさ: {{ item.score_memorize }}点
-                  </v-list-item-content>
-                </v-list-item>
-                <v-list-item>
-                  <v-list-item-content>
-                    必要機材の揃えやすさ: {{ item.score_cost }}点
-                  </v-list-item-content>
-                </v-list-item>
-                <v-list-item>
-                  <v-list-item-content>
-                    演奏時の楽しさ: {{ item.score_enjoyment }}点
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
+            <v-col cols="4">
+              <DrawChart
+                class="mb-16"
+                :post="item"
+                :averagePost="averagePost[selectedInstrumentId-1]"
+              ></DrawChart>
             </v-col>
-            <v-col cols="9">
+            <v-col cols="8">
               <v-list dense>
                 <v-list-item>
                   <v-card max-width="700" min-width="700" elevation="1">
@@ -145,14 +116,14 @@
   import CreateForm from './CreateForm'
   import EditForm from './EditForm'
   import DeleteForm from './DeleteForm'
-  import { GChart } from "vue-google-charts"
+  import DrawChart from '../charts/DrawChart'
   export default {
     name: 'PostIndex',
     components: {
       CreateForm,
       EditForm,
       DeleteForm,
-      GChart
+      DrawChart
     },
     data() {
       return {
@@ -167,6 +138,7 @@
         deleteConfirmedPost: [],
         selectedPosts: [],
         selectedInstrumentId: 1,
+        averagePost: [],
         instruments: [],
         headers: [
           { text: "投稿日時", value: "updated_at", align: "start" },
@@ -203,6 +175,7 @@
             this.posts = response.data.posts
             this.instruments = response.data.instruments
             this.initFetchPosts()
+            this.culcAveragePosts()
           })
       },
       setBreadCrumbs() {
@@ -225,6 +198,37 @@
         if (this.posts.length > 0) {
           this.selectedPosts = this.posts.filter((post) => post.instrument_id === 1)
         }
+      },
+      culcAveragePosts() {
+        this.averagePost = []
+        this.instruments.forEach((instrument, index)=>{
+          let average = {
+            score_easy: 0,
+            score_copy: 0,
+            score_memorize: 0,
+            score_cost: 0,
+            score_enjoyment: 0,
+          }
+          this.posts.forEach(post=>{
+            if(post.instrument_id === index+1){
+              average.score_easy += post.score_easy
+              average.score_copy += post.score_copy
+              average.score_memorize += post.score_memorize
+              average.score_cost += post.score_cost
+              average.score_enjoyment += post.score_enjoyment
+            }
+          })
+          let averageLength = this.posts.filter(post => post.instrument_id === index+1).length
+          if(averageLength > 0) {
+            average.score_easy /= averageLength
+            average.score_copy /= averageLength
+            average.score_memorize /= averageLength
+            average.score_cost /= averageLength
+            average.score_enjoyment /= averageLength
+          }
+          this.averagePost.push(average)
+        })
+        console.log(this.averagePost)
       },
       closeCreate() {
         this.createDialog = false
