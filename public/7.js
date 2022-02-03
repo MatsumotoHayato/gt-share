@@ -148,12 +148,10 @@ var render = function () {
                           [
                             _c("v-icon", [
                               _vm._v(
-                                "\n                            mdi-text-box\n                        "
+                                "\n              mdi-text-box\n            "
                               ),
                             ]),
-                            _vm._v(
-                              "\n                        レビュー一覧\n                    "
-                            ),
+                            _vm._v("\n            レビュー一覧\n          "),
                           ],
                           1
                         ),
@@ -235,11 +233,11 @@ var render = function () {
                                               [
                                                 _c("v-list-item-content", [
                                                   _vm._v(
-                                                    "\n                                                楽器: " +
+                                                    "\n                        楽器: " +
                                                       _vm._s(
                                                         post.instrument.name
                                                       ) +
-                                                      "\n                                            "
+                                                      "\n                      "
                                                   ),
                                                 ]),
                                               ],
@@ -251,9 +249,9 @@ var render = function () {
                                               [
                                                 _c("v-list-item-content", [
                                                   _vm._v(
-                                                    "\n                                                難易度: " +
+                                                    "\n                        難易度: " +
                                                       _vm._s(post.difficulty) +
-                                                      "\n                                            "
+                                                      "\n                      "
                                                   ),
                                                 ]),
                                               ],
@@ -265,9 +263,9 @@ var render = function () {
                                               [
                                                 _c("v-list-item-content", [
                                                   _vm._v(
-                                                    "\n                                                " +
+                                                    "\n                        " +
                                                       _vm._s(post.updated_at) +
-                                                      "\n                                            "
+                                                      "\n                      "
                                                   ),
                                                 ]),
                                               ],
@@ -279,9 +277,9 @@ var render = function () {
                                               [
                                                 _c("v-list-item-content", [
                                                   _vm._v(
-                                                    "\n                                                内容: " +
+                                                    "\n                        内容: " +
                                                       _vm._s(post.body) +
-                                                      "\n                                            "
+                                                      "\n                      "
                                                   ),
                                                 ]),
                                               ],
