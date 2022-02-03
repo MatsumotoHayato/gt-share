@@ -976,8 +976,8 @@ var render = function () {
                         [
                           _c("v-slider", {
                             attrs: {
-                              label: "簡単さ*　　　　　　　",
-                              "tick-labels": ["1", 2, 3, 4, 5],
+                              label: "簡単度*　　　　　",
+                              "tick-labels": [1, 2, 3, 4, 5],
                               max: "5",
                               min: "1",
                               dense: "",
@@ -1010,7 +1010,7 @@ var render = function () {
                         [
                           _c("v-slider", {
                             attrs: {
-                              label: "耳コピしやすさ*　　　",
+                              label: "耳コピしやすさ*　",
                               "tick-labels": [1, 2, 3, 4, 5],
                               max: "5",
                               min: "1",
@@ -1044,7 +1044,7 @@ var render = function () {
                         [
                           _c("v-slider", {
                             attrs: {
-                              label: "覚えやすさ*　　　　　",
+                              label: "覚えやすさ*　　　",
                               "tick-labels": [1, 2, 3, 4, 5],
                               max: "5",
                               min: "1",
@@ -1078,7 +1078,7 @@ var render = function () {
                         [
                           _c("v-slider", {
                             attrs: {
-                              label: "必要機材の揃えやすさ*",
+                              label: "必要機材の少なさ*",
                               "tick-labels": [1, 2, 3, 4, 5],
                               max: "5",
                               min: "1",
@@ -1112,7 +1112,7 @@ var render = function () {
                         [
                           _c("v-slider", {
                             attrs: {
-                              label: "演奏時の楽しさ*　　　",
+                              label: "演奏時の楽しさ*　",
                               "tick-labels": [1, 2, 3, 4, 5],
                               max: "5",
                               min: "1",
@@ -1221,7 +1221,7 @@ var render = function () {
                   attrs: { color: "blue darken-1", text: "" },
                   on: { click: _vm.save },
                 },
-                [_vm._v("\n        追加\n      ")]
+                [_vm._v("\n        投稿\n      ")]
               ),
             ],
             1
@@ -1488,8 +1488,8 @@ var render = function () {
                         [
                           _c("v-slider", {
                             attrs: {
-                              label: "簡単さ*　　　　　　　",
-                              "tick-labels": ["1", 2, 3, 4, 5],
+                              label: "簡単度*　　　　　",
+                              "tick-labels": [1, 2, 3, 4, 5],
                               max: "5",
                               min: "1",
                               dense: "",
@@ -1522,7 +1522,7 @@ var render = function () {
                         [
                           _c("v-slider", {
                             attrs: {
-                              label: "耳コピしやすさ*　　　",
+                              label: "耳コピしやすさ*　",
                               "tick-labels": [1, 2, 3, 4, 5],
                               max: "5",
                               min: "1",
@@ -1556,7 +1556,7 @@ var render = function () {
                         [
                           _c("v-slider", {
                             attrs: {
-                              label: "覚えやすさ*　　　　　",
+                              label: "覚えやすさ*　　　",
                               "tick-labels": [1, 2, 3, 4, 5],
                               max: "5",
                               min: "1",
@@ -1590,7 +1590,7 @@ var render = function () {
                         [
                           _c("v-slider", {
                             attrs: {
-                              label: "必要機材の揃えやすさ*",
+                              label: "必要機材の少なさ*",
                               "tick-labels": [1, 2, 3, 4, 5],
                               max: "5",
                               min: "1",
@@ -1624,7 +1624,7 @@ var render = function () {
                         [
                           _c("v-slider", {
                             attrs: {
-                              label: "演奏時の楽しさ*　　　",
+                              label: "演奏時の楽しさ*　",
                               "tick-labels": [1, 2, 3, 4, 5],
                               max: "5",
                               min: "1",

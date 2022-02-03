@@ -37,7 +37,7 @@
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title class="mt-4 d-flex justify-space-between">
-                  <span v-if="item.experience">ユーザー: {{ item.user.name }} （経験年数{{ item.experience }}年）</span>
+                  <span v-if="item.experience">ユーザー: {{ item.user.name }}（経験年数{{ item.experience }}年）</span>
                   <span v-else>ユーザー: {{ item.user.name }}</span>
                   <div v-if="item.user.id === currentUser.id">
                     <v-btn outlined @click="openEditForm(item)">
@@ -58,7 +58,7 @@
             </v-list-item>
             <v-col cols="4">
               <DrawChart
-                class="mb-16"
+                class="mb-12"
                 :post="item"
                 :averagePost="averagePost[selectedInstrumentId-1]"
               ></DrawChart>
@@ -66,7 +66,7 @@
             <v-col cols="8">
               <v-list dense>
                 <v-list-item>
-                  <v-card max-width="700" min-width="700" elevation="1">
+                  <v-card max-width="700" min-width="700" min-height="400" outlined>
                     <v-card-text class="text-subtitle-1">
                       {{ item.body }}
                     </v-card-text>
@@ -74,7 +74,7 @@
                 </v-list-item>
                 <v-list-item v-show="item.url">
                   <v-list-item-content>
-                    演奏動画: {{ item.url }}
+                    <div>演奏動画: <a :href="item.url">{{ item.url }}</a></div>
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item>
@@ -82,7 +82,7 @@
                     {{ item.updated_at }}
                   </v-list-item-content>
                 </v-list-item>
-                <v-list-item>
+                <v-list-item class="justify-end mb-4 pr-16">
                   <v-btn v-if="item.favorite_check" color="primary" @click="unfavorite(item)">
                     いいね
                     <v-icon right class="ml-3 mr-1">

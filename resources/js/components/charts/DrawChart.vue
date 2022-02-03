@@ -60,7 +60,7 @@
     methods: {
       radarChart() {
         this.datacollection = {
-          labels: ["簡単さ", "耳コピしやすさ", "覚えやすさ", "必要機材のコスパ", "演奏時の楽しさ"],
+          labels: ["簡単度", "耳コピしやすさ", "覚えやすさ", "必要機材の少なさ", "演奏時の楽しさ"],
           datasets: [
           {
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -101,10 +101,3 @@
     }
   }
 </script>
-
-<style>
-  /*.small {*/
-  /*    max-width: 600px;*/
-  /*    margin:  150px auto;*/
-  /*}*/
-</style>

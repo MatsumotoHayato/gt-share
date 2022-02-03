@@ -74,7 +74,7 @@ __webpack_require__.r(__webpack_exports__);
         width: '45%',
         sortable: false
       }, {
-        text: '簡単さ',
+        text: '簡単度',
         value: 'average_score_easy',
         align: 'start',
         width: '20%',
