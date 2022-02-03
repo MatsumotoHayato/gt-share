@@ -50,8 +50,8 @@
             <v-col cols="11">
               <v-slider
                 v-model="newPost.score_easy"
-                label="簡単さ*　　　　　　　"
-                :tick-labels="['1', 2, 3, 4, 5]"
+                label="簡単度*　　　　　"
+                :tick-labels="[1, 2, 3, 4, 5]"
                 max="5"
                 min="1"
                 dense
@@ -65,7 +65,7 @@
             <v-col cols="11">
               <v-slider
                 v-model="newPost.score_copy"
-                label="耳コピしやすさ*　　　"
+                label="耳コピしやすさ*　"
                 :tick-labels="[1, 2, 3, 4, 5]"
                 max="5"
                 min="1"
@@ -80,7 +80,7 @@
             <v-col cols="11">
               <v-slider
                 v-model="newPost.score_memorize"
-                label="覚えやすさ*　　　　　"
+                label="覚えやすさ*　　　"
                 :tick-labels="[1, 2, 3, 4, 5]"
                 max="5"
                 min="1"
@@ -95,7 +95,7 @@
             <v-col cols="11">
               <v-slider
                 v-model="newPost.score_cost"
-                label="必要機材の揃えやすさ*"
+                label="必要機材の少なさ*"
                 :tick-labels="[1, 2, 3, 4, 5]"
                 max="5"
                 min="1"
@@ -110,7 +110,7 @@
             <v-col cols="11">
               <v-slider
                 v-model="newPost.score_enjoyment"
-                label="演奏時の楽しさ*　　　"
+                label="演奏時の楽しさ*　"
                 :tick-labels="[1, 2, 3, 4, 5]"
                 max="5"
                 min="1"
@@ -149,7 +149,7 @@
           キャンセル
         </v-btn>
         <v-btn color="blue darken-1" text @click="save">
-          追加
+          投稿
         </v-btn>
       </v-card-actions>
     </v-card>

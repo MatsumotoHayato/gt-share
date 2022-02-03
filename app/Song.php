@@ -28,10 +28,10 @@ class Song extends Model
         return $this->hasMany('App\Post');
     }
 
-    // 難易度の低い順から曲を取得
+    // 簡単な順に曲を取得
     public function getSongsForBeginners(int $limit_count = 100)
     {
-        // 曲IDと楽器IDでグループ化して平均難易度を計算し、難易度昇順に曲を並び替える
+        // 曲IDと楽器IDでグループ化して平均難易度を計算し、簡単度降順に曲を並び替える
         return $this::with('artist')->Join('posts', 'songs.id', '=', 'posts.song_id')
         ->select('songs.id', 'songs.name', 'songs.artist_id', 'posts.instrument_id', DB::raw('round(AVG(posts.score_easy), 2) as average_score_easy'))
         ->groupBy('songs.id', 'songs.name', 'songs.artist_id', 'posts.instrument_id')
