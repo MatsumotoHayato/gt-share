@@ -54,7 +54,7 @@
               ></v-text-field>
           </v-row>
           <v-row class="mt-12 mb-8">
-            <v-btn class="text-subtitle-1" color="primary" height="56" block @click="register">
+            <v-btn class="text-subtitle-1" color="warning" height="56" block @click="register">
               新規登録
             </v-btn>
           </v-row>

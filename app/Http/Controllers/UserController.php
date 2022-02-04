@@ -16,19 +16,7 @@ class UserController extends Controller
             'user'=> Auth::user()
         ];
     }
-    
-    // ユーザー情報表示画面
-    public function index(User $user)
-    {
-        return view('users/index')->with(['user' => $user]);  
-    }
-    
-    // ユーザー情報編集画面
-    public function edit()
-    {
-        return view('users/edit')->with(['user' => Auth::user()]);
-    }
-    
+
     // ユーザー情報更新
     public function update(Request $request)
     {
