@@ -37,8 +37,30 @@
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title class="mt-4 d-flex justify-space-between">
-                  <span v-if="item.experience">ユーザー: {{ item.user.name }}（経験年数{{ item.experience }}年）</span>
-                  <span v-else>ユーザー: {{ item.user.name }}</span>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                      <div
+                        v-if="item.experience"
+                        v-bind="attrs"
+                        v-on="on"
+                      >
+                        ユーザー: <span style="color: #1976D2;">{{ item.user.name }}（経験年数{{ item.experience }}年）</span>
+                      </div>
+                      <div
+                        v-else
+                        v-bind="attrs"
+                        v-on="on"
+                      >
+                        ユーザー: <span style="color: #1976D2;">{{ item.user.name }}</span>
+                      </div>
+                    </template>
+                    <div>
+                      <div v-if="item.user.age">年齢: {{ item.user.age }}代</div>
+                      <div v-else>年齢: 非公開</div>
+                      <div v-if="item.user.occupation">職業: {{ item.user.occupation }}</div>
+                      <div v-else>職業: 非公開</div>
+                    </div>
+                  </v-tooltip>
                   <div v-if="item.user.id === currentUser.id">
                     <v-btn outlined @click="openEditForm(item)">
                       編集

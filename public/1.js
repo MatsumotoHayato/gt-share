@@ -690,6 +690,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2371,22 +2393,126 @@ var render = function () {
                                       "mt-4 d-flex justify-space-between",
                                   },
                                   [
-                                    item.experience
-                                      ? _c("span", [
-                                          _vm._v(
-                                            "ユーザー: " +
-                                              _vm._s(item.user.name) +
-                                              "（経験年数" +
-                                              _vm._s(item.experience) +
-                                              "年）"
-                                          ),
-                                        ])
-                                      : _c("span", [
-                                          _vm._v(
-                                            "ユーザー: " +
-                                              _vm._s(item.user.name)
-                                          ),
+                                    _c(
+                                      "v-tooltip",
+                                      {
+                                        attrs: { bottom: "" },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "activator",
+                                              fn: function (ref) {
+                                                var on = ref.on
+                                                var attrs = ref.attrs
+                                                return [
+                                                  item.experience
+                                                    ? _c(
+                                                        "div",
+                                                        _vm._g(
+                                                          _vm._b(
+                                                            {},
+                                                            "div",
+                                                            attrs,
+                                                            false
+                                                          ),
+                                                          on
+                                                        ),
+                                                        [
+                                                          _vm._v(
+                                                            "\n                      ユーザー: "
+                                                          ),
+                                                          _c(
+                                                            "span",
+                                                            {
+                                                              staticStyle: {
+                                                                color:
+                                                                  "#1976D2",
+                                                              },
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  item.user.name
+                                                                ) +
+                                                                  "（経験年数" +
+                                                                  _vm._s(
+                                                                    item.experience
+                                                                  ) +
+                                                                  "年）"
+                                                              ),
+                                                            ]
+                                                          ),
+                                                        ]
+                                                      )
+                                                    : _c(
+                                                        "div",
+                                                        _vm._g(
+                                                          _vm._b(
+                                                            {},
+                                                            "div",
+                                                            attrs,
+                                                            false
+                                                          ),
+                                                          on
+                                                        ),
+                                                        [
+                                                          _vm._v(
+                                                            "\n                      ユーザー: "
+                                                          ),
+                                                          _c(
+                                                            "span",
+                                                            {
+                                                              staticStyle: {
+                                                                color:
+                                                                  "#1976D2",
+                                                              },
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                _vm._s(
+                                                                  item.user.name
+                                                                )
+                                                              ),
+                                                            ]
+                                                          ),
+                                                        ]
+                                                      ),
+                                                ]
+                                              },
+                                            },
+                                          ],
+                                          null,
+                                          true
+                                        ),
+                                      },
+                                      [
+                                        _vm._v(" "),
+                                        _c("div", [
+                                          item.user.age
+                                            ? _c("div", [
+                                                _vm._v(
+                                                  "年齢: " +
+                                                    _vm._s(item.user.age) +
+                                                    "代"
+                                                ),
+                                              ])
+                                            : _c("div", [
+                                                _vm._v("年齢: 非公開"),
+                                              ]),
+                                          _vm._v(" "),
+                                          item.user.occupation
+                                            ? _c("div", [
+                                                _vm._v(
+                                                  "職業: " +
+                                                    _vm._s(item.user.occupation)
+                                                ),
+                                              ])
+                                            : _c("div", [
+                                                _vm._v("職業: 非公開"),
+                                              ]),
                                         ]),
+                                      ]
+                                    ),
                                     _vm._v(" "),
                                     item.user.id === _vm.currentUser.id
                                       ? _c(
@@ -2456,7 +2582,8 @@ var render = function () {
                                           1
                                         )
                                       : _vm._e(),
-                                  ]
+                                  ],
+                                  1
                                 ),
                               ],
                               1
