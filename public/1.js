@@ -827,7 +827,6 @@ __webpack_require__.r(__webpack_exports__);
 
         _this3.averagePost.push(average);
       });
-      console.log(this.averagePost);
     },
     closeCreate: function closeCreate() {
       this.createDialog = false;
@@ -2492,6 +2491,7 @@ var render = function () {
                               [
                                 _c(
                                   "v-list-item",
+                                  { staticClass: "mb-4" },
                                   [
                                     _c(
                                       "v-card",

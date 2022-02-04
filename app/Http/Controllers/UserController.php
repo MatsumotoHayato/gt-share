@@ -33,13 +33,17 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'user.name' => 'required|string|max:100',
-            'user.email' => ['required','string','email','max:255', Rule::unique('users','email')->ignore(Auth::id())],
-            'user.age' => 'nullable|integer|between:0,150',
-            'user.occupation' => 'nullable|string|max:100',
+            'name' => 'required|string|max:100',
+            'email' => ['required','string','email','max:255', Rule::unique('users','email')->ignore(Auth::id())],
+            'age' => 'nullable|integer|between:0,150',
+            'occupation' => 'nullable|string|max:100',
         ]);
-        $input = $request['user'];
+        $input = [
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'age' => $request['age'],
+            'occupation' => $request['occupation'],
+        ];
         Auth::user()->fill($input)->save();
-        return redirect('/users/mypage/edit');
     }
 }
