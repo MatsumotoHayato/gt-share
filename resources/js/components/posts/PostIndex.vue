@@ -65,7 +65,7 @@
             </v-col>
             <v-col cols="8">
               <v-list dense>
-                <v-list-item>
+                <v-list-item class="mb-4">
                   <v-card max-width="700" min-width="700" min-height="400" outlined>
                     <v-card-text class="text-subtitle-1">
                       {{ item.body }}
@@ -228,7 +228,6 @@
           }
           this.averagePost.push(average)
         })
-        console.log(this.averagePost)
       },
       closeCreate() {
         this.createDialog = false

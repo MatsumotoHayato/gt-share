@@ -8,10 +8,11 @@ export default new Router({
     { path: '/', component: () => import('./components/artists/ArtistIndex'), name: 'ArtistIndex' },
     { path: '/vue/artists/:artistId', component: () => import('./components/artists/ArtistShow'), name: 'ArtistShow' },
     { path: '/vue/songs/:songId', component: () => import('./components/posts/PostIndex'), name: 'PostIndex' },
+    { path: '/vue/chart', component: () => import('./components/charts/DrawChart'), name: 'DrawChart' },
+    { path: '/vue/profile', component: () => import('./components/users/ProfileEdit'), name: 'ProfileEdit' },
     { path: '/vue/mylist', component: () => import('./components/posts/MyList'), name: 'MyList' },
     { path: '/vue/myposts', component: () => import('./components/posts/MyPosts'), name: 'MyPosts' },
     { path: '/vue/ranking', component: () => import('./components/songs/Ranking'), name: 'Ranking' },
-    { path: '/vue/chart', component: () => import('./components/charts/DrawChart'), name: 'DrawChart' },
     { path: '*', redirect: '/' }
   ],
   mode: 'history',

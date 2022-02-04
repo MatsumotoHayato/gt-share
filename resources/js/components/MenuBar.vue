@@ -19,8 +19,8 @@
             </v-btn>
           </template>
           <v-list>
-            <v-list-item to="/vue/mypage">
-              <v-list-item-title>マイページ</v-list-item-title>
+            <v-list-item to="/vue/profile">
+              <v-list-item-title>プロフィール設定</v-list-item-title>
             </v-list-item>
             <v-list-item to="/vue/password">
               <v-list-item-title>パスワード変更</v-list-item-title>
