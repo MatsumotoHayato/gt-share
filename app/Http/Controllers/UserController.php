@@ -34,4 +34,19 @@ class UserController extends Controller
         ];
         Auth::user()->fill($input)->save();
     }
+    
+    // パスワード変更
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'old_password' => 'required|string|min:8',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+        $user = Auth::user();
+        if(password_verify($request->old_password, $user->password))
+        {
+            $user->password = bcrypt($request->new_password);
+            $user->save();
+        }
+    }
 }

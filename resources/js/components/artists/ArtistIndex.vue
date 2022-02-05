@@ -130,7 +130,7 @@
         })
       }
     },
-    mounted() {
+    created() {
       this.getArtists()
     }
   }

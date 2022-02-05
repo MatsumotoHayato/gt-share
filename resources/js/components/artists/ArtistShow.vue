@@ -148,7 +148,7 @@
         })
       },
     },
-    mounted() {
+    created() {
       this.getSongs()
       this.setBreadCrumbs()
     }
