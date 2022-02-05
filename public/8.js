@@ -108,11 +108,13 @@ __webpack_require__.r(__webpack_exports__);
     change: function change() {
       var _this3 = this;
 
-      axios.put('/users/password', this.passwordForm).then(function (response) {
-        if (response.status == 200) {
-          _this3.$router.push('/');
-        }
-      });
+      if (this.$refs.form.validate()) {
+        axios.put('/users/password', this.passwordForm).then(function (response) {
+          if (response.status == 200) {
+            _this3.$router.push('/');
+          }
+        });
+      }
     }
   },
   created: function created() {

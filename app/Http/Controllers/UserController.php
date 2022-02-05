@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -43,10 +44,13 @@ class UserController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
         $user = Auth::user();
-        if(password_verify($request->old_password, $user->password))
+        if(!password_verify($request->old_password, $user->password))
         {
-            $user->password = bcrypt($request->new_password);
-            $user->save();
+            return response('wrong password', 422);
         }
+        $input = [
+            'password' => Hash::make($request['password']),
+        ];
+        $user->fill($input)->save();
     }
 }
