@@ -86,12 +86,14 @@
           })
       },
       change() {
-        axios.put('/users/password', this.passwordForm)
-          .then((response) => {
-            if (response.status == 200) {
-              this.$router.push('/')
-            }
-          })
+        if (this.$refs.form.validate()){
+          axios.put('/users/password', this.passwordForm)
+            .then((response) => {
+              if (response.status == 200) {
+                this.$router.push('/')
+              }
+            })
+        }
       }
     },
     created() {
