@@ -90,7 +90,7 @@
           })
       }
     },
-    mounted() {
+    created() {
       this.getPosts()
     }
   }

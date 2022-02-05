@@ -84,7 +84,7 @@
           })
       }
     },
-    mounted() {
+    created() {
       this.getPosts()
     }
   }

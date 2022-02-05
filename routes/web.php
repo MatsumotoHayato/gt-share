@@ -19,8 +19,8 @@ Route::get('/myposts', 'PostController@myposts')->middleware('auth');  // 自分
 Route::get('/ranking', 'SongController@ranking');  // ランキング
 
 Route::get('/users/get', 'UserController@get'); // 現在のユーザー情報取得
-Route::get('/users/profile', 'UserController@edit')->middleware('auth');  // プロフィール設定画面
 Route::put('/users/profile', 'UserController@update')->middleware('auth');     // プロフィール更新
+Route::put('/users/password', 'UserController@changePassword')->middleware('auth');     // パスワード変更
 
 Auth::routes();
 

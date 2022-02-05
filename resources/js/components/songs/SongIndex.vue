@@ -146,7 +146,7 @@
         })
       }
     },
-    mounted() {
+    created() {
       this.getSongs()
     }
   }

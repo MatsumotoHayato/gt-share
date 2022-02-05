@@ -130,7 +130,7 @@
         this.loginDialog = true
       },
     },
-    mounted() {
+    created() {
       this.getUser()
     }
   }

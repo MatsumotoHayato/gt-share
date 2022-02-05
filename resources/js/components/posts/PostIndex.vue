@@ -40,7 +40,7 @@
                   <v-tooltip bottom>
                     <template v-slot:activator="{ on, attrs }">
                       <div
-                        v-if="item.experience"
+                        v-if="item.experience !== null"
                         v-bind="attrs"
                         v-on="on"
                       >
@@ -55,9 +55,9 @@
                       </div>
                     </template>
                     <div>
-                      <div v-if="item.user.age">年齢: {{ item.user.age }}代</div>
+                      <div v-if="item.user.age !== null">年齢: {{ item.user.age }}代</div>
                       <div v-else>年齢: 非公開</div>
-                      <div v-if="item.user.occupation">職業: {{ item.user.occupation }}</div>
+                      <div v-if="item.user.occupation !== null">職業: {{ item.user.occupation }}</div>
                       <div v-else>職業: 非公開</div>
                     </div>
                   </v-tooltip>
@@ -94,7 +94,7 @@
                     </v-card-text>
                   </v-card>
                 </v-list-item>
-                <v-list-item v-show="item.url">
+                <v-list-item v-show="item.url !== null">
                   <v-list-item-content>
                     <div>演奏動画: <a :href="item.url">{{ item.url }}</a></div>
                   </v-list-item-content>
@@ -312,7 +312,7 @@
           })
       },
     },
-    mounted() {
+    created() {
       this.getPosts()
       this.setBreadCrumbs()
     },

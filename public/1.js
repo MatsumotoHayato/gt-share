@@ -919,7 +919,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  mounted: function mounted() {
+  created: function created() {
     this.getPosts();
     this.setBreadCrumbs();
   },
@@ -2405,7 +2405,7 @@ var render = function () {
                                                 var on = ref.on
                                                 var attrs = ref.attrs
                                                 return [
-                                                  item.experience
+                                                  item.experience !== null
                                                     ? _c(
                                                         "div",
                                                         _vm._g(
@@ -2488,7 +2488,7 @@ var render = function () {
                                       [
                                         _vm._v(" "),
                                         _c("div", [
-                                          item.user.age
+                                          item.user.age !== null
                                             ? _c("div", [
                                                 _vm._v(
                                                   "年齢: " +
@@ -2500,7 +2500,7 @@ var render = function () {
                                                 _vm._v("年齢: 非公開"),
                                               ]),
                                           _vm._v(" "),
-                                          item.user.occupation
+                                          item.user.occupation !== null
                                             ? _c("div", [
                                                 _vm._v(
                                                   "職業: " +
@@ -2656,8 +2656,8 @@ var render = function () {
                                       {
                                         name: "show",
                                         rawName: "v-show",
-                                        value: item.url,
-                                        expression: "item.url",
+                                        value: item.url !== null,
+                                        expression: "item.url !== null",
                                       },
                                     ],
                                   },
