@@ -1,6 +1,12 @@
 <template>
   <div>
     <v-container>
+      <v-snackbar v-model="snackbar" :timeout="timeout" centered>
+        ログインが必要です
+        <v-btn color="blue darken-1" text @click="login">
+          ログイン
+        </v-btn>
+      </v-snackbar>
       <v-data-table class="elevation-1 artist-index" :items="artists" :headers="headers" @click:row="clickRow" :search="search" sort-by="name">
         <template v-slot:top>
           <v-toolbar flat dark color="blue darken-3" class="mb-1">
@@ -27,7 +33,7 @@
                 <v-card-title>
                   <span class="text-h5">新規アーティスト追加</span>
                 </v-card-title>
-                <v-form ref="form">
+                <v-form ref="form" @submit.prevent>
                   <v-card-text>
                     <v-row>
                       <v-col cols="10">
@@ -82,13 +88,15 @@
           { text: 'レビュー数', value: 'posts_count', align: 'start', width: '20%', filterable: false },
         ],
         dialog: false,
+        snackbar: false,
+        timeout: 5000,
         search: '',
         newArtist: {
           name: ''
         },
         rules: {
           required: value => !!value || '入力は必須です',
-          counter: value => value.length <= 50 || '50文字以内で入力してください',
+          counter: value => (value && value.length <= 50) || '50文字以内で入力してください',
           exists: value => !this.artists.some(object => {
             if(object.name===value){
               return true
@@ -117,6 +125,9 @@
                 this.getArtists()
               }
             })
+            .catch((error) => {
+              this.snackbar = true
+            })
         }
       },
       clickRow(e) {
@@ -128,6 +139,9 @@
         this.$router.push({
           path: `/vue/artists/${item.id}`
         })
+      },
+      login() {
+        
       }
     },
     created() {

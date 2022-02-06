@@ -36,12 +36,17 @@
           ログイン
         </v-btn>
         <LoginForm :loginDialog="loginDialog" @login="login" @registerLink="registerFromLogin" @close="loginDialog = false" />
-
         <v-btn class="font-weight-bold indigo--text text--darken-4 mr-8" light @click="registerDialog = true">
           新規登録
         </v-btn>
         <RegisterForm :registerDialog="registerDialog" @register="register" @loginLink="loginFromRegister" @close="registerDialog = false" />
       </div>
+      <v-snackbar v-model="loginSnackbar" :timeout="timeout" color="success" min-width=0 width=160>
+        ログインしました
+      </v-snackbar>
+      <v-snackbar v-model="logoutSnackbar" :timeout="timeout" color="success" min-width=0 width=170>
+        ログアウトしました
+      </v-snackbar>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-toolbar class="elevation-0">
@@ -83,6 +88,9 @@
         ],
         loginDialog: false,
         registerDialog: false,
+        loginSnackbar: false,
+        logoutSnackbar: false,
+        timeout: 2000,
       }
     },
     methods: {
@@ -97,6 +105,7 @@
           .then((response) => {
             if (response.status == 200) {
               this.loginDialog = false
+              this.loginSnackbar = true
               this.getUser()
               this.$router.push('/')
             }
@@ -106,6 +115,7 @@
         axios.post('/logout')
           .then((response) => {
             if (response.status == 200) {
+              this.logoutSnackbar = true
               this.getUser()
               this.$router.push('/')
             }
@@ -116,6 +126,7 @@
           .then((response) => {
             if (response.status == 200) {
               this.registerDialog = false
+              this.loginSnackbar = true
               this.getUser()
               this.$router.push('/')
             }
