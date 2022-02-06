@@ -1,11 +1,8 @@
 <template>
   <div>
     <v-container>
-      <v-snackbar v-model="snackbar" :timeout="timeout" centered>
+      <v-snackbar v-model="snackbar" :timeout="timeout" color="deep-purple accent-4" centered min-width=0 width=169>
         ログインが必要です
-        <v-btn color="blue darken-1" text @click="login">
-          ログイン
-        </v-btn>
       </v-snackbar>
       <v-data-table class="elevation-1 artist-index" :items="artists" :headers="headers" @click:row="clickRow" :search="search" sort-by="name">
         <template v-slot:top>
@@ -89,7 +86,7 @@
         ],
         dialog: false,
         snackbar: false,
-        timeout: 5000,
+        timeout: 4000,
         search: '',
         newArtist: {
           name: ''

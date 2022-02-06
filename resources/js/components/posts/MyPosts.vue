@@ -1,6 +1,9 @@
 <template>
   <div>
     <v-container>
+      <v-snackbar v-model="snackbar" :timeout="timeout" color="deep-purple accent-4" centered min-width=0 width=169>
+        ログインが必要です
+      </v-snackbar>
       <v-row>
         <p class="text-h5 font-weight-bold">あなたの投稿</p>
       </v-row>
@@ -73,6 +76,8 @@
         posts: [],
         user: [],
         dialog: false,
+        snackbar: false,
+        timeout: 4000,
       }
     },
     methods: {
@@ -81,6 +86,9 @@
           .then((response) => {
             this.posts = response.data.posts,
               this.user = response.data.user
+          })
+          .catch((error) => {
+            this.snackbar = true
           })
       }
     },

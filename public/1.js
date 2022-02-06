@@ -263,7 +263,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateForm',
   props: ['createDialog', 'instruments'],
@@ -400,8 +399,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -712,6 +709,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -755,6 +755,8 @@ __webpack_require__.r(__webpack_exports__);
       createDialog: false,
       editDialog: false,
       deleteDialog: false,
+      snackbar: false,
+      timeout: 4000,
       breadCrumbs: [{
         text: 'ホーム',
         disabled: false,
@@ -865,6 +867,8 @@ __webpack_require__.r(__webpack_exports__);
 
           _this5.getPosts();
         }
+      })["catch"](function (error) {
+        _this5.snackbar = true;
       });
     },
     editPost: function editPost(post) {
@@ -904,6 +908,8 @@ __webpack_require__.r(__webpack_exports__);
         if (response.status == 200) {
           _this8.getPosts();
         }
+      })["catch"](function (error) {
+        _this8.snackbar = true;
       });
     },
     unfavorite: function unfavorite(post) {
@@ -1595,13 +1601,12 @@ var render = function () {
                         [
                           _c("v-textarea", {
                             attrs: {
-                              label: "感想*",
+                              label: "感想",
                               placeholder:
                                 "練習時間、演奏のコツ、使用機材、楽しかった箇所など…",
-                              rules: [_vm.rules.required, _vm.rules.counter],
+                              rules: [_vm.rules.counter],
                               "auto-grow": "",
                               counter: "4000",
-                              required: "",
                             },
                             model: {
                               value: _vm.newPost.body,
@@ -2107,13 +2112,12 @@ var render = function () {
                         [
                           _c("v-textarea", {
                             attrs: {
-                              label: "感想*",
+                              label: "感想",
                               placeholder:
                                 "練習時間、演奏のコツ、使用機材、楽しかった箇所など…",
-                              rules: [_vm.rules.required, _vm.rules.counter],
+                              rules: [_vm.rules.counter],
                               "auto-grow": "",
                               counter: "4000",
-                              required: "",
                             },
                             model: {
                               value: _vm.editedPost.body,
@@ -2243,6 +2247,27 @@ var render = function () {
             attrs: { deleteDialog: _vm.deleteDialog },
             on: { delete: _vm.deletePost, close: _vm.closeDelete },
           }),
+          _vm._v(" "),
+          _c(
+            "v-snackbar",
+            {
+              attrs: {
+                timeout: _vm.timeout,
+                color: "deep-purple accent-4",
+                centered: "",
+                "min-width": "0",
+                width: "169",
+              },
+              model: {
+                value: _vm.snackbar,
+                callback: function ($$v) {
+                  _vm.snackbar = $$v
+                },
+                expression: "snackbar",
+              },
+            },
+            [_vm._v("\n      ログインが必要です\n    ")]
+          ),
           _vm._v(" "),
           _c("v-row", [
             _c("p", { staticClass: "text-h5 font-weight-bold" }, [
