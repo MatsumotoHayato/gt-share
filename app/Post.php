@@ -68,4 +68,6 @@ class Post extends Model
     {
         return $this::with(['song', 'song.artist', 'user', 'instrument'])->where('user_id', Auth::id())->orderBy('updated_at', 'DESC')->get();
     }
+    
+    // public function 
 }

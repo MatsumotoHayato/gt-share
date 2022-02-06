@@ -28,5 +28,4 @@ Route::get('/{any}', function(){
     return view('layouts/app');
 })->where('any', '.*');
 
-// Route::get('/users/mypage/edit', 'UserController@edit')->middleware('auth');  // 自分のユーザー情報編集
 // Route::get('/home', 'HomeController@index')->name('home');

@@ -108,7 +108,7 @@ __webpack_require__.r(__webpack_exports__);
           return !!value || '入力は必須です';
         },
         counter: function counter(value) {
-          return value.length <= 100 || '100文字以内で入力してください';
+          return value && value.length <= 100 || '100文字以内で入力してください';
         },
         exists: function exists(value) {
           return !_this.songs.some(function (object) {
@@ -400,7 +400,14 @@ var render = function () {
                                 _vm._v(" "),
                                 _c(
                                   "v-form",
-                                  { ref: "form" },
+                                  {
+                                    ref: "form",
+                                    on: {
+                                      submit: function ($event) {
+                                        $event.preventDefault()
+                                      },
+                                    },
+                                  },
                                   [
                                     _c(
                                       "v-card-text",

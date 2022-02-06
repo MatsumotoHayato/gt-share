@@ -28,7 +28,7 @@
                 <v-card-title>
                   <span class="text-h5">{{artist.name}} の新規曲追加</span>
                 </v-card-title>
-                <v-form ref="form">
+                <v-form ref="form" @submit.prevent>
                   <v-card-text>
                     <v-row>
                       <v-col cols="10">
@@ -86,7 +86,7 @@
         },
         rules: {
           required: value => !!value || '入力は必須です',
-          counter: value => value.length <= 100 || '100文字以内で入力してください',
+          counter: value => (value && value.length <= 100) || '100文字以内で入力してください',
           exists: value => !this.songs.some(object => {
             if(object.name===value){
               return true

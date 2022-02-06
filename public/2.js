@@ -78,6 +78,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ArtistIndex',
@@ -108,6 +114,8 @@ __webpack_require__.r(__webpack_exports__);
         filterable: false
       }],
       dialog: false,
+      snackbar: false,
+      timeout: 5000,
       search: '',
       newArtist: {
         name: ''
@@ -117,7 +125,7 @@ __webpack_require__.r(__webpack_exports__);
           return !!value || '入力は必須です';
         },
         counter: function counter(value) {
-          return value.length <= 50 || '50文字以内で入力してください';
+          return value && value.length <= 50 || '50文字以内で入力してください';
         },
         exists: function exists(value) {
           return !_this.artists.some(function (object) {
@@ -151,6 +159,8 @@ __webpack_require__.r(__webpack_exports__);
 
             _this3.getArtists();
           }
+        })["catch"](function (error) {
+          _this3.snackbar = true;
         });
       }
     },
@@ -163,7 +173,8 @@ __webpack_require__.r(__webpack_exports__);
       this.$router.push({
         path: "/vue/artists/".concat(item.id)
       });
-    }
+    },
+    login: function login() {}
   },
   created: function created() {
     this.getArtists();
@@ -301,7 +312,7 @@ __webpack_require__.r(__webpack_exports__);
           return !!value || '選択は必須です';
         },
         counter: function counter(value) {
-          return value.length <= 100 || '100文字以内で入力してください';
+          return value && value.length <= 100 || '100文字以内で入力してください';
         },
         exists: function exists(value) {
           return !_this.songs.some(function (object) {
@@ -481,6 +492,32 @@ var render = function () {
       _c(
         "v-container",
         [
+          _c(
+            "v-snackbar",
+            {
+              attrs: { timeout: _vm.timeout, centered: "" },
+              model: {
+                value: _vm.snackbar,
+                callback: function ($$v) {
+                  _vm.snackbar = $$v
+                },
+                expression: "snackbar",
+              },
+            },
+            [
+              _vm._v("\n      ログインが必要です\n      "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "blue darken-1", text: "" },
+                  on: { click: _vm.login },
+                },
+                [_vm._v("\n        ログイン\n      ")]
+              ),
+            ],
+            1
+          ),
+          _vm._v(" "),
           _c("v-data-table", {
             staticClass: "elevation-1 artist-index",
             attrs: {
@@ -622,7 +659,14 @@ var render = function () {
                                 _vm._v(" "),
                                 _c(
                                   "v-form",
-                                  { ref: "form" },
+                                  {
+                                    ref: "form",
+                                    on: {
+                                      submit: function ($event) {
+                                        $event.preventDefault()
+                                      },
+                                    },
+                                  },
                                   [
                                     _c(
                                       "v-card-text",
@@ -923,7 +967,14 @@ var render = function () {
                                 _vm._v(" "),
                                 _c(
                                   "v-form",
-                                  { ref: "form" },
+                                  {
+                                    ref: "form",
+                                    on: {
+                                      submit: function ($event) {
+                                        $event.preventDefault()
+                                      },
+                                    },
+                                  },
                                   [
                                     _c(
                                       "v-card-text",

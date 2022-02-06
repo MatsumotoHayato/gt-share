@@ -196,7 +196,7 @@
             this.song = response.data.song
             this.posts = response.data.posts
             this.instruments = response.data.instruments
-            this.initFetchPosts()
+            this.fetchPosts()
             this.culcAveragePosts()
           })
       },
@@ -213,13 +213,10 @@
             })
           })
       },
-      fetchPosts(e) {
-        this.selectedPosts = this.posts.filter((post) => post.instrument_id === e)
-      },
-      initFetchPosts() {
+      fetchPosts() {
         if (this.posts.length > 0) {
-          this.selectedPosts = this.posts.filter((post) => post.instrument_id === 1)
-        }
+          this.selectedPosts = this.posts.filter((post) => post.instrument_id === this.selectedInstrumentId)
+          }
       },
       culcAveragePosts() {
         this.averagePost = []
@@ -312,15 +309,15 @@
           })
       },
     },
+    watch: {
+      selectedInstrumentId() {
+        this.fetchPosts()
+      }
+    },
     created() {
       this.getPosts()
       this.setBreadCrumbs()
     },
-    watch: {
-      selectedInstrumentId(newValue) {
-        this.fetchPosts(newValue)
-      }
-    }
   }
 </script>
 
