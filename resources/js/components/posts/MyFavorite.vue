@@ -1,6 +1,9 @@
 <template>
   <div>
     <v-container>
+      <v-snackbar v-model="snackbar" :timeout="timeout" color="deep-purple accent-4" centered min-width=0 width=169>
+        ログインが必要です
+      </v-snackbar>
       <v-row>
         <p class="text-h5 font-weight-bold">いいねマイリスト</p>
       </v-row>
@@ -70,7 +73,7 @@
 
 <script>
   export default {
-    name: 'MyList',
+    name: 'MyFavorite',
     data() {
       return {
         posts: [],
@@ -79,14 +82,19 @@
           { text: "名前", value: "body", align: "start" },
         ],
         dialog: false,
+        snackbar: false,
+        timeout: 4000,
       }
     },
     methods: {
       getPosts() {
-        axios.get('/mylist')
+        axios.get('/myfavorite')
           .then((response) => {
             this.posts = response.data.posts,
               this.user = response.data.user
+          })
+          .catch((error) => {
+            this.snackbar = true
           })
       }
     },

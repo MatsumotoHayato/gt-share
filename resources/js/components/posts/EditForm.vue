@@ -95,12 +95,11 @@
             <v-col cols="12">
               <v-textarea
                 v-model="editedPost.body"
-                label="感想*"
+                label="感想"
                 placeholder="練習時間、演奏のコツ、使用機材、楽しかった箇所など…"
-                :rules="[rules.required, rules.counter]"
+                :rules="[rules.counter]"
                 auto-grow
                 counter="4000"
-                required
               ></v-textarea>
             </v-col>
           </v-row>
@@ -112,7 +111,6 @@
           <small>*必須項目</small>
         </v-form>
       </v-card-text>
-
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="blue darken-1" text @click="close">

@@ -104,7 +104,7 @@ class PostController extends Controller
     }
     
     // いいねマイリスト
-    public function mylist(Post $post)
+    public function myfavorite(Post $post)
     {
         return [
             'posts' => $post->getMyFavoritePosts(),

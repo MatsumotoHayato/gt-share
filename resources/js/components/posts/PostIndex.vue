@@ -4,6 +4,9 @@
       <CreateForm :createDialog=createDialog :instruments=instruments @save="createPost" @close="closeCreate" />
       <EditForm :editDialog=editDialog :post=postToEditForm :instruments=instruments @save="editPost" @close="closeEdit" />
       <DeleteForm :deleteDialog=deleteDialog @delete="deletePost" @close="closeDelete" />
+      <v-snackbar v-model="snackbar" :timeout="timeout" color="deep-purple accent-4" centered min-width=0 width=169>
+        ログインが必要です
+      </v-snackbar>
       <v-row>
         <p class="text-h5 font-weight-bold">{{ song.name}} / {{ artist.name }}</p>
       </v-row>
@@ -173,6 +176,8 @@
         createDialog: false,
         editDialog: false,
         deleteDialog: false,
+        snackbar: false,
+        timeout: 4000,
         breadCrumbs: [{
           text: 'ホーム',
           disabled: false,
@@ -265,6 +270,9 @@
               this.getPosts()
             }
           })
+          .catch((error) => {
+            this.snackbar = true
+          })
       },
       editPost(post) {
         axios.put(`/posts/${post.id}`, post)
@@ -298,6 +306,9 @@
             if (response.status == 200) {
               this.getPosts()
             }
+          })
+          .catch((error) => {
+            this.snackbar = true
           })
       },
       unfavorite(post) {

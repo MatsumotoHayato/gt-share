@@ -76,13 +76,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'MyList',
   data: function data() {
     return {
       posts: [],
       user: [],
-      dialog: false
+      dialog: false,
+      snackbar: false,
+      timeout: 4000
     };
   },
   methods: {
@@ -91,6 +96,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('/myposts').then(function (response) {
         _this.posts = response.data.posts, _this.user = response.data.user;
+      })["catch"](function (error) {
+        _this.snackbar = true;
       });
     }
   },
@@ -122,6 +129,27 @@ var render = function () {
       _c(
         "v-container",
         [
+          _c(
+            "v-snackbar",
+            {
+              attrs: {
+                timeout: _vm.timeout,
+                color: "deep-purple accent-4",
+                centered: "",
+                "min-width": "0",
+                width: "169",
+              },
+              model: {
+                value: _vm.snackbar,
+                callback: function ($$v) {
+                  _vm.snackbar = $$v
+                },
+                expression: "snackbar",
+              },
+            },
+            [_vm._v("\n      ログインが必要です\n    ")]
+          ),
+          _vm._v(" "),
           _c("v-row", [
             _c("p", { staticClass: "text-h5 font-weight-bold" }, [
               _vm._v("あなたの投稿"),

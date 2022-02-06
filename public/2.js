@@ -81,9 +81,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ArtistIndex',
@@ -115,7 +112,7 @@ __webpack_require__.r(__webpack_exports__);
       }],
       dialog: false,
       snackbar: false,
-      timeout: 5000,
+      timeout: 4000,
       search: '',
       newArtist: {
         name: ''
@@ -271,6 +268,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SongIndex',
   data: function data() {
@@ -299,6 +299,8 @@ __webpack_require__.r(__webpack_exports__);
         filterable: false
       }],
       dialog: false,
+      snackbar: false,
+      timeout: 4000,
       search: '',
       newSong: {
         name: '',
@@ -347,6 +349,8 @@ __webpack_require__.r(__webpack_exports__);
 
             _this3.getSongs();
           }
+        })["catch"](function (error) {
+          _this3.snackbar = true;
         });
       }
     },
@@ -495,7 +499,13 @@ var render = function () {
           _c(
             "v-snackbar",
             {
-              attrs: { timeout: _vm.timeout, centered: "" },
+              attrs: {
+                timeout: _vm.timeout,
+                color: "deep-purple accent-4",
+                centered: "",
+                "min-width": "0",
+                width: "169",
+              },
               model: {
                 value: _vm.snackbar,
                 callback: function ($$v) {
@@ -504,18 +514,7 @@ var render = function () {
                 expression: "snackbar",
               },
             },
-            [
-              _vm._v("\n      ログインが必要です\n      "),
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "blue darken-1", text: "" },
-                  on: { click: _vm.login },
-                },
-                [_vm._v("\n        ログイン\n      ")]
-              ),
-            ],
-            1
+            [_vm._v("\n      ログインが必要です\n    ")]
           ),
           _vm._v(" "),
           _c("v-data-table", {
@@ -830,6 +829,27 @@ var render = function () {
       _c(
         "v-container",
         [
+          _c(
+            "v-snackbar",
+            {
+              attrs: {
+                timeout: _vm.timeout,
+                color: "deep-purple accent-4",
+                centered: "",
+                "min-width": "0",
+                width: "169",
+              },
+              model: {
+                value: _vm.snackbar,
+                callback: function ($$v) {
+                  _vm.snackbar = $$v
+                },
+                expression: "snackbar",
+              },
+            },
+            [_vm._v("\n      ログインが必要です\n    ")]
+          ),
+          _vm._v(" "),
           _c("v-data-table", {
             staticClass: "elevation-1 song-index",
             attrs: {

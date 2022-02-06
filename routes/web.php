@@ -14,7 +14,7 @@ Route::delete('/posts/{post}', 'PostController@delete')->middleware('auth');  //
 
 Route::post('/posts/{post}/favorite', 'PostController@favorite')->middleware('auth');  // 役に立った機能
 Route::post('/posts/{post}/unfavorite', 'PostController@unfavorite')->middleware('auth');  // 役に立った取り消し機能
-Route::get('/mylist', 'PostController@mylist')->middleware('auth');  // 役に立ったマイリスト
+Route::get('/myfavorite', 'PostController@myfavorite')->middleware('auth');  // 役に立ったマイリスト
 Route::get('/myposts', 'PostController@myposts')->middleware('auth');  // 自分の投稿
 Route::get('/ranking', 'SongController@ranking');  // ランキング
 

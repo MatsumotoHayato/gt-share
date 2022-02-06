@@ -79,6 +79,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ArtistShow',
   data: function data() {
@@ -99,6 +102,8 @@ __webpack_require__.r(__webpack_exports__);
         width: '20%'
       }],
       dialog: false,
+      snackbar: false,
+      timeout: 4000,
       search: '',
       newSong: {
         name: ''
@@ -163,6 +168,8 @@ __webpack_require__.r(__webpack_exports__);
 
             _this4.getSongs();
           }
+        })["catch"](function (error) {
+          _this4.snackbar = true;
         });
       }
     },
@@ -255,6 +262,27 @@ var render = function () {
       _c(
         "v-container",
         [
+          _c(
+            "v-snackbar",
+            {
+              attrs: {
+                timeout: _vm.timeout,
+                color: "deep-purple accent-4",
+                centered: "",
+                "min-width": "0",
+                width: "169",
+              },
+              model: {
+                value: _vm.snackbar,
+                callback: function ($$v) {
+                  _vm.snackbar = $$v
+                },
+                expression: "snackbar",
+              },
+            },
+            [_vm._v("\n      ログインが必要です\n    ")]
+          ),
+          _vm._v(" "),
           _c("p", { staticClass: "text-h5 font-weight-bold" }, [
             _vm._v(_vm._s(_vm.artist.name)),
           ]),

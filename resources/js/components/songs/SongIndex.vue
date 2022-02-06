@@ -1,6 +1,9 @@
 <template>
   <div>
     <v-container>
+      <v-snackbar v-model="snackbar" :timeout="timeout" color="deep-purple accent-4" centered min-width=0 width=169>
+        ログインが必要です
+      </v-snackbar>
       <v-data-table class="elevation-1 song-index" :items="songs" :headers="headers" @click:row="clickRow" :search="search" sort-by="name">
         <template v-slot:top>
           <v-toolbar flat dark color="blue darken-3" class="mb-1">
@@ -90,6 +93,8 @@
           { text: 'レビュー数', value: 'posts_count', align: 'start', width: '20%', filterable: false },
         ],
         dialog: false,
+        snackbar: false,
+        timeout: 4000,
         search: '',
         newSong: {
           name: '',
@@ -127,6 +132,9 @@
                 this.close()
                 this.getSongs()
               }
+            })
+            .catch((error) => {
+              this.snackbar = true
             })
         }
       },

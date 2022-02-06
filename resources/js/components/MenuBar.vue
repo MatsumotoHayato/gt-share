@@ -41,10 +41,10 @@
         </v-btn>
         <RegisterForm :registerDialog="registerDialog" @register="register" @loginLink="loginFromRegister" @close="registerDialog = false" />
       </div>
-      <v-snackbar v-model="loginSnackbar" :timeout="timeout" color="success" min-width=0 width=160>
+      <v-snackbar v-model="loginSnackbar" :timeout="timeout" color="success" min-width=0 width=154>
         ログインしました
       </v-snackbar>
-      <v-snackbar v-model="logoutSnackbar" :timeout="timeout" color="success" min-width=0 width=170>
+      <v-snackbar v-model="logoutSnackbar" :timeout="timeout" color="success" min-width=0 width=169>
         ログアウトしました
       </v-snackbar>
     </v-app-bar>
@@ -83,14 +83,14 @@
         menus: [
           { title: 'ホーム', icon: 'mdi-home', path: '/' },
           { title: 'ランキング', icon: 'mdi-crown', path: '/vue/ranking' },
-          { title: 'いいねマイリスト', icon: 'mdi-thumb-up', path: '/vue/mylist' },
+          { title: 'いいねマイリスト', icon: 'mdi-thumb-up', path: '/vue/myfavorite' },
           { title: 'あなたの投稿', icon: 'mdi-text-box', path: '/vue/myposts' },
         ],
         loginDialog: false,
         registerDialog: false,
         loginSnackbar: false,
         logoutSnackbar: false,
-        timeout: 2000,
+        timeout: 3000,
       }
     },
     methods: {
