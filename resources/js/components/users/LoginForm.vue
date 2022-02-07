@@ -4,6 +4,15 @@
       <v-card-title class="pa-8">
         <span class="text-h5 font-weight-bold">ログイン</span>
       </v-card-title>
+      <v-alert
+        class="mt-n6 mb-n4"
+        v-model="hasError"
+        type="error"
+        tile
+        dense
+      >
+        ログインに失敗しました
+      </v-alert>
       <v-form ref="form">
         <v-card-text style="max-width:424px" class="mx-auto">
           <v-row class="my-4">
@@ -67,6 +76,7 @@
           email: '',
           password: '',
         },
+        hasError: false,
         emailRules: {
           required: v => !!v || '入力は必須です',
           regex: v => /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'メールアドレスの形式が違います',
@@ -81,15 +91,25 @@
     methods: {
       login() {
         if (this.$refs.form.validate()){
-          this.$emit('login', this.userInfo)
+          axios.post('/login', this.userInfo)
+            .then((response) => {
+              if (response.status == 200) {
+                this.$emit('login')
+              }
+            })
+            .catch((error) => {
+              this.hasError = true
+            })
         }
       },
       registerLink() {
         this.$refs.form.reset()
+        this.hasError = false
         this.$emit('registerLink')
       },
       close() {
         this.$refs.form.reset()
+        this.hasError = false
         this.$emit('close')
       },
       focusNext() {

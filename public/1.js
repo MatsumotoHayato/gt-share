@@ -2588,6 +2588,7 @@ var render = function () {
                                     item.user.id === _vm.currentUser.id
                                       ? _c(
                                           "div",
+                                          { staticClass: "mt-2" },
                                           [
                                             _c(
                                               "v-btn",
