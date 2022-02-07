@@ -122,7 +122,7 @@ __webpack_require__.r(__webpack_exports__);
           return !!value || '入力は必須です';
         },
         counter: function counter(value) {
-          return value && value.length <= 50 || '50文字以内で入力してください';
+          return (value || '').length <= 50 || '50文字以内で入力してください';
         },
         exists: function exists(value) {
           return !_this.artists.some(function (object) {
@@ -286,11 +286,10 @@ __webpack_require__.r(__webpack_exports__);
         width: '30%'
       }, {
         text: 'アーティスト名',
-        value: 'artist',
+        value: 'artist.name',
         align: 'start',
         width: '50%',
-        filterable: false,
-        sortable: false
+        filterable: false
       }, {
         text: 'レビュー数',
         value: 'posts_count',
@@ -314,7 +313,7 @@ __webpack_require__.r(__webpack_exports__);
           return !!value || '選択は必須です';
         },
         counter: function counter(value) {
-          return value && value.length <= 100 || '100文字以内で入力してください';
+          return (value || '').length <= 100 || '100文字以内で入力してください';
         },
         exists: function exists(value) {
           return !_this.songs.some(function (object) {
@@ -1151,7 +1150,7 @@ var render = function () {
                 },
               },
               {
-                key: "item.artist",
+                key: "item.artist.name",
                 fn: function (ref) {
                   var item = ref.item
                   return [

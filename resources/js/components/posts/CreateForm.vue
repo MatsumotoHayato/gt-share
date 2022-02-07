@@ -27,6 +27,7 @@
                 max="100"
                 min="0"
                 label="楽器経験"
+                placeholder="0~100を入力"
                 suffix="年"
               ></v-text-field>
             </v-col>
@@ -135,7 +136,11 @@
           </v-row>
           <v-row>
             <v-col cols="12">
-              <v-text-field v-model="newPost.url" label="演奏動画へのURL"></v-text-field>
+              <v-text-field
+                v-model="newPost.url"
+                label="演奏動画へのURL"
+                placeholder="https://www.youtube.com/..."
+              ></v-text-field>
             </v-col>
           </v-row>
           <small>*必須項目</small>
@@ -160,12 +165,13 @@
     name: 'CreateForm',
     props: [
       'createDialog',
-      'instruments'
+      'instruments',
+      'selectedInstrumentId'
     ],
     data() {
       return {
         newPost: {
-          instrument_id: '',
+          instrument_id: this.selectedInstrumentId,
           experience: '',
           score_easy: 3,
           score_copy: 3,
@@ -177,14 +183,14 @@
         },
         rules: {
           required: value => !!value || '入力は必須です',
-          counter: value => value.length <= 4000 || '4000文字以内で入力してください',
+          counter: value => (value || '').length <= 4000 || '4000文字以内で入力してください',
         },
       }
     },
     methods: {
       close() {
         this.newPost = {
-          instrument_id: '',
+          instrument_id: this.selectedInstrumentId,
           experience: '',
           score_easy: 3,
           score_copy: 3,
@@ -202,6 +208,11 @@
           this.$emit('save', this.newPost)
         }
       },
-    }
+    },
+    watch: {
+      selectedInstrumentId(newValue) {
+        this.newPost.instrument_id = newValue
+      }
+    },
   }
 </script>

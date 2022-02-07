@@ -12,9 +12,9 @@ Route::post('/songs/{song}/posts', 'PostController@store')->middleware('auth'); 
 Route::put('/posts/{post}', 'PostController@update')->middleware('auth');     // レビュー編集の変更内容更新
 Route::delete('/posts/{post}', 'PostController@delete')->middleware('auth');  // レビュー削除
 
-Route::post('/posts/{post}/favorite', 'PostController@favorite')->middleware('auth');  // 役に立った機能
-Route::post('/posts/{post}/unfavorite', 'PostController@unfavorite')->middleware('auth');  // 役に立った取り消し機能
-Route::get('/myfavorite', 'PostController@myfavorite')->middleware('auth');  // 役に立ったマイリスト
+Route::post('/posts/{post}/favorite', 'PostController@favorite')->middleware('auth');  // いいね機能
+Route::post('/posts/{post}/unfavorite', 'PostController@unfavorite')->middleware('auth');  // いいね取り消し機能
+Route::get('/myfavorite', 'PostController@myfavorite')->middleware('auth');  // いいねマイリスト
 Route::get('/myposts', 'PostController@myposts')->middleware('auth');  // 自分の投稿
 Route::get('/ranking', 'SongController@ranking');  // ランキング
 

@@ -263,13 +263,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateForm',
-  props: ['createDialog', 'instruments'],
+  props: ['createDialog', 'instruments', 'selectedInstrumentId'],
   data: function data() {
     return {
       newPost: {
-        instrument_id: '',
+        instrument_id: this.selectedInstrumentId,
         experience: '',
         score_easy: 3,
         score_copy: 3,
@@ -284,7 +289,7 @@ __webpack_require__.r(__webpack_exports__);
           return !!value || '入力は必須です';
         },
         counter: function counter(value) {
-          return value.length <= 4000 || '4000文字以内で入力してください';
+          return (value || '').length <= 4000 || '4000文字以内で入力してください';
         }
       }
     };
@@ -292,7 +297,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     close: function close() {
       this.newPost = {
-        instrument_id: '',
+        instrument_id: this.selectedInstrumentId,
         experience: '',
         score_easy: 3,
         score_copy: 3,
@@ -309,6 +314,11 @@ __webpack_require__.r(__webpack_exports__);
       if (this.$refs.form.validate()) {
         this.$emit('save', this.newPost);
       }
+    }
+  },
+  watch: {
+    selectedInstrumentId: function selectedInstrumentId(newValue) {
+      this.newPost.instrument_id = newValue;
     }
   }
 });
@@ -525,6 +535,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'EditForm',
   props: ['editDialog', 'post', 'instruments'],
@@ -536,7 +566,7 @@ __webpack_require__.r(__webpack_exports__);
           return !!value || '入力は必須です';
         },
         counter: function counter(value) {
-          return value.length <= 4000 || '4000文字以内で入力してください';
+          return (value || '').length <= 4000 || '4000文字以内で入力してください';
         }
       }
     };
@@ -573,6 +603,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EditForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditForm */ "./resources/js/components/posts/EditForm.vue");
 /* harmony import */ var _DeleteForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DeleteForm */ "./resources/js/components/posts/DeleteForm.vue");
 /* harmony import */ var _charts_DrawChart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../charts/DrawChart */ "./resources/js/components/charts/DrawChart.vue");
+//
+//
 //
 //
 //
@@ -1403,6 +1435,7 @@ var render = function () {
                               max: "100",
                               min: "0",
                               label: "楽器経験",
+                              placeholder: "0~100を入力",
                               suffix: "年",
                             },
                             model: {
@@ -1631,7 +1664,10 @@ var render = function () {
                         { attrs: { cols: "12" } },
                         [
                           _c("v-text-field", {
-                            attrs: { label: "演奏動画へのURL" },
+                            attrs: {
+                              label: "演奏動画へのURL",
+                              placeholder: "https://www.youtube.com/...",
+                            },
                             model: {
                               value: _vm.newPost.url,
                               callback: function ($$v) {
@@ -1914,6 +1950,7 @@ var render = function () {
                               max: "100",
                               min: "0",
                               label: "楽器経験",
+                              placeholder: "0~100を入力",
                               suffix: "年",
                             },
                             model: {
@@ -2142,7 +2179,10 @@ var render = function () {
                         { attrs: { cols: "12" } },
                         [
                           _c("v-text-field", {
-                            attrs: { label: "演奏動画へのURL" },
+                            attrs: {
+                              label: "演奏動画へのURL",
+                              placeholder: "https://www.youtube.com/...",
+                            },
                             model: {
                               value: _vm.editedPost.url,
                               callback: function ($$v) {
@@ -2230,6 +2270,7 @@ var render = function () {
             attrs: {
               createDialog: _vm.createDialog,
               instruments: _vm.instruments,
+              selectedInstrumentId: _vm.selectedInstrumentId,
             },
             on: { save: _vm.createPost, close: _vm.closeCreate },
           }),
@@ -2427,78 +2468,86 @@ var render = function () {
                                                 var on = ref.on
                                                 var attrs = ref.attrs
                                                 return [
-                                                  item.experience !== null
-                                                    ? _c(
-                                                        "div",
-                                                        _vm._g(
-                                                          _vm._b(
-                                                            {},
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "mt-2" },
+                                                    [
+                                                      item.experience !== null
+                                                        ? _c(
                                                             "div",
-                                                            attrs,
-                                                            false
-                                                          ),
-                                                          on
-                                                        ),
-                                                        [
-                                                          _vm._v(
-                                                            "\n                      ユーザー: "
-                                                          ),
-                                                          _c(
-                                                            "span",
-                                                            {
-                                                              staticStyle: {
-                                                                color:
-                                                                  "#1976D2",
-                                                              },
-                                                            },
+                                                            _vm._g(
+                                                              _vm._b(
+                                                                {},
+                                                                "div",
+                                                                attrs,
+                                                                false
+                                                              ),
+                                                              on
+                                                            ),
                                                             [
                                                               _vm._v(
-                                                                _vm._s(
-                                                                  item.user.name
-                                                                ) +
-                                                                  "（経験年数" +
-                                                                  _vm._s(
-                                                                    item.experience
-                                                                  ) +
-                                                                  "年）"
+                                                                "\n                        ユーザー: "
+                                                              ),
+                                                              _c(
+                                                                "span",
+                                                                {
+                                                                  staticStyle: {
+                                                                    color:
+                                                                      "#1976D2",
+                                                                  },
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      item.user
+                                                                        .name
+                                                                    ) +
+                                                                      "（経験年数" +
+                                                                      _vm._s(
+                                                                        item.experience
+                                                                      ) +
+                                                                      "年）"
+                                                                  ),
+                                                                ]
+                                                              ),
+                                                            ]
+                                                          )
+                                                        : _c(
+                                                            "div",
+                                                            _vm._g(
+                                                              _vm._b(
+                                                                {},
+                                                                "div",
+                                                                attrs,
+                                                                false
+                                                              ),
+                                                              on
+                                                            ),
+                                                            [
+                                                              _vm._v(
+                                                                "\n                        ユーザー: "
+                                                              ),
+                                                              _c(
+                                                                "span",
+                                                                {
+                                                                  staticStyle: {
+                                                                    color:
+                                                                      "#1976D2",
+                                                                  },
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      item.user
+                                                                        .name
+                                                                    )
+                                                                  ),
+                                                                ]
                                                               ),
                                                             ]
                                                           ),
-                                                        ]
-                                                      )
-                                                    : _c(
-                                                        "div",
-                                                        _vm._g(
-                                                          _vm._b(
-                                                            {},
-                                                            "div",
-                                                            attrs,
-                                                            false
-                                                          ),
-                                                          on
-                                                        ),
-                                                        [
-                                                          _vm._v(
-                                                            "\n                      ユーザー: "
-                                                          ),
-                                                          _c(
-                                                            "span",
-                                                            {
-                                                              staticStyle: {
-                                                                color:
-                                                                  "#1976D2",
-                                                              },
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  item.user.name
-                                                                )
-                                                              ),
-                                                            ]
-                                                          ),
-                                                        ]
-                                                      ),
+                                                    ]
+                                                  ),
                                                 ]
                                               },
                                             },
@@ -2648,7 +2697,7 @@ var render = function () {
                                         attrs: {
                                           "max-width": "700",
                                           "min-width": "700",
-                                          "min-height": "400",
+                                          "min-height": "300",
                                           outlined: "",
                                         },
                                       },

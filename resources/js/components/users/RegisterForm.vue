@@ -95,7 +95,7 @@
         passwordShow: false,
         passwordRules: {
           required: v => !!v || '入力は必須です',
-          min: v => (v && v.length >= 8) || '8文字以上入力してください',
+          min: v => (v || '').length >= 8 || '8文字以上入力してください',
           confirm: v => v === this.userInfo.password || 'パスワードが一致しません',
         },
       }

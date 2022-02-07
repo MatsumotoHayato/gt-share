@@ -74,7 +74,7 @@
         passwordShow: false,
         passwordRules: {
           required: value => !!value || '入力は必須です',
-          min: v => (v && v.length >= 8) || '8文字以上入力してください'
+          min: v => (v || '').length >= 8 || '8文字以上入力してください'
         },
       }
     },
