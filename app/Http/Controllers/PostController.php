@@ -35,7 +35,7 @@ class PostController extends Controller
             'score_memorize' => 'required|integer|between:1,5',
             'score_cost' => 'required|integer|between:1,5',
             'score_enjoyment' => 'required|integer|between:1,5',
-            'body' => 'required|string|max:4000',
+            'body' => 'nullable|string|max:4000',
             'url' => 'nullable|url'
         ]);
         $input = [
@@ -67,7 +67,7 @@ class PostController extends Controller
             'score_memorize' => 'required|integer|between:1,5',
             'score_cost' => 'required|integer|between:1,5',
             'score_enjoyment' => 'required|integer|between:1,5',
-            'body' => 'required|string|max:4000',
+            'body' => 'nullable|string|max:4000',
             'url' => 'nullable|url'
         ]);
         $input = [

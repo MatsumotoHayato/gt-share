@@ -1,14 +1,14 @@
 <template>
   <div>
     <v-container>
-      <CreateForm :createDialog=createDialog :instruments=instruments @save="createPost" @close="closeCreate" />
+      <CreateForm :createDialog=createDialog :instruments=instruments :selectedInstrumentId=selectedInstrumentId @save="createPost" @close="closeCreate" />
       <EditForm :editDialog=editDialog :post=postToEditForm :instruments=instruments @save="editPost" @close="closeEdit" />
       <DeleteForm :deleteDialog=deleteDialog @delete="deletePost" @close="closeDelete" />
       <v-snackbar v-model="snackbar" :timeout="timeout" color="deep-purple accent-4" centered min-width=0 width=169>
         ログインが必要です
       </v-snackbar>
       <v-row>
-        <p class="text-h5 font-weight-bold">{{ song.name}} / {{ artist.name }}</p>
+        <p class="text-h5 font-weight-bold">{{ song.name }} / {{ artist.name }}</p>
       </v-row>
       <v-row>
         <v-col cols="3">
@@ -42,19 +42,21 @@
                 <v-list-item-title class="mt-4 d-flex justify-space-between">
                   <v-tooltip bottom>
                     <template v-slot:activator="{ on, attrs }">
-                      <div
-                        v-if="item.experience !== null"
-                        v-bind="attrs"
-                        v-on="on"
-                      >
-                        ユーザー: <span style="color: #1976D2;">{{ item.user.name }}（経験年数{{ item.experience }}年）</span>
-                      </div>
-                      <div
-                        v-else
-                        v-bind="attrs"
-                        v-on="on"
-                      >
-                        ユーザー: <span style="color: #1976D2;">{{ item.user.name }}</span>
+                      <div class="mt-2">
+                        <div
+                          v-if="item.experience !== null"
+                          v-bind="attrs"
+                          v-on="on"
+                        >
+                          ユーザー: <span style="color: #1976D2;">{{ item.user.name }}（経験年数{{ item.experience }}年）</span>
+                        </div>
+                        <div
+                          v-else
+                          v-bind="attrs"
+                          v-on="on"
+                        >
+                          ユーザー: <span style="color: #1976D2;">{{ item.user.name }}</span>
+                        </div>
                       </div>
                     </template>
                     <div>
@@ -91,7 +93,7 @@
             <v-col cols="8">
               <v-list dense>
                 <v-list-item class="mb-4">
-                  <v-card max-width="700" min-width="700" min-height="400" outlined>
+                  <v-card max-width="700" min-width="700" min-height="300" outlined>
                     <v-card-text class="text-subtitle-1">
                       {{ item.body }}
                     </v-card-text>

@@ -72,7 +72,7 @@
         <template v-slot:item.name="{ item }">
           <a class="font-weight-bold song-link" @click.stop="postIndexLink(item)">{{ item.name }}</a>
         </template>
-        <template v-slot:item.artist="{ item }">
+        <template v-slot:item.artist.name="{ item }">
           <a class="artist-link" @click.stop="artistShowLink(item)">{{ item.artist.name }}</a>
         </template>
       </v-data-table>
@@ -89,7 +89,7 @@
         songs: [],
         headers: [
           { text: '曲名', value: 'name', align: 'start', width: '30%' },
-          { text: 'アーティスト名', value: 'artist', align: 'start', width: '50%', filterable: false, sortable: false },
+          { text: 'アーティスト名', value: 'artist.name', align: 'start', width: '50%', filterable: false },
           { text: 'レビュー数', value: 'posts_count', align: 'start', width: '20%', filterable: false },
         ],
         dialog: false,
@@ -103,7 +103,7 @@
         rules: {
           required: value => !!value || '入力は必須です',
           select: value => !!value || '選択は必須です',
-          counter: value => (value && value.length <= 100) || '100文字以内で入力してください',
+          counter: value => (value || '').length <= 100 || '100文字以内で入力してください',
           exists: value => !this.songs.some(object => {
             if(object.name===value && object.artist_id===this.newSong.artist_id){
               return true

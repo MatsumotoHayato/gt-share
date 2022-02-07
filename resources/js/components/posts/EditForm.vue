@@ -8,11 +8,27 @@
         <v-form ref="form">
           <v-row>
             <v-col cols="6">
-              <v-select v-model="editedPost.instrument_id" :items="instruments" item-text="name" item-value="id" label="楽器*" single-line disabled></v-select>
+              <v-select
+                v-model="editedPost.instrument_id"
+                :items="instruments"
+                item-text="name"
+                item-value="id"
+                label="楽器*"
+                single-line
+                disabled
+              ></v-select>
             </v-col>
             <v-spacer />
             <v-col cols="4">
-              <v-text-field v-model="editedPost.experience" type="number" max="100" min="0" label="楽器経験" suffix="年"></v-text-field>
+              <v-text-field
+                v-model="editedPost.experience"
+                type="number"
+                max="100"
+                min="0"
+                label="楽器経験"
+                placeholder="0~100を入力"
+                suffix="年"
+              ></v-text-field>
             </v-col>
             <v-spacer />
           </v-row>
@@ -105,7 +121,11 @@
           </v-row>
           <v-row>
             <v-col cols="12">
-              <v-text-field v-model="editedPost.url" label="演奏動画へのURL"></v-text-field>
+              <v-text-field
+                v-model="editedPost.url"
+                label="演奏動画へのURL"
+                placeholder="https://www.youtube.com/..."
+              ></v-text-field>
             </v-col>
           </v-row>
           <small>*必須項目</small>
@@ -137,7 +157,7 @@
         editedPost: [],
         rules: {
           required: value => !!value || '入力は必須です',
-          counter: value => value.length <= 4000 || '4000文字以内で入力してください',
+          counter: value => (value || '').length <= 4000 || '4000文字以内で入力してください',
         },
       }
     },
