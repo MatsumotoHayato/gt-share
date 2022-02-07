@@ -68,6 +68,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PasswordForm',
   data: function data() {
@@ -75,6 +84,7 @@ __webpack_require__.r(__webpack_exports__);
 
     return {
       user: [],
+      hasError: false,
       passwordForm: {
         old_password: '',
         password: '',
@@ -113,6 +123,8 @@ __webpack_require__.r(__webpack_exports__);
           if (response.status == 200) {
             _this3.$router.push('/');
           }
+        })["catch"](function (error) {
+          _this3.hasError = true;
         });
       }
     }
@@ -151,6 +163,22 @@ var render = function () {
           _vm._v("パスワード変更"),
         ]),
       ]),
+      _vm._v(" "),
+      _c(
+        "v-alert",
+        {
+          staticClass: "mt-n6 mb-n4",
+          attrs: { type: "error", tile: "", dense: "" },
+          model: {
+            value: _vm.hasError,
+            callback: function ($$v) {
+              _vm.hasError = $$v
+            },
+            expression: "hasError",
+          },
+        },
+        [_vm._v("\n    現在のパスワードが正しくありません\n  ")]
+      ),
       _vm._v(" "),
       _c(
         "v-form",

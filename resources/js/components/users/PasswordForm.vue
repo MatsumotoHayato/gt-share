@@ -3,6 +3,15 @@
       <v-card-title class="pa-8">
         <div class="text-h5 font-weight-bold">パスワード変更</div>
       </v-card-title>
+      <v-alert
+        class="mt-n6 mb-n4"
+        v-model="hasError"
+        type="error"
+        tile
+        dense
+      >
+        現在のパスワードが正しくありません
+      </v-alert>
       <v-form ref="form">
         <v-card-text style="max-width:424px" class="mx-auto">
           <v-row class="my-4">
@@ -63,6 +72,7 @@
     data() {
       return {
         user: [],
+        hasError: false,
         passwordForm: {
           old_password: '',
           password: '',
@@ -92,6 +102,9 @@
               if (response.status == 200) {
                 this.$router.push('/')
               }
+            })
+            .catch((error) => {
+              this.hasError = true
             })
         }
       }

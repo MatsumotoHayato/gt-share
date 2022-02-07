@@ -66,7 +66,7 @@
                       <div v-else>職業: 非公開</div>
                     </div>
                   </v-tooltip>
-                  <div v-if="item.user.id === currentUser.id">
+                  <div v-if="item.user.id === currentUser.id" class="mt-2">
                     <v-btn outlined @click="openEditForm(item)">
                       編集
                       <v-icon right>

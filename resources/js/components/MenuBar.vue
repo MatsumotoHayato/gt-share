@@ -35,7 +35,7 @@
         <v-btn class="mr-4" outlined @click="loginDialog = true">
           ログイン
         </v-btn>
-        <LoginForm :loginDialog="loginDialog" @login="login" @registerLink="registerFromLogin" @close="loginDialog = false" />
+        <LoginForm :loginDialog="loginDialog" @login="logined" @registerLink="registerFromLogin" @close="loginDialog = false" />
         <v-btn class="font-weight-bold indigo--text text--darken-4 mr-8" light @click="registerDialog = true">
           新規登録
         </v-btn>
@@ -100,16 +100,11 @@
             this.user = response.data.user
           })
       },
-      login(userInfo) {
-        axios.post('/login', userInfo)
-          .then((response) => {
-            if (response.status == 200) {
-              this.loginDialog = false
-              this.loginSnackbar = true
-              this.getUser()
-              this.$router.push('/')
-            }
-          })
+      logined() {
+        this.loginDialog = false
+        this.loginSnackbar = true
+        this.getUser()
+        this.$router.push('/')
       },
       logout() {
         axios.post('/logout')
