@@ -112,6 +112,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -366,7 +368,6 @@ var render = function () {
                         }),
                         _vm._v(" "),
                         _c("v-select", {
-                          staticClass: "sort-select",
                           attrs: {
                             items: _vm.sortList,
                             "item-value": "value",
@@ -420,12 +421,24 @@ var render = function () {
                                           staticClass: "font-weight-bold mb-4",
                                         },
                                         [
-                                          _vm._v(
-                                            _vm._s(item.song.name) +
-                                              " / " +
-                                              _vm._s(item.song.artist.name)
+                                          _c(
+                                            "router-link",
+                                            {
+                                              attrs: {
+                                                to:
+                                                  "/vue/songs/" + item.song_id,
+                                              },
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(item.song.name) +
+                                                  " / " +
+                                                  _vm._s(item.song.artist.name)
+                                              ),
+                                            ]
                                           ),
-                                        ]
+                                        ],
+                                        1
                                       ),
                                       _vm._v(" "),
                                       item.experience !== null

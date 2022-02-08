@@ -23,7 +23,7 @@
               レビュー一覧
             </v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
-            <v-select class="sort-select" v-model="sortBy" :items="sortList" item-value="value" item-text="text" flat solo-inverted hide-details></v-select>
+            <v-select v-model="sortBy" :items="sortList" item-value="value" item-text="text" flat solo-inverted hide-details></v-select>
             <v-spacer></v-spacer>
             <v-btn class="ma-2" outlined @click="createDialog = true">
               新規レビュー

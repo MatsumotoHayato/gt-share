@@ -17,7 +17,7 @@
               レビュー一覧
             </v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
-            <v-select class="sort-select" v-model="sortBy" :items="sortList" item-value="value" item-text="text" flat solo-inverted hide-details></v-select>
+            <v-select v-model="sortBy" :items="sortList" item-value="value" item-text="text" flat solo-inverted hide-details></v-select>
             <v-spacer></v-spacer>
           </v-toolbar>
         </template>
@@ -27,7 +27,9 @@
               <v-list-item-content>
                 <v-list-item-title class="mt-4 d-flex justify-space-between">
                   <div class="mt-2">
-                    <div class="font-weight-bold mb-4">{{ item.song.name }} / {{ item.song.artist.name }}</div>
+                    <div class="font-weight-bold mb-4">
+                      <router-link :to="`/vue/songs/${item.song_id}`">{{ item.song.name }} / {{ item.song.artist.name }}</router-link>
+                    </div>
                     <div v-if="item.experience !== null">{{ item.instrument.name }}（経験年数{{ item.experience }}年）</div>
                     <div v-else>{{ item.instrument.name }}</div>
                   </div>
@@ -203,4 +205,3 @@
     background: #FFFFFF;
   }
 </style>
-

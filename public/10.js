@@ -1168,7 +1168,6 @@ var render = function () {
                         }),
                         _vm._v(" "),
                         _c("v-select", {
-                          staticClass: "sort-select",
                           attrs: {
                             items: _vm.sortList,
                             "item-value": "value",
