@@ -157,20 +157,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CreateForm',
   props: ['createDialog', 'instruments', 'selectedInstrumentId'],
@@ -1402,6 +1388,7 @@ var render = function () {
                                             _c(
                                               "v-btn",
                                               {
+                                                staticClass: "ml-2 mr-8",
                                                 attrs: {
                                                   outlined: "",
                                                   color: "red",
