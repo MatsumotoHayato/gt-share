@@ -10,7 +10,7 @@
             <v-col cols="6">
               <v-select
                 v-model="editedPost.instrument_id"
-                :items="instruments"
+                :items="[editedPost.instrument]"
                 item-text="name"
                 item-value="id"
                 label="楽器*"
@@ -150,7 +150,6 @@
     props: [
       'editDialog',
       'post',
-      'instruments',
     ],
     data() {
       return {
