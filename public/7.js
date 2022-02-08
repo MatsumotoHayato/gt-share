@@ -582,69 +582,76 @@ var render = function () {
                                       1
                                     ),
                                     _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "mt-2" },
-                                      [
-                                        _c(
-                                          "v-btn",
-                                          {
-                                            attrs: { outlined: "" },
-                                            on: {
-                                              click: function ($event) {
-                                                return _vm.openEditForm(item)
-                                              },
-                                            },
-                                          },
+                                    item.user.id === _vm.user.id
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "mt-2" },
                                           [
-                                            _vm._v(
-                                              "\n                    編集\n                    "
-                                            ),
                                             _c(
-                                              "v-icon",
-                                              { attrs: { right: "" } },
+                                              "v-btn",
+                                              {
+                                                attrs: { outlined: "" },
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.openEditForm(
+                                                      item
+                                                    )
+                                                  },
+                                                },
+                                              },
                                               [
                                                 _vm._v(
-                                                  "\n                      mdi-pencil\n                    "
+                                                  "\n                    編集\n                    "
                                                 ),
-                                              ]
+                                                _c(
+                                                  "v-icon",
+                                                  { attrs: { right: "" } },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                      mdi-pencil\n                    "
+                                                    ),
+                                                  ]
+                                                ),
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-btn",
+                                              {
+                                                staticClass: "ml-2 mr-8",
+                                                attrs: {
+                                                  outlined: "",
+                                                  color: "red",
+                                                },
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.openDeleteForm(
+                                                      item
+                                                    )
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                    削除\n                    "
+                                                ),
+                                                _c(
+                                                  "v-icon",
+                                                  { attrs: { right: "" } },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                      mdi-delete\n                    "
+                                                    ),
+                                                  ]
+                                                ),
+                                              ],
+                                              1
                                             ),
                                           ],
                                           1
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-btn",
-                                          {
-                                            attrs: {
-                                              outlined: "",
-                                              color: "red",
-                                            },
-                                            on: {
-                                              click: function ($event) {
-                                                return _vm.openDeleteForm(item)
-                                              },
-                                            },
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                    削除\n                    "
-                                            ),
-                                            _c(
-                                              "v-icon",
-                                              { attrs: { right: "" } },
-                                              [
-                                                _vm._v(
-                                                  "\n                      mdi-delete\n                    "
-                                                ),
-                                              ]
-                                            ),
-                                          ],
-                                          1
-                                        ),
-                                      ],
-                                      1
-                                    ),
+                                        )
+                                      : _vm._e(),
                                   ]
                                 ),
                               ],

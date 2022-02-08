@@ -40,7 +40,7 @@
                         mdi-pencil
                       </v-icon>
                     </v-btn>
-                    <v-btn outlined color="red" @click="openDeleteForm(item)">
+                    <v-btn class="ml-2 mr-8" outlined color="red" @click="openDeleteForm(item)">
                       削除
                       <v-icon right>
                         mdi-delete

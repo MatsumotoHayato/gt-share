@@ -491,6 +491,7 @@ var render = function () {
                                         _c(
                                           "v-btn",
                                           {
+                                            staticClass: "ml-2 mr-8",
                                             attrs: {
                                               outlined: "",
                                               color: "red",

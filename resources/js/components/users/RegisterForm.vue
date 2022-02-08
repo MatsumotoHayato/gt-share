@@ -4,6 +4,14 @@
       <v-card-title class="pa-8">
         <span class="text-h5 font-weight-bold">アカウントを作成</span>
       </v-card-title>
+      <v-alert
+        class="mx-12 mt-n6 mb-n4"
+        v-model="hasError"
+        type="error"
+        dense
+      >
+        そのメールアドレスは既に登録されています
+      </v-alert>
       <v-form ref="form">
         <v-card-text style="max-width:424px" class="mx-auto">
           <v-row class="my-4">
@@ -85,6 +93,7 @@
           password: '',
           password_confirmation: ''
         },
+        hasError: false,
         nameRules: {
           required: v => !!v || '入力は必須です',
         },
@@ -106,12 +115,25 @@
           this.$emit('register', this.userInfo)
         }
       },
+      register() {
+        axios.post('/register', this.userInfo)
+          .then((response) => {
+            if (response.status == 200) {
+              this.$emit('register')
+            }
+          })
+          .catch((error) => {
+            this.hasError = true
+          })
+      },
       loginLink() {
         this.$refs.form.reset()
+        this.hasError = false
         this.$emit('loginLink')
       },
       close() {
         this.$refs.form.reset()
+        this.hasError = false
         this.$emit('close')
       },
       focusNext(text) {

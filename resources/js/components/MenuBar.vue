@@ -5,29 +5,60 @@
       <v-toolbar-title class="text-h5 font-weight-bold">
         <router-link to="/" class="home-link">GT-share</router-link>
       </v-toolbar-title>
+      <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-icon class="ml-8" small v-bind="attrs" v-on="on">mdi-information-outline</v-icon>
+        </template>
+        <v-card>
+          <v-card-title class="font-weight-bold">
+            このサイトについて
+          </v-card-title>
+          <v-card-text class="text-subtitle-1 black--text">
+            <div>楽器演奏者のための楽曲レビューサイトです。</div>
+            <div>あなたが弾いたことのある曲についてレビューできます。</div>
+            <div>ログインすると様々な機能が使えます。</div>
+          </v-card-text>
+        </v-card>
+      </v-menu>
       <v-spacer></v-spacer>
-      <div v-if="user" class="mr-16">
+      <div v-if="user !== null" class="pa-2 mr-16">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              class="ma-2"
-              icon
+            <v-chip
               v-bind="attrs"
               v-on="on"
+              class="pa-5 text-subtitle-1"
+              color="white"
+              outlined
+              label
             >
-              <v-icon>mdi-account</v-icon>
-            </v-btn>
+              <v-row style="min-width: 160px;" justify="space-between">
+                <div>
+                  <v-icon class="mt-n1">mdi-account</v-icon>
+                  <span>{{ user.name }}</span>
+                </div>
+                <v-icon>mdi-menu-down</v-icon>
+              </v-row>
+            </v-chip>
           </template>
           <v-list>
+            <v-list-item-group>
             <v-list-item to="/vue/profile">
-              <v-list-item-title>プロフィール設定</v-list-item-title>
+              <v-list-item-content>
+                <v-list-item-title class="py-1">プロフィール設定</v-list-item-title>
+              </v-list-item-content>
             </v-list-item>
             <v-list-item to="/vue/password">
-              <v-list-item-title>パスワード変更</v-list-item-title>
+              <v-list-item-content>
+                <v-list-item-title class="py-1">パスワード変更</v-list-item-title>
+              </v-list-item-content>
             </v-list-item>
             <v-list-item @click="logout">
-              <v-list-item-title>ログアウト</v-list-item-title>
+              <v-list-item-content>
+                <v-list-item-title class="py-1">ログアウト</v-list-item-title>
+              </v-list-item-content>
             </v-list-item>
+            </v-list-item-group>
           </v-list>
         </v-menu>
       </div>
@@ -39,7 +70,7 @@
         <v-btn class="font-weight-bold indigo--text text--darken-4 mr-8" light @click="registerDialog = true">
           新規登録
         </v-btn>
-        <RegisterForm :registerDialog="registerDialog" @register="register" @loginLink="loginFromRegister" @close="registerDialog = false" />
+        <RegisterForm :registerDialog="registerDialog" @register="registered" @loginLink="loginFromRegister" @close="registerDialog = false" />
       </div>
       <v-snackbar v-model="loginSnackbar" :timeout="timeout" color="success" min-width=0 width=154>
         ログインしました
@@ -106,22 +137,17 @@
         this.getUser()
         this.$router.push('/')
       },
+      registered() {
+        this.registerDialog = false
+        this.loginSnackbar = true
+        this.getUser()
+        this.$router.push('/')
+      },
       logout() {
         axios.post('/logout')
           .then((response) => {
             if (response.status == 200) {
               this.logoutSnackbar = true
-              this.getUser()
-              this.$router.push('/')
-            }
-          })
-      },
-      register(userInfo) {
-        axios.post('/register', userInfo)
-          .then((response) => {
-            if (response.status == 200) {
-              this.registerDialog = false
-              this.loginSnackbar = true
               this.getUser()
               this.$router.push('/')
             }

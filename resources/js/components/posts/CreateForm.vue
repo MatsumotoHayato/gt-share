@@ -33,20 +33,6 @@
             </v-col>
             <v-spacer />
           </v-row>
-          <!--<v-row v-for="slider in sliders" :key="slider.label">-->
-          <!--  <v-col cols="10">-->
-          <!--    <v-slider-->
-          <!--      v-model="slider.value"-->
-          <!--      :label="slider.label"-->
-          <!--      :tick-labels="[1, 2, 3, 4, 5]"-->
-          <!--      max="5"-->
-          <!--      min="1"-->
-          <!--      dense-->
-          <!--      ticks="always"-->
-          <!--      tick-size="4"-->
-          <!--    ></v-slider>-->
-          <!--  </v-col>-->
-          <!--</v-row>-->
           <v-row>
             <v-col cols="11">
               <v-slider

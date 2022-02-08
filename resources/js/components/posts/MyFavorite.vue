@@ -45,14 +45,14 @@
                       </div>
                     </v-tooltip>
                   </div>
-                  <div class="mt-2">
+                  <div v-if="item.user.id === user.id" class="mt-2">
                     <v-btn outlined @click="openEditForm(item)">
                       編集
                       <v-icon right>
                         mdi-pencil
                       </v-icon>
                     </v-btn>
-                    <v-btn outlined color="red" @click="openDeleteForm(item)">
+                    <v-btn class="ml-2 mr-8" outlined color="red" @click="openDeleteForm(item)">
                       削除
                       <v-icon right>
                         mdi-delete
