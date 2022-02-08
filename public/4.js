@@ -45,8 +45,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Ranking',
   data: function data() {
@@ -207,10 +205,8 @@ var render = function () {
       _c(
         "v-container",
         [
-          _c("v-row", [
-            _c("p", { staticClass: "text-h5 font-weight-bold" }, [
-              _vm._v("簡単な曲ランキング"),
-            ]),
+          _c("p", { staticClass: "text-h5 font-weight-bold" }, [
+            _vm._v("簡単な曲ランキング"),
           ]),
           _vm._v(" "),
           _c(

@@ -79,6 +79,68 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'MyList',
   data: function data() {
@@ -129,6 +191,20 @@ var render = function () {
       _c(
         "v-container",
         [
+          _c("EditForm", {
+            attrs: {
+              editDialog: _vm.editDialog,
+              post: _vm.postToEditForm,
+              instruments: _vm.instruments,
+            },
+            on: { save: _vm.editPost, close: _vm.closeEdit },
+          }),
+          _vm._v(" "),
+          _c("DeleteForm", {
+            attrs: { deleteDialog: _vm.deleteDialog },
+            on: { delete: _vm.deletePost, close: _vm.closeDelete },
+          }),
+          _vm._v(" "),
           _c(
             "v-snackbar",
             {
@@ -156,12 +232,18 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _c("v-data-iterator", {
-            staticClass: "elevation-1",
-            attrs: { items: _vm.posts },
+          _c("v-data-table", {
+            staticClass: "elevation-1 post-index",
+            attrs: {
+              items: _vm.posts,
+              "sort-by": _vm.sortBy,
+              "sort-desc": "",
+              headers: _vm.headers,
+              "hide-default-header": "",
+            },
             scopedSlots: _vm._u([
               {
-                key: "header",
+                key: "top",
                 fn: function () {
                   return [
                     _c(
@@ -185,11 +267,52 @@ var render = function () {
                         ),
                         _vm._v(" "),
                         _c("v-divider", {
-                          staticClass: "ml-4 mr-12",
+                          staticClass: "mx-4",
                           attrs: { inset: "", vertical: "" },
                         }),
                         _vm._v(" "),
+                        _c("v-select", {
+                          staticClass: "sort-select",
+                          attrs: {
+                            items: _vm.sortList,
+                            "item-value": "value",
+                            "item-text": "text",
+                            flat: "",
+                            "solo-inverted": "",
+                            "hide-details": "",
+                          },
+                          model: {
+                            value: _vm.sortBy,
+                            callback: function ($$v) {
+                              _vm.sortBy = $$v
+                            },
+                            expression: "sortBy",
+                          },
+                        }),
+                        _vm._v(" "),
                         _c("v-spacer"),
+                        _vm._v(" "),
+                        _c(
+                          "v-btn",
+                          {
+                            staticClass: "ma-2",
+                            attrs: { outlined: "" },
+                            on: {
+                              click: function ($event) {
+                                _vm.createDialog = true
+                              },
+                            },
+                          },
+                          [
+                            _vm._v("\n            新規レビュー\n            "),
+                            _c("v-icon", { attrs: { right: "" } }, [
+                              _vm._v(
+                                "\n              mdi-pencil-plus\n            "
+                              ),
+                            ]),
+                          ],
+                          1
+                        ),
                       ],
                       1
                     ),
@@ -198,127 +321,238 @@ var render = function () {
                 proxy: true,
               },
               {
-                key: "default",
-                fn: function () {
+                key: "item.updated_at",
+                fn: function (ref) {
+                  var item = ref.item
                   return [
                     _c(
                       "v-row",
-                      _vm._l(_vm.posts, function (post) {
-                        return _c(
-                          "v-col",
-                          { key: post.id, attrs: { cols: "12" } },
+                      [
+                        _c(
+                          "v-list-item",
                           [
                             _c(
-                              "v-card",
+                              "v-list-item-content",
                               [
                                 _c(
-                                  "v-row",
+                                  "v-list-item-title",
+                                  {
+                                    staticClass:
+                                      "mt-4 d-flex justify-space-between",
+                                  },
                                   [
                                     _c(
-                                      "v-col",
-                                      { attrs: { cols: "4" } },
+                                      "v-tooltip",
+                                      {
+                                        attrs: { bottom: "" },
+                                        scopedSlots: _vm._u(
+                                          [
+                                            {
+                                              key: "activator",
+                                              fn: function (ref) {
+                                                var on = ref.on
+                                                var attrs = ref.attrs
+                                                return [
+                                                  _c(
+                                                    "div",
+                                                    { staticClass: "mt-2" },
+                                                    [
+                                                      item.experience !== null
+                                                        ? _c(
+                                                            "div",
+                                                            _vm._g(
+                                                              _vm._b(
+                                                                {},
+                                                                "div",
+                                                                attrs,
+                                                                false
+                                                              ),
+                                                              on
+                                                            ),
+                                                            [
+                                                              _vm._v(
+                                                                "\n                        ユーザー: "
+                                                              ),
+                                                              _c(
+                                                                "span",
+                                                                {
+                                                                  staticStyle: {
+                                                                    color:
+                                                                      "#1976D2",
+                                                                  },
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      item.user
+                                                                        .name
+                                                                    ) +
+                                                                      "（経験年数" +
+                                                                      _vm._s(
+                                                                        item.experience
+                                                                      ) +
+                                                                      "年）"
+                                                                  ),
+                                                                ]
+                                                              ),
+                                                            ]
+                                                          )
+                                                        : _c(
+                                                            "div",
+                                                            _vm._g(
+                                                              _vm._b(
+                                                                {},
+                                                                "div",
+                                                                attrs,
+                                                                false
+                                                              ),
+                                                              on
+                                                            ),
+                                                            [
+                                                              _vm._v(
+                                                                "\n                        ユーザー: "
+                                                              ),
+                                                              _c(
+                                                                "span",
+                                                                {
+                                                                  staticStyle: {
+                                                                    color:
+                                                                      "#1976D2",
+                                                                  },
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      item.user
+                                                                        .name
+                                                                    )
+                                                                  ),
+                                                                ]
+                                                              ),
+                                                            ]
+                                                          ),
+                                                    ]
+                                                  ),
+                                                ]
+                                              },
+                                            },
+                                          ],
+                                          null,
+                                          true
+                                        ),
+                                      },
                                       [
-                                        _c(
-                                          "v-list",
-                                          { attrs: { dense: "" } },
+                                        _vm._v(" "),
+                                        _c("div", [
+                                          item.user.age !== null
+                                            ? _c("div", [
+                                                _vm._v(
+                                                  "年齢: " +
+                                                    _vm._s(item.user.age) +
+                                                    "代"
+                                                ),
+                                              ])
+                                            : _c("div", [
+                                                _vm._v("年齢: 非公開"),
+                                              ]),
+                                          _vm._v(" "),
+                                          item.user.occupation !== null
+                                            ? _c("div", [
+                                                _vm._v(
+                                                  "職業: " +
+                                                    _vm._s(item.user.occupation)
+                                                ),
+                                              ])
+                                            : _c("div", [
+                                                _vm._v("職業: 非公開"),
+                                              ]),
+                                        ]),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    item.user.id === _vm.currentUser.id
+                                      ? _c(
+                                          "div",
+                                          { staticClass: "mt-2" },
                                           [
                                             _c(
-                                              "v-list-item",
+                                              "v-btn",
+                                              {
+                                                attrs: { outlined: "" },
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.openEditForm(
+                                                      item
+                                                    )
+                                                  },
+                                                },
+                                              },
                                               [
-                                                _c("v-list-item-content", [
-                                                  _vm._v(
-                                                    _vm._s(post.song.name) +
-                                                      " / " +
-                                                      _vm._s(
-                                                        post.song.artist.name
-                                                      )
-                                                  ),
-                                                ]),
+                                                _vm._v(
+                                                  "\n                    編集\n                    "
+                                                ),
+                                                _c(
+                                                  "v-icon",
+                                                  { attrs: { right: "" } },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                      mdi-pencil\n                    "
+                                                    ),
+                                                  ]
+                                                ),
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-btn",
+                                              {
+                                                attrs: {
+                                                  outlined: "",
+                                                  color: "red",
+                                                },
+                                                on: {
+                                                  click: function ($event) {
+                                                    return _vm.openDeleteForm(
+                                                      item
+                                                    )
+                                                  },
+                                                },
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                    削除\n                    "
+                                                ),
+                                                _c(
+                                                  "v-icon",
+                                                  { attrs: { right: "" } },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                      mdi-delete\n                    "
+                                                    ),
+                                                  ]
+                                                ),
                                               ],
                                               1
                                             ),
                                           ],
                                           1
-                                        ),
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c("v-divider", {
-                                      attrs: { vertical: "" },
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "v-col",
-                                      { attrs: { cols: "6" } },
-                                      [
-                                        _c(
-                                          "v-list",
-                                          { attrs: { dense: "" } },
-                                          [
-                                            _c(
-                                              "v-list-item",
-                                              [
-                                                _c("v-list-item-content", [
-                                                  _vm._v(
-                                                    "\n                        楽器: " +
-                                                      _vm._s(
-                                                        post.instrument.name
-                                                      ) +
-                                                      "\n                      "
-                                                  ),
-                                                ]),
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-list-item",
-                                              [
-                                                _c("v-list-item-content", [
-                                                  _vm._v(
-                                                    "\n                        難易度: " +
-                                                      _vm._s(post.difficulty) +
-                                                      "\n                      "
-                                                  ),
-                                                ]),
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-list-item",
-                                              [
-                                                _c("v-list-item-content", [
-                                                  _vm._v(
-                                                    "\n                        " +
-                                                      _vm._s(post.updated_at) +
-                                                      "\n                      "
-                                                  ),
-                                                ]),
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-list-item",
-                                              [
-                                                _c("v-list-item-content", [
-                                                  _vm._v(
-                                                    "\n                        内容: " +
-                                                      _vm._s(post.body) +
-                                                      "\n                      "
-                                                  ),
-                                                ]),
-                                              ],
-                                              1
-                                            ),
-                                          ],
-                                          1
-                                        ),
-                                      ],
-                                      1
-                                    ),
+                                        )
+                                      : _vm._e(),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-list-item",
+                                  [
+                                    _c("v-list-item-content", [
+                                      _vm._v(
+                                        _vm._s(item.song.name) +
+                                          " / " +
+                                          _vm._s(item.song.artist.name)
+                                      ),
+                                    ]),
                                   ],
                                   1
                                 ),
@@ -327,13 +561,188 @@ var render = function () {
                             ),
                           ],
                           1
-                        )
-                      }),
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-col",
+                          { attrs: { cols: "4" } },
+                          [
+                            _c("DrawChart", {
+                              staticClass: "mb-12",
+                              attrs: { post: item },
+                            }),
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "v-col",
+                          { attrs: { cols: "8" } },
+                          [
+                            _c(
+                              "v-list",
+                              { attrs: { dense: "" } },
+                              [
+                                _c(
+                                  "v-list-item",
+                                  { staticClass: "mb-4" },
+                                  [
+                                    _c(
+                                      "v-card",
+                                      {
+                                        attrs: {
+                                          "max-width": "700",
+                                          "min-width": "700",
+                                          "min-height": "300",
+                                          outlined: "",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "v-card-text",
+                                          { staticClass: "text-subtitle-1" },
+                                          [
+                                            _vm._v(
+                                              "\n                    " +
+                                                _vm._s(item.body) +
+                                                "\n                  "
+                                            ),
+                                          ]
+                                        ),
+                                      ],
+                                      1
+                                    ),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-list-item",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: item.url !== null,
+                                        expression: "item.url !== null",
+                                      },
+                                    ],
+                                  },
+                                  [
+                                    _c("v-list-item-content", [
+                                      _c("div", [
+                                        _vm._v("演奏動画: "),
+                                        _c("a", { attrs: { href: item.url } }, [
+                                          _vm._v(_vm._s(item.url)),
+                                        ]),
+                                      ]),
+                                    ]),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-list-item",
+                                  [
+                                    _c("v-list-item-content", [
+                                      _vm._v(
+                                        "\n                  " +
+                                          _vm._s(item.updated_at) +
+                                          "\n                "
+                                      ),
+                                    ]),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-list-item",
+                                  { staticClass: "justify-end mb-4 pr-16" },
+                                  [
+                                    item.favorite_check
+                                      ? _c(
+                                          "v-btn",
+                                          {
+                                            attrs: { color: "primary" },
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.unfavorite(item)
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                  いいね\n                  "
+                                            ),
+                                            _c(
+                                              "v-icon",
+                                              {
+                                                staticClass: "ml-3 mr-1",
+                                                attrs: { right: "" },
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                    mdi-thumb-up\n                  "
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("span", [
+                                              _vm._v(_vm._s(item.users_count)),
+                                            ]),
+                                          ],
+                                          1
+                                        )
+                                      : _c(
+                                          "v-btn",
+                                          {
+                                            attrs: {
+                                              outlined: "",
+                                              color: "grey",
+                                            },
+                                            on: {
+                                              click: function ($event) {
+                                                return _vm.favorite(item)
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                  いいね\n                  "
+                                            ),
+                                            _c(
+                                              "v-icon",
+                                              {
+                                                staticClass: "ml-3 mr-1",
+                                                attrs: { right: "" },
+                                              },
+                                              [
+                                                _vm._v(
+                                                  "\n                    mdi-thumb-up\n                  "
+                                                ),
+                                              ]
+                                            ),
+                                            _vm._v(" "),
+                                            _c("span", [
+                                              _vm._v(_vm._s(item.users_count)),
+                                            ]),
+                                          ],
+                                          1
+                                        ),
+                                  ],
+                                  1
+                                ),
+                              ],
+                              1
+                            ),
+                          ],
+                          1
+                        ),
+                      ],
                       1
                     ),
                   ]
                 },
-                proxy: true,
               },
             ]),
           }),

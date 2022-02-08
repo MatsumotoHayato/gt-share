@@ -5,10 +5,9 @@
         <span class="text-h5 font-weight-bold">ログイン</span>
       </v-card-title>
       <v-alert
-        class="mt-n6 mb-n4"
+        class="mx-14 mt-n6 mb-n4"
         v-model="hasError"
         type="error"
-        tile
         dense
       >
         ログインに失敗しました

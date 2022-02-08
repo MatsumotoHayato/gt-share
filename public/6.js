@@ -80,8 +80,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'MyFavorite',
   data: function data() {
@@ -158,10 +156,8 @@ var render = function () {
             [_vm._v("\n      ログインが必要です\n    ")]
           ),
           _vm._v(" "),
-          _c("v-row", [
-            _c("p", { staticClass: "text-h5 font-weight-bold" }, [
-              _vm._v("いいねマイリスト"),
-            ]),
+          _c("p", { staticClass: "text-h5 font-weight-bold" }, [
+            _vm._v("いいねマイリスト"),
           ]),
           _vm._v(" "),
           _c("v-data-iterator", {

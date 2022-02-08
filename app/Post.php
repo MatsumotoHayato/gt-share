@@ -64,7 +64,8 @@ class Post extends Model
     
     public function getMyPosts()
     {
-        return $this::with(['song', 'song.artist', 'user', 'instrument'])->where('user_id', Auth::id())->orderBy('updated_at', 'DESC')->get();
+        return $this::with(['song', 'song.artist', 'user', 'instrument'])->withCount('users')
+        ->where('user_id', Auth::id())->orderBy('updated_at', 'DESC')->get();
     }
     
     // 各項目の平均値を取得

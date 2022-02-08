@@ -1,9 +1,7 @@
 <template>
   <div>
     <v-container>
-      <v-row>
-        <p class="text-h5 font-weight-bold">簡単な曲ランキング</p>
-      </v-row>
+      <p class="text-h5 font-weight-bold">簡単な曲ランキング</p>
       <v-row>
         <v-col cols="3">
           <v-select v-model="selectedInstrumentId" :items="instruments" item-value="id" item-text="name" prepend-icon="mdi-guitar-acoustic" label="楽器を選択" outlined></v-select>

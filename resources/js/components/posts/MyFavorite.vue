@@ -4,9 +4,7 @@
       <v-snackbar v-model="snackbar" :timeout="timeout" color="deep-purple accent-4" centered min-width=0 width=169>
         ログインが必要です
       </v-snackbar>
-      <v-row>
-        <p class="text-h5 font-weight-bold">いいねマイリスト</p>
-      </v-row>
+      <p class="text-h5 font-weight-bold">いいねマイリスト</p>
       <v-data-iterator class="elevation-1" :items="posts" hide-default-footer>
         <template v-slot:header>
           <v-toolbar flat dark color="blue darken-3" class="mb-1">

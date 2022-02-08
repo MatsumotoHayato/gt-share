@@ -2,14 +2,12 @@
   <div>
     <v-container>
       <CreateForm :createDialog=createDialog :instruments=instruments :selectedInstrumentId=selectedInstrumentId @save="createPost" @close="closeCreate" />
-      <EditForm :editDialog=editDialog :post=postToEditForm :instruments=instruments @save="editPost" @close="closeEdit" />
+      <EditForm :editDialog=editDialog :post=postToEditForm @save="editPost" @close="closeEdit" />
       <DeleteForm :deleteDialog=deleteDialog @delete="deletePost" @close="closeDelete" />
       <v-snackbar v-model="snackbar" :timeout="timeout" color="deep-purple accent-4" centered min-width=0 width=169>
         ログインが必要です
       </v-snackbar>
-      <v-row>
-        <p class="text-h5 font-weight-bold">{{ song.name }} / {{ artist.name }}</p>
-      </v-row>
+      <p class="text-h5 font-weight-bold">{{ song.name }} / {{ artist.name }}</p>
       <v-row>
         <v-col cols="3">
           <v-select v-model="selectedInstrumentId" :items="instruments" item-value="id" item-text="name" prepend-icon="mdi-guitar-acoustic" label="楽器を選択" outlined></v-select>

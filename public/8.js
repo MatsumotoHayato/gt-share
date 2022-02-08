@@ -76,7 +76,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PasswordForm',
   data: function data() {
@@ -167,8 +166,8 @@ var render = function () {
       _c(
         "v-alert",
         {
-          staticClass: "mt-n6 mb-n4",
-          attrs: { type: "error", tile: "", dense: "" },
+          staticClass: "mx-14 mt-n6 mb-n4",
+          attrs: { type: "error", dense: "" },
           model: {
             value: _vm.hasError,
             callback: function ($$v) {
