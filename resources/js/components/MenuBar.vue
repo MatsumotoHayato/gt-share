@@ -135,13 +135,13 @@
         this.loginDialog = false
         this.loginSnackbar = true
         this.getUser()
-        this.$router.push('/')
+        this.$router.push('/').catch(error => {})
       },
       registered() {
         this.registerDialog = false
         this.loginSnackbar = true
         this.getUser()
-        this.$router.push('/')
+        this.$router.push('/').catch(error => {})
       },
       logout() {
         axios.post('/logout')
@@ -149,7 +149,7 @@
             if (response.status == 200) {
               this.logoutSnackbar = true
               this.getUser()
-              this.$router.push('/')
+              this.$router.push('/').catch(error => {})
             }
           })
       },
