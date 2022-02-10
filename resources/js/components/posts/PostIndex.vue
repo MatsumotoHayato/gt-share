@@ -85,7 +85,7 @@
               <DrawChart
                 class="mb-12"
                 :post="item"
-                :averagePost="averagePost[selectedInstrumentId-1]"
+                :average="selectedAverage[0]"
               ></DrawChart>
             </v-col>
             <v-col cols="8">
@@ -159,11 +159,12 @@
         artist: [],
         song: [],
         posts: [],
+        averages: [],
         postToEditForm: [],
         deleteConfirmedPost: [],
         selectedPosts: [],
+        selectedAverage: [],
         selectedInstrumentId: 1,
-        averagePost: [],
         instruments: [],
         headers: [
           { text: "投稿日時", value: "updated_at", align: "start" },
@@ -201,8 +202,8 @@
             this.song = response.data.song
             this.posts = response.data.posts
             this.instruments = response.data.instruments
+            this.averages = response.data.averages
             this.fetchPosts()
-            this.culcAveragePosts()
           })
       },
       setBreadCrumbs() {
@@ -221,37 +222,8 @@
       fetchPosts() {
         if (this.posts.length > 0) {
           this.selectedPosts = this.posts.filter((post) => post.instrument_id === this.selectedInstrumentId)
+          this.selectedAverage = this.averages.filter((average) => average.instrument_id === this.selectedInstrumentId)
           }
-      },
-      culcAveragePosts() {
-        this.averagePost = []
-        this.instruments.forEach((instrument, index)=>{
-          let average = {
-            score_easy: 0,
-            score_copy: 0,
-            score_memorize: 0,
-            score_cost: 0,
-            score_enjoyment: 0,
-          }
-          this.posts.forEach(post=>{
-            if(post.instrument_id === index+1){
-              average.score_easy += post.score_easy
-              average.score_copy += post.score_copy
-              average.score_memorize += post.score_memorize
-              average.score_cost += post.score_cost
-              average.score_enjoyment += post.score_enjoyment
-            }
-          })
-          let averageLength = this.posts.filter(post => post.instrument_id === index+1).length
-          if(averageLength > 0) {
-            average.score_easy /= averageLength
-            average.score_copy /= averageLength
-            average.score_memorize /= averageLength
-            average.score_cost /= averageLength
-            average.score_enjoyment /= averageLength
-          }
-          this.averagePost.push(average)
-        })
       },
       closeCreate() {
         this.createDialog = false

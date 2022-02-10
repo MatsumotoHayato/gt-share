@@ -9,7 +9,7 @@
   export default {
     props: [
       'post',
-      'averagePost'
+      'average'
     ],
     components: {
       RadarChart,
@@ -53,7 +53,7 @@
     },
     created() {
       this.radarChart()
-      if(this.averagePost){
+      if(this.average){
         this.addAverageChart()
       }
     },
@@ -90,11 +90,11 @@
           pointBorderWidth: 1,
           label: "平均値",
           data: [
-            this.averagePost.score_easy,
-            this.averagePost.score_copy,
-            this.averagePost.score_memorize,
-            this.averagePost.score_cost,
-            this.averagePost.score_enjoyment,
+            this.average.average_score_easy,
+            this.average.average_score_copy,
+            this.average.average_score_memorize,
+            this.average.average_score_cost,
+            this.average.average_score_enjoyment,
           ]
         })
       }

@@ -18,7 +18,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['post', 'averagePost'],
+  props: ['post', 'average'],
   components: {
     RadarChart: _RadarChart_js__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -61,7 +61,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.radarChart();
 
-    if (this.averagePost) {
+    if (this.average) {
       this.addAverageChart();
     }
   },
@@ -89,7 +89,7 @@ __webpack_require__.r(__webpack_exports__);
         pointBackgroundColor: 'rgba(201, 203, 207, 0.6)',
         pointBorderWidth: 1,
         label: "平均値",
-        data: [this.averagePost.score_easy, this.averagePost.score_copy, this.averagePost.score_memorize, this.averagePost.score_cost, this.averagePost.score_enjoyment]
+        data: [this.average.average_score_easy, this.average.average_score_copy, this.average.average_score_memorize, this.average.average_score_cost, this.average.average_score_enjoyment]
       });
     }
   }
