@@ -67,7 +67,4 @@ class Post extends Model
         return $this::with(['song', 'song.artist', 'user', 'instrument'])->withCount('users')
         ->where('user_id', Auth::id())->orderBy('updated_at', 'DESC')->get();
     }
-    
-    // 各項目の平均値を取得
-    // public function 
 }
