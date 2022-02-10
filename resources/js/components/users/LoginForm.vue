@@ -39,6 +39,9 @@
               @keydown.enter="login"
             ></v-text-field>
           </v-row>
+          <a href="/login/google" class="btn btn-google">
+            Google Login
+          </a>
           <v-row class="mt-16 mb-8">
             <v-btn
               class="text-subtitle-1"

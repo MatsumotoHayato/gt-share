@@ -22,6 +22,9 @@ Route::get('/users/get', 'UserController@get'); // 現在のユーザー情報�
 Route::put('/users/profile', 'UserController@update')->middleware('auth');     // プロフィール更新
 Route::put('/users/password', 'UserController@changePassword')->middleware('auth');     // パスワード変更
 
+Route::get('/login/google', 'Auth\LoginController@redirectToGoogle');
+Route::get('/login/google/callback', 'Auth\LoginController@handleGoogleCallback');
+
 Auth::routes();
 
 Route::get('/{any}', function(){
