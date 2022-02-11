@@ -11,7 +11,7 @@
         </template>
         <v-card>
           <v-card-title class="font-weight-bold">
-            このサイトについて
+            本サイトについて
           </v-card-title>
           <v-card-text class="text-subtitle-1 black--text">
             <div>楽器演奏者のための楽曲レビューサイトです。</div>

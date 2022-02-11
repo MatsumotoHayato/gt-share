@@ -1,78 +1,161 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# GT-share
+「楽器演奏者のための**楽曲レビューサイト**」です。\
+ユーザーは演奏したことのある楽曲についてレビューを投稿することができます。\
+また、評価が気になる楽曲について検索し、そのレビューを閲覧することが可能です。
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+#### 紹介動画
+
+
+#### URL
+https://gtshare.herokuapp.com
+
+#### テスト用アカウント
+メールアドレス: `t@t.tt`\
+パスワード: `tttt1234`
+
+## 作成した背景/目的
+<p>
+私は9年前にエレキギターを弾き始め、高校や大学でバンド活動を行ってきました。
+初めは独学だったため伸び悩んでおりましたが、バンドの先輩から演奏のコツを教えてもらうようになると一気に上達し始め、
+ずっと弾けなかった曲も演奏できるようになりました。
+</p>
+<p>
+このことから、楽器上達には経験者からの情報が必要であると実感し、
+気軽に情報共有できる場を設けるために本アプリケーションを作成しました。
 </p>
 
-## About Laravel
+## 機能一覧
+- [アーティスト名一覧表示機能](#アーティスト名一覧表示機能)
+- [曲名一覧表示機能](#曲名一覧表示機能)
+- [楽器カテゴリ別レビュー一覧表示機能](#楽器カテゴリ別レビュー一覧表示機能)
+- [レビュー投稿機能](#レビュー投稿機能)
+- [ランキング機能](#ランキング機能)
+- [ユーザー登録、ログイン機能](#ユーザー登録、ログイン機能)
+- [いいね機能](#いいね機能)
+- [いいねを押したレビュー一覧表示機能](#いいねを押したレビュー一覧表示機能)
+- [自分が投稿したレビュー一覧表示機能](#自分が投稿したレビュー一覧表示機能)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<h3 id="アーティスト名一覧表示機能">アーティスト名一覧表示機能</h3>
+- クリックすると曲名一覧ページへ移動します。
+- アーティスト名検索、並び替え、新規アーティストの追加ができます。
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<p align="center">
+    <img src="img/home.png" title="ホーム画面" width="80%">
+</p>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+### 曲名一覧表示機能
+- クリックするとレビュー一覧ページへ移動します。
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### レビュー投稿機能
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 楽器カテゴリ別レビュー一覧表示機能
+- 楽器ごとにレビューを表示できます。
+- いいね数、投稿日時で並び替えができます。
 
-## Laravel Sponsors
+### ランキング機能
+- 楽器初心者のユーザー向けに、簡単な曲をランキング形式で表示します。
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### ユーザー登録、ログイン機能
+- Googleアカウントでのログインも可能です。
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+### いいね機能
 
-## Contributing
+### いいねを押したレビュー一覧表示機能
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 自分が投稿したレビュー一覧表示機能
 
-## Code of Conduct
+## 開発環境
+#### OS
+- Amazon Linux バージョン2
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#### フロントエンド
+- HTML/CSS
+- Bootstrap v4.0.0
+- jQuery v3.2
+- Vue v2.5.17
+- Vuetify v2.6.2
+- Vue-Chartjs v3.5.1
 
-## Security Vulnerabilities
+#### バックエンド
+- PHP v8.0.13
+- Laravel v6.20.44
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### データベース
+- MariaDB v10.2.38
 
-## License
+#### インフラ
+- AWS (EC2)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### デプロイ
+- Heroku
+
+## テーブル定義
+
+<p align="center">
+    <img src="./public/img/datatable.png" title="テーブル定義" width="80%">
+</p>
+
+#### usersテーブル
+|  カラム名  |  データ型  |  詳細  |
+| ---- | ---- | ---- |
+|  id  |  bigint(20) unsigned  |  ID  |
+|  name  |  varchar(255)  |  ユーザー名  |
+|  email  |  varchar(255)  |  メールアドレス  |
+|  password  |  varchar(255)  |  パスワード  |
+|  age  |  tinyint(3) unsigned  |  年齢  |
+|  occupation  |  varchar(255)  |  職業  |
+|  rememberToken  |  varchar(100)  |  ログイン状態を保持  |
+|  created_at  |  timestamp  |  データ作成時間  |
+|  updated_at |  timestamp  |  データ更新時間  |
+
+#### artistsテーブル
+|  カラム名  |  データ型  |  詳細  |
+| ---- | ---- | ---- |
+|  id  |  int(10) unsigned  |  ID  |
+|  name  |  varchar(255)  |  アーティスト名  |
+|  created_at  |  timestamp  |  データ作成時間  |
+|  updated_at |  timestamp  |  データ更新時間  |
+
+#### songsテーブル
+|  カラム名  |  データ型  |  詳細  |
+| ---- | ---- | ---- |
+|  id  |  smallint(5) unsigned  |  ID  |
+|  name  |  varchar(255)  |  曲名  |
+|  artist_id  |  int(10) unsigned  |  artistsテーブルとの連携用ID  |
+|  created_at  |  timestamp  |  データ作成時間  |
+|  updated_at |  timestamp  |  データ更新時間  |
+
+#### instrumentsテーブル
+|  カラム名  |  データ型  |  詳細  |
+| ---- | ---- | ---- |
+|  id  |  smallint(5) unsigned  |  ID  |
+|  name  |  varchar(255)  |  楽器名  |
+|  created_at  |  timestamp  |  データ作成時間  |
+|  updated_at |  timestamp  |  データ更新時間  |
+
+#### postsテーブル
+|  カラム名  |  データ型  |  詳細  |
+| ---- | ---- | ---- |
+|  id  |  bigint(20) unsigned  |  ID  |
+|  user_id  |  bigint(20) unsigned  |  usersテーブルとの連携用ID  |
+|  song_id  |  smallint(5) unsigned  |  songsテーブルとの連携用ID  |
+|  instrument_id  |  smallint(5) unsigned  |  instrumentsテーブルとの連携用ID  |
+|  experience  |  tinyint(3) unsigned  |  楽器の経験年数  |
+|  score_easy  |  tinyint(3) unsigned  |  簡単度  |
+|  score_copy  |  tinyint(3) unsigned  |  耳コピしやすさ  |
+|  score_memorize  |  tinyint(3) unsigned  |  覚えやすさ  |
+|  score_cost  |  tinyint(3) unsigned  |  必要機材の少なさ  |
+|  score_enjoyment  |  tinyint(3) unsigned  |  演奏時の楽しさ  |
+|  body  |  text  |  感想  |
+|  url  |  varchar(255)  |  演奏動画へのURL  |
+|  created_at  |  timestamp  |  データ作成時間  |
+|  updated_at |  timestamp  |  データ更新時間  |
+
+#### post_userテーブル（いいね機能用の中間テーブル）
+|  カラム名  |  データ型  |  詳細  |
+| ---- | ---- | ---- |
+|  user_id  |  bigint(20) unsigned  |  usersテーブルとの連携用ID  |
+|  post_id  |  bigint(20) unsigned  |  postsテーブルとの連携用ID  |
+|  created_at  |  timestamp  |  データ作成時間  |
+|  updated_at |  timestamp  |  データ更新時間  |
