@@ -446,10 +446,11 @@ __webpack_require__.r(__webpack_exports__);
         _this.artist = response.data.artist;
         _this.song = response.data.song;
         _this.posts = response.data.posts;
-        _this.instruments = response.data.instruments;
-        _this.averages = response.data.averages;
+        _this.instruments = response.data.instruments; // this.averages = response.data.averages
 
         _this.fetchPosts();
+
+        _this.culcAverages();
       });
     },
     setBreadCrumbs: function setBreadCrumbs() {
@@ -472,11 +473,46 @@ __webpack_require__.r(__webpack_exports__);
       if (this.posts.length > 0) {
         this.selectedPosts = this.posts.filter(function (post) {
           return post.instrument_id === _this3.selectedInstrumentId;
-        });
-        this.selectedAverage = this.averages.filter(function (average) {
-          return average.instrument_id === _this3.selectedInstrumentId;
-        });
+        }); // this.selectedAverage = this.averages.filter((average) => average.instrument_id === this.selectedInstrumentId)
       }
+    },
+    culcAverages: function culcAverages() {
+      var _this4 = this;
+
+      this.averages = [];
+      this.instruments.forEach(function (instrument, index) {
+        var average = {
+          score_easy: 0,
+          score_copy: 0,
+          score_memorize: 0,
+          score_cost: 0,
+          score_enjoyment: 0
+        };
+
+        _this4.posts.forEach(function (post) {
+          if (post.instrument_id === index + 1) {
+            average.score_easy += post.score_easy;
+            average.score_copy += post.score_copy;
+            average.score_memorize += post.score_memorize;
+            average.score_cost += post.score_cost;
+            average.score_enjoyment += post.score_enjoyment;
+          }
+        });
+
+        var averageLength = _this4.posts.filter(function (post) {
+          return post.instrument_id === index + 1;
+        }).length;
+
+        if (averageLength > 0) {
+          average.score_easy /= averageLength;
+          average.score_copy /= averageLength;
+          average.score_memorize /= averageLength;
+          average.score_cost /= averageLength;
+          average.score_enjoyment /= averageLength;
+        }
+
+        _this4.averages.push(average);
+      });
     },
     closeCreate: function closeCreate() {
       this.createDialog = false;
@@ -488,37 +524,37 @@ __webpack_require__.r(__webpack_exports__);
       this.deleteDialog = false;
     },
     createPost: function createPost(post) {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.post("/songs/".concat(this.songId, "/posts"), post).then(function (response) {
         if (response.status == 200) {
-          _this4.closeCreate();
+          _this5.closeCreate();
 
-          _this4.getPosts();
+          _this5.getPosts();
         }
       })["catch"](function (error) {
-        _this4.snackbar = true;
+        _this5.snackbar = true;
       });
     },
     editPost: function editPost(post) {
-      var _this5 = this;
+      var _this6 = this;
 
       axios.put("/posts/".concat(post.id), post).then(function (response) {
         if (response.status == 200) {
-          _this5.closeEdit();
+          _this6.closeEdit();
 
-          _this5.getPosts();
+          _this6.getPosts();
         }
       });
     },
     deletePost: function deletePost() {
-      var _this6 = this;
+      var _this7 = this;
 
       axios["delete"]("/posts/".concat(this.deleteConfirmedPost.id), this.deleteConfirmedPost).then(function (response) {
         if (response.status == 200) {
-          _this6.closeDelete();
+          _this7.closeDelete();
 
-          _this6.getPosts();
+          _this7.getPosts();
         }
       });
     },
@@ -531,22 +567,22 @@ __webpack_require__.r(__webpack_exports__);
       this.deleteDialog = true;
     },
     favorite: function favorite(post) {
-      var _this7 = this;
+      var _this8 = this;
 
       axios.post("/posts/".concat(post.id, "/favorite"), post).then(function (response) {
         if (response.status == 200) {
-          _this7.getPosts();
+          _this8.getPosts();
         }
       })["catch"](function (error) {
-        _this7.snackbar = true;
+        _this8.snackbar = true;
       });
     },
     unfavorite: function unfavorite(post) {
-      var _this8 = this;
+      var _this9 = this;
 
       axios.post("/posts/".concat(post.id, "/unfavorite"), post).then(function (response) {
         if (response.status == 200) {
-          _this8.getPosts();
+          _this9.getPosts();
         }
       });
     }
@@ -1415,7 +1451,8 @@ var render = function () {
                               staticClass: "mb-12",
                               attrs: {
                                 post: item,
-                                average: _vm.selectedAverage[0],
+                                average:
+                                  _vm.averages[_vm.selectedInstrumentId - 1],
                               },
                             }),
                           ],
