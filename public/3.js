@@ -425,8 +425,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     selectedInstrumentId: {
       get: function get() {
-        console.log(this.selectedInstrumentId);
-
         if (this.instruments.length) {
           return this.instruments[this.instrumentIndex].id;
         }

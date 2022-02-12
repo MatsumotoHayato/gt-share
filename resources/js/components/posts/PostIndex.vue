@@ -192,7 +192,6 @@
       },
       selectedInstrumentId: {
         get(){
-          console.log(this.selectedInstrumentId)
           if(this.instruments.length){
             return this.instruments[this.instrumentIndex].id
           }
