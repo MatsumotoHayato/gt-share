@@ -192,6 +192,7 @@
       },
       selectedInstrumentId: {
         get(){
+          console.log(this.selectedInstrumentId)
           if(this.instruments.length){
             return this.instruments[this.instrumentIndex].id
           }
@@ -212,6 +213,7 @@
             this.song = response.data.song
             this.posts = response.data.posts
             this.instruments = response.data.instruments
+            console.log(this.instruments)
             this.averages = response.data.averages
             this.fetchPosts()
           })
@@ -231,7 +233,6 @@
       },
       fetchPosts() {
         if (this.posts.length > 0) {
-          console.log(this.selectedInstrumentId)
           this.selectedPosts = this.posts.filter((post) => post.instrument_id === this.selectedInstrumentId)
           this.selectedAverage = this.averages.filter((average) => average.instrument_id === this.selectedInstrumentId)
           }

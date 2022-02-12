@@ -425,6 +425,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     selectedInstrumentId: {
       get: function get() {
+        console.log(this.selectedInstrumentId);
+
         if (this.instruments.length) {
           return this.instruments[this.instrumentIndex].id;
         }
@@ -447,6 +449,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.song = response.data.song;
         _this.posts = response.data.posts;
         _this.instruments = response.data.instruments;
+        console.log(_this.instruments);
         _this.averages = response.data.averages;
 
         _this.fetchPosts();
@@ -470,7 +473,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       if (this.posts.length > 0) {
-        console.log(this.selectedInstrumentId);
         this.selectedPosts = this.posts.filter(function (post) {
           return post.instrument_id === _this3.selectedInstrumentId;
         });
