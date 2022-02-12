@@ -361,6 +361,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -442,7 +448,9 @@ __webpack_require__.r(__webpack_exports__);
         _this.song = response.data.song;
         _this.posts = response.data.posts;
         _this.instruments = response.data.instruments;
-        console.log(_this.instruments);
+        _this.averages = response.data.averages;
+
+        _this.fetchPosts();
       });
     },
     setBreadCrumbs: function setBreadCrumbs() {
@@ -1051,6 +1059,10 @@ var render = function () {
             _vm._v(_vm._s(_vm.song.name) + " / " + _vm._s(_vm.artist.name)),
           ]),
           _vm._v(" "),
+          _c("p", { staticClass: "text-h5 font-weight-bold" }, [
+            _vm._v(_vm._s(_vm.instruments)),
+          ]),
+          _vm._v(" "),
           _c(
             "v-row",
             [
@@ -1400,7 +1412,20 @@ var render = function () {
                           1
                         ),
                         _vm._v(" "),
-                        _c("v-col", { attrs: { cols: "4" } }),
+                        _c(
+                          "v-col",
+                          { attrs: { cols: "4" } },
+                          [
+                            _c("DrawChart", {
+                              staticClass: "mb-12",
+                              attrs: {
+                                post: item,
+                                average: _vm.selectedAverage[0],
+                              },
+                            }),
+                          ],
+                          1
+                        ),
                         _vm._v(" "),
                         _c(
                           "v-col",

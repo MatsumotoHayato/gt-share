@@ -8,6 +8,7 @@
         ログインが必要です
       </v-snackbar>
       <p class="text-h5 font-weight-bold">{{ song.name }} / {{ artist.name }}</p>
+      <p class="text-h5 font-weight-bold">{{ instruments }}</p>
       <v-row>
         <v-col cols="3">
           <v-select v-model="selectedInstrumentId" :items="instruments" item-value="id" item-text="name" return-object prepend-icon="mdi-guitar-acoustic" label="楽器を選択" outlined></v-select>
@@ -82,6 +83,11 @@
               </v-list-item-content>
             </v-list-item>
             <v-col cols="4">
+              <DrawChart
+                class="mb-12"
+                :post="item"
+                :average="selectedAverage[0]"
+              ></DrawChart>
             </v-col>
             <v-col cols="8">
               <v-list dense>
@@ -207,7 +213,8 @@
             this.song = response.data.song
             this.posts = response.data.posts
             this.instruments = response.data.instruments
-            console.log(this.instruments)
+            this.averages = response.data.averages
+            this.fetchPosts()
           })
       },
       setBreadCrumbs() {
