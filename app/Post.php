@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Post;
 
 class Post extends Model
 {
@@ -19,7 +20,7 @@ class Post extends Model
     ];
     
     protected $appends = [
-        'favorite_check'
+        'favorite_check',
     ];
 
     // Songに対するリレーション
@@ -51,6 +52,21 @@ class Post extends Model
     {
         return $this->users()->get()->contains(auth()->user());
     }
+    
+    // // 曲を指定し、各スコアの平均値を取得
+    // public function getAverageScoresAttribute()
+    // {
+    //     // dd(App\Post::where([['song_id', 78],['instrument_id', 1]])
+    //     // ->select(DB::raw('round(AVG(score_easy), 2')));
+    //     return Post::where([['song_id', 78],['instrument_id', 1]])
+    //     ->select(DB::raw('round(AVG(score_easy), 2'));
+    //     ->select(
+    //         DB::raw('round(AVG(score_easy), 2) as average_score_easy'),
+    //         DB::raw('round(AVG(score_copy), 2) as average_score_copy'),
+    //         DB::raw('round(AVG(score_memorize), 2) as average_score_memorize'),
+    //         DB::raw('round(AVG(score_cost), 2) as average_score_cost'),
+    //         DB::raw('round(AVG(score_enjoyment), 2) as average_score_enjoyment'))
+    // }
     
     // 自分がいいねを押したレビュー一覧を取得
     public function getMyFavoritePosts()

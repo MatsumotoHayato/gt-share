@@ -15,13 +15,10 @@ https://gtshare.herokuapp.com
 
 ## 作成した背景/目的
 <p>
-私は9年前にエレキギターを弾き始め、高校や大学でバンド活動を行ってきました。
-初めは独学だったため伸び悩んでおりましたが、バンドの先輩から演奏のコツを教えてもらうようになると一気に上達し始め、
-ずっと弾けなかった曲も演奏できるようになりました。
+私は9年前にエレキギターを弾き始め、高校や大学でバンド活動を行ってきました。初めは独学だったため伸び悩んでおりましたが、バンドの先輩から演奏のコツを教えてもらうようになると一気に上達し始め、ずっと弾けなかった曲も演奏できるようになりました。
 </p>
 <p>
-このことから、楽器上達には経験者からの情報が必要であると実感し、
-気軽に情報共有できる場を設けるために本アプリケーションを作成しました。
+このことから、楽器上達には経験者からの情報が必要であると実感し、気軽に情報共有できる場を設けるために本アプリケーションを作成しました。
 </p>
 
 ## 機能一覧
@@ -35,7 +32,7 @@ https://gtshare.herokuapp.com
 - [いいねを押したレビュー一覧表示機能](#いいねを押したレビュー一覧表示機能)
 - [自分が投稿したレビュー一覧表示機能](#自分が投稿したレビュー一覧表示機能)
 
-<h3 id="アーティスト名一覧表示機能">アーティスト名一覧表示機能</h3>
+###アーティスト名一覧表示機能
 - クリックすると曲名一覧ページへ移動します。
 - アーティスト名検索、並び替え、新規アーティストの追加ができます。
 
@@ -71,8 +68,6 @@ https://gtshare.herokuapp.com
 
 #### フロントエンド
 - HTML/CSS
-- Bootstrap v4.0.0
-- jQuery v3.2
 - Vue v2.5.17
 - Vuetify v2.6.2
 - Vue-Chartjs v3.5.1
@@ -85,10 +80,12 @@ https://gtshare.herokuapp.com
 - MariaDB v10.2.38
 
 #### インフラ
-- AWS (EC2)
+- AWS (Cloud9)
 
 #### デプロイ
 - Heroku
+
+## 実行手順
 
 ## テーブル定義
 
@@ -96,7 +93,7 @@ https://gtshare.herokuapp.com
     <img src="./public/img/datatable.png" title="テーブル定義" width="80%">
 </p>
 
-#### usersテーブル
+### usersテーブル
 |  カラム名  |  データ型  |  詳細  |
 | ---- | ---- | ---- |
 |  id  |  bigint(20) unsigned  |  ID  |
@@ -109,7 +106,7 @@ https://gtshare.herokuapp.com
 |  created_at  |  timestamp  |  データ作成時間  |
 |  updated_at |  timestamp  |  データ更新時間  |
 
-#### artistsテーブル
+### artistsテーブル
 |  カラム名  |  データ型  |  詳細  |
 | ---- | ---- | ---- |
 |  id  |  int(10) unsigned  |  ID  |
@@ -117,7 +114,7 @@ https://gtshare.herokuapp.com
 |  created_at  |  timestamp  |  データ作成時間  |
 |  updated_at |  timestamp  |  データ更新時間  |
 
-#### songsテーブル
+### songsテーブル
 |  カラム名  |  データ型  |  詳細  |
 | ---- | ---- | ---- |
 |  id  |  smallint(5) unsigned  |  ID  |
@@ -126,7 +123,7 @@ https://gtshare.herokuapp.com
 |  created_at  |  timestamp  |  データ作成時間  |
 |  updated_at |  timestamp  |  データ更新時間  |
 
-#### instrumentsテーブル
+### instrumentsテーブル
 |  カラム名  |  データ型  |  詳細  |
 | ---- | ---- | ---- |
 |  id  |  smallint(5) unsigned  |  ID  |
@@ -134,7 +131,7 @@ https://gtshare.herokuapp.com
 |  created_at  |  timestamp  |  データ作成時間  |
 |  updated_at |  timestamp  |  データ更新時間  |
 
-#### postsテーブル
+### postsテーブル
 |  カラム名  |  データ型  |  詳細  |
 | ---- | ---- | ---- |
 |  id  |  bigint(20) unsigned  |  ID  |
@@ -152,7 +149,7 @@ https://gtshare.herokuapp.com
 |  created_at  |  timestamp  |  データ作成時間  |
 |  updated_at |  timestamp  |  データ更新時間  |
 
-#### post_userテーブル（いいね機能用の中間テーブル）
+### post_userテーブル（いいね機能用の中間テーブル）
 |  カラム名  |  データ型  |  詳細  |
 | ---- | ---- | ---- |
 |  user_id  |  bigint(20) unsigned  |  usersテーブルとの連携用ID  |

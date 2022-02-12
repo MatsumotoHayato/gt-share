@@ -392,7 +392,7 @@ __webpack_require__.r(__webpack_exports__);
       deleteConfirmedPost: [],
       selectedPosts: [],
       selectedAverage: [],
-      selectedInstrumentId: 1,
+      instrumentIndex: 0,
       instruments: [],
       headers: [{
         text: "投稿日時",
@@ -422,6 +422,16 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     songId: function songId() {
       return this.$route.params.songId;
+    },
+    selectedInstrumentId: {
+      get: function get() {
+        if (this.instruments.length) {
+          return this.instruments[this.instrumentIndex].id;
+        }
+      },
+      set: function set(value) {
+        this.instrumentIndex = this.instruments.indexOf(value);
+      }
     }
   },
   methods: {
@@ -1060,6 +1070,7 @@ var render = function () {
                       items: _vm.instruments,
                       "item-value": "id",
                       "item-text": "name",
+                      "return-object": "",
                       "prepend-icon": "mdi-guitar-acoustic",
                       label: "楽器を選択",
                       outlined: "",
