@@ -369,6 +369,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -1459,14 +1461,16 @@ var render = function () {
                               },
                             }),
                             _vm._v(
-                              "\n            " +
+                              "\n            簡単度: " +
                                 _vm._s(item.score_easy) +
-                                "\n            " +
+                                "\n            耳コピしやすさ: " +
                                 _vm._s(item.score_copy) +
-                                "\n            " +
-                                _vm._s(
-                                  _vm.averages[_vm.selectedInstrumentId - 1]
-                                ) +
+                                "\n            覚えやすさ: " +
+                                _vm._s(item.score_memorize) +
+                                "\n            必要機材の少なさ: " +
+                                _vm._s(item.score_cost) +
+                                "\n            演奏時の楽しさ: " +
+                                _vm._s(item.score_enjoyment) +
                                 "\n          "
                             ),
                           ],

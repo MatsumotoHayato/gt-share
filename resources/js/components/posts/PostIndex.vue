@@ -87,9 +87,11 @@
                 :post="item"
                 :average="averages[selectedInstrumentId-1]"
               ></DrawChart>
-              {{item.score_easy}}
-              {{item.score_copy}}
-              {{averages[selectedInstrumentId-1]}}
+              簡単度: {{item.score_easy}}
+              耳コピしやすさ: {{item.score_copy}}
+              覚えやすさ: {{item.score_memorize}}
+              必要機材の少なさ: {{item.score_cost}}
+              演奏時の楽しさ: {{item.score_enjoyment}}
             </v-col>
             <v-col cols="8">
               <v-list dense>
