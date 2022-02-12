@@ -51,11 +51,16 @@
         }
       }
     },
+    // watch: {
+    //   average(){
+    //     this.addAverageChart()
+    //   }
+    // },
     created() {
       this.radarChart()
-      if(this.average){
-        this.addAverageChart()
-      }
+      // if(this.average){
+      //   this.addAverageChart()
+      // }
     },
     methods: {
       radarChart() {
@@ -79,6 +84,9 @@
             ]
           }
           ],
+        }
+        if(this.average){
+          this.addAverageChart()
         }
       },
       addAverageChart() {
