@@ -98,11 +98,11 @@
           pointBorderWidth: 1,
           label: "平均値",
           data: [
-            this.average.average_score_easy,
-            this.average.average_score_copy,
-            this.average.average_score_memorize,
-            this.average.average_score_cost,
-            this.average.average_score_enjoyment,
+            this.average.score_easy,
+            this.average.score_copy,
+            this.average.score_memorize,
+            this.average.score_cost,
+            this.average.score_enjoyment,
           ]
         })
       }

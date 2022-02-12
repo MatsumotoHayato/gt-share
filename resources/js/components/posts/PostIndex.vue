@@ -87,6 +87,9 @@
                 :post="item"
                 :average="averages[selectedInstrumentId-1]"
               ></DrawChart>
+              {{item.score_easy}}
+              {{item.score_copy}}
+              {{averages[selectedInstrumentId-1]}}
             </v-col>
             <v-col cols="8">
               <v-list dense>

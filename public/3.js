@@ -366,6 +366,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -1455,6 +1458,17 @@ var render = function () {
                                   _vm.averages[_vm.selectedInstrumentId - 1],
                               },
                             }),
+                            _vm._v(
+                              "\n            " +
+                                _vm._s(item.score_easy) +
+                                "\n            " +
+                                _vm._s(item.score_copy) +
+                                "\n            " +
+                                _vm._s(
+                                  _vm.averages[_vm.selectedInstrumentId - 1]
+                                ) +
+                                "\n          "
+                            ),
                           ],
                           1
                         ),
