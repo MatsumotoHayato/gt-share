@@ -361,11 +361,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -448,9 +443,6 @@ __webpack_require__.r(__webpack_exports__);
         _this.posts = response.data.posts;
         _this.instruments = response.data.instruments;
         console.log(_this.instruments);
-        _this.averages = response.data.averages;
-
-        _this.fetchPosts();
       });
     },
     setBreadCrumbs: function setBreadCrumbs() {
@@ -1408,20 +1400,7 @@ var render = function () {
                           1
                         ),
                         _vm._v(" "),
-                        _c(
-                          "v-col",
-                          { attrs: { cols: "4" } },
-                          [
-                            _c("DrawChart", {
-                              staticClass: "mb-12",
-                              attrs: {
-                                post: item,
-                                average: _vm.selectedAverage[0],
-                              },
-                            }),
-                          ],
-                          1
-                        ),
+                        _c("v-col", { attrs: { cols: "4" } }),
                         _vm._v(" "),
                         _c(
                           "v-col",

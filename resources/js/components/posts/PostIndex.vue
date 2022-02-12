@@ -82,11 +82,6 @@
               </v-list-item-content>
             </v-list-item>
             <v-col cols="4">
-              <DrawChart
-                class="mb-12"
-                :post="item"
-                :average="selectedAverage[0]"
-              ></DrawChart>
             </v-col>
             <v-col cols="8">
               <v-list dense>
@@ -213,8 +208,6 @@
             this.posts = response.data.posts
             this.instruments = response.data.instruments
             console.log(this.instruments)
-            this.averages = response.data.averages
-            this.fetchPosts()
           })
       },
       setBreadCrumbs() {
