@@ -10,7 +10,7 @@
       <p class="text-h5 font-weight-bold">{{ song.name }} / {{ artist.name }}</p>
       <v-row>
         <v-col cols="3">
-          <v-select v-model="selectedInstrumentId" :items="instruments" item-value="id" item-text="name" prepend-icon="mdi-guitar-acoustic" label="楽器を選択" outlined></v-select>
+          <v-select v-model="selectedInstrumentId" :items="instruments" item-value="id" item-text="name" return-object prepend-icon="mdi-guitar-acoustic" label="楽器を選択" outlined></v-select>
         </v-col>
       </v-row>
       <v-data-table class="elevation-1 post-index" :items="selectedPosts" :sort-by="sortBy" sort-desc :headers="headers" hide-default-header>
@@ -164,7 +164,7 @@
         deleteConfirmedPost: [],
         selectedPosts: [],
         selectedAverage: [],
-        selectedInstrumentId: 1,
+        instrumentIndex: 0,
         instruments: [],
         headers: [
           { text: "投稿日時", value: "updated_at", align: "start" },
@@ -189,6 +189,16 @@
     computed: {
       songId() {
         return this.$route.params.songId
+      },
+      selectedInstrumentId: {
+        get(){
+          if(this.instruments.length){
+            return this.instruments[this.instrumentIndex].id
+          }
+        },
+        set(value) {
+          this.instrumentIndex = this.instruments.indexOf(value)
+        }
       }
     },
     methods: {

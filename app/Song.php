@@ -50,7 +50,7 @@ class Song extends Model
             DB::raw('round(AVG(posts.score_memorize), 2) as average_score_memorize'),
             DB::raw('round(AVG(posts.score_cost), 2) as average_score_cost'),
             DB::raw('round(AVG(posts.score_enjoyment), 2) as average_score_enjoyment'))
-        ->groupBy('songs.id', 'posts.instrument_id')
+        ->groupBy('songs.id', 'posts.instrument_id',)
         ->get();
     }
 }

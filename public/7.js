@@ -51,8 +51,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       songs: [],
       selectedSongs: [],
-      selectedInstrumentId: 1,
       instruments: [],
+      instrumentIndex: 0,
       headers: [{
         text: '',
         value: 'rank',
@@ -77,9 +77,20 @@ __webpack_require__.r(__webpack_exports__);
         align: 'start',
         width: '20%',
         sortable: false
-      }],
-      pageNumber: ''
+      }]
     };
+  },
+  computed: {
+    selectedInstrumentId: {
+      get: function get() {
+        if (this.instruments.length) {
+          return this.instruments[this.instrumentIndex].id;
+        }
+      },
+      set: function set(value) {
+        this.instrumentIndex = this.instruments.indexOf(value);
+      }
+    }
   },
   methods: {
     getSongs: function getSongs() {
@@ -89,7 +100,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.songs = response.data.songs;
         _this.instruments = response.data.instruments;
 
-        _this.initFetchSongs();
+        _this.fetchSongs();
       });
     },
     clickRow: function clickRow(e) {
@@ -97,20 +108,14 @@ __webpack_require__.r(__webpack_exports__);
         path: "/vue/songs/".concat(e.id)
       });
     },
-    fetchSongs: function fetchSongs(e) {
-      this.selectedSongs = this.songs.filter(function (song) {
-        return song.instrument_id === e;
-      });
-    },
-    initFetchSongs: function initFetchSongs() {
+    fetchSongs: function fetchSongs() {
+      var _this2 = this;
+
       if (this.songs.length > 0) {
         this.selectedSongs = this.songs.filter(function (song) {
-          return song.instrument_id === 1;
+          return song.instrument_id === _this2.selectedInstrumentId;
         });
       }
-    },
-    pagination: function pagination(e) {
-      this.pageNumber = e.page;
     },
     postIndexLink: function postIndexLink(item) {
       this.$router.push({
@@ -127,8 +132,8 @@ __webpack_require__.r(__webpack_exports__);
     this.getSongs();
   },
   watch: {
-    selectedInstrumentId: function selectedInstrumentId(newValue) {
-      this.fetchSongs(newValue);
+    selectedInstrumentId: function selectedInstrumentId() {
+      this.fetchSongs();
     }
   }
 });
@@ -221,6 +226,7 @@ var render = function () {
                       items: _vm.instruments,
                       "item-value": "id",
                       "item-text": "name",
+                      "return-object": "",
                       "prepend-icon": "mdi-guitar-acoustic",
                       label: "楽器を選択",
                       outlined: "",
@@ -243,7 +249,7 @@ var render = function () {
           _c("v-data-table", {
             staticClass: "elevation-1 song-ranking",
             attrs: { items: _vm.selectedSongs, headers: _vm.headers },
-            on: { "click:row": _vm.clickRow, pagination: _vm.pagination },
+            on: { "click:row": _vm.clickRow },
             scopedSlots: _vm._u([
               {
                 key: "top",
@@ -283,10 +289,16 @@ var render = function () {
               {
                 key: "item.rank",
                 fn: function (ref) {
-                  var index = ref.index
+                  var item = ref.item
                   return [
                     _c("span", { staticClass: "font-weight-bold pink--text" }, [
-                      _vm._v(_vm._s((_vm.pageNumber - 1) * 10 + index + 1)),
+                      _vm._v(
+                        _vm._s(
+                          _vm.selectedSongs.findIndex(function (song) {
+                            return song.id == item.id
+                          }) + 1
+                        )
+                      ),
                     ]),
                   ]
                 },

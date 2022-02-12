@@ -58,12 +58,15 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
+  // watch: {
+  //   average(){
+  //     this.addAverageChart()
+  //   }
+  // },
   created: function created() {
-    this.radarChart();
-
-    if (this.average) {
-      this.addAverageChart();
-    }
+    this.radarChart(); // if(this.average){
+    //   this.addAverageChart()
+    // }
   },
   methods: {
     radarChart: function radarChart() {
@@ -80,6 +83,10 @@ __webpack_require__.r(__webpack_exports__);
           data: [this.post.score_easy, this.post.score_copy, this.post.score_memorize, this.post.score_cost, this.post.score_enjoyment]
         }]
       };
+
+      if (this.average) {
+        this.addAverageChart();
+      }
     },
     addAverageChart: function addAverageChart() {
       this.datacollection.datasets.push({
