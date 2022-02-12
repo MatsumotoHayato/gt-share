@@ -470,6 +470,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       if (this.posts.length > 0) {
+        console.log(this.selectedInstrumentId);
         this.selectedPosts = this.posts.filter(function (post) {
           return post.instrument_id === _this3.selectedInstrumentId;
         });

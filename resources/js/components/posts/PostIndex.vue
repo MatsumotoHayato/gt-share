@@ -231,6 +231,7 @@
       },
       fetchPosts() {
         if (this.posts.length > 0) {
+          console.log(this.selectedInstrumentId)
           this.selectedPosts = this.posts.filter((post) => post.instrument_id === this.selectedInstrumentId)
           this.selectedAverage = this.averages.filter((average) => average.instrument_id === this.selectedInstrumentId)
           }
