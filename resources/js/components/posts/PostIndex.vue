@@ -212,7 +212,7 @@
             this.song = response.data.song
             this.posts = response.data.posts
             this.instruments = response.data.instruments
-            // this.averages = response.data.averages
+            this.averages = response.data.averages
             this.fetchPosts()
           })
       },

@@ -21,7 +21,7 @@ class PostController extends Controller
             'song' => $song,
             'posts' => Post::with(['user', 'instrument'])->withCount('users')->where('song_id', $song->id)->orderBy('updated_at', 'DESC')->get(),
             'instruments' => Instrument::get(),
-            // 'averages' => $song->culcAverageScores($song->id),
+            'averages' => $song->culcAverageScores($song->id),
         ];
     }
     

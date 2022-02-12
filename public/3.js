@@ -446,7 +446,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.artist = response.data.artist;
         _this.song = response.data.song;
         _this.posts = response.data.posts;
-        _this.instruments = response.data.instruments; // this.averages = response.data.averages
+        _this.instruments = response.data.instruments;
+        _this.averages = response.data.averages;
 
         _this.fetchPosts();
       });
