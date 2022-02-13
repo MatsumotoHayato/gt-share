@@ -85,7 +85,7 @@
               <DrawChart
                 class="mb-12"
                 :post="item"
-                :average="averages[selectedInstrumentId-1]"
+                :average="selectedAverage[0]"
               ></DrawChart>
               簡単度: {{item.score_easy}}
               耳コピしやすさ: {{item.score_copy}}
@@ -165,6 +165,7 @@
         song: [],
         posts: [],
         averages: [],
+        selectedAverage: [],
         postToEditForm: [],
         deleteConfirmedPost: [],
         selectedPosts: [],
@@ -217,9 +218,9 @@
             this.song = response.data.song
             this.posts = response.data.posts
             this.instruments = response.data.instruments
-            // this.averages = response.data.averages
+            this.averages = response.data.averages
             this.fetchPosts()
-            this.culcAverages()
+            // this.culcAverages()
           })
       },
       setBreadCrumbs() {
@@ -238,7 +239,7 @@
       fetchPosts() {
         if (this.posts.length > 0) {
           this.selectedPosts = this.posts.filter((post) => post.instrument_id === this.selectedInstrumentId)
-          // this.selectedAverage = this.averages.filter((average) => average.instrument_id === this.selectedInstrumentId)
+          this.selectedAverage = this.averages.filter((average) => average.instrument_id === this.selectedInstrumentId)
           }
       },
       culcAverages() {

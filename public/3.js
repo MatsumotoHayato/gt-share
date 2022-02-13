@@ -227,6 +227,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EditForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditForm */ "./resources/js/components/posts/EditForm.vue");
 /* harmony import */ var _DeleteForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DeleteForm */ "./resources/js/components/posts/DeleteForm.vue");
 /* harmony import */ var _charts_DrawChart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../charts/DrawChart */ "./resources/js/components/charts/DrawChart.vue");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -384,7 +386,9 @@ __webpack_require__.r(__webpack_exports__);
     DrawChart: _charts_DrawChart__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
-    return {
+    var _ref;
+
+    return _ref = {
       currentUser: {
         id: -1,
         name: 'ゲスト'
@@ -393,36 +397,25 @@ __webpack_require__.r(__webpack_exports__);
       song: [],
       posts: [],
       averages: [],
+      selectedAverage: [],
       postToEditForm: [],
       deleteConfirmedPost: [],
-      selectedPosts: [],
-      selectedAverage: [],
-      instrumentIndex: 0,
-      instruments: [],
-      headers: [{
-        text: "投稿日時",
-        value: "updated_at",
-        align: "start"
-      }],
-      sortBy: 'users_count',
-      sortList: [{
-        text: 'いいねが多い順',
-        value: 'users_count'
-      }, {
-        text: '新しい順',
-        value: 'updated_at'
-      }],
-      createDialog: false,
-      editDialog: false,
-      deleteDialog: false,
-      snackbar: false,
-      timeout: 4000,
-      breadCrumbs: [{
-        text: 'ホーム',
-        disabled: false,
-        to: '/'
-      }]
-    };
+      selectedPosts: []
+    }, _defineProperty(_ref, "selectedAverage", []), _defineProperty(_ref, "instrumentIndex", 0), _defineProperty(_ref, "instruments", []), _defineProperty(_ref, "headers", [{
+      text: "投稿日時",
+      value: "updated_at",
+      align: "start"
+    }]), _defineProperty(_ref, "sortBy", 'users_count'), _defineProperty(_ref, "sortList", [{
+      text: 'いいねが多い順',
+      value: 'users_count'
+    }, {
+      text: '新しい順',
+      value: 'updated_at'
+    }]), _defineProperty(_ref, "createDialog", false), _defineProperty(_ref, "editDialog", false), _defineProperty(_ref, "deleteDialog", false), _defineProperty(_ref, "snackbar", false), _defineProperty(_ref, "timeout", 4000), _defineProperty(_ref, "breadCrumbs", [{
+      text: 'ホーム',
+      disabled: false,
+      to: '/'
+    }]), _ref;
   },
   computed: {
     songId: function songId() {
@@ -451,11 +444,11 @@ __webpack_require__.r(__webpack_exports__);
         _this.artist = response.data.artist;
         _this.song = response.data.song;
         _this.posts = response.data.posts;
-        _this.instruments = response.data.instruments; // this.averages = response.data.averages
+        _this.instruments = response.data.instruments;
+        _this.averages = response.data.averages;
 
-        _this.fetchPosts();
+        _this.fetchPosts(); // this.culcAverages()
 
-        _this.culcAverages();
       });
     },
     setBreadCrumbs: function setBreadCrumbs() {
@@ -478,7 +471,10 @@ __webpack_require__.r(__webpack_exports__);
       if (this.posts.length > 0) {
         this.selectedPosts = this.posts.filter(function (post) {
           return post.instrument_id === _this3.selectedInstrumentId;
-        }); // this.selectedAverage = this.averages.filter((average) => average.instrument_id === this.selectedInstrumentId)
+        });
+        this.selectedAverage = this.averages.filter(function (average) {
+          return average.instrument_id === _this3.selectedInstrumentId;
+        });
       }
     },
     culcAverages: function culcAverages() {
@@ -1456,8 +1452,7 @@ var render = function () {
                               staticClass: "mb-12",
                               attrs: {
                                 post: item,
-                                average:
-                                  _vm.averages[_vm.selectedInstrumentId - 1],
+                                average: _vm.selectedAverage[0],
                               },
                             }),
                             _vm._v(
