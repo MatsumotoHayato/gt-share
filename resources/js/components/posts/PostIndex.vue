@@ -158,8 +158,6 @@
         artist: [],
         song: [],
         posts: [],
-        averages: [],
-        selectedAverage: [],
         postToEditForm: [],
         deleteConfirmedPost: [],
         selectedPosts: [],

@@ -120,10 +120,10 @@
         headers: [
           { text: "投稿日時", value: "updated_at", align: "start" },
         ],
-        sortBy: 'users_count',
+        sortBy: 'updated_at',
         sortList: [
-          { text: 'いいねが多い順', value: 'users_count' },
           { text: '新しい順', value: 'updated_at' },
+          { text: 'いいねが多い順', value: 'users_count' },
         ],
         editDialog: false,
         deleteDialog: false,

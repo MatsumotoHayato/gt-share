@@ -386,8 +386,6 @@ __webpack_require__.r(__webpack_exports__);
       artist: [],
       song: [],
       posts: [],
-      averages: [],
-      selectedAverage: [],
       postToEditForm: [],
       deleteConfirmedPost: [],
       selectedPosts: [],
