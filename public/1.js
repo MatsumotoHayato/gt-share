@@ -674,6 +674,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticStyle: { width: "360px" } },
     [
       _c("radar-chart", {
         attrs: { "chart-data": _vm.datacollection, options: _vm.options },

@@ -83,7 +83,7 @@
             </v-list-item>
             <v-col cols="4">
               <DrawChart
-                class="mb-12"
+                class="mb-12 mx-auto"
                 :post="item"
               ></DrawChart>
             </v-col>

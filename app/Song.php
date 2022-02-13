@@ -28,7 +28,7 @@ class Song extends Model
     }
 
     // 簡単な順に曲を取得
-    public function getSongsForBeginners(int $limit_count = 100)
+    public function getSongsForBeginners(int $limit_count = 5000)
     {
         // 曲IDと楽器IDでグループ化して平均難易度を計算し、簡単度降順に曲を並び替える
         return $this::with('artist')->Join('posts', 'songs.id', '=', 'posts.song_id')

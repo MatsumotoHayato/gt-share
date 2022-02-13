@@ -666,7 +666,7 @@ var render = function () {
                           { attrs: { cols: "4" } },
                           [
                             _c("DrawChart", {
-                              staticClass: "mb-12",
+                              staticClass: "mb-12 mx-auto",
                               attrs: { post: item },
                             }),
                           ],

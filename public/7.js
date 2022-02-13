@@ -76,7 +76,7 @@ __webpack_require__.r(__webpack_exports__);
         value: 'average_score_easy',
         align: 'start',
         width: '20%',
-        sortable: false
+        sortable: true
       }]
     };
   },

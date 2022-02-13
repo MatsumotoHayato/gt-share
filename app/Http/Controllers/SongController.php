@@ -32,11 +32,11 @@ class SongController extends Controller
     }
     
     // 初心者向けの曲ランキング
-    public function ranking(Song $song, Instrument $instrument)
+    public function ranking(Song $song)
     {
         return [
             'songs' => $song->getSongsForBeginners(),
-            'instruments' => $instrument->get(),
+            'instruments' => Instrument::get(),
         ];
     }
 }
