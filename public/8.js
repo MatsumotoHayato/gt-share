@@ -18,7 +18,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['post', 'average'],
+  props: ['post'],
   components: {
     RadarChart: _RadarChart_js__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -58,15 +58,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  // watch: {
-  //   average(){
-  //     this.addAverageChart()
-  //   }
-  // },
   created: function created() {
-    this.radarChart(); // if(this.average){
-    //   this.addAverageChart()
-    // }
+    this.radarChart();
   },
   methods: {
     radarChart: function radarChart() {
@@ -81,23 +74,16 @@ __webpack_require__.r(__webpack_exports__);
           pointRadius: 4,
           label: "この投稿",
           data: [this.post.score_easy, this.post.score_copy, this.post.score_memorize, this.post.score_cost, this.post.score_enjoyment]
+        }, {
+          backgroundColor: 'rgba(201, 203, 207, 0.3)',
+          borderColor: 'rgb(201, 203, 207)',
+          borderWidth: 2,
+          pointBackgroundColor: 'rgba(201, 203, 207, 0.6)',
+          pointBorderWidth: 1,
+          label: "平均値",
+          data: [this.post.average_scores.score_easy, this.post.average_scores.score_copy, this.post.average_scores.score_memorize, this.post.average_scores.score_cost, this.post.average_scores.score_enjoyment]
         }]
       };
-
-      if (this.average) {
-        this.addAverageChart();
-      }
-    },
-    addAverageChart: function addAverageChart() {
-      this.datacollection.datasets.push({
-        backgroundColor: 'rgba(201, 203, 207, 0.3)',
-        borderColor: 'rgb(201, 203, 207)',
-        borderWidth: 2,
-        pointBackgroundColor: 'rgba(201, 203, 207, 0.6)',
-        pointBorderWidth: 1,
-        label: "平均値",
-        data: [this.average.average_score_easy, this.average.average_score_copy, this.average.average_score_memorize, this.average.average_score_cost, this.average.average_score_enjoyment]
-      });
     }
   }
 });

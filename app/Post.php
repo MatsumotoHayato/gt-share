@@ -21,6 +21,7 @@ class Post extends Model
     
     protected $appends = [
         'favorite_check',
+        'average_scores'
     ];
 
     // Songに対するリレーション
@@ -53,19 +54,20 @@ class Post extends Model
         return $this->users()->get()->contains(auth()->user());
     }
     
-    // // 曲を指定し、各スコアの平均値を取得
-    // public function getAverageScoresAttribute()
-    // {
-    //     // dd(App\Post::where([['song_id', 78],['instrument_id', 1]])
-    //     // ->select(DB::raw('round(AVG(score_easy), 2')));
-    //     return Post::where([['song_id', 78],['instrument_id', 1]])
-    //     ->select(
-    //         DB::raw('round(AVG(score_easy), 2) as average_score_easy'),
-    //         DB::raw('round(AVG(score_copy), 2) as average_score_copy'),
-    //         DB::raw('round(AVG(score_memorize), 2) as average_score_memorize'),
-    //         DB::raw('round(AVG(score_cost), 2) as average_score_cost'),
-    //         DB::raw('round(AVG(score_enjoyment), 2) as average_score_enjoyment'));
-    // }
+    // 投稿にスコア平均値を属性として持たせる
+    public function getAverageScoresAttribute()
+    {
+        // 曲と楽器を指定し、各スコアの平均値を取得
+        $query = $this::where([['song_id', $this->song_id],['instrument_id', $this->instrument_id]]);
+        
+        return [
+            'score_easy' => round($query->avg('score_easy'), 2),
+            'score_copy' => round($query->avg('score_copy'), 2),
+            'score_memorize' => round($query->avg('score_memorize'), 2),
+            'score_cost' => round($query->avg('score_cost'), 2),
+            'score_enjoyment' => round($query->avg('score_enjoyment'), 2),
+        ];
+    }
     
     // 自分がいいねを押したレビュー一覧を取得
     public function getMyFavoritePosts()

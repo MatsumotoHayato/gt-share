@@ -8,7 +8,6 @@ export default new Router({
     { path: '/', component: () => import('./components/artists/ArtistIndex'), name: 'ArtistIndex' },
     { path: '/vue/artists/:artistId', component: () => import('./components/artists/ArtistShow'), name: 'ArtistShow' },
     { path: '/vue/songs/:songId', component: () => import('./components/posts/PostIndex'), name: 'PostIndex' },
-    { path: '/vue/chart', component: () => import('./components/charts/DrawChart'), name: 'DrawChart' },
     { path: '/vue/profile', component: () => import('./components/users/ProfileForm'), name: 'ProfileForm' },
     { path: '/vue/password', component: () => import('./components/users/PasswordForm'), name: 'PasswordForm' },
     { path: '/vue/myfavorite', component: () => import('./components/posts/MyFavorite'), name: 'MyFavorite' },

@@ -9,7 +9,6 @@
   export default {
     props: [
       'post',
-      'average'
     ],
     components: {
       RadarChart,
@@ -51,61 +50,48 @@
         }
       }
     },
-    // watch: {
-    //   average(){
-    //     this.addAverageChart()
-    //   }
-    // },
     created() {
       this.radarChart()
-      // if(this.average){
-      //   this.addAverageChart()
-      // }
     },
     methods: {
       radarChart() {
         this.datacollection = {
           labels: ["簡単度", "耳コピしやすさ", "覚えやすさ", "必要機材の少なさ", "演奏時の楽しさ"],
           datasets: [
-          {
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgb(54, 162, 235)',
-            pointBackgroundColor: 'rgb(54, 162, 235)',
-            pointBorderColor: '#fff',
-            pointBorderWidth: 1,
-            pointRadius: 4,
-            label: "この投稿",
-            data: [
-              this.post.score_easy,
-              this.post.score_copy,
-              this.post.score_memorize,
-              this.post.score_cost,
-              this.post.score_enjoyment,
-            ]
-          }
+            {
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgb(54, 162, 235)',
+              pointBackgroundColor: 'rgb(54, 162, 235)',
+              pointBorderColor: '#fff',
+              pointBorderWidth: 1,
+              pointRadius: 4,
+              label: "この投稿",
+              data: [
+                this.post.score_easy,
+                this.post.score_copy,
+                this.post.score_memorize,
+                this.post.score_cost,
+                this.post.score_enjoyment,
+              ]
+            },
+            {
+              backgroundColor: 'rgba(201, 203, 207, 0.3)',
+              borderColor: 'rgb(201, 203, 207)',
+              borderWidth: 2,
+              pointBackgroundColor: 'rgba(201, 203, 207, 0.6)',
+              pointBorderWidth: 1,
+              label: "平均値",
+              data: [
+                this.post.average_scores.score_easy,
+                this.post.average_scores.score_copy,
+                this.post.average_scores.score_memorize,
+                this.post.average_scores.score_cost,
+                this.post.average_scores.score_enjoyment,
+              ]
+            }
           ],
         }
-        if(this.average){
-          this.addAverageChart()
-        }
       },
-      addAverageChart() {
-        this.datacollection.datasets.push({
-          backgroundColor: 'rgba(201, 203, 207, 0.3)',
-          borderColor: 'rgb(201, 203, 207)',
-          borderWidth: 2,
-          pointBackgroundColor: 'rgba(201, 203, 207, 0.6)',
-          pointBorderWidth: 1,
-          label: "平均値",
-          data: [
-            this.average.average_score_easy,
-            this.average.average_score_copy,
-            this.average.average_score_memorize,
-            this.average.average_score_cost,
-            this.average.average_score_enjoyment,
-          ]
-        })
-      }
     }
   }
 </script>
