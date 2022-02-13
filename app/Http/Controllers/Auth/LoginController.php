@@ -54,10 +54,11 @@ class LoginController extends Controller
         $user = User::where('email', $googleUser->email)->first();
         // 見つからなければ新しくユーザーを作成
         if ($user === null) {
+            $random_password = substr(str_shuffle('1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'), 0, 12);
             $user = User::create([
                 'name'     => $googleUser->name,
                 'email'    => $googleUser->email,
-                'password' => \Hash::make(uniqid()),
+                'password' => \Hash::make($random_password),
             ]);
         }
         // ログイン処理
