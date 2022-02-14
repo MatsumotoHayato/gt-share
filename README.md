@@ -43,19 +43,19 @@ https://gtshare.herokuapp.com
 - ヘッダーの項目をクリックして並び替えが可能です。
 
 <p align="center">
-    <img src="./public/img/ArtistIndex.png" title="アーティスト名一覧">
+    <img src="./public/img/ArtistIndex.png" title="アーティスト名一覧" width="80%">
 </p>
 
 - 入力した文字と一致するアーティスト名を検索できます。
 
 <p align="center">
-    <img src="./public/img/Search.png" title="アーティスト名検索" width="90%">
+    <img src="./public/img/Search.png" title="アーティスト名検索" width="80%">
 </p>
 
 - 新規アーティスト名を追加できます。
 
 <p align="center">
-    <img src="./public/img/CreateArtist.png" title="新規アーティスト名追加" width="90%">
+    <img src="./public/img/CreateArtist.png" title="新規アーティスト名追加" width="80%">
 </p>
 
 ### 曲名一覧表示
@@ -63,7 +63,7 @@ https://gtshare.herokuapp.com
 - 検索、並び替え、曲名追加が可能です。
 
 <p align="center">
-    <img src="./public/img/ArtistShow.png" title="曲名一覧" width="90%">
+    <img src="./public/img/ArtistShow.png" title="曲名一覧" width="80%">
 </p>
 
 ### レビュー一覧表示
@@ -71,7 +71,7 @@ https://gtshare.herokuapp.com
 - 新規投稿、いいね、レビュー並び替えができます。
 
 <p align="center">
-    <img src="./public/img/PostIndex.png" title="レビュー一覧" width="90%">
+    <img src="./public/img/PostIndex.png" title="レビュー一覧" width="80%">
 </p>
 
 - 楽器ごとにレビューを表示します。
@@ -83,13 +83,13 @@ https://gtshare.herokuapp.com
 - 新規レビューボタンをクリックすると投稿ダイアログが表示されます。
 
 <p align="center">
-    <img src="./public/img/CreatePost.png" title="レビュー投稿" width="90%">
+    <img src="./public/img/CreatePost.png" title="レビュー投稿" width="80%">
 </p>
 
 - 自分が投稿したレビューは編集・削除が可能です
 
 <p align="center">
-    <img src="./public/img/DeletePost.png" title="レビュー削除" width="90%">
+    <img src="./public/img/DeletePost.png" title="レビュー削除" width="80%">
 </p>
 
 ### ユーザー登録・ログイン機能
@@ -114,21 +114,21 @@ https://gtshare.herokuapp.com
 - 楽器ごとに表示を切り替えられます。
 
 <p align="center">
-    <img src="./public/img/Ranking.png" title="ランキング" width="90%">
+    <img src="./public/img/Ranking.png" title="ランキング" width="80%">
 </p>
 
 ### いいねマイリスト
 - 自分がいいねを押したレビューを見返すことができます。
 
 <p align="center">
-    <img src="./public/img/MyFavorite.png" title="いいねマイリスト" width="90%">
+    <img src="./public/img/MyFavorite.png" title="いいねマイリスト" width="80%">
 </p>
 
 ### 自分が投稿一覧表示
 - 自分が過去に投稿したレビューを振り返ることができます。
 
 <p align="center">
-    <img src="./public/img/MyPosts.png" title="自分の投稿一覧" width="90%">
+    <img src="./public/img/MyPosts.png" title="自分の投稿一覧" width="80%">
 </p>
 
 ## 開発環境
@@ -153,9 +153,6 @@ https://gtshare.herokuapp.com
 
 #### デプロイ
 - Heroku
-
-## 実行手順
-
 
 
 ## テーブル定義
