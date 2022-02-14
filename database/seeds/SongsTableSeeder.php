@@ -20,12 +20,9 @@ class SongsTableSeeder extends Seeder
             'name' => [
                 'Adventure',
                 'starrrrrrr feat.GEROCK',
-                'SNOW SOUND',
                 'Swan',
                 '閃光',
                 '月色ホライズン',
-                'ムーンソング',
-                'Run Away',
                 'ワタリドリ',
                 ]
             ],
@@ -48,7 +45,6 @@ class SongsTableSeeder extends Seeder
                 'midnight cruising',
                 'Alien',
                 'Buster call',
-                'Remember',
                 ]
             ],
             [ //  10-FEETの曲
@@ -84,7 +80,6 @@ class SongsTableSeeder extends Seeder
                 'M1917',
                 'Nex:us',
                 'The Crow',
-                'B.A.I.B',
                 'Black Philosophy Bomb',
                 ]
             ],
@@ -147,7 +142,6 @@ class SongsTableSeeder extends Seeder
             'name' => [
                 'ジターバグ',
                 'Missing',
-                'Red Hot',
                 'Supernova',
                 'スターフィッシュ',
                 '風の日',
@@ -185,8 +179,6 @@ class SongsTableSeeder extends Seeder
                 'C.h.a.o.s.m.y.t.h.',
                 'Cry out',
                 'Deeper Deeper',
-                'じぶんROCK',
-                'Ending Story??',
                 ]
             ],
             [ //  THE ORAL CIGARETTESの曲
@@ -205,8 +197,6 @@ class SongsTableSeeder extends Seeder
                 'ロビンソン',
                 '空も飛べるはず',
                 'チェリー',
-                '正夢',
-                '君が思い出になる前に',
                 ]
             ],
             [ //  マキシマム ザ ホルモンの曲
@@ -217,22 +207,10 @@ class SongsTableSeeder extends Seeder
                 '爪爪爪',
                 '絶望ビリー',
                 'シミ',
-                'アカギ',
                 "What's up, people?!",
                 'え・い・り・あ・ん',
                 'ロック番狂わせ',
                 'Mrブギータンブリンマン',
-                ]
-            ],
-            [ //  MR.BIGの曲
-            'artist_id' => 113,
-            'name' => [
-                'To Be with You',
-                'Daddy, Brother, Lover, Little Boy [The Electric Drill Song]',
-                'Green-Tinted Sixties Mind',
-                'Addicted to That Rush',
-                'Colorado Bulldog',
-                'Take A Walk',
                 ]
             ],
             [ //  エレファントカシマシの曲
@@ -242,7 +220,6 @@ class SongsTableSeeder extends Seeder
                 '俺たちの明日',
                 '桜の花、舞い上がる道を',
                 '悲しみの果て',
-                '笑顔の未来へ',
                 '風に吹かれて',
                 ]
             ],
@@ -250,9 +227,7 @@ class SongsTableSeeder extends Seeder
             'artist_id' => 75,
             'name' => [
                 'STAY GOLD',
-                "CAN'T HELP FALLING IN LOVE",
                 'MY FIRST KISS',
-                'The Gift',
                 'MAXIMUM OVERDRIVE',
                 'NEW LIFE',
                 "CALIFORNIA DREAMIN'",
