@@ -1,10 +1,11 @@
 # GT-share
 「楽器演奏者のための**楽曲レビューサイト**」です。\
 ユーザーは演奏したことのある楽曲についてレビューを投稿することができます。\
-また、評価が気になる楽曲について検索し、そのレビューを閲覧することが可能です。\
+また、評価が気になる楽曲について検索し、そのレビューを閲覧することが可能です。
+<br>
 主に以下のような用途としてお使いいただけます。
-- 気になる曲についての評価・演奏のヒントを調べる
-- 自分が練習した曲についてのメモを記録する
+- 気になる曲についての演奏のヒントを調べる
+- 自分が練習した曲についてのメモや感想を記録する
 
 #### 使用イメージ動画
 
@@ -27,45 +28,85 @@ https://gtshare.herokuapp.com
 </p>
 
 ## 機能一覧
-- [アーティスト名一覧表示機能](#アーティスト名一覧表示機能)
-- [曲名一覧表示機能](#曲名一覧表示機能)
-- [レビュー一覧表示機能](#レビュー一覧表示機能)
-- [レビュー投稿機能](#レビュー投稿機能)
-- [ハンバーガーメニュー]
-- [ランキング機能](#ランキング機能)
+- [アーティスト名一覧表示](#アーティスト名一覧表示)
+- [曲名一覧表示](#曲名一覧表示)
+- [レビュー一覧表示](#レビュー一覧表示)
 - [ユーザー登録、ログイン機能](#ユーザー登録、ログイン機能)
-- [いいね機能](#いいね機能)
-- [いいねを押したレビュー一覧表示機能](#いいねを押したレビュー一覧表示機能)
-- [自分が投稿したレビュー一覧表示機能](#自分が投稿したレビュー一覧表示機能)
+- [ユーザーメニュー](#ユーザーメニュー)
+- [ナビゲーションメニュー](#ナビゲーションメニュー)
+- [ランキング機能](#ランキング機能)
+- [いいねマイリスト](#いいねマイリスト)
+- [自分の投稿一覧表示](#自分の投稿一覧表示)
 
-### アーティスト名一覧表示機能
+### アーティスト名一覧表示
 - クリックすると曲名一覧画面へ移動します。
-- アーティスト名検索、並び替え、新規アーティストの追加ができます。
+- ヘッダーの項目をクリックして並び替えが可能です。
 
 <p align="center">
-    <img src="./public/img/home.png" title="ホーム画面" width="80%">
+    <img src="./public/img/ArtistIndex.png" title="アーティスト名一覧" width="80%">
 </p>
 
-### 曲名一覧表示機能
+- 入力した文字と一致するアーティスト名を検索できます。
+
+<p align="center">
+    <img src="./public/img/Search.png" title="アーティスト名検索" width="80%">
+</p>
+
+- 新規アーティスト名を追加できます。
+
+<p align="center">
+    <img src="./public/img/CreateArtist.png" title="新規アーティスト名追加" width="80%">
+</p>
+
+### 曲名一覧表示
 - クリックするとレビュー一覧画面へ移動します。
+- 検索、並び替え、曲名追加が可能です。
 
 <p align="center">
-    <img src="./public/img/songs.png" title="曲名一覧画面" width="80%">
+    <img src="./public/img/ArtistShow.png" title="曲名一覧" width="80%">
 </p>
 
-### レビュー一覧表示機能
-- 特定の曲のレビューを楽器ごとに表示します。
-- 新規投稿、編集、削除、いいね、レビュー並び替えができます。
+### レビュー一覧表示
 - レビューの評価をレーダーチャートを用いて視覚的にわかりやすく表示しました。
+- 新規投稿、いいね、レビュー並び替えができます。
 
 <p align="center">
-    <img src="./public/img/posts.png" title="レビュー一覧画面" width="80%">
+    <img src="./public/img/PostIndex.png" title="レビュー一覧" width="80%">
 </p>
 
-### レビュー投稿機能
+- 楽器ごとにレビューを表示します。
 
 <p align="center">
-    <img src="./public/img/create_post.png" title="レビュー投稿画面" width="80%">
+    <img src="./public/img/SelectInstrument.png" title="楽器選択" width="40%">
+</p>
+
+- 新規レビューボタンをクリックすると以下のダイアログが表示されます。
+
+<p align="center">
+    <img src="./public/img/CreatePost.png" title="レビュー投稿" width="80%">
+</p>
+
+- 自分が投稿したレビューは編集・削除が可能です
+
+<p align="center">
+    <img src="./public/img/DeletePost.png" title="レビュー削除" width="80%">
+</p>
+
+### ユーザー登録・ログイン機能
+- 画面右上のボタンをクリックすると新規登録・ログインダイアログが表示されます。
+- Googleアカウントでのログインも可能です。
+
+<p align="center">
+    <img src="./public/img/Register.png" title="新規登録" width="40%">
+    <img src="./public/img/Login.png" title="ログイン" width="40%">
+</p>
+
+### ユーザーメニュー
+- ログイン中に画面右上のボタンをクリックすると、ユーザーメニューが表示されます。
+- ログアウトなどの機能を利用可能です。
+
+<p align="center">
+    <img src="./public/img/UserMenu.png" title="ユーザーメニュー" width="80%">
 </p>
 
 ### ランキング機能
@@ -73,43 +114,23 @@ https://gtshare.herokuapp.com
 - 楽器ごとに表示を切り替えられます。
 
 <p align="center">
-    <img src="./public/img/ranking.png" title="ランキング画面" width="80%">
+    <img src="./public/img/Ranking.png" title="ランキング" width="80%">
 </p>
 
-### ユーザー登録、ログイン機能
-- Googleアカウントでのログインも可能です。
-
-<p align="center">
-    <img src="./public/img/register.png" title="新規登録画面" width="80%">
-</p>
-
-### プロフィール設定機能
-- ユーザー名、メールアドレスの変更が可能です。
-- 年齢、職業を選択すると、レビュー一覧画面に表示されるようになります。
-
-<p align="center">
-    <img src="./public/img/profile.png" title="プロフィール設定画面" width="80%">
-</p>
-
-### パスワード変更機能
-- 現在のパスワードを入力し、新しいパスワードを設定し直すことができます。
-- 現在のパスワードが間違っている場合、エラーメッセージが表示されます。
-- Googleアカウントでログイン中の場合、この機能は使用できません。
-
-### いいねを押したレビュー一覧表示機能
+### いいねマイリスト
 - 自分がいいねを押したレビューを見返すことができます。
 - 未ログイン時にはログインを促すメッセージが表示されます。
 
 <p align="center">
-    <img src="./public/img/myfavorite.png" title="いいねマイリスト画面" width="80%">
+    <img src="./public/img/MyFavorite.png" title="いいねマイリスト" width="80%">
 </p>
 
-### 自分が投稿したレビュー一覧表示機能
+### 自分が投稿一覧表示
 - 自分が過去に投稿したレビューを振り返ることができます。
 - 未ログイン時にはログインを促すメッセージが表示されます。
 
 <p align="center">
-    <img src="./public/img/myposts.png" title="自分の投稿一覧画面" width="80%">
+    <img src="./public/img/MyPosts.png" title="自分の投稿一覧" width="80%">
 </p>
 
 ## 開発環境
@@ -137,10 +158,12 @@ https://gtshare.herokuapp.com
 
 ## 実行手順
 
+
+
 ## テーブル定義
 
 <p align="center">
-    <img src="./public/img/datatable.png" title="テーブル定義" width="80%">
+    <img src="./public/img/DataTable.png" title="テーブル定義" width="100%">
 </p>
 
 ### usersテーブル
