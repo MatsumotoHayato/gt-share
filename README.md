@@ -109,6 +109,13 @@ https://gtshare.herokuapp.com
     <img src="./public/img/UserMenu.png" title="ユーザーメニュー" width="40%">
 </p>
 
+### ナビゲーションメニュー
+- 画面左上のアイコンをクリックするとナビゲーションメニューが開きます。
+
+<p align="center">
+    <img src="./public/img/NavigationMenu.png" title="ナビゲーションメニュー" width="80%">
+</p>
+
 ### ランキング機能
 - 楽器初心者のユーザー向けに、簡単な曲をランキング形式で表示します。
 - 楽器ごとに表示を切り替えられます。
@@ -124,7 +131,7 @@ https://gtshare.herokuapp.com
     <img src="./public/img/MyFavorite.png" title="いいねマイリスト" width="80%">
 </p>
 
-### 自分が投稿一覧表示
+### 自分の投稿一覧表示
 - 自分が過去に投稿したレビューを振り返ることができます。
 
 <p align="center">
