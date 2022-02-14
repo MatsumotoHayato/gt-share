@@ -31,7 +31,7 @@ https://gtshare.herokuapp.com
 - [アーティスト名一覧表示](#アーティスト名一覧表示)
 - [曲名一覧表示](#曲名一覧表示)
 - [レビュー一覧表示](#レビュー一覧表示)
-- [ユーザー登録・ログイン機能](#ユーザー登録・ログイン機能)
+- [ユーザー登録・ログイン機能](#ユーザー登録ログイン機能)
 - [ユーザーメニュー](#ユーザーメニュー)
 - [ナビゲーションメニュー](#ナビゲーションメニュー)
 - [ランキング機能](#ランキング機能)
@@ -43,7 +43,7 @@ https://gtshare.herokuapp.com
 - ヘッダーの項目をクリックして並び替えが可能です。
 
 <p align="center">
-    <img src="./public/img/ArtistIndex.png" title="アーティスト名一覧" width="90%">
+    <img src="./public/img/ArtistIndex.png" title="アーティスト名一覧">
 </p>
 
 - 入力した文字と一致するアーティスト名を検索できます。
@@ -80,7 +80,7 @@ https://gtshare.herokuapp.com
     <img src="./public/img/SelectInstrument.png" title="楽器選択" width="20%">
 </p>
 
-- 新規レビューボタンをクリックすると以下のダイアログが表示されます。
+- 新規レビューボタンをクリックすると投稿ダイアログが表示されます。
 
 <p align="center">
     <img src="./public/img/CreatePost.png" title="レビュー投稿" width="90%">
@@ -161,7 +161,7 @@ https://gtshare.herokuapp.com
 ## テーブル定義
 
 <p align="center">
-    <img src="./public/img/DataTable.png" title="テーブル定義" width="100%">
+    <img src="./public/img/DataTable.png" title="テーブル定義">
 </p>
 
 ### usersテーブル
