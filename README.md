@@ -31,7 +31,7 @@ https://gtshare.herokuapp.com
 - [アーティスト名一覧表示](#アーティスト名一覧表示)
 - [曲名一覧表示](#曲名一覧表示)
 - [レビュー一覧表示](#レビュー一覧表示)
-- [ユーザー登録、ログイン機能](#ユーザー登録、ログイン機能)
+- [ユーザー登録・ログイン機能](#ユーザー登録・ログイン機能)
 - [ユーザーメニュー](#ユーザーメニュー)
 - [ナビゲーションメニュー](#ナビゲーションメニュー)
 - [ランキング機能](#ランキング機能)
@@ -43,19 +43,19 @@ https://gtshare.herokuapp.com
 - ヘッダーの項目をクリックして並び替えが可能です。
 
 <p align="center">
-    <img src="./public/img/ArtistIndex.png" title="アーティスト名一覧" width="80%">
+    <img src="./public/img/ArtistIndex.png" title="アーティスト名一覧" width="90%">
 </p>
 
 - 入力した文字と一致するアーティスト名を検索できます。
 
 <p align="center">
-    <img src="./public/img/Search.png" title="アーティスト名検索" width="80%">
+    <img src="./public/img/Search.png" title="アーティスト名検索" width="90%">
 </p>
 
 - 新規アーティスト名を追加できます。
 
 <p align="center">
-    <img src="./public/img/CreateArtist.png" title="新規アーティスト名追加" width="80%">
+    <img src="./public/img/CreateArtist.png" title="新規アーティスト名追加" width="90%">
 </p>
 
 ### 曲名一覧表示
@@ -63,7 +63,7 @@ https://gtshare.herokuapp.com
 - 検索、並び替え、曲名追加が可能です。
 
 <p align="center">
-    <img src="./public/img/ArtistShow.png" title="曲名一覧" width="80%">
+    <img src="./public/img/ArtistShow.png" title="曲名一覧" width="90%">
 </p>
 
 ### レビュー一覧表示
@@ -71,25 +71,25 @@ https://gtshare.herokuapp.com
 - 新規投稿、いいね、レビュー並び替えができます。
 
 <p align="center">
-    <img src="./public/img/PostIndex.png" title="レビュー一覧" width="80%">
+    <img src="./public/img/PostIndex.png" title="レビュー一覧" width="90%">
 </p>
 
 - 楽器ごとにレビューを表示します。
 
 <p align="center">
-    <img src="./public/img/SelectInstrument.png" title="楽器選択" width="40%">
+    <img src="./public/img/SelectInstrument.png" title="楽器選択" width="20%">
 </p>
 
 - 新規レビューボタンをクリックすると以下のダイアログが表示されます。
 
 <p align="center">
-    <img src="./public/img/CreatePost.png" title="レビュー投稿" width="80%">
+    <img src="./public/img/CreatePost.png" title="レビュー投稿" width="90%">
 </p>
 
 - 自分が投稿したレビューは編集・削除が可能です
 
 <p align="center">
-    <img src="./public/img/DeletePost.png" title="レビュー削除" width="80%">
+    <img src="./public/img/DeletePost.png" title="レビュー削除" width="90%">
 </p>
 
 ### ユーザー登録・ログイン機能
@@ -106,7 +106,7 @@ https://gtshare.herokuapp.com
 - ログアウトなどの機能を利用可能です。
 
 <p align="center">
-    <img src="./public/img/UserMenu.png" title="ユーザーメニュー" width="80%">
+    <img src="./public/img/UserMenu.png" title="ユーザーメニュー" width="40%">
 </p>
 
 ### ランキング機能
@@ -114,23 +114,21 @@ https://gtshare.herokuapp.com
 - 楽器ごとに表示を切り替えられます。
 
 <p align="center">
-    <img src="./public/img/Ranking.png" title="ランキング" width="80%">
+    <img src="./public/img/Ranking.png" title="ランキング" width="90%">
 </p>
 
 ### いいねマイリスト
 - 自分がいいねを押したレビューを見返すことができます。
-- 未ログイン時にはログインを促すメッセージが表示されます。
 
 <p align="center">
-    <img src="./public/img/MyFavorite.png" title="いいねマイリスト" width="80%">
+    <img src="./public/img/MyFavorite.png" title="いいねマイリスト" width="90%">
 </p>
 
 ### 自分が投稿一覧表示
 - 自分が過去に投稿したレビューを振り返ることができます。
-- 未ログイン時にはログインを促すメッセージが表示されます。
 
 <p align="center">
-    <img src="./public/img/MyPosts.png" title="自分の投稿一覧" width="80%">
+    <img src="./public/img/MyPosts.png" title="自分の投稿一覧" width="90%">
 </p>
 
 ## 開発環境
