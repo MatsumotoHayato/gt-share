@@ -28,6 +28,7 @@ https://gtshare.herokuapp.com
 </p>
 
 ## 機能一覧
+- [SPA構成](#SPA構成)
 - [アーティスト名一覧表示](#アーティスト名一覧表示)
 - [曲名一覧表示](#曲名一覧表示)
 - [レビュー一覧表示](#レビュー一覧表示)
@@ -37,6 +38,10 @@ https://gtshare.herokuapp.com
 - [ランキング機能](#ランキング機能)
 - [いいねマイリスト](#いいねマイリスト)
 - [自分の投稿一覧表示](#自分の投稿一覧表示)
+
+### SPA構成
+- 本アプリケーションはすべてSPA構成となっております。
+- バックエンドはPHPとLaravel、フロントエンドはVue.jsを用いて開発しました。
 
 ### アーティスト名一覧表示
 - クリックすると曲名一覧画面へ移動します。
@@ -86,7 +91,7 @@ https://gtshare.herokuapp.com
     <img src="./public/img/CreatePost.png" title="レビュー投稿" width="80%">
 </p>
 
-- 自分が投稿したレビューは編集・削除が可能です
+- 自分が投稿したレビューは編集・削除が可能です。
 
 <p align="center">
     <img src="./public/img/DeletePost.png" title="レビュー削除" width="80%">
@@ -137,6 +142,9 @@ https://gtshare.herokuapp.com
 <p align="center">
     <img src="./public/img/MyPosts.png" title="自分の投稿一覧" width="80%">
 </p>
+
+### 今後追加したい機能
+- スマホ画面へのレスポンシブ対応
 
 ## 開発環境
 #### OS
