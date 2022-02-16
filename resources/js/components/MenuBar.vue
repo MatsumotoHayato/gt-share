@@ -14,9 +14,9 @@
             本サイトについて
           </v-card-title>
           <v-card-text class="text-subtitle-1 black--text">
-            <div>楽器演奏者のための楽曲レビューサイトです。</div>
+            <div>楽器演奏者のための<span class="font-weight-bold">楽曲レビューサイト</span>です。</div>
             <div>あなたが弾いたことのある曲についてレビューできます。</div>
-            <div>ログインすると様々な機能が使えます。</div>
+            <div>使い方についての詳細は<a href="https://github.com/k458253/gt-share">Github</a>で紹介しています。</div>
           </v-card-text>
         </v-card>
       </v-menu>
