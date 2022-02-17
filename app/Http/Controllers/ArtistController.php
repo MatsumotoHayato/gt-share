@@ -8,11 +8,13 @@ use Illuminate\Http\Request;
 
 class ArtistController extends Controller
 {
+    // アーティスト一覧を表示するためのデータ処理
     public function index(Artist $artist)
     {
         return $artist::withCount(['songs', 'posts'])->orderBy('name')->get();
     }
     
+    // 特定アーティストの曲一覧を表示するためのデータ処理
     public function show(Artist $artist)
     {
         return [
@@ -21,6 +23,7 @@ class ArtistController extends Controller
         ];
     }
 
+    // 新規アーティスト追加時の保存処理
     public function store(Request $request, Artist $artist)
     {
         // バリデーション

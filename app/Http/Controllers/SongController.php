@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 
 class SongController extends Controller
 {
+    // 全曲一覧を表示するためのデータ処理
     public function index()
     {
         return [
@@ -18,6 +19,7 @@ class SongController extends Controller
         ];
     }
 
+    // 新規曲追加時の保存処理
     public function store(Request $request, Artist $artist, Song $song)
     {
         $request->validate([
@@ -27,11 +29,11 @@ class SongController extends Controller
             ],
         ]);
         $input = ['name' => $request['name']];
-        $input += ['artist_id' => $artist->id];  // 要素artist_idの追加
+        $input += ['artist_id' => $artist->id];
         $song->fill($input)->save();
     }
     
-    // 初心者向けの曲ランキング
+    // 簡単な曲ランキングを表示するためのデータ処理
     public function ranking(Song $song)
     {
         return [

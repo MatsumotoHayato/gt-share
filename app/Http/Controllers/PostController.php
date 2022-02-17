@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
-    // レビュー一覧表示
+    // レビュー一覧表示のためのデータ処理
     public function index(Song $song)
     {
         return [
@@ -24,7 +24,7 @@ class PostController extends Controller
         ];
     }
     
-    // レビュー投稿
+    //  新規レビュー投稿時の保存処理
     public function store(Request $request, Song $song, Post $post)
     {
         $request->validate([
@@ -56,7 +56,7 @@ class PostController extends Controller
         $post->fill($input)->save();
     }
 
-    // レビュー編集の変更内容更新
+    // レビュー編集時の変更内容更新
     public function update(Request $request, Post $post)
     {
         $request->validate([
@@ -103,7 +103,7 @@ class PostController extends Controller
         $post->users()->detach(Auth::id());
     }
     
-    // いいねマイリスト
+    // いいねマイリストを表示するためのデータ処理
     public function myfavorite(Post $post)
     {
         return [
@@ -112,7 +112,7 @@ class PostController extends Controller
         ];
     }
     
-    // 自分の投稿
+    // 自分の投稿一覧を表示するためのデータ処理
     public function myposts(Post $post)
     {
         return [

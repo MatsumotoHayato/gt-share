@@ -387,6 +387,7 @@ __webpack_require__.r(__webpack_exports__);
       song: [],
       posts: [],
       postToEditForm: [],
+      // EditFormコンポーネントに渡すpost
       deleteConfirmedPost: [],
       selectedPosts: [],
       instrumentIndex: 0,
@@ -421,6 +422,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.$route.params.songId;
     },
     selectedInstrumentId: {
+      // Heroku環境でのエラー回避のため、インデックスで管理
       get: function get() {
         if (this.instruments.length) {
           return this.instruments[this.instrumentIndex].id;
@@ -462,6 +464,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
+    // 全楽器からのpostsから、選択した楽器だけのレビューを取り出す
     fetchPosts: function fetchPosts() {
       var _this3 = this;
 

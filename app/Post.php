@@ -47,7 +47,7 @@ class Post extends Model
         return $this->belongsToMany('App\User')->withTimestamps();
     }
     
-    // その投稿にいいねを押したかチェック
+    // その投稿にいいねを押したかどうかの属性を持たせる
     public function getFavoriteCheckAttribute()
     {
         return $this->users()->get()->contains(auth()->user());
@@ -68,7 +68,7 @@ class Post extends Model
         ];
     }
     
-    // 自分がいいねを押したレビュー一覧を取得
+    // 自分がいいねを押したレビューを取得
     public function getMyFavoritePosts()
     {
         // いいねを押した最新順に並べるために内部結合
@@ -78,6 +78,7 @@ class Post extends Model
         ->orderBy('post_user.updated_at', 'DESC')->get();
     }
     
+    // 自分が投稿したレビューを取得
     public function getMyPosts()
     {
         return $this::with(['song', 'song.artist', 'user', 'instrument'])->withCount('users')

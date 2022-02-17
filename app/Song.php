@@ -27,7 +27,7 @@ class Song extends Model
         return $this->hasMany('App\Post');
     }
 
-    // 簡単な順に曲を取得
+    // 簡単度の高い順に曲を取得
     public function getSongsForBeginners(int $limit_count = 5000)
     {
         // 曲IDと楽器IDでグループ化して平均難易度を計算し、簡単度降順に曲を並び替える

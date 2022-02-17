@@ -158,7 +158,7 @@
         artist: [],
         song: [],
         posts: [],
-        postToEditForm: [],
+        postToEditForm: [],  // EditFormコンポーネントに渡すpost
         deleteConfirmedPost: [],
         selectedPosts: [],
         instrumentIndex: 0,
@@ -188,6 +188,7 @@
         return this.$route.params.songId
       },
       selectedInstrumentId: {
+        // Heroku環境でのエラー回避のため、インデックスで管理
         get(){
           if(this.instruments.length){
             return this.instruments[this.instrumentIndex].id
@@ -225,6 +226,7 @@
             })
           })
       },
+      // 全楽器からのpostsから、選択した楽器だけのレビューを取り出す
       fetchPosts() {
         if (this.posts.length > 0) {
           this.selectedPosts = this.posts.filter((post) => post.instrument_id === this.selectedInstrumentId)

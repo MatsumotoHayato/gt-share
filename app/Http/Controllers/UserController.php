@@ -18,7 +18,7 @@ class UserController extends Controller
         ];
     }
 
-    // ユーザー情報更新
+    // プロフィール設定時の更新処理
     public function update(Request $request)
     {
         $request->validate([
@@ -36,7 +36,7 @@ class UserController extends Controller
         Auth::user()->fill($input)->save();
     }
     
-    // パスワード変更
+    // パスワード変更処理
     public function changePassword(Request $request)
     {
         $request->validate([
