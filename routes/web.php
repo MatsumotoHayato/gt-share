@@ -22,6 +22,11 @@ Route::get('/users/get', 'UserController@get'); // 現在のユーザー情報�
 Route::put('/users/profile', 'UserController@update')->middleware('auth');     // プロフィール更新
 Route::put('/users/password', 'UserController@changePassword')->middleware('auth');     // パスワード変更
 
+Route::get('/forums', 'ForumController@index'); // 掲示板スレッド一覧表示
+Route::post('/forums', 'ForumController@store')->middleware('auth'); // 新規スレッド追加
+Route::get('/forums/{forum}', 'ForumController@show'); // スレッド詳細表示
+Route::post('/forums/{forum}', 'ForumController@comment')->middleware('auth'); // 新規コメント追加
+
 Route::get('/login/google', 'Auth\LoginController@redirectToGoogle');  // Google認証ページへリダイレクト
 Route::get('/login/google/callback', 'Auth\LoginController@handleGoogleCallback');  // Googleログインの認証処理
 

@@ -116,6 +116,7 @@
           { title: 'ランキング', icon: 'mdi-crown', path: '/vue/ranking' },
           { title: 'いいねマイリスト', icon: 'mdi-thumb-up', path: '/vue/myfavorite' },
           { title: 'あなたの投稿', icon: 'mdi-text-box', path: '/vue/myposts' },
+          { title: '掲示板', icon: 'mdi-forum', path: '/vue/forums' },
         ],
         loginDialog: false,
         registerDialog: false,

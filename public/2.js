@@ -161,17 +161,18 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
+    // 行をクリックしたとき
     clickRow: function clickRow(e) {
       this.$router.push({
         path: "/vue/artists/".concat(e.id)
       });
     },
+    // アーティスト名の文字をクリックしたとき
     artistShowLink: function artistShowLink(item) {
       this.$router.push({
         path: "/vue/artists/".concat(item.id)
       });
-    },
-    login: function login() {}
+    }
   },
   created: function created() {
     this.getArtists();

@@ -127,19 +127,18 @@
             })
         }
       },
+      // 行をクリックしたとき
       clickRow(e) {
         this.$router.push({
           path: `/vue/artists/${e.id}`
         })
       },
+      // アーティスト名の文字をクリックしたとき
       artistShowLink(item) {
         this.$router.push({
           path: `/vue/artists/${item.id}`
         })
       },
-      login() {
-        
-      }
     },
     created() {
       this.getArtists()
