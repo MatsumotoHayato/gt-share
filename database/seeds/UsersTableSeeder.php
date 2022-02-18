@@ -15,19 +15,19 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
+            'name'      => '管理人',
+            'email'     => 'k458253@kansai-u.ac.jp',
+            'password'  => \Hash::make('TemporaryPassword'),
+            'age'       => 20,
+            'occupation'=> '学生（音楽系の部活・サークル所属）',
+        ]);
+        
+        User::create([
             'name'     => 'テスト用',
             'email'    => 't@t.tt',
             'password' => \Hash::make('tttt1234'),
         ]);
-
-        User::create([
-            'name'      => 'HM',
-            'email'     => 'hayatomatsumoto@hayato.matsumoto',
-            'password'  => \Hash::make(substr(str_shuffle('1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'), 0, 12)),
-            'age'       => 20,
-            'occupation'=> '学生（音楽系の部活・サークル所属）',
-        ]);
-
+        
         factory(User::class, 200)->create();
     }
 }

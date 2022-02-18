@@ -10,7 +10,7 @@ $factory->define(Post::class, function (Faker $faker) {
     $song_count = \App\Song::count();
     $instrument_count = \App\Instrument::count();
     return [
-        'user_id' => $faker->numberBetween(1,$user_count),
+        'user_id' => $faker->numberBetween(2,$user_count),
         'song_id' => $faker->numberBetween(1,$song_count), 
         'instrument_id' => $faker->numberBetween(1,$instrument_count), 
         'experience' => $faker->optional()->numberBetween(0,20),
