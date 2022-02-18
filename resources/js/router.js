@@ -13,6 +13,7 @@ export default new Router({
     { path: '/vue/myfavorite', component: () => import('./components/posts/MyFavorite'), name: 'MyFavorite' },
     { path: '/vue/myposts', component: () => import('./components/posts/MyPosts'), name: 'MyPosts' },
     { path: '/vue/ranking', component: () => import('./components/songs/Ranking'), name: 'Ranking' },
+    { path: '/vue/forums', component: () => import('./components/forums/ForumIndex'), name: 'ForumIndex' },
     { path: '*', redirect: '/' }
   ],
   mode: 'history',
