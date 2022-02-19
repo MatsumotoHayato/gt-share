@@ -1,17 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/MyFavorite.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/MyFavorite.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forums/ForumIndex.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forums/ForumIndex.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _EditForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditForm */ "./resources/js/components/posts/EditForm.vue");
-/* harmony import */ var _DeleteForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeleteForm */ "./resources/js/components/posts/DeleteForm.vue");
-/* harmony import */ var _charts_DrawChart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../charts/DrawChart */ "./resources/js/components/charts/DrawChart.vue");
 //
 //
 //
@@ -112,123 +109,138 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-
-
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'MyFavorite',
-  components: {
-    EditForm: _EditForm__WEBPACK_IMPORTED_MODULE_0__["default"],
-    DeleteForm: _DeleteForm__WEBPACK_IMPORTED_MODULE_1__["default"],
-    DrawChart: _charts_DrawChart__WEBPACK_IMPORTED_MODULE_2__["default"]
-  },
+  name: 'ForumIndex',
   data: function data() {
     return {
-      posts: [],
-      user: [],
-      postToEditForm: [],
-      deleteConfirmedPost: [],
+      forums: [],
+      selectedForums: [],
       headers: [{
-        text: "投稿日時",
-        value: "updated_at",
-        align: "start"
+        text: 'タイトル',
+        value: 'title',
+        align: 'start',
+        width: '50%',
+        sortable: false
+      }, {
+        text: 'ジャンル',
+        value: 'genre',
+        align: 'start',
+        width: '15%',
+        filterable: false,
+        sortable: false
+      }, {
+        text: 'コメント数',
+        value: 'comments_count',
+        align: 'start',
+        width: '15%',
+        filterable: false
+      }, {
+        text: '投稿日時',
+        value: 'updated_at',
+        align: 'start',
+        width: '20%',
+        filterable: false
       }],
-      sortBy: '',
-      sortList: [{
-        text: "いいねを押した順",
-        value: ""
+      genres: [{
+        text: '質問',
+        value: '質問'
+      }, {
+        text: 'リクエスト',
+        value: 'リクエスト'
+      }, {
+        text: 'サイトへの要望',
+        value: 'サイトへの要望'
       }],
-      editDialog: false,
-      deleteDialog: false,
+      selectedGenres: ['質問', 'リクエスト', 'サイトへの要望'],
+      dialog: false,
       snackbar: false,
-      timeout: 4000
+      timeout: 4000,
+      search: '',
+      newForum: {
+        title: '',
+        genre: '質問',
+        body: ''
+      },
+      rules: {
+        required: function required(value) {
+          return !!value || '入力は必須です';
+        },
+        counter: function counter(value) {
+          return (value || '').length <= 50 || '50文字以内で入力してください';
+        },
+        body_counter: function body_counter(value) {
+          return (value || '').length <= 4000 || '4000文字以内で入力してください';
+        }
+      }
     };
   },
   methods: {
-    getPosts: function getPosts() {
+    getForums: function getForums() {
       var _this = this;
 
-      axios.get('/myfavorite').then(function (response) {
-        _this.posts = response.data.posts, _this.user = response.data.user;
-      })["catch"](function (error) {
-        _this.snackbar = true;
+      axios.get('/forums').then(function (response) {
+        _this.forums = response.data;
+        _this.selectedForums = response.data;
       });
     },
-    closeEdit: function closeEdit() {
-      this.editDialog = false;
-    },
-    closeDelete: function closeDelete() {
-      this.deleteDialog = false;
-    },
-    editPost: function editPost(post) {
+    fetchForums: function fetchForums() {
       var _this2 = this;
 
-      axios.put("/posts/".concat(post.id), post).then(function (response) {
-        if (response.status == 200) {
-          _this2.closeEdit();
-
-          _this2.getPosts();
-        }
+      this.selectedForums = this.forums.filter(function (forum) {
+        return _this2.selectedGenres.includes(forum.genre);
       });
     },
-    deletePost: function deletePost() {
+    close: function close() {
+      this.$refs.form.resetValidation();
+      this.newForum = {
+        title: '',
+        genre: '質問',
+        body: ''
+      };
+      this.dialog = false;
+    },
+    save: function save() {
       var _this3 = this;
 
-      axios["delete"]("/posts/".concat(this.deleteConfirmedPost.id), this.deleteConfirmedPost).then(function (response) {
-        if (response.status == 200) {
-          _this3.closeDelete();
+      if (this.$refs.form.validate()) {
+        axios.post('/forums', this.newForum).then(function (response) {
+          if (response.status == 200) {
+            _this3.close();
 
-          _this3.getPosts();
-        }
+            _this3.getForums();
+          }
+        })["catch"](function (error) {
+          _this3.snackbar = true;
+        });
+      }
+    },
+    clickRow: function clickRow(e) {
+      this.$router.push({
+        path: "/vue/forums/".concat(e.id)
       });
     },
-    openEditForm: function openEditForm(post) {
-      this.postToEditForm = post;
-      this.editDialog = true;
-    },
-    openDeleteForm: function openDeleteForm(post) {
-      this.deleteConfirmedPost = post;
-      this.deleteDialog = true;
-    },
-    favorite: function favorite(post) {
-      var _this4 = this;
-
-      axios.post("/posts/".concat(post.id, "/favorite"), post).then(function (response) {
-        if (response.status == 200) {
-          _this4.getPosts();
-        }
-      })["catch"](function (error) {
-        _this4.snackbar = true;
-      });
-    },
-    unfavorite: function unfavorite(post) {
-      var _this5 = this;
-
-      axios.post("/posts/".concat(post.id, "/unfavorite"), post).then(function (response) {
-        if (response.status == 200) {
-          _this5.getPosts();
-        }
+    forumShowLink: function forumShowLink(item) {
+      this.$router.push({
+        path: "/vue/forums/".concat(item.id)
       });
     }
   },
+  watch: {
+    selectedGenres: function selectedGenres() {
+      this.fetchForums();
+    }
+  },
   created: function created() {
-    this.getPosts();
+    this.getForums();
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/MyFavorite.vue?vue&type=style&index=0&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/MyFavorite.vue?vue&type=style&index=0&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forums/ForumIndex.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forums/ForumIndex.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -237,22 +249,22 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.post-index tr:hover td {\n  background: #FFFFFF;\n}\n", ""]);
+exports.push([module.i, "\n.forum-index tr:hover td {\n  background: #f0f8ff;\n}\n.forum-index th {\n  background: #f5f5f5;\n}\n.forum-link {\n  text-decoration: none;\n  color: inherit !important;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/MyFavorite.vue?vue&type=style&index=0&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/MyFavorite.vue?vue&type=style&index=0&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forums/ForumIndex.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forums/ForumIndex.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./MyFavorite.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/MyFavorite.vue?vue&type=style&index=0&lang=css&");
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ForumIndex.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forums/ForumIndex.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -274,10 +286,10 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/MyFavorite.vue?vue&type=template&id=3c108b8f&":
-/*!*******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/MyFavorite.vue?vue&type=template&id=3c108b8f& ***!
-  \*******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forums/ForumIndex.vue?vue&type=template&id=751bd953&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/forums/ForumIndex.vue?vue&type=template&id=751bd953& ***!
+  \********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -295,16 +307,6 @@ var render = function () {
       _c(
         "v-container",
         [
-          _c("EditForm", {
-            attrs: { editDialog: _vm.editDialog, post: _vm.postToEditForm },
-            on: { save: _vm.editPost, close: _vm.closeEdit },
-          }),
-          _vm._v(" "),
-          _c("DeleteForm", {
-            attrs: { deleteDialog: _vm.deleteDialog },
-            on: { delete: _vm.deletePost, close: _vm.closeDelete },
-          }),
-          _vm._v(" "),
           _c(
             "v-snackbar",
             {
@@ -327,16 +329,51 @@ var render = function () {
           ),
           _vm._v(" "),
           _c("p", { staticClass: "text-h5 font-weight-bold" }, [
-            _vm._v("いいねマイリスト"),
+            _vm._v("掲示板"),
           ]),
           _vm._v(" "),
+          _c(
+            "v-row",
+            [
+              _c(
+                "v-col",
+                { attrs: { cols: "5" } },
+                [
+                  _c("v-select", {
+                    attrs: {
+                      items: _vm.genres,
+                      "item-text": "text",
+                      "item-value": "value",
+                      label: "表示するジャンル",
+                      chips: "",
+                      "deletable-chips": "",
+                      outlined: "",
+                      multiple: "",
+                    },
+                    model: {
+                      value: _vm.selectedGenres,
+                      callback: function ($$v) {
+                        _vm.selectedGenres = $$v
+                      },
+                      expression: "selectedGenres",
+                    },
+                  }),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+          _vm._v(" "),
           _c("v-data-table", {
-            staticClass: "elevation-1 post-index",
+            staticClass: "elevation-1 forum-index",
             attrs: {
-              items: _vm.posts,
+              items: _vm.selectedForums,
               headers: _vm.headers,
-              "hide-default-header": "",
+              search: _vm.search,
+              "sort-by": "name",
             },
+            on: { "click:row": _vm.clickRow },
             scopedSlots: _vm._u([
               {
                 key: "top",
@@ -353,11 +390,9 @@ var render = function () {
                           "v-toolbar-title",
                           [
                             _c("v-icon", [
-                              _vm._v(
-                                "\n              mdi-thumb-up\n            "
-                              ),
+                              _vm._v("\n              mdi-forum\n            "),
                             ]),
-                            _vm._v("\n            レビュー一覧\n          "),
+                            _vm._v("\n            スレッド一覧\n          "),
                           ],
                           1
                         ),
@@ -367,26 +402,255 @@ var render = function () {
                           attrs: { inset: "", vertical: "" },
                         }),
                         _vm._v(" "),
-                        _c("v-select", {
+                        _c("v-text-field", {
                           attrs: {
-                            items: _vm.sortList,
-                            "item-value": "value",
-                            "item-text": "text",
+                            clearable: "",
                             flat: "",
                             "solo-inverted": "",
                             "hide-details": "",
-                            readonly: "",
+                            "prepend-inner-icon": "mdi-magnify",
+                            label: "タイトルを検索",
                           },
                           model: {
-                            value: _vm.sortBy,
+                            value: _vm.search,
                             callback: function ($$v) {
-                              _vm.sortBy = $$v
+                              _vm.search = $$v
                             },
-                            expression: "sortBy",
+                            expression: "search",
                           },
                         }),
                         _vm._v(" "),
                         _c("v-spacer"),
+                        _vm._v(" "),
+                        _c(
+                          "v-dialog",
+                          {
+                            attrs: { "max-width": "800px", persistent: "" },
+                            scopedSlots: _vm._u([
+                              {
+                                key: "activator",
+                                fn: function (ref) {
+                                  var on = ref.on
+                                  var attrs = ref.attrs
+                                  return [
+                                    _c(
+                                      "v-btn",
+                                      _vm._g(
+                                        _vm._b(
+                                          {
+                                            staticClass: "ma-2",
+                                            attrs: { outlined: "" },
+                                          },
+                                          "v-btn",
+                                          attrs,
+                                          false
+                                        ),
+                                        on
+                                      ),
+                                      [
+                                        _vm._v(
+                                          "\n                新規スレッド\n                "
+                                        ),
+                                        _c("v-icon", { attrs: { right: "" } }, [
+                                          _vm._v(
+                                            "\n                  mdi-pencil-plus\n                "
+                                          ),
+                                        ]),
+                                      ],
+                                      1
+                                    ),
+                                  ]
+                                },
+                              },
+                            ]),
+                            model: {
+                              value: _vm.dialog,
+                              callback: function ($$v) {
+                                _vm.dialog = $$v
+                              },
+                              expression: "dialog",
+                            },
+                          },
+                          [
+                            _vm._v(" "),
+                            _c(
+                              "v-card",
+                              [
+                                _c("v-card-title", [
+                                  _c("span", { staticClass: "text-h5" }, [
+                                    _vm._v("新規スレッド追加"),
+                                  ]),
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "v-form",
+                                  {
+                                    ref: "form",
+                                    on: {
+                                      submit: function ($event) {
+                                        $event.preventDefault()
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _c(
+                                      "v-card-text",
+                                      [
+                                        _c(
+                                          "v-row",
+                                          [
+                                            _c(
+                                              "v-col",
+                                              { attrs: { cols: "8" } },
+                                              [
+                                                _c("v-text-field", {
+                                                  attrs: {
+                                                    label: "タイトル",
+                                                    rules: [
+                                                      _vm.rules.required,
+                                                      _vm.rules.counter,
+                                                    ],
+                                                    autofocus: "",
+                                                  },
+                                                  model: {
+                                                    value: _vm.newForum.title,
+                                                    callback: function ($$v) {
+                                                      _vm.$set(
+                                                        _vm.newForum,
+                                                        "title",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "newForum.title",
+                                                  },
+                                                }),
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c("v-spacer"),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-col",
+                                              { attrs: { cols: "3" } },
+                                              [
+                                                _c("v-select", {
+                                                  attrs: {
+                                                    items: _vm.genres,
+                                                    "item-text": "text",
+                                                    "item-value": "value",
+                                                    label: "ジャンル",
+                                                  },
+                                                  model: {
+                                                    value: _vm.newForum.genre,
+                                                    callback: function ($$v) {
+                                                      _vm.$set(
+                                                        _vm.newForum,
+                                                        "genre",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression:
+                                                      "newForum.genre",
+                                                  },
+                                                }),
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c("v-spacer"),
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-row",
+                                          [
+                                            _c(
+                                              "v-col",
+                                              { attrs: { cols: "12" } },
+                                              [
+                                                _c("v-textarea", {
+                                                  attrs: {
+                                                    label: "内容",
+                                                    rules: [
+                                                      _vm.rules.required,
+                                                      _vm.rules.body_counter,
+                                                    ],
+                                                    "auto-grow": "",
+                                                    counter: "4000",
+                                                  },
+                                                  model: {
+                                                    value: _vm.newForum.body,
+                                                    callback: function ($$v) {
+                                                      _vm.$set(
+                                                        _vm.newForum,
+                                                        "body",
+                                                        $$v
+                                                      )
+                                                    },
+                                                    expression: "newForum.body",
+                                                  },
+                                                }),
+                                              ],
+                                              1
+                                            ),
+                                          ],
+                                          1
+                                        ),
+                                      ],
+                                      1
+                                    ),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-card-actions",
+                                  [
+                                    _c("v-spacer"),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-btn",
+                                      {
+                                        attrs: {
+                                          color: "blue darken-1",
+                                          text: "",
+                                        },
+                                        on: { click: _vm.close },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                  キャンセル\n                "
+                                        ),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-btn",
+                                      {
+                                        attrs: {
+                                          color: "blue darken-1",
+                                          text: "",
+                                        },
+                                        on: { click: _vm.save },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                  追加\n                "
+                                        ),
+                                      ]
+                                    ),
+                                  ],
+                                  1
+                                ),
+                              ],
+                              1
+                            ),
+                          ],
+                          1
+                        ),
                       ],
                       1
                     ),
@@ -395,412 +659,22 @@ var render = function () {
                 proxy: true,
               },
               {
-                key: "item.updated_at",
+                key: "item.title",
                 fn: function (ref) {
                   var item = ref.item
                   return [
                     _c(
-                      "v-row",
-                      [
-                        _c(
-                          "v-list-item",
-                          [
-                            _c(
-                              "v-list-item-content",
-                              [
-                                _c(
-                                  "v-list-item-title",
-                                  {
-                                    staticClass:
-                                      "mt-4 d-flex justify-space-between",
-                                  },
-                                  [
-                                    _c(
-                                      "div",
-                                      { staticClass: "mt-2" },
-                                      [
-                                        _c(
-                                          "div",
-                                          {
-                                            staticClass:
-                                              "font-weight-bold mb-4",
-                                          },
-                                          [
-                                            _c(
-                                              "router-link",
-                                              {
-                                                attrs: {
-                                                  to:
-                                                    "/vue/songs/" +
-                                                    item.song_id,
-                                                },
-                                              },
-                                              [
-                                                _vm._v(
-                                                  _vm._s(item.song.name) +
-                                                    " / " +
-                                                    _vm._s(
-                                                      item.song.artist.name
-                                                    )
-                                                ),
-                                              ]
-                                            ),
-                                          ],
-                                          1
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-tooltip",
-                                          {
-                                            attrs: { bottom: "" },
-                                            scopedSlots: _vm._u(
-                                              [
-                                                {
-                                                  key: "activator",
-                                                  fn: function (ref) {
-                                                    var on = ref.on
-                                                    var attrs = ref.attrs
-                                                    return [
-                                                      _c(
-                                                        "div",
-                                                        _vm._g(
-                                                          _vm._b(
-                                                            {},
-                                                            "div",
-                                                            attrs,
-                                                            false
-                                                          ),
-                                                          on
-                                                        ),
-                                                        [
-                                                          item.experience !==
-                                                          null
-                                                            ? _c("div", [
-                                                                _c(
-                                                                  "span",
-                                                                  {
-                                                                    staticStyle:
-                                                                      {
-                                                                        color:
-                                                                          "#1976D2",
-                                                                      },
-                                                                  },
-                                                                  [
-                                                                    _vm._v(
-                                                                      _vm._s(
-                                                                        item
-                                                                          .user
-                                                                          .name
-                                                                      )
-                                                                    ),
-                                                                  ]
-                                                                ),
-                                                                _vm._v(
-                                                                  ": " +
-                                                                    _vm._s(
-                                                                      item
-                                                                        .instrument
-                                                                        .name
-                                                                    ) +
-                                                                    "（経験年数" +
-                                                                    _vm._s(
-                                                                      item.experience
-                                                                    ) +
-                                                                    "年）"
-                                                                ),
-                                                              ])
-                                                            : _c("div", [
-                                                                _c(
-                                                                  "span",
-                                                                  {
-                                                                    staticStyle:
-                                                                      {
-                                                                        color:
-                                                                          "#1976D2",
-                                                                      },
-                                                                  },
-                                                                  [
-                                                                    _vm._v(
-                                                                      _vm._s(
-                                                                        item
-                                                                          .user
-                                                                          .name
-                                                                      )
-                                                                    ),
-                                                                  ]
-                                                                ),
-                                                                _vm._v(
-                                                                  ": " +
-                                                                    _vm._s(
-                                                                      item
-                                                                        .instrument
-                                                                        .name
-                                                                    )
-                                                                ),
-                                                              ]),
-                                                        ]
-                                                      ),
-                                                    ]
-                                                  },
-                                                },
-                                              ],
-                                              null,
-                                              true
-                                            ),
-                                          },
-                                          [
-                                            _vm._v(" "),
-                                            _c("div", [
-                                              item.user.age !== null
-                                                ? _c("div", [
-                                                    _vm._v(
-                                                      "年齢: " +
-                                                        _vm._s(item.user.age) +
-                                                        "代"
-                                                    ),
-                                                  ])
-                                                : _c("div", [
-                                                    _vm._v("年齢: 非公開"),
-                                                  ]),
-                                              _vm._v(" "),
-                                              item.user.occupation !== null
-                                                ? _c("div", [
-                                                    _vm._v(
-                                                      "職業: " +
-                                                        _vm._s(
-                                                          item.user.occupation
-                                                        )
-                                                    ),
-                                                  ])
-                                                : _c("div", [
-                                                    _vm._v("職業: 非公開"),
-                                                  ]),
-                                            ]),
-                                          ]
-                                        ),
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    item.user.id === _vm.user.id
-                                      ? _c(
-                                          "div",
-                                          { staticClass: "mt-2" },
-                                          [
-                                            _c(
-                                              "v-btn",
-                                              {
-                                                attrs: { outlined: "" },
-                                                on: {
-                                                  click: function ($event) {
-                                                    return _vm.openEditForm(
-                                                      item
-                                                    )
-                                                  },
-                                                },
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                    編集\n                    "
-                                                ),
-                                                _c(
-                                                  "v-icon",
-                                                  { attrs: { right: "" } },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                      mdi-pencil\n                    "
-                                                    ),
-                                                  ]
-                                                ),
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-btn",
-                                              {
-                                                staticClass: "ml-2 mr-8",
-                                                attrs: {
-                                                  outlined: "",
-                                                  color: "red",
-                                                },
-                                                on: {
-                                                  click: function ($event) {
-                                                    return _vm.openDeleteForm(
-                                                      item
-                                                    )
-                                                  },
-                                                },
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                    削除\n                    "
-                                                ),
-                                                _c(
-                                                  "v-icon",
-                                                  { attrs: { right: "" } },
-                                                  [
-                                                    _vm._v(
-                                                      "\n                      mdi-delete\n                    "
-                                                    ),
-                                                  ]
-                                                ),
-                                              ],
-                                              1
-                                            ),
-                                          ],
-                                          1
-                                        )
-                                      : _vm._e(),
-                                  ]
-                                ),
-                              ],
-                              1
-                            ),
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-col",
-                          { attrs: { cols: "4" } },
-                          [
-                            _c("DrawChart", {
-                              staticClass: "mb-12 mx-auto",
-                              attrs: { post: item },
-                            }),
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "v-col",
-                          { attrs: { cols: "8" } },
-                          [
-                            _c(
-                              "v-list",
-                              { attrs: { dense: "" } },
-                              [
-                                _c(
-                                  "v-list-item",
-                                  { staticClass: "mb-4" },
-                                  [
-                                    _c(
-                                      "v-card",
-                                      {
-                                        attrs: {
-                                          "max-width": "700",
-                                          "min-width": "700",
-                                          "min-height": "300",
-                                          outlined: "",
-                                        },
-                                      },
-                                      [
-                                        _c(
-                                          "v-card-text",
-                                          { staticClass: "text-subtitle-1" },
-                                          [
-                                            _vm._v(
-                                              "\n                    " +
-                                                _vm._s(item.body) +
-                                                "\n                  "
-                                            ),
-                                          ]
-                                        ),
-                                      ],
-                                      1
-                                    ),
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-list-item",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "show",
-                                        rawName: "v-show",
-                                        value: item.url !== null,
-                                        expression: "item.url !== null",
-                                      },
-                                    ],
-                                  },
-                                  [
-                                    _c("v-list-item-content", [
-                                      _c("div", [
-                                        _vm._v("演奏動画: "),
-                                        _c("a", { attrs: { href: item.url } }, [
-                                          _vm._v(_vm._s(item.url)),
-                                        ]),
-                                      ]),
-                                    ]),
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-list-item",
-                                  [
-                                    _c("v-list-item-content", [
-                                      _vm._v(
-                                        "\n                  " +
-                                          _vm._s(item.updated_at) +
-                                          "\n                "
-                                      ),
-                                    ]),
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-list-item",
-                                  { staticClass: "justify-end mb-4 pr-16" },
-                                  [
-                                    _c(
-                                      "v-btn",
-                                      {
-                                        attrs: { color: "primary" },
-                                        on: {
-                                          click: function ($event) {
-                                            return _vm.unfavorite(item)
-                                          },
-                                        },
-                                      },
-                                      [
-                                        _vm._v(
-                                          "\n                  いいね\n                  "
-                                        ),
-                                        _c(
-                                          "v-icon",
-                                          {
-                                            staticClass: "ml-3 mr-1",
-                                            attrs: { right: "" },
-                                          },
-                                          [
-                                            _vm._v(
-                                              "\n                    mdi-thumb-up\n                  "
-                                            ),
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c("span", [
-                                          _vm._v(_vm._s(item.users_count)),
-                                        ]),
-                                      ],
-                                      1
-                                    ),
-                                  ],
-                                  1
-                                ),
-                              ],
-                              1
-                            ),
-                          ],
-                          1
-                        ),
-                      ],
-                      1
+                      "a",
+                      {
+                        staticClass: "font-weight-bold forum-link",
+                        on: {
+                          click: function ($event) {
+                            $event.stopPropagation()
+                            return _vm.forumShowLink(item)
+                          },
+                        },
+                      },
+                      [_vm._v(_vm._s(item.title))]
                     ),
                   ]
                 },
@@ -821,18 +695,18 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/posts/MyFavorite.vue":
-/*!******************************************************!*\
-  !*** ./resources/js/components/posts/MyFavorite.vue ***!
-  \******************************************************/
+/***/ "./resources/js/components/forums/ForumIndex.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/forums/ForumIndex.vue ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _MyFavorite_vue_vue_type_template_id_3c108b8f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MyFavorite.vue?vue&type=template&id=3c108b8f& */ "./resources/js/components/posts/MyFavorite.vue?vue&type=template&id=3c108b8f&");
-/* harmony import */ var _MyFavorite_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MyFavorite.vue?vue&type=script&lang=js& */ "./resources/js/components/posts/MyFavorite.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _MyFavorite_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MyFavorite.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/posts/MyFavorite.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _ForumIndex_vue_vue_type_template_id_751bd953___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ForumIndex.vue?vue&type=template&id=751bd953& */ "./resources/js/components/forums/ForumIndex.vue?vue&type=template&id=751bd953&");
+/* harmony import */ var _ForumIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ForumIndex.vue?vue&type=script&lang=js& */ "./resources/js/components/forums/ForumIndex.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ForumIndex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ForumIndex.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/forums/ForumIndex.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -843,9 +717,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _MyFavorite_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _MyFavorite_vue_vue_type_template_id_3c108b8f___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _MyFavorite_vue_vue_type_template_id_3c108b8f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ForumIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ForumIndex_vue_vue_type_template_id_751bd953___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ForumIndex_vue_vue_type_template_id_751bd953___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -855,54 +729,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/posts/MyFavorite.vue"
+component.options.__file = "resources/js/components/forums/ForumIndex.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/posts/MyFavorite.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/components/posts/MyFavorite.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************/
+/***/ "./resources/js/components/forums/ForumIndex.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/forums/ForumIndex.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyFavorite_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./MyFavorite.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/MyFavorite.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MyFavorite_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ForumIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ForumIndex.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forums/ForumIndex.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ForumIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/posts/MyFavorite.vue?vue&type=style&index=0&lang=css&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/posts/MyFavorite.vue?vue&type=style&index=0&lang=css& ***!
-  \***************************************************************************************/
+/***/ "./resources/js/components/forums/ForumIndex.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/forums/ForumIndex.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MyFavorite_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./MyFavorite.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/MyFavorite.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MyFavorite_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MyFavorite_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MyFavorite_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MyFavorite_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ForumIndex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./ForumIndex.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forums/ForumIndex.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ForumIndex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ForumIndex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ForumIndex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ForumIndex_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ "./resources/js/components/posts/MyFavorite.vue?vue&type=template&id=3c108b8f&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/components/posts/MyFavorite.vue?vue&type=template&id=3c108b8f& ***!
-  \*************************************************************************************/
+/***/ "./resources/js/components/forums/ForumIndex.vue?vue&type=template&id=751bd953&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/forums/ForumIndex.vue?vue&type=template&id=751bd953& ***!
+  \**************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyFavorite_vue_vue_type_template_id_3c108b8f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./MyFavorite.vue?vue&type=template&id=3c108b8f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/MyFavorite.vue?vue&type=template&id=3c108b8f&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyFavorite_vue_vue_type_template_id_3c108b8f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForumIndex_vue_vue_type_template_id_751bd953___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ForumIndex.vue?vue&type=template&id=751bd953& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/forums/ForumIndex.vue?vue&type=template&id=751bd953&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForumIndex_vue_vue_type_template_id_751bd953___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MyFavorite_vue_vue_type_template_id_3c108b8f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForumIndex_vue_vue_type_template_id_751bd953___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

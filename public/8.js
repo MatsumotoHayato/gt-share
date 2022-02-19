@@ -1,45 +1,14 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[8],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/users/PasswordForm.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/users/PasswordForm.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/songs/Ranking.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/songs/Ranking.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -77,68 +46,153 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'PasswordForm',
+  name: 'Ranking',
   data: function data() {
-    var _this = this;
-
     return {
-      user: [],
-      hasError: false,
-      passwordForm: {
-        old_password: '',
-        password: '',
-        password_confirmation: ''
-      },
-      passwordShow: false,
-      passwordRules: {
-        required: function required(v) {
-          return !!v || '入力は必須です';
-        },
-        min: function min(v) {
-          return v && v.length >= 8 || '8文字以上入力してください';
-        },
-        same: function same(v) {
-          return v !== _this.passwordForm.old_password || '現在のパスワードと同じです';
-        },
-        confirm: function confirm(v) {
-          return v === _this.passwordForm.password || 'パスワードが一致しません';
-        }
-      }
+      songs: [],
+      selectedSongs: [],
+      instruments: [],
+      instrumentIndex: 0,
+      headers: [{
+        text: '',
+        value: 'rank',
+        align: 'start',
+        width: '5%',
+        sortable: false
+      }, {
+        text: '曲名',
+        value: 'name',
+        align: 'start',
+        width: '30%',
+        sortable: false
+      }, {
+        text: 'アーティスト名',
+        value: 'artist',
+        align: 'start',
+        width: '45%',
+        sortable: false
+      }, {
+        text: '簡単度',
+        value: 'average_score_easy',
+        align: 'start',
+        width: '20%',
+        sortable: true
+      }]
     };
   },
-  methods: {
-    getUser: function getUser() {
-      var _this2 = this;
-
-      axios.get('/users/get').then(function (response) {
-        _this2.user = response.data.user;
-      });
-    },
-    change: function change() {
-      var _this3 = this;
-
-      if (this.$refs.form.validate()) {
-        axios.put('/users/password', this.passwordForm).then(function (response) {
-          if (response.status == 200) {
-            _this3.$router.push('/');
-          }
-        })["catch"](function (error) {
-          _this3.hasError = true;
-        });
+  computed: {
+    selectedInstrumentId: {
+      get: function get() {
+        if (this.instruments.length) {
+          return this.instruments[this.instrumentIndex].id;
+        }
+      },
+      set: function set(value) {
+        this.instrumentIndex = this.instruments.indexOf(value);
       }
     }
   },
+  methods: {
+    getSongs: function getSongs() {
+      var _this = this;
+
+      axios.get('/ranking').then(function (response) {
+        _this.songs = response.data.songs;
+        _this.instruments = response.data.instruments;
+
+        _this.fetchSongs();
+      });
+    },
+    clickRow: function clickRow(e) {
+      this.$router.push({
+        path: "/vue/songs/".concat(e.id)
+      });
+    },
+    fetchSongs: function fetchSongs() {
+      var _this2 = this;
+
+      if (this.songs.length > 0) {
+        this.selectedSongs = this.songs.filter(function (song) {
+          return song.instrument_id === _this2.selectedInstrumentId;
+        });
+      }
+    },
+    postIndexLink: function postIndexLink(item) {
+      this.$router.push({
+        path: "/vue/songs/".concat(item.id)
+      });
+    },
+    artistShowLink: function artistShowLink(item) {
+      this.$router.push({
+        path: "/vue/artists/".concat(item.artist_id)
+      });
+    }
+  },
   created: function created() {
-    this.getUser();
+    this.getSongs();
+  },
+  watch: {
+    selectedInstrumentId: function selectedInstrumentId() {
+      this.fetchSongs();
+    }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/users/PasswordForm.vue?vue&type=template&id=96da355e&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/users/PasswordForm.vue?vue&type=template&id=96da355e& ***!
-  \*********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/songs/Ranking.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/songs/Ranking.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.song-ranking tr:hover td {\n  background: #f0f8ff;\n}\n.song-ranking th {\n  background: #f5f5f5;\n}\n.song-link,\n.artist-link {\n  text-decoration: none;\n  color: inherit !important;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/songs/Ranking.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/songs/Ranking.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Ranking.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/songs/Ranking.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/songs/Ranking.vue?vue&type=template&id=1dfb7b6c&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/songs/Ranking.vue?vue&type=template&id=1dfb7b6c& ***!
+  \****************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -151,172 +205,148 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-card",
-    {
-      staticClass: "mx-auto elevation-4",
-      attrs: { color: "grey lighten-5", "max-width": "488" },
-    },
+    "div",
     [
-      _c("v-card-title", { staticClass: "pa-8" }, [
-        _c("div", { staticClass: "text-h5 font-weight-bold" }, [
-          _vm._v("パスワード変更"),
-        ]),
-      ]),
-      _vm._v(" "),
       _c(
-        "v-alert",
-        {
-          staticClass: "mx-14 mt-n6 mb-n4",
-          attrs: { type: "error", dense: "" },
-          model: {
-            value: _vm.hasError,
-            callback: function ($$v) {
-              _vm.hasError = $$v
-            },
-            expression: "hasError",
-          },
-        },
-        [_vm._v("\n    現在のパスワードが正しくありません\n  ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "v-form",
-        { ref: "form" },
+        "v-container",
         [
+          _c("p", { staticClass: "text-h5 font-weight-bold" }, [
+            _vm._v("簡単な曲ランキング"),
+          ]),
+          _vm._v(" "),
           _c(
-            "v-card-text",
-            { staticClass: "mx-auto", staticStyle: { "max-width": "424px" } },
+            "v-row",
             [
               _c(
-                "v-row",
-                { staticClass: "my-4" },
+                "v-col",
+                { attrs: { cols: "3" } },
                 [
-                  _c("v-text-field", {
+                  _c("v-select", {
                     attrs: {
-                      rules: [
-                        _vm.passwordRules.required,
-                        _vm.passwordRules.min,
-                      ],
-                      "validate-on-blur": "",
-                      type: "password",
+                      items: _vm.instruments,
+                      "item-value": "id",
+                      "item-text": "name",
+                      "return-object": "",
+                      "prepend-icon": "mdi-guitar-acoustic",
+                      label: "楽器を選択",
                       outlined: "",
-                      autofocus: "",
-                      label: "現在のパスワード",
                     },
                     model: {
-                      value: _vm.passwordForm.old_password,
+                      value: _vm.selectedInstrumentId,
                       callback: function ($$v) {
-                        _vm.$set(_vm.passwordForm, "old_password", $$v)
+                        _vm.selectedInstrumentId = $$v
                       },
-                      expression: "passwordForm.old_password",
+                      expression: "selectedInstrumentId",
                     },
                   }),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-row",
-                { staticClass: "my-4" },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      "append-icon": _vm.passwordShow
-                        ? "mdi-eye"
-                        : "mdi-eye-off",
-                      rules: [
-                        _vm.passwordRules.required,
-                        _vm.passwordRules.min,
-                        _vm.passwordRules.same,
-                      ],
-                      "validate-on-blur": "",
-                      type: _vm.passwordShow ? "text" : "password",
-                      outlined: "",
-                      label: "新しいパスワード",
-                    },
-                    on: {
-                      "click:append": function ($event) {
-                        _vm.passwordShow = !_vm.passwordShow
-                      },
-                    },
-                    model: {
-                      value: _vm.passwordForm.password,
-                      callback: function ($$v) {
-                        _vm.$set(_vm.passwordForm, "password", $$v)
-                      },
-                      expression: "passwordForm.password",
-                    },
-                  }),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-row",
-                { staticClass: "my-4" },
-                [
-                  _c("v-text-field", {
-                    attrs: {
-                      rules: [
-                        _vm.passwordRules.required,
-                        _vm.passwordRules.confirm,
-                      ],
-                      type: "password",
-                      outlined: "",
-                      label: "新しいパスワード（確認用）",
-                    },
-                    model: {
-                      value: _vm.passwordForm.password_confirmation,
-                      callback: function ($$v) {
-                        _vm.$set(_vm.passwordForm, "password_confirmation", $$v)
-                      },
-                      expression: "passwordForm.password_confirmation",
-                    },
-                  }),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-row",
-                { staticClass: "mt-12 mb-8" },
-                [
-                  _c(
-                    "v-btn",
-                    {
-                      staticClass: "text-subtitle-1",
-                      attrs: { color: "warning", height: "56", block: "" },
-                      on: { click: _vm.change },
-                    },
-                    [_vm._v("\n          変更\n        ")]
-                  ),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("v-divider"),
-              _vm._v(" "),
-              _c(
-                "v-row",
-                { staticClass: "mt-8 mb-4", attrs: { justify: "center" } },
-                [
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: {
-                        color: "blue darken-1",
-                        text: "",
-                        to: "/vue/profile",
-                      },
-                    },
-                    [_vm._v("\n          プロフィール設定\n        ")]
-                  ),
                 ],
                 1
               ),
             ],
             1
           ),
+          _vm._v(" "),
+          _c("v-data-table", {
+            staticClass: "elevation-1 song-ranking",
+            attrs: { items: _vm.selectedSongs, headers: _vm.headers },
+            on: { "click:row": _vm.clickRow },
+            scopedSlots: _vm._u([
+              {
+                key: "top",
+                fn: function () {
+                  return [
+                    _c(
+                      "v-toolbar",
+                      {
+                        staticClass: "mb-1",
+                        attrs: { flat: "", dark: "", color: "blue darken-3" },
+                      },
+                      [
+                        _c(
+                          "v-toolbar-title",
+                          [
+                            _c("v-icon", [
+                              _vm._v("\n              mdi-crown\n            "),
+                            ]),
+                            _vm._v("\n            曲一覧\n          "),
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("v-divider", {
+                          staticClass: "mx-4",
+                          attrs: { inset: "", vertical: "" },
+                        }),
+                        _vm._v(" "),
+                        _c("v-spacer"),
+                      ],
+                      1
+                    ),
+                  ]
+                },
+                proxy: true,
+              },
+              {
+                key: "item.rank",
+                fn: function (ref) {
+                  var item = ref.item
+                  return [
+                    _c("span", { staticClass: "font-weight-bold pink--text" }, [
+                      _vm._v(
+                        _vm._s(
+                          _vm.selectedSongs.findIndex(function (song) {
+                            return song.id == item.id
+                          }) + 1
+                        )
+                      ),
+                    ]),
+                  ]
+                },
+              },
+              {
+                key: "item.name",
+                fn: function (ref) {
+                  var item = ref.item
+                  return [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "font-weight-bold song-link",
+                        on: {
+                          click: function ($event) {
+                            $event.stopPropagation()
+                            return _vm.postIndexLink(item)
+                          },
+                        },
+                      },
+                      [_vm._v(_vm._s(item.name))]
+                    ),
+                  ]
+                },
+              },
+              {
+                key: "item.artist",
+                fn: function (ref) {
+                  var item = ref.item
+                  return [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "artist-link",
+                        on: {
+                          click: function ($event) {
+                            $event.stopPropagation()
+                            return _vm.artistShowLink(item)
+                          },
+                        },
+                      },
+                      [_vm._v(_vm._s(item.artist.name))]
+                    ),
+                  ]
+                },
+              },
+            ]),
+          }),
         ],
         1
       ),
@@ -331,18 +361,20 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/users/PasswordForm.vue":
-/*!********************************************************!*\
-  !*** ./resources/js/components/users/PasswordForm.vue ***!
-  \********************************************************/
+/***/ "./resources/js/components/songs/Ranking.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/songs/Ranking.vue ***!
+  \***************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PasswordForm_vue_vue_type_template_id_96da355e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PasswordForm.vue?vue&type=template&id=96da355e& */ "./resources/js/components/users/PasswordForm.vue?vue&type=template&id=96da355e&");
-/* harmony import */ var _PasswordForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PasswordForm.vue?vue&type=script&lang=js& */ "./resources/js/components/users/PasswordForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Ranking_vue_vue_type_template_id_1dfb7b6c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Ranking.vue?vue&type=template&id=1dfb7b6c& */ "./resources/js/components/songs/Ranking.vue?vue&type=template&id=1dfb7b6c&");
+/* harmony import */ var _Ranking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Ranking.vue?vue&type=script&lang=js& */ "./resources/js/components/songs/Ranking.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Ranking.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/songs/Ranking.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -350,10 +382,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PasswordForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PasswordForm_vue_vue_type_template_id_96da355e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PasswordForm_vue_vue_type_template_id_96da355e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Ranking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Ranking_vue_vue_type_template_id_1dfb7b6c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Ranking_vue_vue_type_template_id_1dfb7b6c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -363,38 +395,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/users/PasswordForm.vue"
+component.options.__file = "resources/js/components/songs/Ranking.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/users/PasswordForm.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/users/PasswordForm.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************/
+/***/ "./resources/js/components/songs/Ranking.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/songs/Ranking.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PasswordForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/users/PasswordForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Ranking.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/songs/Ranking.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/users/PasswordForm.vue?vue&type=template&id=96da355e&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/users/PasswordForm.vue?vue&type=template&id=96da355e& ***!
-  \***************************************************************************************/
+/***/ "./resources/js/components/songs/Ranking.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/songs/Ranking.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Ranking.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/songs/Ranking.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./resources/js/components/songs/Ranking.vue?vue&type=template&id=1dfb7b6c&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/songs/Ranking.vue?vue&type=template&id=1dfb7b6c& ***!
+  \**********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordForm_vue_vue_type_template_id_96da355e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PasswordForm.vue?vue&type=template&id=96da355e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/users/PasswordForm.vue?vue&type=template&id=96da355e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordForm_vue_vue_type_template_id_96da355e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_template_id_1dfb7b6c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Ranking.vue?vue&type=template&id=1dfb7b6c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/songs/Ranking.vue?vue&type=template&id=1dfb7b6c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_template_id_1dfb7b6c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordForm_vue_vue_type_template_id_96da355e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Ranking_vue_vue_type_template_id_1dfb7b6c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

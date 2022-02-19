@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Forum;
+use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
@@ -31,5 +32,31 @@ class ForumController extends Controller
         $input += ['user_id' => Auth::id(),];
         
         $forum->fill($input)->save();
+    }
+    
+    public function show(Forum $forum)
+    {
+        return [
+            'forum' => $forum,
+            'owner' => $forum->user,
+            'comments' => Comment::with('user')->where('forum_id', $forum->id)->get()
+        ];
+    }
+    
+    // 新規スレッド追加時の保存処理
+    public function comment(Request $request, Forum $forum, Comment $comment)
+    {
+        $request->validate([
+            'body' => 'required|string|max:4000',
+        ]);
+        $input = [
+            'body' => $request['body'],
+        ];
+        $input += [
+            'user_id' => Auth::id(),
+            'forum_id' => $forum->id
+        ];
+        
+        $comment->fill($input)->save();
     }
 }
