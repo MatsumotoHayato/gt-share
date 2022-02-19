@@ -373,7 +373,8 @@ var render = function () {
               items: _vm.selectedForums,
               headers: _vm.headers,
               search: _vm.search,
-              "sort-by": "name",
+              "sort-by": "updated_at",
+              "sort-desc": "",
             },
             on: { "click:row": _vm.clickRow },
             scopedSlots: _vm._u([
