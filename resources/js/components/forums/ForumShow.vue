@@ -4,12 +4,22 @@
       <v-snackbar v-model="snackbar" :timeout="timeout" color="deep-purple accent-4" centered min-width=0 width=169>
         ログインが必要です
       </v-snackbar>
-      <p class="text-h5 font-weight-bold">
-        <v-chip class="ma-2" large>
-          {{ forum.genre }}
-        </v-chip>
-        {{ forum.title }}
-      </p>
+      <DeleteForm :deleteDialog=deleteDialog @delete="deleteForum" @close="closeDelete" />
+      <v-row class="align-center">
+        <p class="text-h5 font-weight-bold">
+          <v-chip class="ma-2" large>
+            {{ forum.genre }}
+          </v-chip>
+          {{ forum.title }}
+        </p>
+        <v-spacer />
+        <v-btn v-if="owner.id === currentUser.id" outlined color="red" @click="openDeleteForm()">
+          削除
+          <v-icon right>
+            mdi-delete
+          </v-icon>
+        </v-btn>
+      </v-row>
       <div class="mr-auto" style="border: 1px solid #E0E0E0; padding:32px 48px">
         <v-card
           class="mr-auto"
@@ -45,6 +55,7 @@
             {{ comment.body }}
           </v-card-text>
         </v-card>
+        
         <v-form ref="form" @submit.prevent>
           <v-textarea
             class="mt-16 ml-auto"
@@ -58,12 +69,16 @@
           ></v-textarea>
           <v-row>
             <v-spacer />
-            <v-btn class="mt-2" color="primary" @click="save">
+            <v-btn class="mr-4" color="primary" rounded @click="save">
               送信
+              <v-icon class="ml-3" right>
+                mdi-send
+              </v-icon>
             </v-btn>
           </v-row>
         </v-form>
       </div>
+      
       <v-breadcrumbs :items="breadCrumbs">
         <template v-slot:divider>
           <v-icon>mdi-chevron-right</v-icon>
@@ -74,15 +89,24 @@
 </template>
 
 <script>
+  import DeleteForm from '../posts/DeleteForm'
   export default {
     name: 'ForumShow',
+    components: {
+      DeleteForm,
+    },
     data() {
       return {
+        currentUser: {
+          id: -1,
+          name: 'ゲスト'
+        },
         forum: [],
         owner: [],
         comments: [],
         snackbar: false,
         timeout: 4000,
+        deleteDialog: false,
         search: '',
         newComment: {
           body: ''
@@ -92,8 +116,8 @@
           counter: value => (value || '').length <= 4000 || '4000文字以内で入力してください',
         },
         breadCrumbs: [
-          { text: 'ホーム', disabled: false, to: '/' },
-          { text: '掲示板', disabled: false, to: '/vue/forums' },
+          { text: 'ホーム', disabled: false, to: '/', exact: true },
+          { text: '掲示板', disabled: false, to: '/vue/forums', exact: true },
         ]
       }
     },
@@ -106,6 +130,9 @@
       getForum() {
         axios.get(`/forums/${this.forumId}`)
           .then((response) => {
+            if (response.data.user) {
+              this.currentUser = response.data.user
+            }
             this.forum = response.data.forum
             this.owner = response.data.owner
             this.comments = response.data.comments
@@ -135,6 +162,22 @@
               }
             })
         }
+      },
+      closeDelete() {
+        this.deleteDialog = false
+      },
+      openDeleteForm() {
+        this.deleteDialog = true
+      },
+      deleteForum() {
+        axios.delete(`/forums/${this.forumId}`, this.forum)
+          .then((response) => {
+            if (response.status == 200) {
+              this.$router.push({
+                path: '/vue/forums'
+              })
+            }
+          })
       },
     },
     created() {

@@ -141,7 +141,9 @@
               }
             })
             .catch((error) => {
-              this.snackbar = true
+              if (error.response.status == 401){
+                this.snackbar = true
+              }
             })
         }
       },

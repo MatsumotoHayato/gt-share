@@ -123,7 +123,9 @@ __webpack_require__.r(__webpack_exports__);
             _this3.$router.push('/');
           }
         })["catch"](function (error) {
-          _this3.hasError = true;
+          if (error.response.status == 422) {
+            _this3.hasError = true;
+          }
         });
       }
     }

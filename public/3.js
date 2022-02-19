@@ -493,7 +493,9 @@ __webpack_require__.r(__webpack_exports__);
           _this4.getPosts();
         }
       })["catch"](function (error) {
-        _this4.snackbar = true;
+        if (error.response.status == 401) {
+          _this4.snackbar = true;
+        }
       });
     },
     editPost: function editPost(post) {
@@ -534,7 +536,9 @@ __webpack_require__.r(__webpack_exports__);
           _this7.getPosts();
         }
       })["catch"](function (error) {
-        _this7.snackbar = true;
+        if (error.response.status == 401) {
+          _this7.snackbar = true;
+        }
       });
     },
     unfavorite: function unfavorite(post) {

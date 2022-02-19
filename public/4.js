@@ -169,7 +169,9 @@ __webpack_require__.r(__webpack_exports__);
             _this4.getSongs();
           }
         })["catch"](function (error) {
-          _this4.snackbar = true;
+          if (error.response.status == 401) {
+            _this4.snackbar = true;
+          }
         });
       }
     },
