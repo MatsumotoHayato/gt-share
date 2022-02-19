@@ -210,7 +210,9 @@ __webpack_require__.r(__webpack_exports__);
             _this3.getForums();
           }
         })["catch"](function (error) {
-          _this3.snackbar = true;
+          if (error.response.status == 401) {
+            _this3.snackbar = true;
+          }
         });
       }
     },

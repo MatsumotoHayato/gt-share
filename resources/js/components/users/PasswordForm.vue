@@ -103,7 +103,9 @@
               }
             })
             .catch((error) => {
-              this.hasError = true
+              if (error.response.status == 422){
+                this.hasError = true
+              }
             })
         }
       }

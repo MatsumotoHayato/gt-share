@@ -250,7 +250,9 @@
             }
           })
           .catch((error) => {
-            this.snackbar = true
+            if (error.response.status == 401){
+              this.snackbar = true
+            }
           })
       },
       editPost(post) {
@@ -287,7 +289,9 @@
             }
           })
           .catch((error) => {
-            this.snackbar = true
+            if (error.response.status == 401){
+              this.snackbar = true
+            }
           })
       },
       unfavorite(post) {

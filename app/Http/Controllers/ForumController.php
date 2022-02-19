@@ -34,13 +34,21 @@ class ForumController extends Controller
         $forum->fill($input)->save();
     }
     
+    // スレッド詳細を表示するためのデータ処理
     public function show(Forum $forum)
     {
         return [
+            'user' => Auth::user(),
             'forum' => $forum,
             'owner' => $forum->user,
             'comments' => Comment::with('user')->where('forum_id', $forum->id)->get()
         ];
+    }
+    
+    // スレッド削除
+    public function delete(Forum $forum)
+    {
+        $forum->delete();
     }
     
     // 新規スレッド追加時の保存処理

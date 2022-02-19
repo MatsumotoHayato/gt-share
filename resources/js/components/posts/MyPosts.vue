@@ -139,7 +139,9 @@
             this.user = response.data.user
           })
           .catch((error) => {
-            this.snackbar = true
+            if (error.response.status == 401){
+              this.snackbar = true
+            }
           })
       },
       closeEdit() {

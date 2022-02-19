@@ -24,6 +24,7 @@ Route::put('/users/password', 'UserController@changePassword')->middleware('auth
 
 Route::get('/forums', 'ForumController@index'); // 掲示板スレッド一覧表示
 Route::post('/forums', 'ForumController@store')->middleware('auth'); // 新規スレッド追加
+Route::delete('/forums/{forum}', 'ForumController@delete')->middleware('auth'); // スレッド削除
 Route::get('/forums/{forum}', 'ForumController@show'); // スレッド詳細表示
 Route::post('/forums/{forum}', 'ForumController@comment')->middleware('auth'); // 新規コメント追加
 
