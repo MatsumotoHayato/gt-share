@@ -11,7 +11,7 @@ class Forum extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'user_id', 'title', 'genre', 'body'
+        'user_id', 'title', 'category', 'body'
     ];
     
     // Userに対するリレーション
