@@ -100,6 +100,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ForumShow',
@@ -122,6 +127,7 @@ __webpack_require__.r(__webpack_exports__);
       newComment: {
         body: ''
       },
+      deleteConfirmedComment: null,
       rules: {
         required: function required(value) {
           return !!value || '入力は必須です';
@@ -187,6 +193,42 @@ __webpack_require__.r(__webpack_exports__);
             _this3.snackbar = true;
           }
         });
+
+      }
+    },
+    closeDelete: function closeDelete() {
+      this.deleteDialog = false;
+      this.deleteConfirmedComment = null;
+    },
+    openDeleteForum: function openDeleteForum() {
+      this.deleteDialog = true;
+    },
+    openDeleteComment: function openDeleteComment(comment) {
+      this.deleteDialog = true;
+      this.deleteConfirmedComment = comment;
+    },
+    deletePost: function deletePost() {
+      var _this4 = this;
+
+      // スレッドの削除
+      if (this.deleteConfirmedComment === null) {
+        axios["delete"]("/forums/".concat(this.forumId), this.forum).then(function (response) {
+          if (response.status == 200) {
+            _this4.$router.push({
+              path: '/vue/forums'
+            });
+          }
+        });
+      } else {
+        // コメントの削除
+        axios["delete"]("/comments/".concat(this.deleteConfirmedComment.id), this.deleteConfirmedComment).then(function (response) {
+          if (response.status == 200) {
+            _this4.closeDelete();
+
+            _this4.getForum();
+          }
+        });
+
       }
     },
     closeDelete: function closeDelete() {
@@ -383,7 +425,7 @@ var render = function () {
           _vm._v(" "),
           _c("DeleteForm", {
             attrs: { deleteDialog: _vm.deleteDialog },
-            on: { delete: _vm.deleteForum, close: _vm.closeDelete },
+            on: { delete: _vm.deletePost, close: _vm.closeDelete },
           }),
           _vm._v(" "),
           _c(
@@ -413,7 +455,7 @@ var render = function () {
                       attrs: { outlined: "", color: "red" },
                       on: {
                         click: function ($event) {
-                          return _vm.openDeleteForm()
+                          return _vm.openDeleteForum()
                         },
                       },
                     },
@@ -500,6 +542,24 @@ var render = function () {
                         _c("span", { staticClass: "font-weight-bold" }, [
                           _vm._v(_vm._s(comment.user.name)),
                         ]),
+                        _vm._v(" "),
+                        _c("v-spacer"),
+                        _vm._v(" "),
+                        comment.user_id === _vm.currentUser.id
+                          ? _c(
+                              "v-btn",
+                              {
+                                attrs: { icon: "" },
+                                on: {
+                                  click: function ($event) {
+                                    return _vm.openDeleteComment(comment)
+                                  },
+                                },
+                              },
+                              [_c("v-icon", [_vm._v("mdi-close")])],
+                              1
+                            )
+                          : _vm._e(),
                       ],
                       1
                     ),

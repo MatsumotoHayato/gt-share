@@ -136,7 +136,9 @@ __webpack_require__.r(__webpack_exports__);
         filterable: false
       }, {
         text: '投稿日時',
-        value: 'updated_at',
+
+        value: 'created_at',
+
         align: 'start',
         width: '20%',
         filterable: false
@@ -373,7 +375,9 @@ var render = function () {
               items: _vm.selectedForums,
               headers: _vm.headers,
               search: _vm.search,
-              "sort-by": "updated_at",
+
+              "sort-by": "created_at",
+
               "sort-desc": "",
             },
             on: { "click:row": _vm.clickRow },
@@ -612,8 +616,7 @@ var render = function () {
                                 _c(
                                   "v-card-actions",
                                   [
-                                    _c("v-spacer"),
-                                    _vm._v(" "),
+
                                     _c(
                                       "v-btn",
                                       {
@@ -630,6 +633,10 @@ var render = function () {
                                       ]
                                     ),
                                     _vm._v(" "),
+
+                                    _c("v-spacer"),
+                                    _vm._v(" "),
+
                                     _c(
                                       "v-btn",
                                       {

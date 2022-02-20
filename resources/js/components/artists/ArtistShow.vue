@@ -46,10 +46,10 @@
                   </v-card-text>
                 </v-form>
                 <v-card-actions>
-                  <v-spacer></v-spacer>
                   <v-btn color="blue darken-1" text @click="close">
                     キャンセル
                   </v-btn>
+                  <v-spacer></v-spacer>
                   <v-btn color="blue darken-1" text @click="save">
                     追加
                   </v-btn>

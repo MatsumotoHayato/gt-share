@@ -20,7 +20,9 @@
           ></v-select>
         </v-col>
       </v-row>
-      <v-data-table class="elevation-1 forum-index" :items="selectedForums" :headers="headers" @click:row="clickRow" :search="search" sort-by="updated_at" sort-desc>
+
+      <v-data-table class="elevation-1 forum-index" :items="selectedForums" :headers="headers" @click:row="clickRow" :search="search" sort-by="created_at" sort-desc>
+
         <template v-slot:top>
           <v-toolbar flat dark color="blue darken-3" class="mb-1">
             <v-toolbar-title>
@@ -78,10 +80,10 @@
                   </v-card-text>
                 </v-form>
                 <v-card-actions>
-                  <v-spacer></v-spacer>
                   <v-btn color="blue darken-1" text @click="close">
                     キャンセル
                   </v-btn>
+                  <v-spacer></v-spacer>
                   <v-btn color="blue darken-1" text @click="save">
                     追加
                   </v-btn>
@@ -109,7 +111,7 @@
           { text: 'タイトル', value: 'title', align: 'start', width: '50%', sortable: false },
           { text: 'ジャンル', value: 'genre', align: 'start', width: '15%', filterable: false, sortable: false },
           { text: 'コメント数', value: 'comments_count', align: 'start', width: '15%', filterable: false },
-          { text: '投稿日時', value: 'updated_at', align: 'start', width: '20%', filterable: false },
+          { text: '投稿日時', value: 'created_at', align: 'start', width: '20%', filterable: false },
         ],
         genres: [
           { text: '質問', value: '質問'},
