@@ -1169,8 +1169,6 @@ var render = function () {
           _c(
             "v-card-actions",
             [
-              _c("v-spacer"),
-              _vm._v(" "),
               _c(
                 "v-btn",
                 {
@@ -1179,6 +1177,8 @@ var render = function () {
                 },
                 [_vm._v("\n        キャンセル\n      ")]
               ),
+              _vm._v(" "),
+              _c("v-spacer"),
               _vm._v(" "),
               _c(
                 "v-btn",

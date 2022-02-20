@@ -4,7 +4,7 @@
       <v-snackbar v-model="snackbar" :timeout="timeout" color="deep-purple accent-4" centered min-width=0 width=169>
         ログインが必要です
       </v-snackbar>
-      <DeleteForm :deleteDialog=deleteDialog @delete="deleteForum" @close="closeDelete" />
+      <DeleteForm :deleteDialog=deleteDialog @delete="deletePost" @close="closeDelete" />
       <v-row class="align-center">
         <p class="text-h5 font-weight-bold">
           <v-chip class="ma-2" large>
@@ -13,7 +13,7 @@
           {{ forum.title }}
         </p>
         <v-spacer />
-        <v-btn v-if="owner.id === currentUser.id" outlined color="red" @click="openDeleteForm()">
+        <v-btn v-if="owner.id === currentUser.id" outlined color="red" @click="openDeleteForum()">
           削除
           <v-icon right>
             mdi-delete
@@ -50,6 +50,10 @@
               mdi-account-circle
             </v-icon>
             <span class="font-weight-bold">{{ comment.user.name }}</span>
+            <v-spacer></v-spacer>
+            <v-btn v-if="comment.user_id === currentUser.id" icon @click="openDeleteComment(comment)">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
           </v-card-title>
           <v-card-text class="text-subtitle-1 black--text">
             {{ comment.body }}
@@ -111,6 +115,7 @@
         newComment: {
           body: ''
         },
+        deleteConfirmedComment: null,
         rules: {
           required: value => !!value || '入力は必須です',
           counter: value => (value || '').length <= 4000 || '4000文字以内で入力してください',
@@ -165,19 +170,35 @@
       },
       closeDelete() {
         this.deleteDialog = false
+        this.deleteConfirmedComment = null
       },
-      openDeleteForm() {
+      openDeleteForum() {
         this.deleteDialog = true
       },
-      deleteForum() {
-        axios.delete(`/forums/${this.forumId}`, this.forum)
-          .then((response) => {
-            if (response.status == 200) {
-              this.$router.push({
-                path: '/vue/forums'
-              })
-            }
-          })
+      openDeleteComment(comment) {
+        this.deleteDialog = true
+        this.deleteConfirmedComment = comment
+      },
+      deletePost() {
+        // スレッドの削除
+        if (this.deleteConfirmedComment === null) {
+          axios.delete(`/forums/${this.forumId}`, this.forum)
+            .then((response) => {
+              if (response.status == 200) {
+                this.$router.push({
+                  path: '/vue/forums'
+                })
+              }
+            })
+        } else {  // コメントの削除
+          axios.delete(`/comments/${this.deleteConfirmedComment.id}`, this.deleteConfirmedComment)
+            .then((response) => {
+              if (response.status == 200) {
+                this.closeDelete()
+                this.getForum()
+              }
+            })
+        }
       },
     },
     created() {

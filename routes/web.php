@@ -26,7 +26,8 @@ Route::get('/forums', 'ForumController@index'); // 掲示板スレッド一覧�
 Route::post('/forums', 'ForumController@store')->middleware('auth'); // 新規スレッド追加
 Route::delete('/forums/{forum}', 'ForumController@delete')->middleware('auth'); // スレッド削除
 Route::get('/forums/{forum}', 'ForumController@show'); // スレッド詳細表示
-Route::post('/forums/{forum}', 'ForumController@comment')->middleware('auth'); // 新規コメント追加
+Route::post('/forums/{forum}', 'CommentController@store')->middleware('auth'); // 新規コメント追加
+Route::delete('/comments/{comment}', 'CommentController@delete')->middleware('auth'); // コメント削除
 
 Route::get('/login/google', 'Auth\LoginController@redirectToGoogle');  // Google認証ページへリダイレクト
 Route::get('/login/google/callback', 'Auth\LoginController@handleGoogleCallback');  // Googleログインの認証処理

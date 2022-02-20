@@ -50,21 +50,4 @@ class ForumController extends Controller
     {
         $forum->delete();
     }
-    
-    // 新規スレッド追加時の保存処理
-    public function comment(Request $request, Forum $forum, Comment $comment)
-    {
-        $request->validate([
-            'body' => 'required|string|max:4000',
-        ]);
-        $input = [
-            'body' => $request['body'],
-        ];
-        $input += [
-            'user_id' => Auth::id(),
-            'forum_id' => $forum->id
-        ];
-        
-        $comment->fill($input)->save();
-    }
 }
