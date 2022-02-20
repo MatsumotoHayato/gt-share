@@ -146,8 +146,15 @@ https://gtshare.herokuapp.com
     <img src="./public/img/MyPosts.png" title="自分の投稿一覧" width="80%">
 </p>
 
+### 掲示板機能
+- 曲に関する質問やサイトへの要望などを投稿できます。
+- チャット感覚で気軽にコメントを送信できます。
+
+<p align="center">
+    <img src="./public/img/ForumShow.png" title="掲示板スレッド詳細" width="80%">
+</p>
+
 ### 今後追加したい機能
-- 掲示板機能（現在開発中）
 - スマホ画面へのレスポンシブ対応
 - Vuexを用いたログイン状態の管理
 
@@ -219,7 +226,7 @@ https://gtshare.herokuapp.com
 |  created_at  |  timestamp  |  データ作成時間  |
 |  updated_at |  timestamp  |  データ更新時間  |
 
-### postsテーブル
+### postsテーブル（レビューデータを格納）
 |  カラム名  |  データ型  |  詳細  |
 | ---- | ---- | ---- |
 |  id  |  bigint(20) unsigned  |  ID  |
@@ -242,5 +249,26 @@ https://gtshare.herokuapp.com
 | ---- | ---- | ---- |
 |  user_id  |  bigint(20) unsigned  |  usersテーブルとの連携用ID  |
 |  post_id  |  bigint(20) unsigned  |  postsテーブルとの連携用ID  |
+|  created_at  |  timestamp  |  データ作成時間  |
+|  updated_at |  timestamp  |  データ更新時間  |
+
+### forumsテーブル（掲示板のスレッドデータを格納）
+|  カラム名  |  データ型  |  詳細  |
+| ---- | ---- | ---- |
+|  id  |  bigint(20) unsigned  |  ID  |
+|  user_id  |  bigint(20) unsigned  |  usersテーブルとの連携用ID  |
+|  title  |  varchar(255)  |  タイトル  |
+|  category  |  varchar(255)  |  カテゴリ  |
+|  body  |  text  |  内容  |
+|  created_at  |  timestamp  |  データ作成時間  |
+|  updated_at |  timestamp  |  データ更新時間  |
+
+### commentsテーブル（掲示板のコメントデータを格納）
+|  カラム名  |  データ型  |  詳細  |
+| ---- | ---- | ---- |
+|  id  |  bigint(20) unsigned  |  ID  |
+|  user_id  |  bigint(20) unsigned  |  usersテーブルとの連携用ID  |
+|  forum_id  |  bigint(20) unsigned  |  forumsテーブルとの連携用ID  |
+|  body  |  text  |  コメント内容  |
 |  created_at  |  timestamp  |  データ作成時間  |
 |  updated_at |  timestamp  |  データ更新時間  |

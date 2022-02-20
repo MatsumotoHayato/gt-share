@@ -17,7 +17,7 @@ class CreateForumsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('title');
-            $table->string('genre');
+            $table->string('category');
             $table->text('body');
             $table->timestamps();
             $table->softDeletes();

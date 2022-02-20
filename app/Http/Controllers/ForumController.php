@@ -21,12 +21,12 @@ class ForumController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:50',
-            'genre' => 'required|string',
+            'category' => 'required|string',
             'body' => 'required|string|max:4000',
         ]);
         $input = [
             'title' => $request['title'],
-            'genre' => $request['genre'],
+            'category' => $request['category'],
             'body' => $request['body'],
         ];
         $input += ['user_id' => Auth::id(),];

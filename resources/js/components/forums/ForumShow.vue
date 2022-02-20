@@ -8,7 +8,7 @@
       <v-row class="align-center">
         <p class="text-h5 font-weight-bold">
           <v-chip class="ma-2" large>
-            {{ forum.genre }}
+            {{ forum.category }}
           </v-chip>
           {{ forum.title }}
         </p>

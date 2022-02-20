@@ -8,11 +8,11 @@
       <v-row>
         <v-col cols="5">
           <v-select
-            v-model="selectedGenres"
-            :items="genres"
+            v-model="selectedCategories"
+            :items="categories"
             item-text="text"
             item-value="value"
-            label="表示するジャンル"
+            label="表示するカテゴリ"
             chips
             deletable-chips
             outlined
@@ -57,11 +57,11 @@
                       <v-spacer />
                       <v-col cols="3">
                         <v-select
-                          v-model="newForum.genre"
-                          :items="genres"
+                          v-model="newForum.category"
+                          :items="categories"
                           item-text="text"
                           item-value="value"
-                          label="ジャンル"
+                          label="カテゴリ"
                         ></v-select>
                       </v-col>
                       <v-spacer />
@@ -109,16 +109,16 @@
         selectedForums: [],
         headers: [
           { text: 'タイトル', value: 'title', align: 'start', width: '50%', sortable: false },
-          { text: 'ジャンル', value: 'genre', align: 'start', width: '15%', filterable: false, sortable: false },
+          { text: 'カテゴリ', value: 'category', align: 'start', width: '15%', filterable: false, sortable: false },
           { text: 'コメント数', value: 'comments_count', align: 'start', width: '15%', filterable: false },
           { text: '投稿日時', value: 'created_at', align: 'start', width: '20%', filterable: false },
         ],
-        genres: [
+        categories: [
           { text: '質問', value: '質問'},
           { text: 'リクエスト', value: 'リクエスト'},
           { text: 'サイトへの要望', value: 'サイトへの要望'},
         ],
-        selectedGenres: [
+        selectedCategories: [
           '質問', 'リクエスト', 'サイトへの要望'
         ],
         dialog: false,
@@ -127,7 +127,7 @@
         search: '',
         newForum: {
           title: '',
-          genre: '質問',
+          category: '質問',
           body: '',
         },
         rules: {
@@ -146,13 +146,13 @@
           })
       },
       fetchForums() {
-        this.selectedForums = this.forums.filter((forum) => this.selectedGenres.includes(forum.genre))
+        this.selectedForums = this.forums.filter((forum) => this.selectedCategories.includes(forum.category))
       },
       close() {
         this.$refs.form.resetValidation()
         this.newForum = {
           title: '',
-          genre: '質問',
+          category: '質問',
           body: '',
         }
         this.dialog = false
@@ -185,7 +185,7 @@
       },
     },
     watch: {
-      selectedGenres() {
+      selectedCategories() {
         this.fetchForums()
       }
     },

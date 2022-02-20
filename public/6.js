@@ -109,6 +109,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ForumIndex',
   data: function data() {
@@ -122,8 +124,8 @@ __webpack_require__.r(__webpack_exports__);
         width: '50%',
         sortable: false
       }, {
-        text: 'ジャンル',
-        value: 'genre',
+        text: 'カテゴリ',
+        value: 'category',
         align: 'start',
         width: '15%',
         filterable: false,
@@ -136,14 +138,12 @@ __webpack_require__.r(__webpack_exports__);
         filterable: false
       }, {
         text: '投稿日時',
-
         value: 'created_at',
-
         align: 'start',
         width: '20%',
         filterable: false
       }],
-      genres: [{
+      categories: [{
         text: '質問',
         value: '質問'
       }, {
@@ -153,14 +153,14 @@ __webpack_require__.r(__webpack_exports__);
         text: 'サイトへの要望',
         value: 'サイトへの要望'
       }],
-      selectedGenres: ['質問', 'リクエスト', 'サイトへの要望'],
+      selectedCategories: ['質問', 'リクエスト', 'サイトへの要望'],
       dialog: false,
       snackbar: false,
       timeout: 4000,
       search: '',
       newForum: {
         title: '',
-        genre: '質問',
+        category: '質問',
         body: ''
       },
       rules: {
@@ -189,14 +189,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.selectedForums = this.forums.filter(function (forum) {
-        return _this2.selectedGenres.includes(forum.genre);
+        return _this2.selectedCategories.includes(forum.category);
       });
     },
     close: function close() {
       this.$refs.form.resetValidation();
       this.newForum = {
         title: '',
-        genre: '質問',
+        category: '質問',
         body: ''
       };
       this.dialog = false;
@@ -230,7 +230,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   watch: {
-    selectedGenres: function selectedGenres() {
+    selectedCategories: function selectedCategories() {
       this.fetchForums();
     }
   },
@@ -345,21 +345,21 @@ var render = function () {
                 [
                   _c("v-select", {
                     attrs: {
-                      items: _vm.genres,
+                      items: _vm.categories,
                       "item-text": "text",
                       "item-value": "value",
-                      label: "表示するジャンル",
+                      label: "表示するカテゴリ",
                       chips: "",
                       "deletable-chips": "",
                       outlined: "",
                       multiple: "",
                     },
                     model: {
-                      value: _vm.selectedGenres,
+                      value: _vm.selectedCategories,
                       callback: function ($$v) {
-                        _vm.selectedGenres = $$v
+                        _vm.selectedCategories = $$v
                       },
-                      expression: "selectedGenres",
+                      expression: "selectedCategories",
                     },
                   }),
                 ],
@@ -375,9 +375,7 @@ var render = function () {
               items: _vm.selectedForums,
               headers: _vm.headers,
               search: _vm.search,
-
               "sort-by": "created_at",
-
               "sort-desc": "",
             },
             on: { "click:row": _vm.clickRow },
@@ -544,22 +542,23 @@ var render = function () {
                                               [
                                                 _c("v-select", {
                                                   attrs: {
-                                                    items: _vm.genres,
+                                                    items: _vm.categories,
                                                     "item-text": "text",
                                                     "item-value": "value",
-                                                    label: "ジャンル",
+                                                    label: "カテゴリ",
                                                   },
                                                   model: {
-                                                    value: _vm.newForum.genre,
+                                                    value:
+                                                      _vm.newForum.category,
                                                     callback: function ($$v) {
                                                       _vm.$set(
                                                         _vm.newForum,
-                                                        "genre",
+                                                        "category",
                                                         $$v
                                                       )
                                                     },
                                                     expression:
-                                                      "newForum.genre",
+                                                      "newForum.category",
                                                   },
                                                 }),
                                               ],
@@ -616,7 +615,6 @@ var render = function () {
                                 _c(
                                   "v-card-actions",
                                   [
-
                                     _c(
                                       "v-btn",
                                       {
@@ -633,10 +631,8 @@ var render = function () {
                                       ]
                                     ),
                                     _vm._v(" "),
-
                                     _c("v-spacer"),
                                     _vm._v(" "),
-
                                     _c(
                                       "v-btn",
                                       {

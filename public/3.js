@@ -105,7 +105,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ForumShow',
   components: {
@@ -193,7 +192,6 @@ __webpack_require__.r(__webpack_exports__);
             _this3.snackbar = true;
           }
         });
-
       }
     },
     closeDelete: function closeDelete() {
@@ -228,25 +226,7 @@ __webpack_require__.r(__webpack_exports__);
             _this4.getForum();
           }
         });
-
       }
-    },
-    closeDelete: function closeDelete() {
-      this.deleteDialog = false;
-    },
-    openDeleteForm: function openDeleteForm() {
-      this.deleteDialog = true;
-    },
-    deleteForum: function deleteForum() {
-      var _this4 = this;
-
-      axios["delete"]("/forums/".concat(this.forumId), this.forum).then(function (response) {
-        if (response.status == 200) {
-          _this4.$router.push({
-            path: '/vue/forums'
-          });
-        }
-      });
     }
   },
   created: function created() {
@@ -438,7 +418,7 @@ var render = function () {
                 [
                   _c("v-chip", { staticClass: "ma-2", attrs: { large: "" } }, [
                     _vm._v(
-                      "\n          " + _vm._s(_vm.forum.genre) + "\n        "
+                      "\n          " + _vm._s(_vm.forum.category) + "\n        "
                     ),
                   ]),
                   _vm._v("\n        " + _vm._s(_vm.forum.title) + "\n      "),
