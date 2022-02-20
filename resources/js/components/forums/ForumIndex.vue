@@ -20,7 +20,9 @@
           ></v-select>
         </v-col>
       </v-row>
+
       <v-data-table class="elevation-1 forum-index" :items="selectedForums" :headers="headers" @click:row="clickRow" :search="search" sort-by="created_at" sort-desc>
+
         <template v-slot:top>
           <v-toolbar flat dark color="blue darken-3" class="mb-1">
             <v-toolbar-title>
