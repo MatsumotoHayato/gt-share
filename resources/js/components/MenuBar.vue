@@ -1,11 +1,16 @@
 <template>
   <header>
+    <LoginForm :loginDialog="loginDialog" @login="logined" @registerLink="registerFromLogin" @close="loginDialog = false" />
+    <RegisterForm :registerDialog="registerDialog" @register="registered" @loginLink="loginFromRegister" @close="registerDialog = false" />
     <v-app-bar app class="elevation-0" color="indigo darken-4" dark>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title class="text-h5 font-weight-bold">
+      <v-toolbar-title
+        class="font-weight-bold"
+        :class="{'text-h5': $vuetify.breakpoint.smAndUp, 'text-subtitle-1': $vuetify.breakpoint.xsAndDown}"
+      >
         <router-link to="/" class="home-link">GT-share</router-link>
       </v-toolbar-title>
-      <v-menu offset-y>
+      <v-menu v-if="!$vuetify.breakpoint.xs" offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-icon class="ml-8" small v-bind="attrs" v-on="on">mdi-information-outline</v-icon>
         </template>
@@ -21,56 +26,69 @@
         </v-card>
       </v-menu>
       <v-spacer></v-spacer>
-      <div v-if="user !== null" class="pa-2 mr-16">
-        <v-menu offset-y>
-          <template v-slot:activator="{ on, attrs }">
-            <v-chip
-              v-bind="attrs"
-              v-on="on"
-              class="pa-5 text-subtitle-1"
-              color="white"
-              outlined
-              label
-            >
-              <v-row style="min-width: 160px;" justify="space-between">
-                <div>
-                  <v-icon class="mt-n1">mdi-account</v-icon>
-                  <span>{{ user.name }}</span>
-                </div>
-                <v-icon>mdi-menu-down</v-icon>
-              </v-row>
-            </v-chip>
-          </template>
-          <v-list>
-            <v-list-item-group>
-            <v-list-item to="/vue/profile">
-              <v-list-item-content>
-                <v-list-item-title class="py-1">プロフィール設定</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item to="/vue/password">
-              <v-list-item-content>
-                <v-list-item-title class="py-1">パスワード変更</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item @click="logout">
-              <v-list-item-content>
-                <v-list-item-title class="py-1">ログアウト</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            </v-list-item-group>
-          </v-list>
-        </v-menu>
-      </div>
-      <div v-else>
-        <v-btn class="mr-4" outlined @click="loginDialog = true">
-          ログイン
-        </v-btn>
-        <LoginForm :loginDialog="loginDialog" @login="logined" @registerLink="registerFromLogin" @close="loginDialog = false" />
-        <v-btn class="font-weight-bold indigo--text text--darken-4 mr-8" light @click="registerDialog = true">
-          新規登録
-        </v-btn>
-        <RegisterForm :registerDialog="registerDialog" @register="registered" @loginLink="loginFromRegister" @close="registerDialog = false" />
+      <div class="d-flex justify-end">
+        <div
+          v-if="user !== null"
+          class="pa-2"
+          :class="{'mr-16': $vuetify.breakpoint.mdAndUp, 'mr-2': $vuetify.breakpoint.smAndDown}"
+        >
+          <v-menu offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-chip
+                v-bind="attrs"
+                v-on="on"
+                class="pa-5 text-subtitle-1"
+                color="white"
+                outlined
+                label
+              >
+                <v-row style="min-width: 160px;" justify="space-between">
+                  <div>
+                    <v-icon class="mt-n1">mdi-account</v-icon>
+                    <span>{{ user.name }}</span>
+                  </div>
+                  <v-icon>mdi-menu-down</v-icon>
+                </v-row>
+              </v-chip>
+            </template>
+            <v-list>
+              <v-list-item-group>
+              <v-list-item to="/vue/profile">
+                <v-list-item-content>
+                  <v-list-item-title class="py-1">プロフィール設定</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item to="/vue/password">
+                <v-list-item-content>
+                  <v-list-item-title class="py-1">パスワード変更</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              <v-list-item @click="logout">
+                <v-list-item-content>
+                  <v-list-item-title class="py-1">ログアウト</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </v-menu>
+        </div>
+        <div v-else>
+          <v-btn
+            :class="{'mr-4': $vuetify.breakpoint.mdAndUp, 'mr-1': $vuetify.breakpoint.smAndDown}"
+            outlined
+            @click="loginDialog = true"
+            v-bind="size"
+          >ログイン
+          </v-btn>
+          <v-btn
+            class="font-weight-bold indigo--text text--darken-4"
+            :class="{'mr-8': $vuetify.breakpoint.mdAndUp, 'mr-2': $vuetify.breakpoint.smAndDown}"
+            light
+            @click="registerDialog = true"
+            v-bind="size"
+            >新規登録
+          </v-btn>
+        </div>
       </div>
       <v-snackbar v-model="loginSnackbar" :timeout="timeout" color="success" min-width=0 width=154>
         ログインしました
@@ -82,7 +100,10 @@
     <v-navigation-drawer v-model="drawer" fixed temporary>
       <v-toolbar class="elevation-0">
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title class="text-h5 font-weight-bold">GT-share</v-toolbar-title>
+        <v-toolbar-title
+          class="font-weight-bold"
+          :class="{'text-h5': $vuetify.breakpoint.smAndUp, 'text-subtitle-1': $vuetify.breakpoint.xsAndDown}"
+        >GT-share</v-toolbar-title>
       </v-toolbar>
       <v-list nav>
         <v-list-item v-for="menu in menus" :key="menu.title" :to="menu.path">
@@ -123,6 +144,12 @@
         loginSnackbar: false,
         logoutSnackbar: false,
         timeout: 3000,
+      }
+    },
+    computed: {
+      size() {  // 画面幅960px以下なら'small'を返す
+        const size = {xs:'small', sm:'small'}[this.$vuetify.breakpoint.name];
+        return size ? { [size]: true } : {}
       }
     },
     methods: {
