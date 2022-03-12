@@ -10,7 +10,7 @@
       >
         <router-link to="/" class="home-link">GT-share</router-link>
       </v-toolbar-title>
-      <v-menu v-if="!$vuetify.breakpoint.xs" offset-y>
+      <v-menu v-if="$vuetify.breakpoint.smAndUp" offset-y>
         <template v-slot:activator="{ on, attrs }">
           <v-icon class="ml-8" small v-bind="attrs" v-on="on">mdi-information-outline</v-icon>
         </template>
