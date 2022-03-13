@@ -90,10 +90,10 @@
           </v-btn>
         </div>
       </div>
-      <v-snackbar v-model="loginSnackbar" :timeout="timeout" color="success" min-width=0 width=154>
+      <v-snackbar v-if="$vuetify.breakpoint.mdAndUp" v-model="loginSnackbar" :timeout="timeout" color="success" min-width=0 width=154>
         ログインしました
       </v-snackbar>
-      <v-snackbar v-model="logoutSnackbar" :timeout="timeout" color="success" min-width=0 width=169>
+      <v-snackbar v-if="$vuetify.breakpoint.mdAndUp" v-model="logoutSnackbar" :timeout="timeout" color="success" min-width=0 width=169>
         ログアウトしました
       </v-snackbar>
     </v-app-bar>

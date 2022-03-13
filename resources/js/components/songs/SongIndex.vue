@@ -4,24 +4,67 @@
       <v-snackbar v-model="snackbar" :timeout="timeout" color="deep-purple accent-4" centered min-width=0 width=169>
         ログインが必要です
       </v-snackbar>
-      <v-data-table class="elevation-1 song-index" :items="songs" :headers="headers" @click:row="clickRow" :search="search" sort-by="name">
+      <v-data-table
+        class="elevation-1 song-index"
+        :items="songs"
+        :headers="headers"
+        @click:row="clickRow"
+        :search="search"
+        sort-by="name"
+        :page.sync="page"
+        :items-per-page="itemsPerPage"
+        hide-default-footer
+        @page-count="pageCount = $event"
+        mobile-breakpoint=0
+      >
         <template v-slot:top>
           <v-toolbar flat dark color="blue darken-3" class="mb-1">
-            <v-toolbar-title>
+            <v-toolbar-title :class="{'text-subtitle-1': $vuetify.breakpoint.smAndDown}">
               <v-icon>
                 mdi-music
               </v-icon>
               曲一覧
             </v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
-            <v-text-field v-model="search" clearable flat solo-inverted hide-details prepend-inner-icon="mdi-magnify" label="曲名を検索">
-            </v-text-field>
+            <v-text-field
+              v-if="$vuetify.breakpoint.smAndUp"
+              v-model="search"
+              clearable
+              flat
+              solo-inverted
+              hide-details
+              prepend-inner-icon="mdi-magnify"
+              label="曲名を検索"
+            ></v-text-field>
+            <v-menu v-else offset-y>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  icon
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon>mdi-magnify</v-icon>
+                </v-btn>
+              </template>
+              <v-text-field
+                v-model="search"
+                solo
+                clearable
+                hide-details
+                autofocus
+              ></v-text-field>
+            </v-menu>
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px" @click:outside="close" @keydown.esc="close">
               <template v-slot:activator="{ on, attrs }">
-                <v-btn class="ma-2" outlined v-bind="attrs" v-on="on">
+                <v-btn v-if="$vuetify.breakpoint.mdAndUp" class="ma-2" outlined v-bind="attrs" v-on="on">
                   新規曲
                   <v-icon right>
+                    mdi-pencil-plus
+                  </v-icon>
+                </v-btn>
+                <v-btn v-else icon v-bind="attrs" v-on="on">
+                  <v-icon>
                     mdi-pencil-plus
                   </v-icon>
                 </v-btn>
@@ -76,6 +119,12 @@
           <a class="artist-link" @click.stop="artistShowLink(item)">{{ item.artist.name }}</a>
         </template>
       </v-data-table>
+      <v-pagination
+        class="text-center pt-2"
+        v-model="page"
+        :length="pageCount"
+        :total-visible="7"
+      ></v-pagination>
     </v-container>
   </div>
 </template>
@@ -87,15 +136,13 @@
       return {
         artists: [],
         songs: [],
-        headers: [
-          { text: '曲名', value: 'name', align: 'start', width: '30%' },
-          { text: 'アーティスト名', value: 'artist.name', align: 'start', width: '50%', filterable: false },
-          { text: 'レビュー数', value: 'posts_count', align: 'start', width: '20%', filterable: false },
-        ],
         dialog: false,
         snackbar: false,
         timeout: 4000,
         search: '',
+        page: 1,
+        pageCount: 0,
+        itemsPerPage: 10,
         newSong: {
           name: '',
           artist_id: ''
@@ -110,6 +157,23 @@
             }
           }) || '既に登録済みです',
         },
+      }
+    },
+    computed: {
+      headers() {
+        // 画面サイズによって表示項目を変更
+        if (this.$vuetify.breakpoint.mdAndUp) {
+          return [
+            { text: '曲名', value: 'name', align: 'start', width: '30%' },
+            { text: 'アーティスト名', value: 'artist.name', align: 'start', width: '50%', filterable: false },
+            { text: 'レビュー数', value: 'posts_count', align: 'start', width: '20%', filterable: false },
+          ]
+        } else {
+          return [
+            { text: '曲名', value: 'name', align: 'start', width: '50%' },
+            { text: 'アーティスト名', value: 'artist.name', align: 'end', width: '50%', filterable: false },
+          ]
+        }
       }
     },
     methods: {
