@@ -346,6 +346,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SongIndex',
   data: function data() {
@@ -354,28 +403,13 @@ __webpack_require__.r(__webpack_exports__);
     return {
       artists: [],
       songs: [],
-      headers: [{
-        text: '曲名',
-        value: 'name',
-        align: 'start',
-        width: '30%'
-      }, {
-        text: 'アーティスト名',
-        value: 'artist.name',
-        align: 'start',
-        width: '50%',
-        filterable: false
-      }, {
-        text: 'レビュー数',
-        value: 'posts_count',
-        align: 'start',
-        width: '20%',
-        filterable: false
-      }],
       dialog: false,
       snackbar: false,
       timeout: 4000,
       search: '',
+      page: 1,
+      pageCount: 0,
+      itemsPerPage: 10,
       newSong: {
         name: '',
         artist_id: ''
@@ -399,6 +433,44 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     };
+  },
+  computed: {
+    headers: function headers() {
+      // 画面サイズによって表示項目を変更
+      if (this.$vuetify.breakpoint.mdAndUp) {
+        return [{
+          text: '曲名',
+          value: 'name',
+          align: 'start',
+          width: '30%'
+        }, {
+          text: 'アーティスト名',
+          value: 'artist.name',
+          align: 'start',
+          width: '50%',
+          filterable: false
+        }, {
+          text: 'レビュー数',
+          value: 'posts_count',
+          align: 'start',
+          width: '20%',
+          filterable: false
+        }];
+      } else {
+        return [{
+          text: '曲名',
+          value: 'name',
+          align: 'start',
+          width: '50%'
+        }, {
+          text: 'アーティスト名',
+          value: 'artist.name',
+          align: 'end',
+          width: '50%',
+          filterable: false
+        }];
+      }
+    }
   },
   methods: {
     getSongs: function getSongs() {
@@ -1043,8 +1115,20 @@ var render = function () {
               headers: _vm.headers,
               search: _vm.search,
               "sort-by": "name",
+              page: _vm.page,
+              "items-per-page": _vm.itemsPerPage,
+              "hide-default-footer": "",
+              "mobile-breakpoint": "0",
             },
-            on: { "click:row": _vm.clickRow },
+            on: {
+              "click:row": _vm.clickRow,
+              "update:page": function ($event) {
+                _vm.page = $event
+              },
+              "page-count": function ($event) {
+                _vm.pageCount = $event
+              },
+            },
             scopedSlots: _vm._u([
               {
                 key: "top",
@@ -1059,6 +1143,12 @@ var render = function () {
                       [
                         _c(
                           "v-toolbar-title",
+                          {
+                            class: {
+                              "text-subtitle-1":
+                                _vm.$vuetify.breakpoint.smAndDown,
+                            },
+                          },
                           [
                             _c("v-icon", [
                               _vm._v("\n              mdi-music\n            "),
@@ -1073,23 +1163,78 @@ var render = function () {
                           attrs: { inset: "", vertical: "" },
                         }),
                         _vm._v(" "),
-                        _c("v-text-field", {
-                          attrs: {
-                            clearable: "",
-                            flat: "",
-                            "solo-inverted": "",
-                            "hide-details": "",
-                            "prepend-inner-icon": "mdi-magnify",
-                            label: "曲名を検索",
-                          },
-                          model: {
-                            value: _vm.search,
-                            callback: function ($$v) {
-                              _vm.search = $$v
-                            },
-                            expression: "search",
-                          },
-                        }),
+                        _vm.$vuetify.breakpoint.smAndUp
+                          ? _c("v-text-field", {
+                              attrs: {
+                                clearable: "",
+                                flat: "",
+                                "solo-inverted": "",
+                                "hide-details": "",
+                                "prepend-inner-icon": "mdi-magnify",
+                                label: "曲名を検索",
+                              },
+                              model: {
+                                value: _vm.search,
+                                callback: function ($$v) {
+                                  _vm.search = $$v
+                                },
+                                expression: "search",
+                              },
+                            })
+                          : _c(
+                              "v-menu",
+                              {
+                                attrs: { "offset-y": "" },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "activator",
+                                    fn: function (ref) {
+                                      var on = ref.on
+                                      var attrs = ref.attrs
+                                      return [
+                                        _c(
+                                          "v-btn",
+                                          _vm._g(
+                                            _vm._b(
+                                              { attrs: { icon: "" } },
+                                              "v-btn",
+                                              attrs,
+                                              false
+                                            ),
+                                            on
+                                          ),
+                                          [
+                                            _c("v-icon", [
+                                              _vm._v("mdi-magnify"),
+                                            ]),
+                                          ],
+                                          1
+                                        ),
+                                      ]
+                                    },
+                                  },
+                                ]),
+                              },
+                              [
+                                _vm._v(" "),
+                                _c("v-text-field", {
+                                  attrs: {
+                                    solo: "",
+                                    clearable: "",
+                                    "hide-details": "",
+                                    autofocus: "",
+                                  },
+                                  model: {
+                                    value: _vm.search,
+                                    callback: function ($$v) {
+                                      _vm.search = $$v
+                                    },
+                                    expression: "search",
+                                  },
+                                }),
+                              ],
+                              1
+                            ),
                         _vm._v(" "),
                         _c("v-spacer"),
                         _vm._v(" "),
@@ -1122,32 +1267,57 @@ var render = function () {
                                   var on = ref.on
                                   var attrs = ref.attrs
                                   return [
-                                    _c(
-                                      "v-btn",
-                                      _vm._g(
-                                        _vm._b(
-                                          {
-                                            staticClass: "ma-2",
-                                            attrs: { outlined: "" },
-                                          },
+                                    _vm.$vuetify.breakpoint.mdAndUp
+                                      ? _c(
                                           "v-btn",
-                                          attrs,
-                                          false
-                                        ),
-                                        on
-                                      ),
-                                      [
-                                        _vm._v(
-                                          "\n                新規曲\n                "
-                                        ),
-                                        _c("v-icon", { attrs: { right: "" } }, [
-                                          _vm._v(
-                                            "\n                  mdi-pencil-plus\n                "
+                                          _vm._g(
+                                            _vm._b(
+                                              {
+                                                staticClass: "ma-2",
+                                                attrs: { outlined: "" },
+                                              },
+                                              "v-btn",
+                                              attrs,
+                                              false
+                                            ),
+                                            on
                                           ),
-                                        ]),
-                                      ],
-                                      1
-                                    ),
+                                          [
+                                            _vm._v(
+                                              "\n                新規曲\n                "
+                                            ),
+                                            _c(
+                                              "v-icon",
+                                              { attrs: { right: "" } },
+                                              [
+                                                _vm._v(
+                                                  "\n                  mdi-pencil-plus\n                "
+                                                ),
+                                              ]
+                                            ),
+                                          ],
+                                          1
+                                        )
+                                      : _c(
+                                          "v-btn",
+                                          _vm._g(
+                                            _vm._b(
+                                              { attrs: { icon: "" } },
+                                              "v-btn",
+                                              attrs,
+                                              false
+                                            ),
+                                            on
+                                          ),
+                                          [
+                                            _c("v-icon", [
+                                              _vm._v(
+                                                "\n                  mdi-pencil-plus\n                "
+                                              ),
+                                            ]),
+                                          ],
+                                          1
+                                        ),
                                   ]
                                 },
                               },
@@ -1358,6 +1528,18 @@ var render = function () {
                 },
               },
             ]),
+          }),
+          _vm._v(" "),
+          _c("v-pagination", {
+            staticClass: "text-center pt-2",
+            attrs: { length: _vm.pageCount, "total-visible": 7 },
+            model: {
+              value: _vm.page,
+              callback: function ($$v) {
+                _vm.page = $$v
+              },
+              expression: "page",
+            },
           }),
         ],
         1
