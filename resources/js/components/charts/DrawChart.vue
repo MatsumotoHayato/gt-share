@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 360px;">
+  <div style="max-width: 360px;">
     <radar-chart :chart-data="datacollection" :options="options"></radar-chart>
   </div>
 </template>
