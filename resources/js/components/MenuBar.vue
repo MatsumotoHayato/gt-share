@@ -148,7 +148,7 @@
     },
     computed: {
       size() {  // 画面幅960px以下なら'small'を返す
-        const size = {xs:'small', sm:'small'}[this.$vuetify.breakpoint.name];
+        const size = {xs:'small', sm:'small'}[this.$vuetify.breakpoint.name]
         return size ? { [size]: true } : {}
       }
     },

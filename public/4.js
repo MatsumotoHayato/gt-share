@@ -365,6 +365,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -410,6 +434,9 @@ __webpack_require__.r(__webpack_exports__);
       deleteDialog: false,
       snackbar: false,
       timeout: 4000,
+      page: 1,
+      pageCount: 0,
+      itemsPerPage: 5,
       breadCrumbs: [{
         text: 'ホーム',
         disabled: false,
@@ -431,6 +458,33 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(value) {
         this.instrumentIndex = this.instruments.indexOf(value);
       }
+    },
+    dense: function dense() {
+      // 画面幅960px以下なら'dense'を返す
+      return this.$vuetify.breakpoint.smAndDown ? {
+        'dense': true
+      } : {};
+    },
+    responsiveMinWidth: function responsiveMinWidth() {
+      return {
+        xs: 275,
+        sm: 510,
+        md: 522,
+        lg: 712,
+        xl: 950
+      }[this.$vuetify.breakpoint.name];
+    },
+    responsiveMaxWidth: function responsiveMaxWidth() {
+      return {
+        xs: 510,
+        sm: 868,
+        md: 712,
+        lg: 712,
+        xl: 950
+      }[this.$vuetify.breakpoint.name];
+    },
+    responsiveMinHeight: function responsiveMinHeight() {
+      return this.$vuetify.breakpoint.mdAndUp ? 300 : 10;
     }
   },
   methods: {
@@ -472,6 +526,7 @@ __webpack_require__.r(__webpack_exports__);
         this.selectedPosts = this.posts.filter(function (post) {
           return post.instrument_id === _this3.selectedInstrumentId;
         });
+        this.page = 1;
       }
     },
     closeCreate: function closeCreate() {
@@ -576,7 +631,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.post-index tr:hover td {\n  background: #FFFFFF;\n}\n", ""]);
+exports.push([module.i, "\n.post-index tr:hover td {\n  background: #FFFFFF;\n}\n.small-select {\n  max-width: 90px;\n}\n", ""]);
 
 // exports
 
@@ -1054,35 +1109,51 @@ var render = function () {
             [_vm._v("\n      ログインが必要です\n    ")]
           ),
           _vm._v(" "),
-          _c("p", { staticClass: "text-h5 font-weight-bold" }, [
-            _vm._v(_vm._s(_vm.song.name) + " / " + _vm._s(_vm.artist.name)),
-          ]),
+          _c(
+            "p",
+            {
+              staticClass: "font-weight-bold",
+              class: {
+                "text-h5": _vm.$vuetify.breakpoint.mdAndUp,
+                "text-subtitle-1": _vm.$vuetify.breakpoint.smAndDown,
+              },
+            },
+            [_vm._v(_vm._s(_vm.song.name) + " / " + _vm._s(_vm.artist.name))]
+          ),
           _vm._v(" "),
           _c(
             "v-row",
             [
               _c(
                 "v-col",
-                { attrs: { cols: "3" } },
+                { attrs: { cols: "8", sm: "6", md: "4", lg: "3", xl: "3" } },
                 [
-                  _c("v-select", {
-                    attrs: {
-                      items: _vm.instruments,
-                      "item-value": "id",
-                      "item-text": "name",
-                      "return-object": "",
-                      "prepend-icon": "mdi-guitar-acoustic",
-                      label: "楽器を選択",
-                      outlined: "",
-                    },
-                    model: {
-                      value: _vm.selectedInstrumentId,
-                      callback: function ($$v) {
-                        _vm.selectedInstrumentId = $$v
+                  _c(
+                    "v-select",
+                    _vm._b(
+                      {
+                        attrs: {
+                          items: _vm.instruments,
+                          "item-value": "id",
+                          "item-text": "name",
+                          "return-object": "",
+                          "prepend-icon": "mdi-guitar-acoustic",
+                          label: "楽器を選択",
+                          outlined: "",
+                        },
+                        model: {
+                          value: _vm.selectedInstrumentId,
+                          callback: function ($$v) {
+                            _vm.selectedInstrumentId = $$v
+                          },
+                          expression: "selectedInstrumentId",
+                        },
                       },
-                      expression: "selectedInstrumentId",
-                    },
-                  }),
+                      "v-select",
+                      _vm.dense,
+                      false
+                    )
+                  ),
                 ],
                 1
               ),
@@ -1098,6 +1169,18 @@ var render = function () {
               "sort-desc": "",
               headers: _vm.headers,
               "hide-default-header": "",
+              page: _vm.page,
+              "items-per-page": _vm.itemsPerPage,
+              "hide-default-footer": "",
+              "mobile-breakpoint": "0",
+            },
+            on: {
+              "update:page": function ($event) {
+                _vm.page = $event
+              },
+              "page-count": function ($event) {
+                _vm.pageCount = $event
+              },
             },
             scopedSlots: _vm._u([
               {
@@ -1113,6 +1196,12 @@ var render = function () {
                       [
                         _c(
                           "v-toolbar-title",
+                          {
+                            class: {
+                              "text-subtitle-1":
+                                _vm.$vuetify.breakpoint.smAndDown,
+                            },
+                          },
                           [
                             _c("v-icon", [
                               _vm._v(
@@ -1129,47 +1218,80 @@ var render = function () {
                           attrs: { inset: "", vertical: "" },
                         }),
                         _vm._v(" "),
-                        _c("v-select", {
-                          attrs: {
-                            items: _vm.sortList,
-                            "item-value": "value",
-                            "item-text": "text",
-                            flat: "",
-                            "solo-inverted": "",
-                            "hide-details": "",
-                          },
-                          model: {
-                            value: _vm.sortBy,
-                            callback: function ($$v) {
-                              _vm.sortBy = $$v
+                        _c(
+                          "v-select",
+                          _vm._b(
+                            {
+                              class: {
+                                "small-select": _vm.$vuetify.breakpoint.xs,
+                              },
+                              attrs: {
+                                items: _vm.sortList,
+                                "item-value": "value",
+                                "item-text": "text",
+                                flat: "",
+                                "solo-inverted": "",
+                                "hide-details": "",
+                              },
+                              model: {
+                                value: _vm.sortBy,
+                                callback: function ($$v) {
+                                  _vm.sortBy = $$v
+                                },
+                                expression: "sortBy",
+                              },
                             },
-                            expression: "sortBy",
-                          },
-                        }),
+                            "v-select",
+                            _vm.dense,
+                            false
+                          )
+                        ),
                         _vm._v(" "),
                         _c("v-spacer"),
                         _vm._v(" "),
-                        _c(
-                          "v-btn",
-                          {
-                            staticClass: "ma-2",
-                            attrs: { outlined: "" },
-                            on: {
-                              click: function ($event) {
-                                _vm.createDialog = true
+                        _vm.$vuetify.breakpoint.mdAndUp
+                          ? _c(
+                              "v-btn",
+                              {
+                                staticClass: "ma-2",
+                                attrs: { outlined: "" },
+                                on: {
+                                  click: function ($event) {
+                                    _vm.createDialog = true
+                                  },
+                                },
                               },
-                            },
-                          },
-                          [
-                            _vm._v("\n            新規レビュー\n            "),
-                            _c("v-icon", { attrs: { right: "" } }, [
-                              _vm._v(
-                                "\n              mdi-pencil-plus\n            "
-                              ),
-                            ]),
-                          ],
-                          1
-                        ),
+                              [
+                                _vm._v(
+                                  "\n            新規レビュー\n            "
+                                ),
+                                _c("v-icon", { attrs: { right: "" } }, [
+                                  _vm._v(
+                                    "\n              mdi-pencil-plus\n            "
+                                  ),
+                                ]),
+                              ],
+                              1
+                            )
+                          : _c(
+                              "v-btn",
+                              {
+                                attrs: { icon: "" },
+                                on: {
+                                  click: function ($event) {
+                                    _vm.createDialog = true
+                                  },
+                                },
+                              },
+                              [
+                                _c("v-icon", [
+                                  _vm._v(
+                                    "\n              mdi-pencil-plus\n            "
+                                  ),
+                                ]),
+                              ],
+                              1
+                            ),
                       ],
                       1
                     ),
@@ -1409,10 +1531,21 @@ var render = function () {
                         _vm._v(" "),
                         _c(
                           "v-col",
-                          { attrs: { cols: "4" } },
+                          {
+                            attrs: {
+                              cols: "11",
+                              sm: "11",
+                              md: "4",
+                              lg: "4",
+                              xl: "4",
+                            },
+                          },
                           [
                             _c("DrawChart", {
-                              staticClass: "mb-12 mx-auto",
+                              staticClass: "mx-auto",
+                              class: {
+                                "mb-12": _vm.$vuetify.breakpoint.mdAndUp,
+                              },
                               attrs: { post: item },
                             }),
                           ],
@@ -1421,7 +1554,15 @@ var render = function () {
                         _vm._v(" "),
                         _c(
                           "v-col",
-                          { attrs: { cols: "8" } },
+                          {
+                            attrs: {
+                              cols: "12",
+                              sm: "12",
+                              md: "8",
+                              lg: "8",
+                              xl: "8",
+                            },
+                          },
                           [
                             _c(
                               "v-list",
@@ -1435,16 +1576,21 @@ var render = function () {
                                       "v-card",
                                       {
                                         attrs: {
-                                          "max-width": "700",
-                                          "min-width": "700",
-                                          "min-height": "300",
+                                          "min-height": _vm.responsiveMinHeight,
+                                          "min-width": _vm.responsiveMinWidth,
+                                          "max-width": _vm.responsiveMaxWidth,
                                           outlined: "",
                                         },
                                       },
                                       [
                                         _c(
                                           "v-card-text",
-                                          { staticClass: "text-subtitle-1" },
+                                          {
+                                            class: {
+                                              "text-subtitle-1":
+                                                _vm.$vuetify.breakpoint.mdAndUp,
+                                            },
+                                          },
                                           [
                                             _vm._v(
                                               "\n                    " +
@@ -1501,7 +1647,12 @@ var render = function () {
                                 _vm._v(" "),
                                 _c(
                                   "v-list-item",
-                                  { staticClass: "justify-end mb-4 pr-16" },
+                                  {
+                                    staticClass: "justify-end mb-4",
+                                    class: {
+                                      "pr-16": _vm.$vuetify.breakpoint.mdAndUp,
+                                    },
+                                  },
                                   [
                                     item.favorite_check
                                       ? _c(
@@ -1589,6 +1740,18 @@ var render = function () {
                 },
               },
             ]),
+          }),
+          _vm._v(" "),
+          _c("v-pagination", {
+            staticClass: "text-center pt-2",
+            attrs: { length: _vm.pageCount, "total-visible": 7 },
+            model: {
+              value: _vm.page,
+              callback: function ($$v) {
+                _vm.page = $$v
+              },
+              expression: "page",
+            },
           }),
           _vm._v(" "),
           _c("v-breadcrumbs", {
