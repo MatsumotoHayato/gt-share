@@ -158,11 +158,10 @@ https://gtshare.herokuapp.com
 - スマホ端末でも利用可能です。
 
 <p align="center">
-    <img src="./public/img/Responsive.png" title="レスポンシブデザイン" width="20%">
+    <img src="./public/img/Responsive.png" title="レスポンシブデザイン" width="30%">
 </p>
 
 ### 今後追加したい機能
-- スマホ画面へのレスポンシブ対応（現在開発中です）
 - Vuexを用いたログイン状態の管理
 
 ## 開発環境
