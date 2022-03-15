@@ -724,7 +724,7 @@ var render = function () {
                           attrs: { inset: "", vertical: "" },
                         }),
                         _vm._v(" "),
-                        _vm.$vuetify.breakpoint.smAndUp
+                        _vm.$vuetify.breakpoint.mdAndUp
                           ? _c("v-text-field", {
                               attrs: {
                                 clearable: "",
@@ -1163,7 +1163,7 @@ var render = function () {
                           attrs: { inset: "", vertical: "" },
                         }),
                         _vm._v(" "),
-                        _vm.$vuetify.breakpoint.smAndUp
+                        _vm.$vuetify.breakpoint.mdAndUp
                           ? _c("v-text-field", {
                               attrs: {
                                 clearable: "",

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto elevation-4" color="grey lighten-5" max-width="488">
+  <v-card class="mx-auto elevation-4" color="grey lighten-5" :max-width="responsiveMaxWidth">
     <v-card-title class="pa-8">
       <div class="text-h5 font-weight-bold">パスワード変更</div>
     </v-card-title>
@@ -12,7 +12,7 @@
       現在のパスワードが正しくありません
     </v-alert>
     <v-form ref="form">
-      <v-card-text style="max-width:424px" class="mx-auto">
+      <v-card-text class="mx-auto" :class="{'width-sm-up': $vuetify.breakpoint.smAndUp, 'width-xs': $vuetify.breakpoint.xs}">
         <v-row class="my-4">
           <v-text-field
             v-model="passwordForm.old_password"
@@ -87,6 +87,11 @@
         
       }
     },
+    computed: {
+      responsiveMaxWidth() {
+        return this.$vuetify.breakpoint.smAndUp ? 488 : 366
+      },
+    },
     methods: {
       getUser() {
         axios.get('/users/get')
@@ -115,3 +120,12 @@
     }
   }
 </script>
+
+<style scoped>
+  .width-xs {
+    max-width: 300px;
+  }
+  .width-sm-up {
+    max-width: 424px;
+  }
+</style>

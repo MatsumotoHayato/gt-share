@@ -6,25 +6,28 @@
       </v-snackbar>
       <DeleteForm :deleteDialog=deleteDialog @delete="deletePost" @close="closeDelete" />
       <v-row class="align-center">
-        <p class="text-h5 font-weight-bold">
-          <v-chip class="ma-2" large>
+        <p class="font-weight-bold" :class="{'text-h5': $vuetify.breakpoint.mdAndUp, 'text-subtitle-1': $vuetify.breakpoint.smAndDown}">
+          <v-chip class="ma-2" v-bind="largeChip">
             {{ forum.category }}
           </v-chip>
           {{ forum.title }}
         </p>
         <v-spacer />
-        <v-btn v-if="owner.id === currentUser.id" outlined color="red" @click="openDeleteForum()">
+        <v-btn v-if="owner.id === currentUser.id && $vuetify.breakpoint.mdAndUp" class="mr-3" outlined color="red" @click="openDeleteForum()">
           削除
           <v-icon right>
             mdi-delete
           </v-icon>
+        </v-btn>
+        <v-btn v-if="owner.id === currentUser.id && $vuetify.breakpoint.smAndDown" class="mr-3" icon color="red" @click="openDeleteForum()">
+          <v-icon>mdi-delete</v-icon>
         </v-btn>
       </v-row>
       <div class="mr-auto" style="border: 1px solid #E0E0E0; padding:32px 48px">
         <v-card
           class="mr-auto"
           color="green accent-1"
-          max-width="900"
+          :max-width="responsiveMaxWidth"
         >
           <v-card-title>
             <v-icon left large>
@@ -40,10 +43,9 @@
         <v-card
           v-for="comment in comments"
           :key="comment.id"
-          class="mt-8"
-          :class="[comment.user_id === owner.id ? 'questioner' : 'answerer']"
+          :class="[comment.user_id === owner.id ? 'questioner' : 'answerer', {'mt-8': $vuetify.breakpoint.mdAndUp, 'mt-4': $vuetify.breakpoint.smAndDown}]"
           color="green accent-1"
-          max-width="900"
+          :max-width="responsiveMaxWidth"
         >
           <v-card-title>
             <v-icon left large>
@@ -62,8 +64,8 @@
         
         <v-form ref="form" @submit.prevent>
           <v-textarea
-            class="mt-16 ml-auto"
-            style="max-width: 900px;"
+            class="ml-auto"
+            :class="['textarea-' + $vuetify.breakpoint.name, {'mt-16': $vuetify.breakpoint.mdAndUp, 'mt-8': $vuetify.breakpoint.smAndDown}]"
             background-color="grey lighten-5"
             v-model="newComment.body"
             label="新しくコメントを入力"
@@ -129,7 +131,13 @@
     computed: {
       forumId() {
         return this.$route.params.forumId
-      }
+      },
+      largeChip() {  // 画面幅960px以下なら'dense'を返す
+        return this.$vuetify.breakpoint.mdAndUp ? { 'large': true } : {}
+      },
+      responsiveMaxWidth() {
+        return {xs:250, sm:480, md:720, lg:900, xl:1000}[this.$vuetify.breakpoint.name]
+      },
     },
     methods: {
       getForum() {
@@ -214,5 +222,20 @@
   }
   .answerer {
     margin-left: auto;
+  }
+  .textarea-xs {
+    max-width: 250px;
+  }
+  .textarea-sm {
+    max-width: 480px;
+  }
+  .textarea-md {
+    max-width: 720px;
+  }
+  .textarea-lg {
+    max-width: 900px;
+  }
+  .textarea-xl {
+    max-width: 1000px;
   }
 </style>

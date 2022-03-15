@@ -104,6 +104,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ForumShow',
@@ -151,6 +153,21 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     forumId: function forumId() {
       return this.$route.params.forumId;
+    },
+    largeChip: function largeChip() {
+      // 画面幅960px以下なら'dense'を返す
+      return this.$vuetify.breakpoint.mdAndUp ? {
+        'large': true
+      } : {};
+    },
+    responsiveMaxWidth: function responsiveMaxWidth() {
+      return {
+        xs: 250,
+        sm: 480,
+        md: 720,
+        lg: 900,
+        xl: 1000
+      }[this.$vuetify.breakpoint.name];
     }
   },
   methods: {
@@ -324,7 +341,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.questioner[data-v-f491e1e8] {\n  margin-right: auto;\n}\n.answerer[data-v-f491e1e8] {\n  margin-left: auto;\n}\n", ""]);
+exports.push([module.i, "\n.questioner[data-v-f491e1e8] {\n  margin-right: auto;\n}\n.answerer[data-v-f491e1e8] {\n  margin-left: auto;\n}\n.textarea-xs[data-v-f491e1e8] {\n  max-width: 250px;\n}\n.textarea-sm[data-v-f491e1e8] {\n  max-width: 480px;\n}\n.textarea-md[data-v-f491e1e8] {\n  max-width: 720px;\n}\n.textarea-lg[data-v-f491e1e8] {\n  max-width: 900px;\n}\n.textarea-xl[data-v-f491e1e8] {\n  max-width: 1000px;\n}\n", ""]);
 
 // exports
 
@@ -414,13 +431,30 @@ var render = function () {
             [
               _c(
                 "p",
-                { staticClass: "text-h5 font-weight-bold" },
+                {
+                  staticClass: "font-weight-bold",
+                  class: {
+                    "text-h5": _vm.$vuetify.breakpoint.mdAndUp,
+                    "text-subtitle-1": _vm.$vuetify.breakpoint.smAndDown,
+                  },
+                },
                 [
-                  _c("v-chip", { staticClass: "ma-2", attrs: { large: "" } }, [
-                    _vm._v(
-                      "\n          " + _vm._s(_vm.forum.category) + "\n        "
+                  _c(
+                    "v-chip",
+                    _vm._b(
+                      { staticClass: "ma-2" },
+                      "v-chip",
+                      _vm.largeChip,
+                      false
                     ),
-                  ]),
+                    [
+                      _vm._v(
+                        "\n          " +
+                          _vm._s(_vm.forum.category) +
+                          "\n        "
+                      ),
+                    ]
+                  ),
                   _vm._v("\n        " + _vm._s(_vm.forum.title) + "\n      "),
                 ],
                 1
@@ -428,10 +462,12 @@ var render = function () {
               _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),
-              _vm.owner.id === _vm.currentUser.id
+              _vm.owner.id === _vm.currentUser.id &&
+              _vm.$vuetify.breakpoint.mdAndUp
                 ? _c(
                     "v-btn",
                     {
+                      staticClass: "mr-3",
                       attrs: { outlined: "", color: "red" },
                       on: {
                         click: function ($event) {
@@ -445,6 +481,24 @@ var render = function () {
                         _vm._v("\n          mdi-delete\n        "),
                       ]),
                     ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.owner.id === _vm.currentUser.id &&
+              _vm.$vuetify.breakpoint.smAndDown
+                ? _c(
+                    "v-btn",
+                    {
+                      staticClass: "mr-3",
+                      attrs: { icon: "", color: "red" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.openDeleteForum()
+                        },
+                      },
+                    },
+                    [_c("v-icon", [_vm._v("mdi-delete")])],
                     1
                   )
                 : _vm._e(),
@@ -466,7 +520,10 @@ var render = function () {
                 "v-card",
                 {
                   staticClass: "mr-auto",
-                  attrs: { color: "green accent-1", "max-width": "900" },
+                  attrs: {
+                    color: "green accent-1",
+                    "max-width": _vm.responsiveMaxWidth,
+                  },
                 },
                 [
                   _c(
@@ -501,13 +558,19 @@ var render = function () {
                   "v-card",
                   {
                     key: comment.id,
-                    staticClass: "mt-8",
                     class: [
                       comment.user_id === _vm.owner.id
                         ? "questioner"
                         : "answerer",
+                      {
+                        "mt-8": _vm.$vuetify.breakpoint.mdAndUp,
+                        "mt-4": _vm.$vuetify.breakpoint.smAndDown,
+                      },
                     ],
-                    attrs: { color: "green accent-1", "max-width": "900" },
+                    attrs: {
+                      color: "green accent-1",
+                      "max-width": _vm.responsiveMaxWidth,
+                    },
                   },
                   [
                     _c(
@@ -570,8 +633,14 @@ var render = function () {
                 },
                 [
                   _c("v-textarea", {
-                    staticClass: "mt-16 ml-auto",
-                    staticStyle: { "max-width": "900px" },
+                    staticClass: "ml-auto",
+                    class: [
+                      "textarea-" + _vm.$vuetify.breakpoint.name,
+                      {
+                        "mt-16": _vm.$vuetify.breakpoint.mdAndUp,
+                        "mt-8": _vm.$vuetify.breakpoint.smAndDown,
+                      },
+                    ],
                     attrs: {
                       "background-color": "grey lighten-5",
                       label: "新しくコメントを入力",

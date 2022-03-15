@@ -13,7 +13,7 @@
         ログインに失敗しました
       </v-alert>
       <v-form ref="form">
-        <v-card-text style="max-width:424px" class="mx-auto">
+        <v-card-text class="mx-auto" :class="{'width-sm-up': $vuetify.breakpoint.smAndUp, 'width-xs': $vuetify.breakpoint.xs}">
           <v-row class="my-4">
             <v-text-field
               v-model="userInfo.email"
@@ -139,5 +139,11 @@
   .link-text {
     display: inline-block;
     height: inherit !important;
+  }
+  .width-xs {
+    max-width: 300px;
+  }
+  .width-sm-up {
+    max-width: 424px;
   }
 </style>
