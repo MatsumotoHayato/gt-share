@@ -40,6 +40,7 @@ https://gtshare.herokuapp.com
 - [いいねマイリスト](#いいねマイリスト)
 - [自分の投稿一覧表示](#自分の投稿一覧表示)
 - [掲示板機能](#掲示板機能)
+- [レスポンシブデザイン](#レスポンシブデザイン)
 
 ### SPA構成
 - 本アプリケーションはすべてSPA構成となっております。
@@ -151,6 +152,13 @@ https://gtshare.herokuapp.com
 
 <p align="center">
     <img src="./public/img/ForumShow.png" title="掲示板スレッド詳細" width="80%">
+</p>
+
+### レスポンシブデザイン
+- スマホ端末でも利用可能です。
+
+<p align="center">
+    <img src="./public/img/Responsive.png" title="レスポンシブデザイン" width="20%">
 </p>
 
 ### 今後追加したい機能
