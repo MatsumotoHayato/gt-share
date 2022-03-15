@@ -35,7 +35,7 @@
               レビュー一覧
             </v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
-            <v-select v-model="sortBy" :class="{'small-select': $vuetify.breakpoint.xs}" v-bind="dense" :items="sortList" item-value="value" item-text="text" flat solo-inverted hide-details></v-select>
+            <v-select v-model="sortBy" :class="{'xs-select': $vuetify.breakpoint.xs, 'sm-select': $vuetify.breakpoint.sm}" v-bind="dense" :items="sortList" item-value="value" item-text="text" flat solo-inverted hide-details></v-select>
             <v-spacer></v-spacer>
             <v-btn v-if="$vuetify.breakpoint.mdAndUp" class="ma-2" outlined @click="createDialog = true">
               新規レビュー
@@ -82,30 +82,36 @@
                     </div>
                   </v-tooltip>
                   <div v-if="item.user.id === currentUser.id" class="mt-2">
-                    <v-btn outlined @click="openEditForm(item)">
+                    <v-btn v-if="$vuetify.breakpoint.mdAndUp" outlined @click="openEditForm(item)">
                       編集
                       <v-icon right>
                         mdi-pencil
                       </v-icon>
                     </v-btn>
-                    <v-btn class="ml-2 mr-8" outlined color="red" @click="openDeleteForm(item)">
+                    <v-btn v-else icon @click="openEditForm(item)">
+                      <v-icon>mdi-pencil</v-icon>
+                    </v-btn>
+                    <v-btn v-if="$vuetify.breakpoint.mdAndUp" class="ml-2 mr-8" outlined color="red" @click="openDeleteForm(item)">
                       削除
                       <v-icon right>
                         mdi-delete
                       </v-icon>
                     </v-btn>
+                    <v-btn v-else icon color="red" @click="openDeleteForm(item)">
+                      <v-icon>mdi-delete</v-icon>
+                    </v-btn>
                   </div>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-col cols="11" sm="11" md="4" lg="4" xl="4">
+            <v-col cols="11" sm="11" md="4">
               <DrawChart
                 :class="{'mb-12': $vuetify.breakpoint.mdAndUp}"
                 class="mx-auto"
                 :post="item"
               ></DrawChart>
             </v-col>
-            <v-col cols="12" sm="12" md="8" lg="8" xl="8">
+            <v-col cols="12" sm="12" md="8">
               <v-list dense>
                 <v-list-item class="mb-4">
                   <v-card :min-height="responsiveMinHeight" :min-width="responsiveMinWidth" :max-width="responsiveMaxWidth" outlined>
@@ -359,7 +365,10 @@
   .post-index tr:hover td {
     background: #FFFFFF;
   }
-  .small-select {
-    max-width: 90px;
+  .xs-select {
+    max-width: 100px;
+  }
+  .sm-select {
+    max-width: 300px;
   }
 </style>

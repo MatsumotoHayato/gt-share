@@ -45,6 +45,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Ranking',
   data: function data() {
@@ -53,31 +71,9 @@ __webpack_require__.r(__webpack_exports__);
       selectedSongs: [],
       instruments: [],
       instrumentIndex: 0,
-      headers: [{
-        text: '',
-        value: 'rank',
-        align: 'start',
-        width: '5%',
-        sortable: false
-      }, {
-        text: '曲名',
-        value: 'name',
-        align: 'start',
-        width: '30%',
-        sortable: false
-      }, {
-        text: 'アーティスト名',
-        value: 'artist',
-        align: 'start',
-        width: '45%',
-        sortable: false
-      }, {
-        text: '簡単度',
-        value: 'average_score_easy',
-        align: 'start',
-        width: '20%',
-        sortable: true
-      }]
+      page: 1,
+      pageCount: 0,
+      itemsPerPage: 10
     };
   },
   computed: {
@@ -90,6 +86,61 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(value) {
         this.instrumentIndex = this.instruments.indexOf(value);
       }
+    },
+    headers: function headers() {
+      // 画面サイズによって表示項目を変更
+      if (this.$vuetify.breakpoint.mdAndUp) {
+        return [{
+          text: '',
+          value: 'rank',
+          align: 'start',
+          width: '5%',
+          sortable: false
+        }, {
+          text: '曲名',
+          value: 'name',
+          align: 'start',
+          width: '30%',
+          sortable: false
+        }, {
+          text: 'アーティスト名',
+          value: 'artist',
+          align: 'start',
+          width: '45%',
+          sortable: false
+        }, {
+          text: '簡単度',
+          value: 'average_score_easy',
+          align: 'start',
+          width: '20%',
+          sortable: true
+        }];
+      } else {
+        return [{
+          text: '',
+          value: 'rank',
+          align: 'start',
+          width: '5%',
+          sortable: false
+        }, {
+          text: '曲名',
+          value: 'name',
+          align: 'start',
+          width: '50%'
+        }, {
+          text: 'アーティスト名',
+          value: 'artist.name',
+          align: 'end',
+          width: '45%',
+          filterable: false
+        }];
+      }
+    },
+    dense: function dense() {
+      // 画面幅960px以下なら'dense'を返す
+      return this.$vuetify.breakpoint.smAndDown ? {
+        'dense': true
+      } : {};
     }
   },
   methods: {
@@ -210,35 +261,51 @@ var render = function () {
       _c(
         "v-container",
         [
-          _c("p", { staticClass: "text-h5 font-weight-bold" }, [
-            _vm._v("簡単な曲ランキング"),
-          ]),
+          _c(
+            "p",
+            {
+              staticClass: "font-weight-bold",
+              class: {
+                "text-h5": _vm.$vuetify.breakpoint.mdAndUp,
+                "text-subtitle-1": _vm.$vuetify.breakpoint.smAndDown,
+              },
+            },
+            [_vm._v("\n      簡単な曲ランキング\n    ")]
+          ),
           _vm._v(" "),
           _c(
             "v-row",
             [
               _c(
                 "v-col",
-                { attrs: { cols: "3" } },
+                { attrs: { cols: "8", sm: "6", md: "4", lg: "3", xl: "3" } },
                 [
-                  _c("v-select", {
-                    attrs: {
-                      items: _vm.instruments,
-                      "item-value": "id",
-                      "item-text": "name",
-                      "return-object": "",
-                      "prepend-icon": "mdi-guitar-acoustic",
-                      label: "楽器を選択",
-                      outlined: "",
-                    },
-                    model: {
-                      value: _vm.selectedInstrumentId,
-                      callback: function ($$v) {
-                        _vm.selectedInstrumentId = $$v
+                  _c(
+                    "v-select",
+                    _vm._b(
+                      {
+                        attrs: {
+                          items: _vm.instruments,
+                          "item-value": "id",
+                          "item-text": "name",
+                          "return-object": "",
+                          "prepend-icon": "mdi-guitar-acoustic",
+                          label: "楽器を選択",
+                          outlined: "",
+                        },
+                        model: {
+                          value: _vm.selectedInstrumentId,
+                          callback: function ($$v) {
+                            _vm.selectedInstrumentId = $$v
+                          },
+                          expression: "selectedInstrumentId",
+                        },
                       },
-                      expression: "selectedInstrumentId",
-                    },
-                  }),
+                      "v-select",
+                      _vm.dense,
+                      false
+                    )
+                  ),
                 ],
                 1
               ),
@@ -248,8 +315,23 @@ var render = function () {
           _vm._v(" "),
           _c("v-data-table", {
             staticClass: "elevation-1 song-ranking",
-            attrs: { items: _vm.selectedSongs, headers: _vm.headers },
-            on: { "click:row": _vm.clickRow },
+            attrs: {
+              items: _vm.selectedSongs,
+              headers: _vm.headers,
+              page: _vm.page,
+              "items-per-page": _vm.itemsPerPage,
+              "hide-default-footer": "",
+              "mobile-breakpoint": "0",
+            },
+            on: {
+              "click:row": _vm.clickRow,
+              "update:page": function ($event) {
+                _vm.page = $event
+              },
+              "page-count": function ($event) {
+                _vm.pageCount = $event
+              },
+            },
             scopedSlots: _vm._u([
               {
                 key: "top",
@@ -264,6 +346,12 @@ var render = function () {
                       [
                         _c(
                           "v-toolbar-title",
+                          {
+                            class: {
+                              "text-subtitle-1":
+                                _vm.$vuetify.breakpoint.smAndDown,
+                            },
+                          },
                           [
                             _c("v-icon", [
                               _vm._v("\n              mdi-crown\n            "),
@@ -346,6 +434,18 @@ var render = function () {
                 },
               },
             ]),
+          }),
+          _vm._v(" "),
+          _c("v-pagination", {
+            staticClass: "text-center pt-2",
+            attrs: { length: _vm.pageCount, "total-visible": 7 },
+            model: {
+              value: _vm.page,
+              callback: function ($$v) {
+                _vm.page = $$v
+              },
+              expression: "page",
+            },
           }),
         ],
         1
