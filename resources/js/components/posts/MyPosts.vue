@@ -6,18 +6,30 @@
       <v-snackbar v-model="snackbar" :timeout="timeout" color="deep-purple accent-4" centered min-width=0 width=169>
         ログインが必要です
       </v-snackbar>
-      <p class="text-h5 font-weight-bold">あなたの投稿</p>
-      <v-data-table class="elevation-1 post-index" :items="posts" :sort-by="sortBy" sort-desc :headers="headers" hide-default-header>
+      <p class="font-weight-bold" :class="{'text-h5': $vuetify.breakpoint.mdAndUp, 'text-subtitle-1': $vuetify.breakpoint.smAndDown}">あなたの投稿</p>
+      <v-data-table
+        class="elevation-1 post-index"
+        :items="posts"
+        :sort-by="sortBy"
+        sort-desc
+        :headers="headers"
+        hide-default-header
+        :page.sync="page"
+        :items-per-page="itemsPerPage"
+        hide-default-footer
+        @page-count="pageCount = $event"
+        mobile-breakpoint=0
+      >
         <template v-slot:top>
           <v-toolbar flat dark color="blue darken-3" class="mb-1">
-            <v-toolbar-title>
+            <v-toolbar-title :class="{'text-subtitle-1': $vuetify.breakpoint.smAndDown}">
               <v-icon>
                 mdi-text-box
               </v-icon>
               レビュー一覧
             </v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
-            <v-select v-model="sortBy" :items="sortList" item-value="value" item-text="text" flat solo-inverted hide-details></v-select>
+            <v-select v-model="sortBy" :class="{'xs-select': $vuetify.breakpoint.xs, 'sm-select': $vuetify.breakpoint.sm}" v-bind="dense" :items="sortList" item-value="value" item-text="text" flat solo-inverted hide-details></v-select>
             <v-spacer></v-spacer>
           </v-toolbar>
         </template>
@@ -34,33 +46,40 @@
                     <div v-else>{{ item.instrument.name }}</div>
                   </div>
                   <div class="mt-2">
-                    <v-btn outlined @click="openEditForm(item)">
+                    <v-btn v-if="$vuetify.breakpoint.mdAndUp" outlined @click="openEditForm(item)">
                       編集
                       <v-icon right>
                         mdi-pencil
                       </v-icon>
                     </v-btn>
-                    <v-btn class="ml-2 mr-8" outlined color="red" @click="openDeleteForm(item)">
+                    <v-btn v-else icon @click="openEditForm(item)">
+                      <v-icon>mdi-pencil</v-icon>
+                    </v-btn>
+                    <v-btn v-if="$vuetify.breakpoint.mdAndUp" class="ml-2 mr-8" outlined color="red" @click="openDeleteForm(item)">
                       削除
                       <v-icon right>
                         mdi-delete
                       </v-icon>
                     </v-btn>
+                    <v-btn v-else icon color="red" @click="openDeleteForm(item)">
+                      <v-icon>mdi-delete</v-icon>
+                    </v-btn>
                   </div>
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-col cols="4">
+            <v-col cols="11" sm="11" md="4">
               <DrawChart
-                class="mb-12 mx-auto"
+                :class="{'mb-12': $vuetify.breakpoint.mdAndUp}"
+                class="mx-auto"
                 :post="item"
               ></DrawChart>
             </v-col>
-            <v-col cols="8">
+            <v-col cols="12" sm="12" md="8">
               <v-list dense>
                 <v-list-item class="mb-4">
-                  <v-card max-width="700" min-width="700" min-height="300" outlined>
-                    <v-card-text class="text-subtitle-1">
+                  <v-card :min-height="responsiveMinHeight" :min-width="responsiveMinWidth" :max-width="responsiveMaxWidth" outlined>
+                    <v-card-text :class="{'text-subtitle-1': $vuetify.breakpoint.mdAndUp}">
                       {{ item.body }}
                     </v-card-text>
                   </v-card>
@@ -75,7 +94,7 @@
                     {{ item.updated_at }}
                   </v-list-item-content>
                 </v-list-item>
-                <v-list-item class="justify-end mb-4 pr-16">
+                <v-list-item class="justify-end mb-4" :class="{'pr-16': $vuetify.breakpoint.mdAndUp}">
                   <v-btn v-if="item.favorite_check" color="primary" @click="unfavorite(item)">
                     いいね
                     <v-icon right class="ml-3 mr-1">
@@ -96,6 +115,12 @@
           </v-row>
         </template>
       </v-data-table>
+      <v-pagination
+        class="text-center pt-2"
+        v-model="page"
+        :length="pageCount"
+        :total-visible="7"
+      ></v-pagination>
     </v-container>
   </div>
 </template>
@@ -129,7 +154,24 @@
         deleteDialog: false,
         snackbar: false,
         timeout: 4000,
+        page: 1,
+        pageCount: 0,
+        itemsPerPage: 5,
       }
+    },
+    computed: {
+      dense() {  // 画面幅960px以下なら'dense'を返す
+        return this.$vuetify.breakpoint.smAndDown ? { 'dense': true } : {}
+      },
+      responsiveMinWidth() {
+        return {xs:275, sm:510, md:522, lg:712, xl:950}[this.$vuetify.breakpoint.name]
+      },
+      responsiveMaxWidth() {
+        return {xs:510, sm:868, md:712, lg:712, xl:950}[this.$vuetify.breakpoint.name]
+      },
+      responsiveMinHeight() {
+        return this.$vuetify.breakpoint.mdAndUp ? 300 : 10
+      },
     },
     methods: {
       getPosts() {
@@ -205,5 +247,11 @@
 <style>
   .post-index tr:hover td {
     background: #FFFFFF;
+  }
+  .xs-select {
+    max-width: 150px;
+  }
+  .sm-select {
+    max-width: 300px;
   }
 </style>
