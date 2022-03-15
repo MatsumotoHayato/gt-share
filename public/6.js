@@ -111,38 +111,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ForumIndex',
   data: function data() {
     return {
       forums: [],
       selectedForums: [],
-      headers: [{
-        text: 'タイトル',
-        value: 'title',
-        align: 'start',
-        width: '50%',
-        sortable: false
-      }, {
-        text: 'カテゴリ',
-        value: 'category',
-        align: 'start',
-        width: '15%',
-        filterable: false,
-        sortable: false
-      }, {
-        text: 'コメント数',
-        value: 'comments_count',
-        align: 'start',
-        width: '15%',
-        filterable: false
-      }, {
-        text: '投稿日時',
-        value: 'created_at',
-        align: 'start',
-        width: '20%',
-        filterable: false
-      }],
       categories: [{
         text: '質問',
         value: '質問'
@@ -158,6 +179,9 @@ __webpack_require__.r(__webpack_exports__);
       snackbar: false,
       timeout: 4000,
       search: '',
+      page: 1,
+      pageCount: 0,
+      itemsPerPage: 20,
       newForum: {
         title: '',
         category: '質問',
@@ -175,6 +199,54 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
     };
+  },
+  computed: {
+    headers: function headers() {
+      // 画面サイズによって表示項目を変更
+      if (this.$vuetify.breakpoint.mdAndUp) {
+        return [{
+          text: 'タイトル',
+          value: 'title',
+          align: 'start',
+          width: '50%',
+          sortable: false
+        }, {
+          text: 'カテゴリ',
+          value: 'category',
+          align: 'start',
+          width: '15%',
+          filterable: false,
+          sortable: false
+        }, {
+          text: 'コメント数',
+          value: 'comments_count',
+          align: 'start',
+          width: '15%',
+          filterable: false
+        }, {
+          text: '投稿日時',
+          value: 'created_at',
+          align: 'start',
+          width: '20%',
+          filterable: false
+        }];
+      } else {
+        return [{
+          text: 'タイトル',
+          value: 'title',
+          align: 'start',
+          width: '65%',
+          sortable: false
+        }, {
+          text: 'カテゴリ',
+          value: 'category',
+          align: 'end',
+          width: '35%',
+          filterable: false,
+          sortable: false
+        }];
+      }
+    }
   },
   methods: {
     getForums: function getForums() {
@@ -332,16 +404,24 @@ var render = function () {
             [_vm._v("\n      ログインが必要です\n    ")]
           ),
           _vm._v(" "),
-          _c("p", { staticClass: "text-h5 font-weight-bold" }, [
-            _vm._v("掲示板"),
-          ]),
+          _c(
+            "p",
+            {
+              staticClass: "font-weight-bold",
+              class: {
+                "text-h5": _vm.$vuetify.breakpoint.mdAndUp,
+                "text-subtitle-1": _vm.$vuetify.breakpoint.smAndDown,
+              },
+            },
+            [_vm._v("掲示板")]
+          ),
           _vm._v(" "),
           _c(
             "v-row",
             [
               _c(
                 "v-col",
-                { attrs: { cols: "5" } },
+                { attrs: { cols: "9", sm: "8", md: "7", lg: "5", xl: "4" } },
                 [
                   _c("v-select", {
                     attrs: {
@@ -375,10 +455,20 @@ var render = function () {
               items: _vm.selectedForums,
               headers: _vm.headers,
               search: _vm.search,
-              "sort-by": "created_at",
-              "sort-desc": "",
+              page: _vm.page,
+              "items-per-page": _vm.itemsPerPage,
+              "hide-default-footer": "",
+              "mobile-breakpoint": "0",
             },
-            on: { "click:row": _vm.clickRow },
+            on: {
+              "click:row": _vm.clickRow,
+              "update:page": function ($event) {
+                _vm.page = $event
+              },
+              "page-count": function ($event) {
+                _vm.pageCount = $event
+              },
+            },
             scopedSlots: _vm._u([
               {
                 key: "top",
@@ -393,6 +483,12 @@ var render = function () {
                       [
                         _c(
                           "v-toolbar-title",
+                          {
+                            class: {
+                              "text-subtitle-1":
+                                _vm.$vuetify.breakpoint.smAndDown,
+                            },
+                          },
                           [
                             _c("v-icon", [
                               _vm._v("\n              mdi-forum\n            "),
@@ -407,23 +503,78 @@ var render = function () {
                           attrs: { inset: "", vertical: "" },
                         }),
                         _vm._v(" "),
-                        _c("v-text-field", {
-                          attrs: {
-                            clearable: "",
-                            flat: "",
-                            "solo-inverted": "",
-                            "hide-details": "",
-                            "prepend-inner-icon": "mdi-magnify",
-                            label: "タイトルを検索",
-                          },
-                          model: {
-                            value: _vm.search,
-                            callback: function ($$v) {
-                              _vm.search = $$v
-                            },
-                            expression: "search",
-                          },
-                        }),
+                        _vm.$vuetify.breakpoint.mdAndUp
+                          ? _c("v-text-field", {
+                              attrs: {
+                                clearable: "",
+                                flat: "",
+                                "solo-inverted": "",
+                                "hide-details": "",
+                                "prepend-inner-icon": "mdi-magnify",
+                                label: "タイトルを検索",
+                              },
+                              model: {
+                                value: _vm.search,
+                                callback: function ($$v) {
+                                  _vm.search = $$v
+                                },
+                                expression: "search",
+                              },
+                            })
+                          : _c(
+                              "v-menu",
+                              {
+                                attrs: { "offset-y": "" },
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "activator",
+                                    fn: function (ref) {
+                                      var on = ref.on
+                                      var attrs = ref.attrs
+                                      return [
+                                        _c(
+                                          "v-btn",
+                                          _vm._g(
+                                            _vm._b(
+                                              { attrs: { icon: "" } },
+                                              "v-btn",
+                                              attrs,
+                                              false
+                                            ),
+                                            on
+                                          ),
+                                          [
+                                            _c("v-icon", [
+                                              _vm._v("mdi-magnify"),
+                                            ]),
+                                          ],
+                                          1
+                                        ),
+                                      ]
+                                    },
+                                  },
+                                ]),
+                              },
+                              [
+                                _vm._v(" "),
+                                _c("v-text-field", {
+                                  attrs: {
+                                    solo: "",
+                                    clearable: "",
+                                    "hide-details": "",
+                                    autofocus: "",
+                                  },
+                                  model: {
+                                    value: _vm.search,
+                                    callback: function ($$v) {
+                                      _vm.search = $$v
+                                    },
+                                    expression: "search",
+                                  },
+                                }),
+                              ],
+                              1
+                            ),
                         _vm._v(" "),
                         _c("v-spacer"),
                         _vm._v(" "),
@@ -438,32 +589,57 @@ var render = function () {
                                   var on = ref.on
                                   var attrs = ref.attrs
                                   return [
-                                    _c(
-                                      "v-btn",
-                                      _vm._g(
-                                        _vm._b(
-                                          {
-                                            staticClass: "ma-2",
-                                            attrs: { outlined: "" },
-                                          },
+                                    _vm.$vuetify.breakpoint.mdAndUp
+                                      ? _c(
                                           "v-btn",
-                                          attrs,
-                                          false
-                                        ),
-                                        on
-                                      ),
-                                      [
-                                        _vm._v(
-                                          "\n                新規スレッド\n                "
-                                        ),
-                                        _c("v-icon", { attrs: { right: "" } }, [
-                                          _vm._v(
-                                            "\n                  mdi-pencil-plus\n                "
+                                          _vm._g(
+                                            _vm._b(
+                                              {
+                                                staticClass: "ma-2",
+                                                attrs: { outlined: "" },
+                                              },
+                                              "v-btn",
+                                              attrs,
+                                              false
+                                            ),
+                                            on
                                           ),
-                                        ]),
-                                      ],
-                                      1
-                                    ),
+                                          [
+                                            _vm._v(
+                                              "\n                新規スレッド\n                "
+                                            ),
+                                            _c(
+                                              "v-icon",
+                                              { attrs: { right: "" } },
+                                              [
+                                                _vm._v(
+                                                  "\n                  mdi-pencil-plus\n                "
+                                                ),
+                                              ]
+                                            ),
+                                          ],
+                                          1
+                                        )
+                                      : _c(
+                                          "v-btn",
+                                          _vm._g(
+                                            _vm._b(
+                                              { attrs: { icon: "" } },
+                                              "v-btn",
+                                              attrs,
+                                              false
+                                            ),
+                                            on
+                                          ),
+                                          [
+                                            _c("v-icon", [
+                                              _vm._v(
+                                                "\n                  mdi-pencil-plus\n                "
+                                              ),
+                                            ]),
+                                          ],
+                                          1
+                                        ),
                                   ]
                                 },
                               },
@@ -686,6 +862,18 @@ var render = function () {
                 },
               },
             ]),
+          }),
+          _vm._v(" "),
+          _c("v-pagination", {
+            staticClass: "text-center pt-2",
+            attrs: { length: _vm.pageCount, "total-visible": 7 },
+            model: {
+              value: _vm.page,
+              callback: function ($$v) {
+                _vm.page = $$v
+              },
+              expression: "page",
+            },
           }),
         ],
         1

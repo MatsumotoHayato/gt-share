@@ -27,7 +27,7 @@
             </v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-text-field
-              v-if="$vuetify.breakpoint.smAndUp"
+              v-if="$vuetify.breakpoint.mdAndUp"
               v-model="search"
               clearable
               flat

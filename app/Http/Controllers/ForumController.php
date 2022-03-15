@@ -13,7 +13,7 @@ class ForumController extends Controller
     // スレッド一覧を表示するためのデータ処理
     public function index(Forum $forum)
     {
-        return $forum::withCount('comments')->orderBy('updated_at')->get();
+        return $forum::withCount('comments')->orderBy('updated_at', 'DESC')->get();
     }
 
     // 新規スレッド追加時の保存処理
