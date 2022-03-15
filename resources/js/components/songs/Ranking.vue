@@ -1,16 +1,28 @@
 <template>
   <div>
     <v-container>
-      <p class="text-h5 font-weight-bold">簡単な曲ランキング</p>
+      <p class="font-weight-bold" :class="{'text-h5': $vuetify.breakpoint.mdAndUp, 'text-subtitle-1': $vuetify.breakpoint.smAndDown}">
+        簡単な曲ランキング
+      </p>
       <v-row>
-        <v-col cols="3">
-          <v-select v-model="selectedInstrumentId" :items="instruments" item-value="id" item-text="name" return-object prepend-icon="mdi-guitar-acoustic" label="楽器を選択" outlined></v-select>
+        <v-col cols="8" sm="6" md="4" lg="3" xl="3">
+          <v-select v-model="selectedInstrumentId" v-bind="dense" :items="instruments" item-value="id" item-text="name" return-object prepend-icon="mdi-guitar-acoustic" label="楽器を選択" outlined></v-select>
         </v-col>
       </v-row>
-      <v-data-table class="elevation-1 song-ranking" :items="selectedSongs" :headers="headers" @click:row="clickRow">
+      <v-data-table
+        class="elevation-1 song-ranking"
+        :items="selectedSongs"
+        :headers="headers"
+        @click:row="clickRow"
+        :page.sync="page"
+        :items-per-page="itemsPerPage"
+        hide-default-footer
+        @page-count="pageCount = $event"
+        mobile-breakpoint=0
+      >
         <template v-slot:top>
           <v-toolbar flat dark color="blue darken-3" class="mb-1">
-            <v-toolbar-title>
+            <v-toolbar-title :class="{'text-subtitle-1': $vuetify.breakpoint.smAndDown}">
               <v-icon>
                 mdi-crown
               </v-icon>
@@ -30,6 +42,12 @@
           <a class="artist-link" @click.stop="artistShowLink(item)">{{ item.artist.name }}</a>
         </template>
       </v-data-table>
+      <v-pagination
+        class="text-center pt-2"
+        v-model="page"
+        :length="pageCount"
+        :total-visible="7"
+      ></v-pagination>
     </v-container>
   </div>
 </template>
@@ -43,12 +61,9 @@
         selectedSongs: [],
         instruments: [],
         instrumentIndex: 0,
-        headers: [
-          { text: '', value: 'rank', align: 'start', width: '5%', sortable: false },
-          { text: '曲名', value: 'name', align: 'start', width: '30%', sortable: false },
-          { text: 'アーティスト名', value: 'artist', align: 'start', width: '45%', sortable: false },
-          { text: '簡単度', value: 'average_score_easy', align: 'start', width: '20%', sortable: true },
-        ],
+        page: 1,
+        pageCount: 0,
+        itemsPerPage: 10,
       }
     },
     computed: {
@@ -61,6 +76,26 @@
         set(value) {
           this.instrumentIndex = this.instruments.indexOf(value)
         }
+      },
+      headers() {
+        // 画面サイズによって表示項目を変更
+        if (this.$vuetify.breakpoint.mdAndUp) {
+          return [
+            { text: '', value: 'rank', align: 'start', width: '5%', sortable: false },
+            { text: '曲名', value: 'name', align: 'start', width: '30%', sortable: false },
+            { text: 'アーティスト名', value: 'artist', align: 'start', width: '45%', sortable: false },
+            { text: '簡単度', value: 'average_score_easy', align: 'start', width: '20%', sortable: true },
+          ]
+        } else {
+          return [
+            { text: '', value: 'rank', align: 'start', width: '5%', sortable: false },
+            { text: '曲名', value: 'name', align: 'start', width: '50%' },
+            { text: 'アーティスト名', value: 'artist.name', align: 'end', width: '45%', filterable: false },
+          ]
+        }
+      },
+      dense() {  // 画面幅960px以下なら'dense'を返す
+        return this.$vuetify.breakpoint.smAndDown ? { 'dense': true } : {}
       }
     },
     methods: {

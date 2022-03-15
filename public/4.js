@@ -389,6 +389,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -631,7 +637,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.post-index tr:hover td {\n  background: #FFFFFF;\n}\n.small-select {\n  max-width: 90px;\n}\n", ""]);
+exports.push([module.i, "\n.post-index tr:hover td {\n  background: #FFFFFF;\n}\n.xs-select {\n  max-width: 100px;\n}\n.sm-select {\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -1223,7 +1229,8 @@ var render = function () {
                           _vm._b(
                             {
                               class: {
-                                "small-select": _vm.$vuetify.breakpoint.xs,
+                                "xs-select": _vm.$vuetify.breakpoint.xs,
+                                "sm-select": _vm.$vuetify.breakpoint.sm,
                               },
                               attrs: {
                                 items: _vm.sortList,
@@ -1454,67 +1461,110 @@ var render = function () {
                                           "div",
                                           { staticClass: "mt-2" },
                                           [
-                                            _c(
-                                              "v-btn",
-                                              {
-                                                attrs: { outlined: "" },
-                                                on: {
-                                                  click: function ($event) {
-                                                    return _vm.openEditForm(
-                                                      item
-                                                    )
+                                            _vm.$vuetify.breakpoint.mdAndUp
+                                              ? _c(
+                                                  "v-btn",
+                                                  {
+                                                    attrs: { outlined: "" },
+                                                    on: {
+                                                      click: function ($event) {
+                                                        return _vm.openEditForm(
+                                                          item
+                                                        )
+                                                      },
+                                                    },
                                                   },
-                                                },
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                    編集\n                    "
-                                                ),
-                                                _c(
-                                                  "v-icon",
-                                                  { attrs: { right: "" } },
                                                   [
                                                     _vm._v(
-                                                      "\n                      mdi-pencil\n                    "
+                                                      "\n                    編集\n                    "
                                                     ),
-                                                  ]
+                                                    _c(
+                                                      "v-icon",
+                                                      { attrs: { right: "" } },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                      mdi-pencil\n                    "
+                                                        ),
+                                                      ]
+                                                    ),
+                                                  ],
+                                                  1
+                                                )
+                                              : _c(
+                                                  "v-btn",
+                                                  {
+                                                    attrs: { icon: "" },
+                                                    on: {
+                                                      click: function ($event) {
+                                                        return _vm.openEditForm(
+                                                          item
+                                                        )
+                                                      },
+                                                    },
+                                                  },
+                                                  [
+                                                    _c("v-icon", [
+                                                      _vm._v("mdi-pencil"),
+                                                    ]),
+                                                  ],
+                                                  1
                                                 ),
-                                              ],
-                                              1
-                                            ),
                                             _vm._v(" "),
-                                            _c(
-                                              "v-btn",
-                                              {
-                                                staticClass: "ml-2 mr-8",
-                                                attrs: {
-                                                  outlined: "",
-                                                  color: "red",
-                                                },
-                                                on: {
-                                                  click: function ($event) {
-                                                    return _vm.openDeleteForm(
-                                                      item
-                                                    )
+                                            _vm.$vuetify.breakpoint.mdAndUp
+                                              ? _c(
+                                                  "v-btn",
+                                                  {
+                                                    staticClass: "ml-2 mr-8",
+                                                    attrs: {
+                                                      outlined: "",
+                                                      color: "red",
+                                                    },
+                                                    on: {
+                                                      click: function ($event) {
+                                                        return _vm.openDeleteForm(
+                                                          item
+                                                        )
+                                                      },
+                                                    },
                                                   },
-                                                },
-                                              },
-                                              [
-                                                _vm._v(
-                                                  "\n                    削除\n                    "
-                                                ),
-                                                _c(
-                                                  "v-icon",
-                                                  { attrs: { right: "" } },
                                                   [
                                                     _vm._v(
-                                                      "\n                      mdi-delete\n                    "
+                                                      "\n                    削除\n                    "
                                                     ),
-                                                  ]
+                                                    _c(
+                                                      "v-icon",
+                                                      { attrs: { right: "" } },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                      mdi-delete\n                    "
+                                                        ),
+                                                      ]
+                                                    ),
+                                                  ],
+                                                  1
+                                                )
+                                              : _c(
+                                                  "v-btn",
+                                                  {
+                                                    attrs: {
+                                                      icon: "",
+                                                      color: "red",
+                                                    },
+                                                    on: {
+                                                      click: function ($event) {
+                                                        return _vm.openDeleteForm(
+                                                          item
+                                                        )
+                                                      },
+                                                    },
+                                                  },
+                                                  [
+                                                    _c("v-icon", [
+                                                      _vm._v("mdi-delete"),
+                                                    ]),
+                                                  ],
+                                                  1
                                                 ),
-                                              ],
-                                              1
-                                            ),
                                           ],
                                           1
                                         )
@@ -1531,15 +1581,7 @@ var render = function () {
                         _vm._v(" "),
                         _c(
                           "v-col",
-                          {
-                            attrs: {
-                              cols: "11",
-                              sm: "11",
-                              md: "4",
-                              lg: "4",
-                              xl: "4",
-                            },
-                          },
+                          { attrs: { cols: "11", sm: "11", md: "4" } },
                           [
                             _c("DrawChart", {
                               staticClass: "mx-auto",
@@ -1554,15 +1596,7 @@ var render = function () {
                         _vm._v(" "),
                         _c(
                           "v-col",
-                          {
-                            attrs: {
-                              cols: "12",
-                              sm: "12",
-                              md: "8",
-                              lg: "8",
-                              xl: "8",
-                            },
-                          },
+                          { attrs: { cols: "12", sm: "12", md: "8" } },
                           [
                             _c(
                               "v-list",
